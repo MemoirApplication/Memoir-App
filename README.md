@@ -6,7 +6,7 @@ First things first (for devs), you need to install manually install the required
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
 cd Memoir-App
-npm install next@latest react@latest react-dom@latest
+npm install next@latest react@latest react-dom@latest 
 ```
 
 
@@ -30,9 +30,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js, Electron.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Quick Start | Electron.js](https://www.electronjs.org/docs/latest/tutorial/quick-start)
+<!-- You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome! -->
