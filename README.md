@@ -3,13 +3,14 @@
 # Getting Started
 
 First things first (for devs), you need to install manually install the required packages after cloning the repository:
+
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
-cd Memoir-App
+cd Memoir-App && git pull
 npm install next@latest react@latest react-dom@latest 
 npm install electron --save-dev 
+npm install @clerk/nextjs
 ```
-
 
 to run the development server:
 
