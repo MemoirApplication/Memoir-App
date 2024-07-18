@@ -7,8 +7,7 @@ First things first (for devs), you need to install manually install the required
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
 cd Memoir-App && git pull
-npm install next@latest react@latest react-dom@latest @clerk/nextjs
-npm install --save-dev electron electron-builder concurrently wait-on
+npm install
 ```
 
 Make a ```.env.local``` file and then update the api keys for Clerk.

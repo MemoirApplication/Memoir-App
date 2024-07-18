@@ -2,14 +2,19 @@
   "name": "memoir-app",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "npm run build && electron .",
+    "lint": "next lint",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"npm run electron\"",
+    "electron-build": "next build && electron-builder"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.4",
+    "electron-serve": "^2.0.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
