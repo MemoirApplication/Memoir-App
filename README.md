@@ -12,6 +12,8 @@ npm install electron --save-dev
 npm install @clerk/nextjs
 ```
 
+Make a ```.env.local``` file and then update the api keys for Clerk.
+
 to run the development server:
 
 ```bash
