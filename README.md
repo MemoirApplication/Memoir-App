@@ -3,15 +3,16 @@
 # Getting Started
 
 First things first (for devs), you need to install manually install the required packages after cloning the repository:
+
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
-cd Memoir-App
-npm install next@latest react@latest react-dom@latest 
-npm install electron --save-dev 
+cd Memoir-App && git pull
+npm install
 ```
 
+Make a ```.env.local``` file and then update the api keys for Clerk.
 
-to run the development server:
+## To run the development server
 
 ```bash
 npm run dev
@@ -21,6 +22,12 @@ yarn dev
 pnpm dev
 # or
 bun dev
+```
+
+## To run the development electron
+
+```bash
+npm run electron-dev 
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
