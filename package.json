@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.4",
+    "@nextui-org/react": "^2.4.6",
     "electron-serve": "^2.0.0",
+    "framer-motion": "^11.3.8",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
