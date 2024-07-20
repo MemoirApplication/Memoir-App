@@ -27,8 +27,8 @@ export const metadata: Metadata = {
         media: "(prefers-color-scheme: dark)",
         url: "/favicon.ico",
         href: "/favicon.ico",
-      }
-    ]
+      },
+    ],
   },
 };
 
@@ -38,11 +38,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="dark">
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
