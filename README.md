@@ -1,5 +1,13 @@
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
+
 ![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image")
+
+### Check-in
+
+- [x] Chikobara
+- [ ] れい nemuirei
+- [ ] Bader-ed
+- [ ] LUCIFER
 
 # Getting Started
 
@@ -39,13 +47,6 @@ To learn more about Next.js, Electron.js, take a look at the following resources
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Quick Start | Electron.js](https://www.electronjs.org/docs/latest/tutorial/quick-start)
 <!-- You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome! -->
-
-### Check-in
-
-- [x] Chikobara
-- [ ] れい nemuirei
-- [ ] Bader-ed
-- [ ] LUCIFER
 
 ## Star History
 
