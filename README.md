@@ -44,3 +44,8 @@ To learn more about Next.js, Electron.js, take a look at the following resources
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Quick Start | Electron.js](https://www.electronjs.org/docs/latest/tutorial/quick-start)
 <!-- You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome! -->
+
+[x] Chikobara
+[] れい nemuirei
+[] Bader-ed
+[] LUCIFER
