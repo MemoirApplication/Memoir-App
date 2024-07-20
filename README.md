@@ -16,12 +16,6 @@ Make a `.env.local` file and then update the api keys for Clerk.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 ## To run the development electron
