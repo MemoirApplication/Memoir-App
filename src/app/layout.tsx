@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import {
   ClerkProvider,
@@ -11,11 +11,25 @@ import {
 
 import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Memoir App",
-  description: "",
+  description: "Memoir app description",
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/favicon.ico",
+        href: "/favicon.ico",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/favicon.ico",
+        href: "/favicon.ico",
+      }
+    ]
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body>
         <Providers>
           {children}
