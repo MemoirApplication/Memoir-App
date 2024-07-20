@@ -1,4 +1,5 @@
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
+![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image")
 
 # Getting Started
 
@@ -45,3 +46,13 @@ To learn more about Next.js, Electron.js, take a look at the following resources
 - [ ] れい nemuirei
 - [ ] Bader-ed
 - [ ] LUCIFER
+
+## Star History
+
+<a href="https://star-history.com/#MemoirApplication/Memoir-App&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=MemoirApplication/Memoir-App&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=MemoirApplication/Memoir-App&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=MemoirApplication/Memoir-App&type=Date" />
+ </picture>
+</a>
