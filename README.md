@@ -27,7 +27,7 @@ bun dev
 ## To run the development electron
 
 ```bash
-npm run electron-dev 
+npm run electron
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
