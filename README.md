@@ -11,7 +11,7 @@
 
 # Getting Started
 
-First things first (for devs), you need to install manually install the required packages after cloning the repository:
+First things first (for devs), you need to manually install the required packages after cloning the repository:
 
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
