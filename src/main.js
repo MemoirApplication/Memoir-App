@@ -1,9 +1,20 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
-
 const isDev = !app.isPackaged;
 
+const Datastore = require("@seald-io/nedb");
+
+// Initialize NeDB with Persistent datastore with automatic loading
+const db = new Datastore({ filename: "notes.db", autoload: true });
+try {
+  await db.loadDatabaseAsync();
+} catch (error) {
+  // loading has failed
+}
+// loading has succeeded
+
+// Create the main window
 let mainWindow;
 
 async function createWindow() {
