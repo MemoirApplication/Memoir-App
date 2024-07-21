@@ -6,13 +6,15 @@ const isDev = !app.isPackaged;
 const Datastore = require("@seald-io/nedb");
 
 // Initialize NeDB with Persistent datastore with automatic loading
-const db = new Datastore({ filename: "notes.db", autoload: true });
+const db = new Datastore({
+  filename: path.join(__dirname, "notes.db"),
+  autoload: true,
+});
 try {
-  await db.loadDatabaseAsync();
+  await db.loadDatabaseAsync(); // loading has succeeded
 } catch (error) {
-  // loading has failed
+  console.log(error); // loading has failed
 }
-// loading has succeeded
 
 // Create the main window
 let mainWindow;
