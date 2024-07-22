@@ -62,6 +62,8 @@ export const NavigationBar = () => {
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Dropdown Menu with icons">
               <DropdownItem
+                className="text-foreground "
+                variant="faded"
                 key="light"
                 startContent={<SunMoon />}
                 onClick={() => setTheme("light")}
@@ -69,6 +71,8 @@ export const NavigationBar = () => {
                 Light
               </DropdownItem>
               <DropdownItem
+                className="text-foreground "
+                variant="faded"
                 key="dark"
                 startContent={<Moon />}
                 onClick={() => setTheme("dark")}

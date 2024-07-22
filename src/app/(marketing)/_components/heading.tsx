@@ -3,7 +3,7 @@ import { Textarea } from "@nextui-org/react";
 
 export const Heading = () => {
   return (
-    <div className="max-w-3xl space-y-4">
+    <div className="max-w-3xl space-y-4 pt-40">
       <h1 className="text-5xl font-bold">
         Welcome to <span className="underline">Memoir</span>
       </h1>
