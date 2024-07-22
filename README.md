@@ -6,7 +6,7 @@
 
 - [x] Chikobara
 - [ ] れい nemuirei
-- [ ] Bader-ed
+- [x] Bader-ed
 - [x] LUCIFER
 
 # Getting Started
