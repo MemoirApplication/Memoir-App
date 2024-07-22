@@ -19,6 +19,7 @@
     "@nextui-org/input": "^2.2.4",
     "@nextui-org/navbar": "^2.0.36",
     "@nextui-org/react": "^2.4.6",
+    "@nextui-org/skeleton": "^2.0.31",
     "@nextui-org/system": "^2.2.5",
     "@nextui-org/theme": "^2.2.9",
     "@seald-io/nedb": "^4.0.4",

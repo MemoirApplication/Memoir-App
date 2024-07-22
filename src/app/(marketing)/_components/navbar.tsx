@@ -20,6 +20,17 @@ import { SunMoon, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+import { Skeleton } from "@nextui-org/skeleton";
+
+// Import Clerk
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 export const NavigationBar = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -28,73 +39,96 @@ export const NavigationBar = () => {
     setMounted(true);
   }, []);
 
+  //for skeleton
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
   return (
-    <Navbar>
-      <NavbarBrand>
-        <p className="font-bold text-inherit">Memoir Logo</p>
-      </NavbarBrand>
+    <ClerkProvider>
+      <Navbar>
+        <NavbarBrand>
+          <p className="font-bold text-inherit">Memoir Logo</p>
+        </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page" color="secondary">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <Dropdown>
-            <DropdownTrigger>
-              <Button isIconOnly variant="bordered" color="default">
-                <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu variant="faded" aria-label="Dropdown Menu with icons">
-              <DropdownItem
-                className="text-foreground "
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavbarItem>
+            <Link color="foreground" href="#">
+              Features
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive>
+            <Link href="#" aria-current="page" color="secondary">
+              Customers
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link color="foreground" href="#">
+              Integrations
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button isIconOnly variant="bordered" color="default">
+                  <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
                 variant="faded"
-                key="light"
-                startContent={<SunMoon />}
-                onClick={() => setTheme("light")}
+                aria-label="Dropdown Menu with icons"
               >
-                Light
-              </DropdownItem>
-              <DropdownItem
-                className="text-foreground "
-                variant="faded"
-                key="dark"
-                startContent={<Moon />}
-                onClick={() => setTheme("dark")}
-              >
-                Dark
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
+                <DropdownItem
+                  className="text-foreground "
+                  variant="faded"
+                  key="light"
+                  startContent={<SunMoon />}
+                  onClick={() => setTheme("light")}
+                >
+                  Light
+                </DropdownItem>
+                <DropdownItem
+                  className="text-foreground "
+                  variant="faded"
+                  key="dark"
+                  startContent={<Moon />}
+                  onClick={() => setTheme("dark")}
+                >
+                  Dark
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
 
-        <NavbarItem>
-          <Button
-            as={Link}
-            color="secondary"
-            radius="md"
-            variant="shadow"
-            href="#"
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+          <NavbarItem>
+            <SignedOut>
+              <SignInButton>
+                <Button
+                  as={Link}
+                  color="secondary"
+                  radius="md"
+                  variant="shadow"
+                >
+                  Sign in
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              {loading ? (
+                <Skeleton className="flex rounded-full w-7 h-7" />
+              ) : (
+                <UserButton />
+              )}
+            </SignedIn>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+    </ClerkProvider>
   );
 };
