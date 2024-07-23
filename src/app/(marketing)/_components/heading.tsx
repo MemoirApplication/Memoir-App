@@ -1,5 +1,6 @@
 import React from "react";
 import { Textarea } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 
 export const Heading = () => {
   return (
@@ -8,16 +9,11 @@ export const Heading = () => {
         Welcome to <span className="underline">Memoir</span>
       </h1>
       <br></br>
-      <Textarea
-        isReadOnly
-        variant="bordered"
-        minRows={1}
-        size="lg"
-        labelPlacement="outside"
-        placeholder="Enter your description"
-        defaultValue="Your Ideas, Documents and Plans all together in one place."
-        className="max-w-3xs"
-      />
+      <Card shadow="lg" isHoverable isFooterBlurred>
+        <CardBody>
+          <p>Your Ideas, Documents and Plans all together in one place.</p>
+        </CardBody>
+      </Card>
     </div>
   );
 };

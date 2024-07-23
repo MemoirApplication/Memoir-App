@@ -44,7 +44,7 @@ export const NavigationBar = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
@@ -57,12 +57,12 @@ export const NavigationBar = () => {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
             <Link color="foreground" href="#">
-              Features
+              Docs
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
             <Link href="#" aria-current="page" color="secondary">
-              Customers
+              Features
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -121,7 +121,7 @@ export const NavigationBar = () => {
             </SignedOut>
             <SignedIn>
               {loading ? (
-                <Skeleton className="flex rounded-full w-7 h-7" />
+                <Skeleton className="flex rounded-full blur-sm w-7 h-8" />
               ) : (
                 <UserButton />
               )}

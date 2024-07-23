@@ -1,5 +1,4 @@
 import { Heading } from "./_components/heading";
-import { NavigationBar } from "./_components/navbar";
 const MarketingPage = () => {
   return (
     <div className=" text-foreground bg-background min-h-full flex flex-col">
