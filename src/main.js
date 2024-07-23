@@ -7,13 +7,14 @@ const Datastore = require("@seald-io/nedb");
 
 // Initialize NeDB with Persistent datastore with automatic loading
 const db = new Datastore({
-  filename: path.join(__dirname, "notes.db"),
+  filename: path.join(__dirname, "memoir.db"),
   autoload: true,
 });
 try {
-  await db.loadDatabaseAsync(); // loading has succeeded
+  db.loadDatabaseAsync();
+  console.log(db.filename + " DB successfully loaded"); // loading has succeeded
 } catch (error) {
-  console.log(error); // loading has failed
+  console.log(db.filename + " DB failed to load" + error); // loading has failed
 }
 
 // Create the main window
@@ -24,15 +25,17 @@ async function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+      enableRemoteModule: true,
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
     },
   });
 
   if (isDev) {
     // In development, we'll use the Next.js dev server
-    await mainWindow.loadURL("http://localhost:3000");
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.webContents.openDevTools(); // this will open browser dev tools
   } else {
     // In production, we'll load the built app
     const startUrl = url.format({
@@ -40,7 +43,7 @@ async function createWindow() {
       protocol: "file:",
       slashes: true,
     });
-    await mainWindow.loadURL(startUrl);
+    mainWindow.loadURL(startUrl);
   }
 
   mainWindow.on("closed", function () {
