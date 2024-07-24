@@ -1,21 +1,22 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const url = require("url");
 const isDev = !app.isPackaged;
 
 const Datastore = require("@seald-io/nedb");
+const { rejects } = require("assert");
 
 // Initialize NeDB with Persistent datastore with automatic loading
 const db = new Datastore({
   filename: path.join(__dirname, "memoir.db"),
   autoload: true,
 });
-try {
-  db.loadDatabaseAsync();
-  console.log(db.filename + " DB successfully loaded"); // loading has succeeded
-} catch (error) {
-  console.log(db.filename + " DB failed to load" + error); // loading has failed
-}
+// try {
+//   db.loadDatabaseAsync();
+//   console.log(db.filename + " DB successfully loaded"); // loading has succeeded
+// } catch (error) {
+//   console.log(db.filename + " DB failed to load" + error); // loading has failed
+// }
 
 // Create the main window
 let mainWindow;
@@ -59,4 +60,40 @@ app.on("window-all-closed", function () {
 
 app.on("activate", function () {
   if (mainWindow === null) createWindow();
+});
+
+ipcMain.handle("create-document", async (event, documentData) => {
+  return new Promise((resolv, reject) => {
+    db.insert(documentData, (err, newDoc) => {
+      if (err) reject(err);
+      else resolve(newDoc);
+    });
+  });
+});
+
+ipcMain.handle("get-documents", async () => {
+  return new Promise((resolv, reject) => {
+    db.find({}, (err, docs) => {
+      if (err) reject(err);
+      else resolv(docs);
+    });
+  });
+});
+
+ipcMain.handle("update-document", async (event, id, updateData) => {
+  return new Promise((resolv, reject) => {
+    db.update({ _id: id }, { $set: updateData }, {}, (err, numReplaced) => {
+      if (err) reject(err);
+      else resolve(numReplaced);
+    });
+  });
+});
+
+ipcMain.handle("delete-document", async (event, id) => {
+  return new Promise((resolve, reject) => {
+    db.remove({ _id: id }, {}, (err, numRemoved) => {
+      if (err) reject(err);
+      else resolve(numRemoved);
+    });
+  });
 });
