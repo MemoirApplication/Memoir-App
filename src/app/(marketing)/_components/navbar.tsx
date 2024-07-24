@@ -19,7 +19,6 @@ import { MonitorCog, SunMoon, Sun, Moon } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-
 import { Skeleton } from "@nextui-org/skeleton";
 
 // Import Clerk
@@ -30,6 +29,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { Logo } from "./Logo";
 
 export const NavigationBar = () => {
   const [mounted, setMounted] = useState(false);
@@ -51,7 +51,8 @@ export const NavigationBar = () => {
     <ClerkProvider>
       <Navbar>
         <NavbarBrand>
-          <p className="font-bold text-inherit">Memoir Logo</p>
+          <Logo />
+          <p>Memoir</p>
         </NavbarBrand>
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">

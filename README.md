@@ -50,3 +50,4 @@ To learn more about Next.js, Electron.js, take a look at the following resources
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=MemoirApplication/Memoir-App&type=Date" />
  </picture>
 </a>
+ 
