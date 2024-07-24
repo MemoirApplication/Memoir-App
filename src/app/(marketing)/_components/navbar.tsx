@@ -54,6 +54,43 @@ export const NavigationBar = () => {
           <Logo />
           <p>Memoir</p>
         </NavbarBrand>
+        <NavbarContent justify="start" className="">
+          <NavbarItem>
+            <NavbarItem>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button isIconOnly variant="bordered" color="default">
+                    <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  variant="faded"
+                  aria-label="Dropdown Menu with icons"
+                >
+                  <DropdownItem
+                    className="text-foreground "
+                    variant="faded"
+                    key="light"
+                    startContent={<SunMoon />}
+                    onClick={() => setTheme("light")}
+                  >
+                    Light
+                  </DropdownItem>
+                  <DropdownItem
+                    className="text-foreground "
+                    variant="faded"
+                    key="dark"
+                    startContent={<Moon />}
+                    onClick={() => setTheme("dark")}
+                  >
+                    Dark
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </NavbarItem>
+          </NavbarItem>
+        </NavbarContent>
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
@@ -73,40 +110,6 @@ export const NavigationBar = () => {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly variant="bordered" color="default">
-                  <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                variant="faded"
-                aria-label="Dropdown Menu with icons"
-              >
-                <DropdownItem
-                  className="text-foreground "
-                  variant="faded"
-                  key="light"
-                  startContent={<SunMoon />}
-                  onClick={() => setTheme("light")}
-                >
-                  Light
-                </DropdownItem>
-                <DropdownItem
-                  className="text-foreground "
-                  variant="faded"
-                  key="dark"
-                  startContent={<Moon />}
-                  onClick={() => setTheme("dark")}
-                >
-                  Dark
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </NavbarItem>
-
           <NavbarItem>
             <SignedOut>
               <SignInButton>

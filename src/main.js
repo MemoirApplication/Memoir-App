@@ -11,6 +11,7 @@ const db = new Datastore({
   filename: path.join(__dirname, "memoir.db"),
   autoload: true,
 });
+
 // try {
 //   db.loadDatabaseAsync();
 //   console.log(db.filename + " DB successfully loaded"); // loading has succeeded

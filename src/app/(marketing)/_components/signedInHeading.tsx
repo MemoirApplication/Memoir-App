@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody } from "@nextui-org/react";
 import headingImage from "./android-chrome-512x512.png";
 import Image from "next/image";
-export const Heading = () => {
+export const SignedInHeading = () => {
   return (
     <div className="max-w-3xl space-y-4 pt-40">
       <div className="drop-shadow-2xl  flex justify-center">
