@@ -38,3 +38,5 @@ next-env.d.ts
 
 # trunk
 .trunk
+
+memoir.db
