@@ -9,7 +9,7 @@ export const SignedInHeading = () => {
         <Image src={headingImage} alt="Logo" width={200} height={200} />
       </div>
       <h1 className="drop-shadow-2xl text-5xl font-bold">
-        Welcome to <span className="underline">Memoir</span>
+        Welcome to <span className="underline italic">Memoir</span>
       </h1>
       <br></br>
       <Card shadow="lg" isHoverable isFooterBlurred>
