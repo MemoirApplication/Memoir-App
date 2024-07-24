@@ -1,7 +1,5 @@
 "use client";
 import { SignedInHeading } from "./_components/signedInHeading";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Logo } from "./Logo";
 
 const MarketingPage = () => {
   return (
