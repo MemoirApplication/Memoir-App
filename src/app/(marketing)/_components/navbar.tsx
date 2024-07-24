@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/dropdown";
-import { SunMoon, Moon } from "lucide-react";
+import { MonitorCog, SunMoon, Sun, Moon } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -76,7 +76,7 @@ export const NavigationBar = () => {
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly variant="bordered" color="default">
-                  <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                   <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 </Button>
               </DropdownTrigger>
@@ -87,11 +87,11 @@ export const NavigationBar = () => {
                 <DropdownItem
                   className="text-foreground "
                   variant="faded"
-                  key="light"
-                  startContent={<SunMoon />}
-                  onClick={() => setTheme("light")}
+                  key="system"
+                  startContent={<MonitorCog />}
+                  onClick={() => setTheme("system")}
                 >
-                  Light
+                  System
                 </DropdownItem>
                 <DropdownItem
                   className="text-foreground "
@@ -101,6 +101,15 @@ export const NavigationBar = () => {
                   onClick={() => setTheme("dark")}
                 >
                   Dark
+                </DropdownItem>
+                <DropdownItem
+                  className="text-foreground "
+                  variant="faded"
+                  key="light"
+                  startContent={<Sun />}
+                  onClick={() => setTheme("light")}
+                >
+                  Light
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
