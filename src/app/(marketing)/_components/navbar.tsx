@@ -19,7 +19,7 @@ import { SunMoon, Moon } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Skeleton } from "@nextui-org/skeleton";
+// import { Skeleton } from "@nextui-org/skeleton";
 
 // Import Clerk
 import {
@@ -39,13 +39,13 @@ export const NavigationBar = () => {
     setMounted(true);
   }, []);
 
-  //for skeleton
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+  // //for skeleton
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   return (
     <ClerkProvider>
@@ -54,45 +54,8 @@ export const NavigationBar = () => {
           <Logo />
           <p>Memoir</p>
         </NavbarBrand>
-        <NavbarContent justify="start" className="">
-          <NavbarItem>
-            <NavbarItem>
-              <Dropdown>
-                <DropdownTrigger>
-                  <Button isIconOnly variant="bordered" color="default">
-                    <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  variant="faded"
-                  aria-label="Dropdown Menu with icons"
-                >
-                  <DropdownItem
-                    className="text-foreground "
-                    variant="faded"
-                    key="light"
-                    startContent={<SunMoon />}
-                    onClick={() => setTheme("light")}
-                  >
-                    Light
-                  </DropdownItem>
-                  <DropdownItem
-                    className="text-foreground "
-                    variant="faded"
-                    key="dark"
-                    startContent={<Moon />}
-                    onClick={() => setTheme("dark")}
-                  >
-                    Dark
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </NavbarItem>
-          </NavbarItem>
-        </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarContent className="hidden sm:flex gap-4 " justify="center">
           <NavbarItem>
             <Link color="foreground" href="#">
               Docs
@@ -109,7 +72,41 @@ export const NavigationBar = () => {
             </Link>
           </NavbarItem>
         </NavbarContent>
+
         <NavbarContent justify="end">
+          <NavbarItem>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button isIconOnly variant="bordered" color="default">
+                  <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                variant="faded"
+                aria-label="Dropdown Menu with icons"
+              >
+                <DropdownItem
+                  className="text-foreground "
+                  variant="faded"
+                  key="light"
+                  startContent={<SunMoon />}
+                  onClick={() => setTheme("light")}
+                >
+                  Light
+                </DropdownItem>
+                <DropdownItem
+                  className="text-foreground "
+                  variant="faded"
+                  key="dark"
+                  startContent={<Moon />}
+                  onClick={() => setTheme("dark")}
+                >
+                  Dark
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
           <NavbarItem>
             <SignedOut>
               <SignInButton>
@@ -124,11 +121,18 @@ export const NavigationBar = () => {
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              {loading ? (
-                <Skeleton className="flex rounded-full blur-sm w-7 h-8" />
-              ) : (
+              <div className="flex gap-4">
+                <Button
+                  as={Link}
+                  color="secondary"
+                  radius="md"
+                  variant="shadow"
+                  href="/main/routes/documents"
+                >
+                  Open Memoir
+                </Button>
                 <UserButton />
-              )}
+              </div>
             </SignedIn>
           </NavbarItem>
         </NavbarContent>
