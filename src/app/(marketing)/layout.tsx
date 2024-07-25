@@ -1,6 +1,7 @@
 "use client";
-import { Footer } from "./_components/footer";
+
 import { NavigationBar } from "./_components/navbar";
+
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>

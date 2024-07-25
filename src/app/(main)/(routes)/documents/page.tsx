@@ -1,3 +1,8 @@
+const DocumentsPage = () => {
+  return <div>This is the Documents Page</div>;
+};
+export default DocumentsPage;
+
 // import { useState, useEffect } from "react";
 // import { getDocuments, createDocument } from "@/utils/db";
 

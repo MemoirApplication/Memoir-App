@@ -8,16 +8,36 @@ import { parseDate } from "@internationalized/date";
 import { Image } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 
-import "@blocknote/core/fonts/inter.css";
-import { useCreateBlockNote } from "@blocknote/react";
-import { BlockNoteView } from "@blocknote/mantine";
-import "@blocknote/mantine/style.css";
+// import "@blocknote/core/fonts/inter.css";
+// import { useCreateBlockNote } from "@blocknote/react";
+// import { BlockNoteView } from "@blocknote/mantine";
+// import "@blocknote/mantine/style.css";
 
 const MarketingPage = () => {
   let [value, setValue] = React.useState(parseDate("2024-03-07"));
 
   // Creates a new editor instance.
-  const editor = useCreateBlockNote();
+  // const editor = useCreateBlockNote();
+  // const editor = useCreateBlockNote({
+  //   initialContent: [
+  //     {
+  //       type: "paragraph",
+  //       content: "Welcome to this demo!",
+  //     },
+  //     {
+  //       type: "paragraph",
+  //       content: "You'll see that the text is now blue",
+  //     },
+  //     {
+  //       type: "paragraph",
+  //       content:
+  //         "Press the '/' key - the hovered Slash Menu items are also blue",
+  //     },
+  //     {
+  //       type: "paragraph",
+  //     },
+  //   ],
+  // });
 
   return (
     <div className="text-foreground bg-background min-h-max flex flex-col ">
@@ -37,6 +57,7 @@ const MarketingPage = () => {
           className="max-w-xs pr-6"
         />
         <Calendar
+          color="secondary"
           aria-label="Date (Controlled)"
           value={value}
           onChange={setValue}
@@ -54,9 +75,9 @@ const MarketingPage = () => {
         />
       </div>
 
-      <div className="pt-8 mt-4 w-96 justify-center items-center px-8 mx-6">
+      {/* <div className="  object-fill h-48 w-96 pt-8 mt-4  justify-center items-center px-8 mx-6 drop-shadow-2xl">
         <BlockNoteView editor={editor} />
-      </div>
+      </div> */}
 
       <div className="flex flex-col  justify-center md:justify-start items-center  pb-10 mt-80">
         <Footer />
