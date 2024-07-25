@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/dropdown";
-import { MonitorCog, Sun, Moon } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -86,15 +86,6 @@ export const NavigationBar = () => {
                 variant="faded"
                 aria-label="Dropdown Menu with icons"
               >
-                <DropdownItem
-                  className="text-foreground "
-                  variant="faded"
-                  key="system"
-                  startContent={<MonitorCog />}
-                  onClick={() => setTheme("system")}
-                >
-                  System
-                </DropdownItem>
                 <DropdownItem
                   className="text-foreground "
                   variant="faded"

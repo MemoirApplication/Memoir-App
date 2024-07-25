@@ -1,9 +1,10 @@
 "use client";
+import { Footer } from "./_components/footer";
 import { NavigationBar } from "./_components/navbar";
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-full">
-      <main className="h-full text-foreground bg-background min-h-full flex flex-col">
+    <div>
+      <main className="h-max text-foreground bg-background min-h-full flex flex-col">
         <NavigationBar />
         {children}
       </main>

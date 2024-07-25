@@ -1,14 +1,14 @@
-import { Button } from "@nextui-org/button";
+"use client";
 
-import { Logo } from "./Logo";
+import { Link } from "@nextui-org/react";
 
 export const Footer = () => {
   return (
-    <div className="flex items-center w-full p-6 bg-background z-50">
-      <div className="md:ml-auto w-full justify-between md:justify-end flex items-center gap-x-2 text-muted-foreground">
-        <Button variant="light" size="sm">
-          about..
-        </Button>
+    <div className="mb-0 items-end p-6 z-50">
+      <div className="md:justify-end items-center gap-x-2 text-muted-foreground items-end">
+        <Link color="secondary" href="#">
+          About
+        </Link>
       </div>
     </div>
   );
