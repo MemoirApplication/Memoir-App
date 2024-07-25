@@ -1,7 +1,12 @@
+import { Block } from "@blocknote/core";
 interface Document {
   _id?: string;
-  title: string;
-  content: string;
+  title?: string;
+  contentBlocks?: {
+    _id?: number;
+    block: 
+  };
+
   // Add other fields as needed
 }
 
