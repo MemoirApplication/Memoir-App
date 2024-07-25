@@ -64,11 +64,11 @@ const MarketingPage = () => {
         />
       </div>
 
-      <div className="pt-10  flex justify-center justfy-between items-center drop-shadow-2xl ">
+      <div className="object-fill pt-10  flex justify-center justfy-between items-center  ">
         <Image
           isBlurred
           isZoomed
-          width={640}
+          width={550}
           src="./screenshot.png"
           alt="screenshot"
           className="m-5"

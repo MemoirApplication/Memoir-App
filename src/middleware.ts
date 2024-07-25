@@ -1,7 +1,8 @@
 // This middleware is for clerk
-
+'use server';
 
 import { clerkMiddleware } from "@clerk/nextjs/server";
+
 
 export default clerkMiddleware();
 

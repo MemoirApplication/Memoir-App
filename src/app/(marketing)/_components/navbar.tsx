@@ -21,7 +21,6 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
-
 // Import Clerk
 import {
   ClerkProvider,
@@ -47,6 +46,7 @@ export const NavigationBar = () => {
       setLoading(false);
     }, 2000);
   }, []);
+
   return (
     <Navbar>
       <NavbarBrand>
