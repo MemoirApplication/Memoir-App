@@ -12,7 +12,7 @@ interface Document {
   updatedAt?: Date;
 };
 
-  // Add other fields as needed
+  // Add other fields as needed 
 
 declare global {
   interface Window {
