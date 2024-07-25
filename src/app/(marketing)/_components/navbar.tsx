@@ -57,7 +57,7 @@ export const NavigationBar = () => {
 
         <NavbarContent className="hidden sm:flex gap-4 " justify="center">
           <NavbarItem>
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="/documents">
               Docs
             </Link>
           </NavbarItem>
@@ -127,7 +127,7 @@ export const NavigationBar = () => {
                   color="secondary"
                   radius="md"
                   variant="shadow"
-                  href="/main/routes/documents"
+                  href="/documents"
                 >
                   Open Memoir
                 </Button>
