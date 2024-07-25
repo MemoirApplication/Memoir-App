@@ -1,12 +1,15 @@
 "use client";
 
 import { NavigationBar } from "./_components/navbar";
-
+import { ClerkProvider } from "@clerk/nextjs";
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <main className="h-max text-foreground bg-background min-h-full flex flex-col">
-        <NavigationBar />
+        <ClerkProvider>
+          <NavigationBar />
+        </ClerkProvider>
+
         {children}
       </main>
     </div>
