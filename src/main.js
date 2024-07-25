@@ -12,12 +12,12 @@ const db = new Datastore({
   autoload: true,
 });
 
-// try {
-//   db.loadDatabaseAsync();
-//   console.log(db.filename + " DB successfully loaded"); // loading has succeeded
-// } catch (error) {
-//   console.log(db.filename + " DB failed to load" + error); // loading has failed
-// }
+try {
+  db.loadDatabaseAsync();
+  console.log(db.filename + " DB successfully loaded"); // loading has succeeded
+} catch (error) {
+  console.log(db.filename + " DB failed to load" + error); // loading has failed
+}
 
 // Create the main window
 let mainWindow;
@@ -63,13 +63,21 @@ app.on("activate", function () {
   if (mainWindow === null) createWindow();
 });
 
+// Listen for IPC messages from the renderer process
 ipcMain.handle("create-document", async (event, documentData) => {
-  return new Promise((resolv, reject) => {
-    db.insert(documentData, (err, newDoc) => {
-      if (err) reject(err);
-      else resolve(newDoc);
-    });
-  });
+  if (!documentData) {
+    throw new Error("documentData cannot be null or undefined");
+  }
+
+  try {
+    const newDoc = await db.insertAsync(documentData);
+    if (!newDoc) {
+      throw new Error("Failed to create document");
+    }
+    return newDoc;
+  } catch (err) {
+    throw err;
+  }
 });
 
 ipcMain.handle("get-documents", async () => {

@@ -16,9 +16,9 @@ interface Document {
 declare global {
   interface Window {
     electronAPI?: {
-      createDocument(documentData: Omit<Document, '_id'>): Promise<Document>;
-      getDocuments(): Promise<Document[]>;
-      updateDocument(id: string, updateData: Partial<Document>): Promise<number>;
+      createDocument(documentData: Omit<Document, '_id'>):Promise<Document>;
+      getDocuments():Promise<Document[]>;
+      updateDocument(id: string, updateData: Partial<Document>):Promise<number>;
       deleteDocument(id: string): Promise<number>;
     }
   }
