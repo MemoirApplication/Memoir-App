@@ -1,13 +1,13 @@
-interface Document{
+interface Document {
   _id?: string;
   title: string;
   content: string;
-  // TODO: Add other properties as needed
+  // Add other fields as needed
 }
 
 declare global {
   interface Window {
-    electronAPI: {
+    electronAPI?: {
       createDocument(documentData: Omit<Document, '_id'>): Promise<Document>;
       getDocuments(): Promise<Document[]>;
       updateDocument(id: string, updateData: Partial<Document>): Promise<number>;
@@ -16,11 +16,30 @@ declare global {
   }
 }
 
-// TODO: Add other methods as needed
-export const createDocument = (documentData: Omit<Document, '_id'>): Promise<Document> => window.electronAPI.createDocument(documentData);
+export const createDocument = (documentData: Omit<Document, '_id'>): Promise<Document> => {
+  if (typeof window !== 'undefined' && window.electronAPI) {
+    return window.electronAPI.createDocument(documentData);
+  }
+  throw new Error('Electron API is not available');
+};
 
-export const getDocuments = (): Promise<Document[]> => window.electronAPI.getDocuments();
+export const getDocuments = (): Promise<Document[]> => {
+  if (typeof window !== 'undefined' && window.electronAPI) {
+    return window.electronAPI.getDocuments();
+  }
+  throw new Error('Electron API is not available');
+};
 
-export const updateDocument = (id: string, updateData: Partial<Document>): Promise<number> => window.electronAPI.updateDocument(id, updateData);
+export const updateDocument = (id: string, updateData: Partial<Document>): Promise<number> => {
+  if (typeof window !== 'undefined' && window.electronAPI) {
+    return window.electronAPI.updateDocument(id, updateData);
+  }
+  throw new Error('Electron API is not available');
+};
 
-export const deleteDocument = (id: string): Promise<number> => window.electronAPI.deleteDocument(id);
+export const deleteDocument = (id: string): Promise<number> => {
+  if (typeof window !== 'undefined' && window.electronAPI) {
+    return window.electronAPI.deleteDocument(id);
+  }
+  throw new Error('Electron API is not available');
+};

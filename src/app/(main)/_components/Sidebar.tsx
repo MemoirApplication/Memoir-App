@@ -1,5 +1,5 @@
 import React from "react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
+import { Button, ScrollShadow } from "@nextui-org/react";
 import { FileText, Plus } from "lucide-react";
 
 interface SidebarProps {
@@ -14,24 +14,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCreateDocument,
 }) => {
   return (
-    <div className="w-64 h-screen bg-gray-100 p-4">
-      <button
-        onClick={onCreateDocument}
-        className="flex items-center mb-4 text-blue-600"
-      >
-        <Plus size={24} />
-        <span className="ml-2">New Document</span>
-      </button>
-      <Listbox
-        aria-label="Document list"
-        onAction={(key) => onSelectDocument(key as string)}
-      >
-        {documents.map((doc) => (
-          <ListboxItem key={doc._id} startContent={<FileText size={24} />}>
-            {doc.title}
-          </ListboxItem>
-        ))}
-      </Listbox>
+    <div className="w-64 h-screen border-r border-divider">
+      <ScrollShadow className="h-full">
+        <div className="p-4">
+          <Button
+            onPress={onCreateDocument}
+            startContent={<Plus size={18} />}
+            className="mb-4 w-full"
+          >
+            New Document
+          </Button>
+          {documents.map((doc) => (
+            <Button
+              key={doc._id}
+              onPress={() => onSelectDocument(doc._id)}
+              startContent={<FileText size={18} />}
+              className="mb-2 w-full justify-start"
+              variant="light"
+            >
+              {doc.title}
+            </Button>
+          ))}
+        </div>
+      </ScrollShadow>
     </div>
   );
 };

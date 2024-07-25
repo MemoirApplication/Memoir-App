@@ -13,14 +13,22 @@ export default function Documents() {
   }, []);
 
   const loadDocuments = async () => {
-    const docs = await getDocuments();
-    setDocuments(docs);
+    try {
+      const docs = await getDocuments();
+      setDocuments(docs);
+    } catch (error) {
+      console.error("Failed to load documents:", error);
+    }
   };
 
   const handleCreateDocument = async () => {
-    const newDoc = { title: "New Document", content: "Start writing..." };
-    await createDocument(newDoc);
-    loadDocuments();
+    try {
+      const newDoc = { title: "New Document", content: "Start writing..." };
+      await createDocument(newDoc);
+      loadDocuments();
+    } catch (error) {
+      console.error("Failed to create document:", error);
+    }
   };
 
   const handleSelectDocument = (id) => {
@@ -46,33 +54,3 @@ export default function Documents() {
     </div>
   );
 }
-// import { useState, useEffect } from "react";
-// import { getDocuments, createDocument } from "@/utils/db";
-
-// export default function Documents() {
-//   const [documets, setDocuments] = useState([]);
-
-//   useEffect(() => {
-//     loadDocuments();
-//   }, []);
-
-//   const loadDocuments = async () => {
-//     const docs = await getDocuments();
-//     setDocuments(docs);
-//   };
-//   const handleCreateDocument = async () => {
-//     const newDoc = { title: "New Document", content: "Start writing..." };
-//     await createDocument(newDoc);
-//     loadDocuments();
-//   };
-
-//   return (
-//     <div>
-//       <h1>Documents</h1>
-//       <button onClick={handleCreateDocument}>Create Document</button>
-//       {documets.map((doc) => (
-//         <div key={doc._id}>{doc.title}</div>
-//       ))}
-//     </div>
-//   );
-// }
