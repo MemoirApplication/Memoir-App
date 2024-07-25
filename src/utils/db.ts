@@ -4,7 +4,7 @@ interface Document {
   title?: string;
   contentBlocks?: {
     _id?: number;
-    block: 
+    block: string;
   };
 
   // Add other fields as needed
