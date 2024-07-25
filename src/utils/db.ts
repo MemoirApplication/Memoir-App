@@ -1,14 +1,18 @@
 import { Block } from "@blocknote/core";
+
+// Define the Document interface / scheme
 interface Document {
   _id?: string;
   title?: string;
-  contentBlocks?: {
-    _id?: number;
-    block: string;
-  };
+  tags?: {};
+  pageIcon?: {};
+  contentBlocks?: Block[];
+  parentId?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
 
   // Add other fields as needed
-}
 
 declare global {
   interface Window {

@@ -14,7 +14,7 @@ import { Textarea } from "@nextui-org/react";
 // import "@blocknote/mantine/style.css";
 
 const MarketingPage = () => {
-  let [value, setValue] = React.useState(parseDate("2024-03-07"));
+  let [value, setValue] = React.useState(parseDate("2024-08-03"));
 
   // Creates a new editor instance.
   // const editor = useCreateBlockNote();
@@ -68,7 +68,7 @@ const MarketingPage = () => {
         <Image
           isBlurred
           isZoomed
-          width={550}
+          width={500}
           src="./screenshot.png"
           alt="screenshot"
           className="m-5"
