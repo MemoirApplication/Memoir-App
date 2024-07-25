@@ -65,18 +65,20 @@ app.on("activate", function () {
 
 // Listen for IPC messages from the renderer process
 ipcMain.handle("create-document", async (event, documentData) => {
-  if (!documentData) {
-    throw new Error("documentData cannot be null or undefined");
-  }
-
   try {
+    if (!documentData) {
+      throw new Error("documentData cannot be null or undefined");
+    }
+
     const newDoc = await db.insertAsync(documentData);
+
     if (!newDoc) {
       throw new Error("Failed to create document");
     }
+
     return newDoc;
   } catch (err) {
-    throw err;
+    throw new Error(`Failed to create document: ${err}`);
   }
 });
 
