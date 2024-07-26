@@ -83,28 +83,53 @@ ipcMain.handle("create-document", async (event, documentData) => {
 });
 
 ipcMain.handle("get-documents", async () => {
-  return new Promise((resolv, reject) => {
-    db.find({}, (err, docs) => {
-      if (err) reject(err);
-      else resolv(docs);
-    });
-  });
+  try {
+    const documents = await db.findAsync({});
+    if (!documents) {
+      throw new Error("Failed to get documents");
+    }
+    return documents;
+  } catch (error) {
+    throw new Error(`Failed to get documents: ${error}`);
+  }
 });
 
 ipcMain.handle("update-document", async (event, id, updateData) => {
-  return new Promise((resolv, reject) => {
-    db.update({ _id: id }, { $set: updateData }, {}, (err, numReplaced) => {
-      if (err) reject(err);
-      else resolve(numReplaced);
-    });
-  });
+  if (!id) {
+    throw new Error("id cannot be null or undefined");
+  }
+  try {
+    const numReplaced = await db.updateAsync(
+      { _id: id },
+      { $set: updateData },
+      { returnUpdatedDocs: true }
+    );
+
+    if (!numReplaced) {
+      throw new Error("Failed to update document");
+    }
+
+    return numReplaced;
+  } catch (error) {
+    console.error("Failed to update document:", error);
+    throw new Error(`Failed to update document: ${error}`);
+  }
 });
 
 ipcMain.handle("delete-document", async (event, id) => {
-  return new Promise((resolve, reject) => {
-    db.remove({ _id: id }, {}, (err, numRemoved) => {
-      if (err) reject(err);
-      else resolve(numRemoved);
-    });
-  });
+  if (!id) {
+    throw new Error("id cannot be null or undefined");
+  }
+  try {
+    const numRemoved = await db.removeAsync({ _id: id });
+    if (numRemoved === null || numRemoved === undefined) {
+      throw new Error("Failed to delete document");
+    }
+    if (numRemoved === 0) {
+      throw new Error("Document not found");
+    }
+    return numRemoved;
+  } catch (error) {
+    console.error("Failed to delete document:", error);
+  }
 });
