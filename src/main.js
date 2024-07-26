@@ -19,6 +19,8 @@ try {
   console.log(db.filename + " DB failed to load" + error); // loading has failed
 }
 
+app.disableHardwareAcceleration();
+
 // Create the main window
 let mainWindow;
 
@@ -28,9 +30,9 @@ async function createWindow() {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      enableRemoteModule: true,
+      // enableRemoteModule: true,
       nodeIntegration: true,
-      contextIsolation: true,
+      contextIsolation: false,
     },
   });
 
@@ -52,7 +54,6 @@ async function createWindow() {
     mainWindow = null;
   });
 }
-
 app.on("ready", createWindow);
 
 app.on("window-all-closed", function () {
