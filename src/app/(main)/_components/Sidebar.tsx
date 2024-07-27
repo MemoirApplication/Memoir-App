@@ -8,6 +8,7 @@ import {
   ChevronDown,
   HomeIcon,
   PlusCircle,
+  Search,
   SearchIcon,
   Settings2Icon,
   Trash2Icon,
@@ -15,8 +16,10 @@ import {
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
 import { Item } from "./item";
+import { useRouter } from "next/navigation";
 
 export const Sidebar = () => {
+  const router = useRouter();
   const create = useMutation(api.documents.create);
 
   const handleCreate = () => {
@@ -51,11 +54,15 @@ export const Sidebar = () => {
             <div>
               <Card>
                 <CardBody className="flex space-y-2">
-                  <Button variant="light" className="justify-start">
+                  {/* <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
                     <p className="select-none">Search</p>
-                  </Button>
-                  <Button variant="light" className="justify-start">
+                  </Button> */}
+                  <Button
+                    onClick={() => router.push("/documents")}
+                    variant="light"
+                    className="justify-start"
+                  >
                     <HomeIcon size={16} />
                     <p className="select-none">Home</p>
                   </Button>
@@ -79,7 +86,13 @@ export const Sidebar = () => {
                   <PlusCircle size={18} />
                   New Note
                 </Button> */}
-                <div>
+                <div className="space-y-1">
+                  <Item
+                    label="Search"
+                    icon={Search}
+                    isSearch
+                    onClick={() => {}}
+                  />
                   <Item
                     onClick={handleCreate}
                     label="New Page"
