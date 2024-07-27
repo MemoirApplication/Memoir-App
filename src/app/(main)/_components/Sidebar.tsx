@@ -14,7 +14,7 @@ import {
 export const Sidebar = () => {
   return (
     <>
-      <aside className="h-full h-screen  w-80 ">
+      <aside className=" h-screen  w-80 ">
         <Card className="h-full ">
           <div className="p-4 h-full flex-col ">
             <Card isBlurred shadow="lg" className="mb-4">
@@ -36,19 +36,19 @@ export const Sidebar = () => {
                 <CardBody className="flex space-y-2">
                   <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
-                    <p className="select-none">Workspace</p>
+                    <p className="select-none">Search</p>
                   </Button>
                   <Button variant="light" className="justify-start">
                     <HomeIcon size={16} />
-                    <p className="select-none">Workspace</p>
+                    <p className="select-none">Home</p>
                   </Button>
                   <Button variant="light" className="justify-start">
                     <Calendar size={16} />
-                    <p className="select-none">Workspace</p>
+                    <p className="select-none">Calendar</p>
                   </Button>
                   <Button variant="light" className="justify-start">
                     <Settings2Icon size={16} />
-                    <p className="select-none">Workspace</p>
+                    <p className="select-none">Settings</p>
                   </Button>
                 </CardBody>
               </Card>
@@ -60,7 +60,7 @@ export const Sidebar = () => {
               <CardBody></CardBody>
             </Card>
             <Divider className="my-4" />
-            <div className="align-bottom items-end">
+            <div className="absolute inset-x-0 bottom-0 m-4">
               <Card>
                 <CardBody>
                   <Button variant="light" className="justify-start ">
