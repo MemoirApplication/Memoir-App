@@ -5,7 +5,7 @@ import { Card, CardBody } from "@nextui-org/card";
 export default function Documents() {
   return (
     // <div className="flex">
-    <div className=" select-none h-full min-h-full flex flex-col items-center justify-center space-y-4">
+    <div className="select-none h-full min-h-full flex flex-col items-center justify-center space-y-4">
       <Card>
         <CardBody>
           <p>Start a Note</p>

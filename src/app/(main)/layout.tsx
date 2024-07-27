@@ -19,7 +19,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return redirect("/");
   }
   return (
-    <div className="select-none h-full text-foreground bg-background min-h-full">
+    <div className="select-none h-max flex w-screen text-foreground bg-background min-h-full">
       <main className="h-full min-h-full flex  overflow-y-auto">
         <Sidebar />
         {children}
