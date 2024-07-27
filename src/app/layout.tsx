@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Providers } from "./providers";
+import { ConvexClientProvider } from "@/components/convex-provider";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -32,8 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
+      <body className="bg-background text-foreground min-h-full">
+        <ConvexClientProvider>
+          <Providers>{children}</Providers>
+        </ConvexClientProvider>
       </body>
     </html>
   );

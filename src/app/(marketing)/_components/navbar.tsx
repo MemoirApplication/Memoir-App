@@ -30,8 +30,10 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Logo } from "./Logo";
+import { useConvexAuth } from "convex/react";
 
 export const NavigationBar = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
   const { isLoaded } = useSession();
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
