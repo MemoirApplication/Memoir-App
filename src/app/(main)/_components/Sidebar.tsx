@@ -2,11 +2,10 @@
 
 import { UserButton } from "@clerk/nextjs";
 import { Button, Card, CardBody, Divider } from "@nextui-org/react";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import {
   Calendar,
   ChevronDown,
-  CircleUser,
   HomeIcon,
   PlusCircle,
   SearchIcon,
@@ -15,12 +14,12 @@ import {
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
+import { Item } from "./item";
 
 export const Sidebar = () => {
   const create = useMutation(api.documents.create);
-  const documents = useQuery(api.documents.get);
 
-  const onCreate = () => {
+  const handleCreate = () => {
     const promise = create({ title: "untitled" });
     toast.promise(promise, {
       loading: "Creating a new note...",
@@ -76,19 +75,21 @@ export const Sidebar = () => {
 
             <Card>
               <CardBody>
-                <Button onClick={onCreate} variant="flat" color="secondary">
+                {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
-                </Button>
+                </Button> */}
                 <div>
-                  {documents?.map((document) => (
-                    <p key={document._id}>{document.title}</p>
-                  ))}
+                  <Item
+                    onClick={handleCreate}
+                    label="New Page"
+                    icon={PlusCircle}
+                  />
                 </div>
               </CardBody>
             </Card>
-            <Divider className="my-4" />
             <div className="absolute inset-x-0 bottom-0 m-4">
+              <Divider className="my-4" />
               <Card shadow="lg">
                 <CardBody>
                   <Button
