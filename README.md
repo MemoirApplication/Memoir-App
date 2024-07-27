@@ -17,6 +17,7 @@ Make a `.env.local` file and then update the api keys for Clerk.
 ## To run the development server
 
 ```bash
+npx convex dev
 npm run dev
 ```
 
