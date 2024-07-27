@@ -9,7 +9,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (isLoading) {
     return (
-      <div className="text-foreground bg-background h-screen h-full flex items-center justify-center">
+      <div className="text-foreground bg-background h-screen flex items-center justify-center">
         <Spinner color="secondary" className="py-4 mt-10" />
       </div>
     );
@@ -21,7 +21,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <main>
-        <div className="grid-cols-2 flex">
+        <div className=" text-foreground bg-background grid-cols-2 flex">
           <Sidebar />
           {children}
         </div>
