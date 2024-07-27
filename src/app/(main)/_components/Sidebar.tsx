@@ -24,7 +24,8 @@ export const Sidebar = () => {
                 <Button
                   isIconOnly
                   size="sm"
-                  variant="faded"
+                  variant="light"
+                  color="secondary"
                   className="ml-auto"
                 >
                   <ChevronDown />
@@ -61,9 +62,13 @@ export const Sidebar = () => {
             </Card>
             <Divider className="my-4" />
             <div className="absolute inset-x-0 bottom-0 m-4">
-              <Card>
+              <Card shadow="lg">
                 <CardBody>
-                  <Button variant="light" className="justify-start ">
+                  <Button
+                    variant="shadow"
+                    color="secondary"
+                    className="justify-start "
+                  >
                     <Trash2Icon size={16} />
                     Trash
                   </Button>

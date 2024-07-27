@@ -18,6 +18,7 @@ import {
 } from "@nextui-org/react";
 import App from "../../_components/blocksnote";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { PlusCircle } from "lucide-react";
 
 export default function Documents() {
   const { user } = useUser();
@@ -38,12 +39,14 @@ export default function Documents() {
         {/*  */}
         <div>
           {/* // to-do fix pos  */}
-          <div className="h-full flex  flex-col justify-center items-center space-y-4">
+          <div className="h-screen flex flex-col items-center justify-center">
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memroir
             </h2>
+            <Button isIconOnly variant="light" color="secondary">
+              <PlusCircle />
+            </Button>
           </div>
-          {/* <App /> */}
         </div>
       </div>
     </>
