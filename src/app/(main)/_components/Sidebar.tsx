@@ -2,6 +2,7 @@
 
 import { UserButton } from "@clerk/nextjs";
 import { Button, Card, CardBody, Divider } from "@nextui-org/react";
+import { useQuery } from "convex/react";
 import {
   Calendar,
   ChevronDown,
@@ -12,8 +13,10 @@ import {
   Settings2Icon,
   Trash2Icon,
 } from "lucide-react";
+import { api } from "../../../../convex/_generated/api";
 
 export const Sidebar = () => {
+  const documents = useQuery(api.documents.get);
   return (
     <>
       <aside className=" h-screen  w-80 ">
@@ -66,6 +69,11 @@ export const Sidebar = () => {
                   <PlusCircle size={18} />
                   New Note
                 </Button>
+                <div>
+                  {documents?.map((document) => (
+                    <p key={document._id}>{document.title}</p>
+                  ))}
+                </div>
               </CardBody>
             </Card>
             <Divider className="my-4" />
