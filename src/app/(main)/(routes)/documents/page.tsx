@@ -8,20 +8,26 @@ import {
   NavbarItem,
   Link,
   Button,
-  Dropdown,
-  DropdownTrigger,
-  Avatar,
-  DropdownMenu,
-  DropdownItem,
-  Card,
-  CardBody,
 } from "@nextui-org/react";
 import App from "../../_components/blocksnote";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { PlusCircle } from "lucide-react";
+import { useMutation } from "convex/react";
+import { api } from "../../../../../convex/_generated/api";
+import { toast } from "sonner";
 
 export default function Documents() {
   const { user } = useUser();
+  const create = useMutation(api.documents.create);
+
+  const onCreate = () => {
+    const promise = create({ title: "untitled" });
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note.",
+    });
+  };
   return (
     <>
       <div className="pl-6 h-screen min-h-full flex flex-col w-screen">
@@ -43,7 +49,12 @@ export default function Documents() {
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memroir
             </h2>
-            <Button variant="light" color="secondary" className="mt-2">
+            <Button
+              onClick={onCreate}
+              variant="light"
+              color="secondary"
+              className="mt-2"
+            >
               <PlusCircle />
               Create Note
             </Button>

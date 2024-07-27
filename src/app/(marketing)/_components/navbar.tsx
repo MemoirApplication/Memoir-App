@@ -50,7 +50,7 @@ export const NavigationBar = () => {
   }, []);
 
   return (
-    <Navbar>
+    <Navbar isBordered>
       <NavbarBrand>
         <Logo />
         <p>Memoir</p>

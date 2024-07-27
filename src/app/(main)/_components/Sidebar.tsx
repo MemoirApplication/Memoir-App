@@ -7,6 +7,7 @@ import {
   ChevronDown,
   CircleUser,
   HomeIcon,
+  PlusCircle,
   SearchIcon,
   Settings2Icon,
   Trash2Icon,
@@ -60,7 +61,12 @@ export const Sidebar = () => {
             <Divider className="my-4" />
 
             <Card>
-              <CardBody></CardBody>
+              <CardBody>
+                <Button variant="flat" color="secondary">
+                  <PlusCircle size={18} />
+                  New Note
+                </Button>
+              </CardBody>
             </Card>
             <Divider className="my-4" />
             <div className="absolute inset-x-0 bottom-0 m-4">

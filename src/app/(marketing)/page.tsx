@@ -8,36 +8,8 @@ import { parseDate } from "@internationalized/date";
 import { Image } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 
-// import "@blocknote/core/fonts/inter.css";
-// import { useCreateBlockNote } from "@blocknote/react";
-// import { BlockNoteView } from "@blocknote/mantine";
-// import "@blocknote/mantine/style.css";
-
 const MarketingPage = () => {
   let [value, setValue] = React.useState(parseDate("2024-08-03"));
-
-  // Creates a new editor instance.
-  // const editor = useCreateBlockNote();
-  // const editor = useCreateBlockNote({
-  //   initialContent: [
-  //     {
-  //       type: "paragraph",
-  //       content: "Welcome to this demo!",
-  //     },
-  //     {
-  //       type: "paragraph",
-  //       content: "You'll see that the text is now blue",
-  //     },
-  //     {
-  //       type: "paragraph",
-  //       content:
-  //         "Press the '/' key - the hovered Slash Menu items are also blue",
-  //     },
-  //     {
-  //       type: "paragraph",
-  //     },
-  //   ],
-  // });
 
   return (
     <div className="text-foreground bg-background min-h-max flex flex-col ">
@@ -61,17 +33,6 @@ const MarketingPage = () => {
           aria-label="Date (Controlled)"
           value={value}
           onChange={setValue}
-        />
-      </div>
-
-      <div className="object-fill pt-10  flex justify-center justfy-between items-center  ">
-        <Image
-          isBlurred
-          isZoomed
-          width={500}
-          src="./screenshot.png"
-          alt="screenshot"
-          className="m-5"
         />
       </div>
 
