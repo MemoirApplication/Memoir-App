@@ -37,8 +37,11 @@ export default function Documents() {
 
         {/*  */}
         <div>
+          {/* // to-do fix pos  */}
           <div className="h-full flex  flex-col justify-center items-center space-y-4">
-            <h2>Hey {user?.firstName}, Welcome to Memroir</h2>
+            <h2 className="select-none">
+              Hey {user?.firstName}, Welcome to Memroir
+            </h2>
           </div>
           {/* <App /> */}
         </div>
