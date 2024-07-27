@@ -1,5 +1,6 @@
 "use client";
 
+import { UserButton } from "@clerk/nextjs";
 import { Button, Card, CardBody, Divider } from "@nextui-org/react";
 import {
   Calendar,
@@ -19,8 +20,9 @@ export const Sidebar = () => {
           <div className="p-4 h-full flex-col ">
             <Card isBlurred shadow="lg" className="mb-4">
               <CardBody className="flex-row items-center justify-center">
-                <CircleUser size={20} className="mr-1" />
-                <p className="ml-1 select-none">Workspace</p>
+                <UserButton />
+
+                <p className="ml-2 select-none">Workspace</p>
                 <Button
                   isIconOnly
                   size="sm"

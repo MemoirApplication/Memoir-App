@@ -28,10 +28,10 @@ export default function Documents() {
         {/*  */}
 
         {/* navbar div */}
-        <div className="">
+        <div className=" top-0 z-50">
           <Navbar position="static" isBordered={true}>
             <NavbarContent as="div" justify="end">
-              <UserButton />
+              {/* <UserButton /> */}
             </NavbarContent>
           </Navbar>
         </div>
@@ -39,7 +39,7 @@ export default function Documents() {
         {/*  */}
         <div>
           {/* // to-do fix pos  */}
-          <div className="h-screen flex flex-col items-center justify-center">
+          <div className="mt-60  flex flex-col items-center justify-center">
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memroir
             </h2>
