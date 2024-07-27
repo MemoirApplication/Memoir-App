@@ -43,8 +43,9 @@ export default function Documents() {
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memroir
             </h2>
-            <Button isIconOnly variant="light" color="secondary">
+            <Button variant="light" color="secondary" className="mt-2">
               <PlusCircle />
+              Create Note
             </Button>
           </div>
         </div>
