@@ -2,7 +2,7 @@
 
 import { UserButton } from "@clerk/nextjs";
 import { Button, Card, CardBody, Divider } from "@nextui-org/react";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import {
   Calendar,
   ChevronDown,
@@ -14,9 +14,20 @@ import {
   Trash2Icon,
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
+import { toast } from "sonner";
 
 export const Sidebar = () => {
+  const create = useMutation(api.documents.create);
   const documents = useQuery(api.documents.get);
+
+  const onCreate = () => {
+    const promise = create({ title: "untitled" });
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note.",
+    });
+  };
   return (
     <>
       <aside className=" h-screen  w-80 ">
@@ -65,7 +76,7 @@ export const Sidebar = () => {
 
             <Card>
               <CardBody>
-                <Button variant="flat" color="secondary">
+                <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
                 </Button>
