@@ -34,7 +34,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside className="fixed top-0 left-0 h-full w-60 z-50">
+      <aside className="fixed top-0 left-0 h-full w-72 z-50">
         <Card className="h-full shadow-lg">
           <div className="p-4 h-full flex flex-col">
             <Card isBlurred shadow="lg" className="mb-4">

@@ -1,6 +1,14 @@
 "use client";
 
-import { ChevronDown, ChevronRight, LucideIcon, Plus } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  CopyIcon,
+  Ellipsis,
+  LucideIcon,
+  Plus,
+  Trash2Icon,
+} from "lucide-react";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { cn } from "@nextui-org/theme";
 import { Skeleton } from "@nextui-org/skeleton";
@@ -8,6 +16,13 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -51,7 +66,7 @@ export const Item = ({
         if (!expanded) {
           onExpand?.();
         }
-        router.push(`/documents/${documentId}`);
+        // router.push(`/documents/${documentId}`);
       }
     );
     toast.promise(promise, {
@@ -68,17 +83,17 @@ export const Item = ({
       onClick={onClick}
       role="button"
       style={{
-        paddingLeft: level ? `${level * 12 + 12}px` : "12px",
+        paddingLeft: level ? `${level * 12 + 6}px` : "4px",
       }}
       className={cn(
-        "select-none group min-h-[27px] text-sm py-1 pr-3 w-full hove:bg-primary/10 flex items-center text-muted-foreground font-medium",
+        "select-none group min-h-[27px]  text-md py-1 pr-3 w-full hove:bg-primary/10 flex items-center text-muted-foreground font-medium",
         active && "bg-primary/5 text-primary"
       )}
     >
       {!!id && (
         <div
           role="button"
-          className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
+          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-secondary-100 dark:bg-secondary-500"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -98,10 +113,41 @@ export const Item = ({
       {/* this is for plus icon nextto each page button  */}
       {!!id && (
         <div className="ml-auto flex items-center gap-x-2">
+          <Dropdown>
+            <DropdownTrigger>
+              <Button
+                isIconOnly
+                size="sm"
+                color="secondary"
+                variant="light"
+                className="group opacity-0 group-hover:opacity-100"
+              >
+                <Ellipsis />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
+              <DropdownItem
+                key="copy"
+                shortcut="⌘C"
+                startContent={<CopyIcon />}
+              >
+                Copy link
+              </DropdownItem>
+              <DropdownItem
+                key="delete"
+                className="text-danger"
+                color="danger"
+                shortcut="⌘⇧D"
+                startContent={<Trash2Icon />}
+              >
+                Delete file
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
           <div
             role="button"
             onClick={onCreate}
-            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:bg-neutral-600"
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
