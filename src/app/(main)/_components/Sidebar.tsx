@@ -33,27 +33,28 @@ export const Sidebar = () => {
   };
 
   return (
-    <aside className="fixed top-0 left-0 h-full w-60 z-50">
-      <Card className="h-full shadow-lg">
-        <div className="p-4 h-full flex flex-col">
-          <Card isBlurred shadow="lg" className="mb-4">
-            <CardBody className="flex-row items-center justify-center">
-              <UserButton />
-              <p className="ml-2 select-none">Workspace</p>
-              <Button
-                isIconOnly
-                size="sm"
-                variant="light"
-                color="secondary"
-                className="ml-auto"
-              >
-                <ChevronDown />
-              </Button>
-            </CardBody>
-          </Card>
-          <div>
-            <Card>
-              <CardBody className="flex flex-col space-y-2">
+    <>
+      <aside className="fixed top-0 left-0 h-full w-60 z-50">
+        <Card className="h-full shadow-lg">
+          <div className="p-4 h-full flex flex-col">
+            <Card isBlurred shadow="lg" className="mb-4">
+              <CardBody className="flex-row items-center justify-center">
+                <UserButton />
+                <p className="ml-2 select-none">Workspace</p>
+                <Button
+                  isIconOnly
+                  size="sm"
+                  variant="light"
+                  color="secondary"
+                  className="ml-auto"
+                >
+                  <ChevronDown />
+                </Button>
+              </CardBody>
+            </Card>
+            <div>
+              <Card>
+                <CardBody className="flex flex-col space-y-2">
                   {/* <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
                     <p className="select-none">Search</p>
