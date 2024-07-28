@@ -41,9 +41,11 @@ export default function Documents() {
     <>
       {/* Navbar */}
       <div className="relative w-screen">
+        <div className="z-50">
         <Sidebar isCollapsed={isCollapsed} />
+        </div>
         <div
-          className={`fixed top-0 right-0 z-50 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <Navbar isBordered={true} height="h-16">
             <NavbarContent as="div" justify="start">
