@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { DocumentList } from "./document-list";
 
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+import { TrashBox } from "./trash-box";
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -123,9 +124,7 @@ export const Sidebar = () => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
-                      <div>
-                        <h2>Trash box</h2>
-                      </div>
+                      <TrashBox />
                     </PopoverContent>
                   </Popover>
                 </CardBody>
