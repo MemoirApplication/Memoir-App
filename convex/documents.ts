@@ -5,7 +5,7 @@ import { Doc, Id } from "./_generated/dataModel";
 
 export const getSidebar = query({
   args: {
-    parentDocument: v.optional(v.id("document"))
+    parentDocument: v.optional(v.id("documents"))
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -43,7 +43,7 @@ export const getSidebar = query({
 export const create = mutation({
   args: {
     title: v.string(),
-    parentDocument: v.optional(v.id("document")),
+    parentDocument: v.optional(v.id("documents")),
   },
 
   handler: async (ctx, args) => {
