@@ -28,37 +28,33 @@ export default function Documents() {
       error: "Failed to create a new note.",
     });
   };
+
   return (
     <>
-      <div className="pl-6 h-screen min-h-full flex flex-col w-screen">
-        {/*  */}
-
-        {/* navbar div */}
-        <div className=" top-0 z-50">
-          <Navbar position="static" isBordered={true}>
+      <div className="relative pl-6 h-screen min-h-full flex flex-col w-screen">
+        {/* Navbar */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <Navbar isBordered={true} height="44px">
             <NavbarContent as="div" justify="end">
               {/* <UserButton /> */}
             </NavbarContent>
           </Navbar>
         </div>
 
-        {/*  */}
-        <div>
-          {/* // to-do fix pos  */}
-          <div className="mt-60  flex flex-col items-center justify-center">
-            <h2 className="select-none">
-              Hey {user?.firstName}, Welcome to Memroir
-            </h2>
-            <Button
-              onClick={onCreate}
-              variant="light"
-              color="secondary"
-              className="mt-2"
-            >
-              <PlusCircle />
-              Create Note
-            </Button>
-          </div>
+        {/* Main content */}
+        <div className="flex flex-col items-center justify-center mt-60">
+          <h2 className="select-none">
+            Hey {user?.firstName}, Welcome to Memoir
+          </h2>
+          <Button
+            onClick={onCreate}
+            variant="light"
+            color="secondary"
+            className="mt-2"
+          >
+            <PlusCircle />
+            Create Note
+          </Button>
         </div>
       </div>
     </>

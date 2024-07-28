@@ -6,6 +6,9 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenuToggle, 
+  NavbarMenu, 
+  NavbarMenuItem,
   Link,
   Button,
 } from "@nextui-org/react";

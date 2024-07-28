@@ -7,6 +7,7 @@ import { Sidebar } from "./_components/Sidebar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
+  
   if (isLoading) {
     return (
       <div className="text-foreground bg-background h-screen flex items-center justify-center">
@@ -18,13 +19,12 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   if (!isAuthenticated) {
     return redirect("/");
   }
+  
   return (
-    <div>
-      <main>
-        <div className=" text-foreground bg-background grid-cols-2 flex">
-          <Sidebar />
-          {children}
-        </div>
+    <div className="flex h-screen">
+      <Sidebar />
+      <main className="flex-grow bg-background text-foreground">
+        {children}
       </main>
     </div>
   );
