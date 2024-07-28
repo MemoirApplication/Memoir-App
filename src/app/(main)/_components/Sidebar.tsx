@@ -17,6 +17,7 @@ import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
 import { Item } from "./item";
 import { useRouter } from "next/navigation";
+import { DocumentList } from "./document-list";
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -98,6 +99,9 @@ export const Sidebar = () => {
                     label="New Page"
                     icon={PlusCircle}
                   />
+                </div>
+                <div className="mt-4">
+                  <DocumentList />
                 </div>
               </CardBody>
             </Card>

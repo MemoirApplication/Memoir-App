@@ -3,6 +3,7 @@
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { cn } from "@nextui-org/theme";
+import { Skeleton } from "@nextui-org/skeleton";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -28,6 +29,13 @@ export const Item = ({
   onExpand,
   expanded,
 }: ItemProps) => {
+  const handleExpand = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    onExpand?.();
+  };
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
@@ -38,7 +46,7 @@ export const Item = ({
         paddingLeft: level ? `${level * 12 + 12}px` : "12px",
       }}
       className={cn(
-        "select-none group min-h-[27px] text-sm py-1 pr-3 w-full hove:bg-primary/5 flex items-center text-muted-foreground font-medium",
+        "select-none group min-h-[27px] text-sm py-1 pr-3 w-full hove:bg-primary/10 flex items-center text-muted-foreground font-medium",
         active && "bg-primary/5 text-primary"
       )}
     >
@@ -46,7 +54,7 @@ export const Item = ({
         <div
           role="button"
           className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
-          onClick={() => {}}
+          onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
@@ -59,9 +67,21 @@ export const Item = ({
       <span className="truncate">{label}</span>
       {isSearch && (
         <kbd className="ml-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs pr-1">⌘ </span>K
+          <span className="text-xs pr-1">⌘ K</span>
         </kbd>
       )}
+    </div>
+  );
+};
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
+      className="flex gap-x-2 py[3px]"
+    >
+      <Skeleton className="h-4 w-4 " />
+      <Skeleton className="h-4 w-[30%] " />
     </div>
   );
 };
