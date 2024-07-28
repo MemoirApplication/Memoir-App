@@ -19,6 +19,8 @@ import { Item } from "./item";
 import { useRouter } from "next/navigation";
 import { DocumentList } from "./document-list";
 
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+
 export const Sidebar = () => {
   const router = useRouter();
   const create = useMutation(api.documents.create);
@@ -109,14 +111,23 @@ export const Sidebar = () => {
               <Divider className="my-4" />
               <Card shadow="lg">
                 <CardBody>
-                  <Button
-                    variant="shadow"
-                    color="secondary"
-                    className="justify-start "
-                  >
-                    <Trash2Icon size={16} />
-                    Trash
-                  </Button>
+                  <Popover backdrop="blur" placement="top">
+                    <PopoverTrigger>
+                      <Button
+                        variant="shadow"
+                        color="secondary"
+                        className="justify-start "
+                      >
+                        <Trash2Icon size={16} />
+                        Trash
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <div>
+                        <h2>Trash box</h2>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </CardBody>
               </Card>
             </div>

@@ -4,8 +4,8 @@ import {
   ChevronDown,
   ChevronRight,
   CopyIcon,
-  Ellipsis,
   LucideIcon,
+  MoreHorizontal,
   Plus,
   Trash2Icon,
 } from "lucide-react";
@@ -23,6 +23,7 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
+import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -33,7 +34,7 @@ interface ItemProps {
   level?: number;
   onExpand?: () => void;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon: LucideIcon;
 }
 export const Item = ({
@@ -48,9 +49,21 @@ export const Item = ({
   onExpand,
   expanded,
 }: ItemProps) => {
-  const create = useMutation(api.documents.create);
+  const { user } = useUser();
   const router = useRouter();
+  const create = useMutation(api.documents.create);
+  const archive = useMutation(api.documents.archive);
 
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (!id) return;
+    const promise = archive({ id });
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note moved to trash!",
+      error: "Failed moving to trash.",
+    });
+  };
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -93,7 +106,7 @@ export const Item = ({
       {!!id && (
         <div
           role="button"
-          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-secondary-100 dark:bg-secondary-500"
+          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-100 dark:bg-secondary-500"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -115,17 +128,17 @@ export const Item = ({
         <div className="ml-auto flex items-center gap-x-2">
           <Dropdown>
             <DropdownTrigger>
-              <Button
-                isIconOnly
-                size="sm"
-                color="secondary"
-                variant="light"
-                className="group opacity-0 group-hover:opacity-100"
+              <div
+                role="button"
+                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
               >
-                <Ellipsis />
-              </Button>
+                <MoreHorizontal size={18} />
+              </div>
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
+              <DropdownItem showDivider isDisabled>
+                Last Edited By: {user?.fullName}
+              </DropdownItem>
               <DropdownItem
                 key="copy"
                 shortcut="⌘C"
@@ -134,6 +147,7 @@ export const Item = ({
                 Copy link
               </DropdownItem>
               <DropdownItem
+                onClick={onArchive}
                 key="delete"
                 className="text-danger"
                 color="danger"
@@ -147,7 +161,7 @@ export const Item = ({
           <div
             role="button"
             onClick={onCreate}
-            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
+            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
