@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react"; 
 import { useConvexAuth } from "convex/react";
 import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
 import { Sidebar } from "./_components/Sidebar";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const MainLayout = ({ children, isCollapsed }: { children: React.ReactNode, isCollapsed: boolean, toggleSidebar: () => void }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
+
   
   if (isLoading) {
     return (
@@ -22,8 +23,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   
   return (
     <div className="flex h-screen">
-      <Sidebar />
-      <main className="flex-grow bg-background text-foreground">
+      <main>
         {children}
       </main>
     </div>

@@ -19,7 +19,7 @@ import { Item } from "./item";
 import { useRouter } from "next/navigation";
 import { DocumentList } from "./document-list";
 
-export const Sidebar = () => {
+export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   const router = useRouter();
   const create = useMutation(api.documents.create);
 
@@ -34,7 +34,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside className="fixed top-0 left-0 h-full w-60 z-50">
+      <aside className={`fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}>
         <Card className="h-full shadow-lg">
           <div className="p-4 h-full flex flex-col">
             <Card isBlurred shadow="lg" className="mb-4">

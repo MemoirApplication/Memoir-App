@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -11,14 +11,18 @@ import {
 } from "@nextui-org/react";
 import App from "../../_components/blocksnote";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Menu } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
+import MainLayout from "../../layout";
+import { Sidebar } from "../../_components/Sidebar";
 
 export default function Documents() {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const onCreate = () => {
     const promise = create({ title: "untitled" });
@@ -29,32 +33,45 @@ export default function Documents() {
     });
   };
 
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
     <>
-      <div className="relative pl-6 h-screen min-h-full flex flex-col w-screen">
-        {/* Navbar */}
-        <div className="fixed top-0 left-0 right-0 z-50">
-          <Navbar isBordered={true} height="44px">
-            <NavbarContent as="div" justify="end">
-              {/* <UserButton /> */}
+      {/* Navbar */}
+      <div className="relative w-screen">
+        <Sidebar isCollapsed={isCollapsed} />
+        <div
+          className={`fixed top-0 right-0 z-50 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          <Navbar isBordered={true} height="h-16">
+            <NavbarContent as="div" justify="start">
+              <Button onClick={toggleSidebar} variant="light" color="secondary" isIconOnly size="sm">
+                <Menu />
+              </Button>
             </NavbarContent>
           </Navbar>
         </div>
 
         {/* Main content */}
-        <div className="flex flex-col items-center justify-center mt-60">
-          <h2 className="select-none">
-            Hey {user?.firstName}, Welcome to Memoir
-          </h2>
-          <Button
-            onClick={onCreate}
-            variant="light"
-            color="secondary"
-            className="mt-2"
-          >
-            <PlusCircle />
-            Create Note
-          </Button>
+        <div
+          className={`fixed right-0 flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          <div className="flex flex-col items-center justify-center mt-60">
+            <h2 className="select-none">
+              Hey {user?.firstName}, Welcome to Memoir
+            </h2>
+            <Button
+              onClick={onCreate}
+              variant="light"
+              color="secondary"
+              className="mt-2"
+            >
+              <PlusCircle />
+              Create Note
+            </Button>
+          </div>
         </div>
       </div>
     </>
