@@ -27,7 +27,7 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   const create = useMutation(api.documents.create);
 
   const handleCreate = () => {
-    const promise = create({ title: "untitled" });
+    const promise = create({ title: "Untitled" });
     toast.promise(promise, {
       loading: "Creating a new note...",
       success: "New note created!",

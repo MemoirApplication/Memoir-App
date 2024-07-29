@@ -25,7 +25,7 @@ export default function Documents() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const onCreate = () => {
-    const promise = create({ title: "untitled" });
+    const promise = create({ title: "Untitled" });
     toast.promise(promise, {
       loading: "Creating a new note...",
       success: "New note created!",
@@ -40,16 +40,22 @@ export default function Documents() {
   return (
     <>
       {/* Navbar */}
-      <div className="relative w-screen">
+      <div className="relative h-screen bg-background text-foreground w-screen">
         <div className="z-50">
-        <Sidebar isCollapsed={isCollapsed} />
+          <Sidebar isCollapsed={isCollapsed} />
         </div>
         <div
           className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <Navbar isBordered={true} height="h-16">
             <NavbarContent as="div" justify="start">
-              <Button onClick={toggleSidebar} variant="light" color="secondary" isIconOnly size="sm">
+              <Button
+                onClick={toggleSidebar}
+                variant="light"
+                color="secondary"
+                isIconOnly
+                size="sm"
+              >
                 <Menu />
               </Button>
             </NavbarContent>
@@ -58,7 +64,7 @@ export default function Documents() {
 
         {/* Main content */}
         <div
-          className={`fixed right-0 flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <div className="flex flex-col items-center justify-center mt-60">
             <h2 className="select-none">
