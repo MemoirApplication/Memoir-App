@@ -19,7 +19,7 @@ try {
   console.log(db.filename + " DB failed to load" + error); // loading has failed
 }
 
-app.disableHardwareAcceleration();
+// app.disableHardwareAcceleration();
 
 // Create the main window
 let mainWindow;

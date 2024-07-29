@@ -9,7 +9,8 @@ import { Image } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 
 const MarketingPage = () => {
-  let [value, setValue] = React.useState(parseDate("2024-08-03"));
+  const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
+  let [value, setValue] = React.useState(parseDate(today));
 
   return (
     <div className="text-foreground bg-background min-h-max flex flex-col ">

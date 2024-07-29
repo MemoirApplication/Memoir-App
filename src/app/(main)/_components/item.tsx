@@ -16,6 +16,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Kbd } from "@nextui-org/kbd";
 import {
   Dropdown,
   DropdownTrigger,
@@ -119,9 +120,15 @@ export const Item = ({
       )}
       <span className="truncate">{label}</span>
       {isSearch && (
-        <kbd className="ml-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs pr-1">⌘ K</span>
-        </kbd>
+        // <kbd className="ml-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+        //   <span className="text-xs pr-1">⌘ K</span>
+        // </kbd>
+        <Kbd
+          className="ml-auto pointer-events-none inline-flex select-none"
+          keys={["command"]}
+        >
+          K
+        </Kbd>
       )}
       {/* this is for plus icon nextto each page button  */}
       {!!id && (
