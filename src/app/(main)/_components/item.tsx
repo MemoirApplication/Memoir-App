@@ -22,7 +22,6 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 

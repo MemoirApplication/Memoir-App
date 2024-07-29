@@ -1,13 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useConvexAuth } from "convex/react";
 import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
-import { Sidebar } from "./_components/Sidebar";
 
 const MainLayout = ({
   children,
-  isCollapsed,
 }: {
   children: React.ReactNode;
   isCollapsed: boolean;
