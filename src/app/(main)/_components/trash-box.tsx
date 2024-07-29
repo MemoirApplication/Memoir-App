@@ -7,8 +7,22 @@ import { useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
-import { Search, Trash, Undo } from "lucide-react";
+import {
+  CircleCheckBig,
+  CircleSlash2,
+  Search,
+  Trash,
+  Undo,
+} from "lucide-react";
 import { Input } from "@nextui-org/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/dropdown";
+import { Button } from "@nextui-org/button";
 
 export const TrashBox = () => {
   const router = useRouter();
@@ -41,7 +55,7 @@ export const TrashBox = () => {
   };
 
   const onRemove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    // event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     documentId: Id<"documents">
   ) => {
     const promise = remove({ id: documentId });
@@ -95,12 +109,35 @@ export const TrashBox = () => {
               >
                 <Undo className=" h-4 w-4 text-muted-foreground" />
               </div>
-              <div
-                role="button"
-                className="rounded-md p-2 hover:bg-neutral-200"
-              >
-                <Trash className=" h-4 w-4 text-muted-foreground" />
-              </div>
+              <Popover placement="top" backdrop="opaque">
+                <PopoverTrigger>
+                  <Button isIconOnly variant="light" color="secondary">
+                    <Trash className=" h-4 w-4 text-muted-foreground" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <div className="flex  justify-center items-center">
+                    <h2 className="text-lg mr-4 ml-2">Are you sure ?</h2>
+                    <Button
+                      onClick={() => onRemove(document._id)}
+                      isIconOnly
+                      variant="light"
+                      color="danger"
+                      className="mx-1"
+                    >
+                      <CircleCheckBig />
+                    </Button>
+                    {/* <Button
+                      isIconOnly
+                      variant="light"
+                      color="secondary"
+                      className="mx-1"
+                    >
+                      <CircleSlash2 />
+                    </Button> */}
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         ))}
