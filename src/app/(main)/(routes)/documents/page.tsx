@@ -8,6 +8,7 @@ import {
   NavbarItem,
   Link,
   Button,
+  Input,
 } from "@nextui-org/react";
 import App from "../../_components/blocksnote";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -23,6 +24,9 @@ export default function Documents() {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
   const onCreate = () => {
     const promise = create({ title: "Untitled" });
     toast.promise(promise, {
@@ -32,15 +36,11 @@ export default function Documents() {
     });
   };
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
   return (
     <>
       {/* Navbar */}
-      <div className="relative h-screen bg-background text-foreground w-screen">
-        <div className="z-50">
+      <div className="relative h-screen bg-background text-foreground ">
+        {/* <div className="z-50">
           <Sidebar isCollapsed={isCollapsed} />
         </div>
         <div
@@ -59,10 +59,10 @@ export default function Documents() {
               </Button>
             </NavbarContent>
           </Navbar>
-        </div>
+        </div> */}
 
         {/* Main content */}
-        <div
+        {/* <div
           className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <div className="flex flex-col items-center justify-center mt-60">
@@ -79,6 +79,20 @@ export default function Documents() {
               Create Note
             </Button>
           </div>
+        </div> */}
+        <div className="flex flex-col items-center justify-center mt-60">
+          <h2 className="select-none">
+            Hey {user?.firstName}, Welcome to Memoir
+          </h2>
+          <Button
+            onClick={onCreate}
+            variant="light"
+            color="secondary"
+            className="mt-2"
+          >
+            <PlusCircle />
+            Create Note
+          </Button>
         </div>
       </div>
     </>
