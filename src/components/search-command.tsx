@@ -81,7 +81,7 @@ export const SearchCommand = () => {
             <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
               No documents found.
             </p>
-            {documents?.map((document) => (
+            {filterDocuments?.map((document) => (
               <div
                 key={document._id}
                 role="button"
