@@ -52,7 +52,17 @@ export const SearchCommand = () => {
   }
 
   return (
-    <Popover isOpen={isOpen} onOpenChange={onClose} backdrop="blur">
+    <Popover
+      isOpen={isOpen}
+      onOpenChange={onClose}
+      onClose={onClose}
+      backdrop="blur"
+      shouldCloseOnBlur={true}
+      shouldCloseOnInteractOutside={(e) => {
+        // Return true if onClose should be called
+        return true;
+      }}
+    >
       <PopoverTrigger>
         <div></div>
       </PopoverTrigger>

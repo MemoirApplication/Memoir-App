@@ -21,10 +21,12 @@ import { DocumentList } from "./document-list";
 
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { TrashBox } from "./trash-box";
+import { useSearch } from "@/hooks/use-search";
 
 export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   const router = useRouter();
   const create = useMutation(api.documents.create);
+  const search = useSearch();
 
   const handleCreate = () => {
     const promise = create({ title: "Untitled" });
@@ -97,7 +99,7 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
                     label="Search"
                     icon={Search}
                     isSearch
-                    onClick={() => {}}
+                    onClick={search.onOpen}
                   />
                   <Item
                     onClick={handleCreate}
