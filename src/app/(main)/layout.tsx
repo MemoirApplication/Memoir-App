@@ -3,6 +3,7 @@ import React from "react";
 import { useConvexAuth } from "convex/react";
 import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
+import { SearchCommand } from "@/components/search-command";
 
 const MainLayout = ({
   children,
@@ -27,7 +28,10 @@ const MainLayout = ({
 
   return (
     <div className="flex h-screen">
-      <main>{children}</main>
+      <main>
+        <SearchCommand />
+        {children}
+      </main>
     </div>
   );
 };
