@@ -40,9 +40,9 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
+        className={` bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
       >
-        <Card className="h-full shadow-lg">
+        <Card shadow="lg" isHoverable className="h-full shadow-lg">
           <div className="p-4 h-full flex flex-col">
             <Card isBlurred shadow="lg" className="mb-4">
               <CardBody className="flex-row items-center justify-center">
@@ -116,7 +116,11 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
               <Divider className="my-4" />
               <Card shadow="lg">
                 <CardBody>
-                  <Popover backdrop="blur" placement="top">
+                  <Popover
+                    backdrop="blur"
+                    placement="top"
+                    className="select-none"
+                  >
                     <PopoverTrigger>
                       <Button
                         variant="shadow"

@@ -106,7 +106,7 @@ export const Item = ({
       {!!id && (
         <div
           role="button"
-          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-100 dark:bg-secondary-500"
+          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-100 dark:bg-secondary-200"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -131,12 +131,12 @@ export const Item = ({
       )}
       {/* this is for plus icon nextto each page button  */}
       {!!id && (
-        <div className="ml-auto flex items-center gap-x-2">
-          <Dropdown>
+        <div className=" ml-auto flex items-center gap-x-2">
+          <Dropdown className="select-none">
             <DropdownTrigger>
               <div
                 role="button"
-                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
+                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-200"
               >
                 <MoreHorizontal size={18} />
               </div>
@@ -167,7 +167,7 @@ export const Item = ({
           <div
             role="button"
             onClick={onCreate}
-            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-500"
+            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-200"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
