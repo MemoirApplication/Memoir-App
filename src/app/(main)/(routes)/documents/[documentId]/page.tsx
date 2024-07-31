@@ -46,8 +46,6 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     return <div> Not Found </div>;
   }
 
-  const update = useM;
-
   return (
     <>
       <div className=" h-screen bg-background text-foreground w-screen">
