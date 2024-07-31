@@ -16,6 +16,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
+import { Editor } from "@/components/editor";
 
 interface DocumentIdPageProps {
   params: {
@@ -44,6 +45,8 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   if (document === null) {
     return <div> Not Found </div>;
   }
+
+  const update = useM;
 
   return (
     <>
@@ -81,6 +84,9 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             <div className="h-[35vh]" />
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
               <Toolbar initialData={document} />
+              <div className="mt-2">
+                <Editor onChange={() => {}} initialContent={document.content} />
+              </div>
             </div>
             {/* Main Contenet */}
           </div>

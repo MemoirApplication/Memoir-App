@@ -21,7 +21,7 @@ import { DocumentList } from "./document-list";
 
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { TrashBox } from "./trash-box";
-import { useSearch } from "@/hooks/use-search";
+import { useSearch } from "@/hooks/search-hook";
 
 export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   const router = useRouter();

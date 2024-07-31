@@ -6,7 +6,7 @@ import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/clerk-react";
 
-import { useSearch } from "@/hooks/use-search";
+import { useSearch } from "@/hooks/search-hook";
 import { api } from "../../convex/_generated/api";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
 import { Input } from "@nextui-org/input";
