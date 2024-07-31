@@ -51,8 +51,8 @@ export const Title = ({ initialData }: TitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <div className="flex items-center gap-x-1">
-      {!!initialData && <p>{initialData.icon}</p>}
+    <div className="flex items-center gap-x-2">
+      {!!initialData && <p className="text-xl" >{initialData.icon}</p>}
       {isEditing ? (
         <Input
           ref={inputRef}
@@ -61,14 +61,14 @@ export const Title = ({ initialData }: TitleProps) => {
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={title}
-          className=" p-2 focus-visible:ring-transparent"
+          className="p-0 focus-visible:ring-transparent"
         />
       ) : (
         <Button
           onClick={enabaleInput}
           size="sm"
           variant="light"
-          className="font-normal h-auto p-1"
+          className="font-medium h-auto p-1 text-base"
         >
           <span className="truncate">{initialData?.title}</span>
         </Button>

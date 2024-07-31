@@ -22,8 +22,11 @@ import { DocumentList } from "./document-list";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { TrashBox } from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
+import { useSidebar } from "../contexts/SidebarContext";
 
-export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
+
+export const Sidebar = () => {
+  const { isCollapsed } = useSidebar(); 
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
@@ -40,7 +43,7 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
   return (
     <>
       <aside
-        className={` bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
+        className={`bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
       >
         <Card shadow="lg" isHoverable className="h-full shadow-lg">
           <div className="p-4 h-full flex flex-col">
