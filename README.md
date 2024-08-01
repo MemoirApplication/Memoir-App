@@ -17,7 +17,7 @@ Make a `.env.local` file and then update the api keys for Clerk.
 ## To run the development server
 
 ```bash
-npx convex dev
+npx convex dev 
 npm run dev
 ```
 
@@ -40,3 +40,5 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
  </picture>
 </a>
  
+
+  <!-- /when i write npx convex dev/ there is an error that i don't have access to the project with deployment dutiful-pika-147, as configured in CONVEX_DEPLOYMENT -->
