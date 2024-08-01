@@ -2,13 +2,15 @@
 
 import React, { useState } from "react";
 import { Button } from "@nextui-org/button";
-import { Menu, Star, Ellipsis, MessageSquareText, Share, PanelLeft } from "lucide-react";
+import { Menu, Star, Ellipsis, MessageSquareText, Share, PanelLeft, Sun, Moon } from "lucide-react";
 import { Title } from "@/app/(main)/_components/title";
 import { useTheme } from "next-themes";
 import { useSidebar } from "../contexts/SidebarContext";
 
 export const CNavbar = ({ document }) => {
   const { isCollapsed, toggleSidebar } = useSidebar(); // Use context here
+  const { theme, setTheme } = useTheme();
+  const ThemeIcon = theme === "dark" ? Sun : Moon;
 
   return (
     // <div className=" h-screen bg-background text-foreground w-screen">
@@ -52,6 +54,14 @@ export const CNavbar = ({ document }) => {
           isIconOnly 
           size="sm">
           <Star size={20} />
+        </Button>
+        <Button           
+          variant="light" 
+          color="default" 
+          isIconOnly 
+          size="sm"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+          <ThemeIcon size={20} />
         </Button>
         <Button 
           variant="light" 
