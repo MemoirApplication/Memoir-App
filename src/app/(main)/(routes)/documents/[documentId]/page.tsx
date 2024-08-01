@@ -69,9 +69,9 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
       <div className="bg-background h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div>
 
       <div className="text-foreground w-screen flex-grow flex">
-        <div className="z-50">
+        {/* <div className="z-50">
           <Sidebar />
-        </div>
+        </div> */}
         <div
           className={`flex-1 transition-all duration-300 ${isCollapsed ? "ml-0" : "ml-[18rem]"}`}
         >

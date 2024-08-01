@@ -5,6 +5,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
 import { SidebarProvider } from "./contexts/SidebarContext";
+import { Sidebar } from "./_components/Sidebar";
 
 const MainLayout = ({
   children,
@@ -31,7 +32,12 @@ const MainLayout = ({
     <div className="flex h-screen">
       <main>
         <SearchCommand />
-        <SidebarProvider>{children}</SidebarProvider>
+        <SidebarProvider>
+                  <div className="z-50">
+          <Sidebar />
+        </div>
+          {children}
+          </SidebarProvider>
       </main>
     </div>
   );

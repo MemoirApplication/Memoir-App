@@ -40,9 +40,9 @@ export default function Documents() {
     <>
       {/* Navbar */}
       <div className="relative h-screen bg-background text-foreground ">
-        <div className="z-50">
+        {/* <div className="z-50">
           <Sidebar />
-        </div>
+        </div> */}
         {/* <div
           className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
