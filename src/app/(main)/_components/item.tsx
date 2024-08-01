@@ -100,7 +100,7 @@ export const Item = ({
       }}
       className={cn(
         "select-none group min-h-[27px]  text-md py-1 pr-3 w-full hove:bg-primary/10 flex items-center text-muted-foreground font-medium",
-        active && "bg-secondary/5 text-secondary"
+        active && "bg-secondary/5 text-secondary rounded-md"
       )}
     >
       {!!id && (

@@ -1,9 +1,9 @@
 "use client";
 
 import { api } from "../../../../../../convex/_generated/api";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 
 import { Navbar, NavbarContent } from "@nextui-org/navbar";
@@ -16,7 +16,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
-import { Editor } from "@/components/editor";
+import dynamic from "next/dynamic";
 
 interface DocumentIdPageProps {
   params: {
@@ -25,6 +25,11 @@ interface DocumentIdPageProps {
 }
 
 export default function DocumentIdPage({ params }: DocumentIdPageProps) {
+  const Editor = useMemo(
+    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    []
+  );
+
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -34,6 +39,15 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId as Id<"documents">,
   });
+
+  const update = useMutation(api.documents.update);
+
+  const onChange = (content: string) => {
+    update({
+      id: params.documentId,
+      content,
+    });
+  };
 
   if (document === undefined) {
     return (
@@ -83,7 +97,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
               <Toolbar initialData={document} />
               <div className="mt-2">
-                <Editor onChange={() => {}} initialContent={document.content} />
+                <Editor onChange={onChange} initialData={document} />
               </div>
             </div>
             {/* Main Contenet */}
