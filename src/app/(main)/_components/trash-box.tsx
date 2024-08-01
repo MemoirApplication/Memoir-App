@@ -105,13 +105,13 @@ export const TrashBox = () => {
               <div
                 onClick={(e) => onRestore(e, document._id)}
                 role="button"
-                className="rounded-md p-2 hover:bg-neutral-200"
+                className="rounded-md p-2 hover:bg-secondary-200"
               >
                 <Undo className=" h-4 w-4 text-muted-foreground" />
               </div>
               <Popover placement="top" backdrop="opaque">
                 <PopoverTrigger>
-                  <Button isIconOnly variant="light" color="secondary">
+                  <Button isIconOnly variant="light" color="danger">
                     <Trash className=" h-4 w-4 text-muted-foreground" />
                   </Button>
                 </PopoverTrigger>

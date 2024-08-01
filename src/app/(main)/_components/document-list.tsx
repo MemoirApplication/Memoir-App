@@ -36,6 +36,7 @@ export const DocumentList = ({
   if (documents === undefined) {
     return (
       <>
+      <div className="p-[6px]">
         <Item.Skeleton level={level} />
         {level === 0 && (
           <>
@@ -43,6 +44,7 @@ export const DocumentList = ({
             <Item.Skeleton level={level} />
           </>
         )}
+        </div>
       </>
     );
   }
@@ -58,7 +60,7 @@ export const DocumentList = ({
           paddingLeft: level ? `${level * 12 + 25}px` : "12px",
         }}
         className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80",
+          "hidden text-sm font-medium text-muted-foreground/80 p-2 ",
           expanded && "last:block",
           level === 0 && "hidden"
         )}
