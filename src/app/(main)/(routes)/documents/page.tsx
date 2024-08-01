@@ -41,9 +41,9 @@ export default function Documents() {
       {/* Navbar */}
       <div className="relative h-screen bg-background text-foreground ">
         <div className="z-50">
-          <Sidebar isCollapsed={isCollapsed} />
+          <Sidebar />
         </div>
-        <div
+        {/* <div
           className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <Navbar isBordered={true} height="h-16">
@@ -59,13 +59,13 @@ export default function Documents() {
               </Button>
             </NavbarContent>
           </Navbar>
-        </div>
+        </div> */}
 
         {/* Main content */}
         <div
-          className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}
         >
-          <div className="flex flex-col items-center justify-center mt-60">
+          <div className="flex flex-col items-center justify-center mt-72">
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memoir
             </h2>

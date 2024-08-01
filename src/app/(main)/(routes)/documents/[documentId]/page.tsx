@@ -16,6 +16,8 @@ import { Skeleton } from "@nextui-org/skeleton";
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
+import { CNavbar } from "@/app/(main)/_components/CNavbar";
+import { useSidebar } from "../../../contexts/SidebarContext";
 import dynamic from "next/dynamic";
 
 interface DocumentIdPageProps {
@@ -30,11 +32,12 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     []
   );
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { isCollapsed } = useSidebar(); // Use the context here
+  // const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // const toggleSidebar = () => {
+  //   setIsCollapsed(!isCollapsed);
+  // };
 
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId as Id<"documents">,
@@ -62,7 +65,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
   return (
     <>
-      <div className=" h-screen bg-background text-foreground w-screen">
+      {/* <div className=" h-screen bg-background text-foreground w-screen">
         <div className="relative z-50 mb-10">
           <Sidebar isCollapsed={isCollapsed} />
         </div>
@@ -85,23 +88,31 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             <NavbarContent justify="end">
               <p>end of nav bar</p>
             </NavbarContent>
-          </Navbar>
+          </Navbar> */}
+      <div className="h-screen bg-background text-foreground w-screen">
+        <div className="relative z-50 mb-10">
+          <Sidebar />
+        </div>
+        <div
+          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          <CNavbar document={document} />
           {document.isArchived && <Banner documentId={document._id} />}
         </div>
+      </div>
 
-        <div
-          className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <div className="m-10">
-            <div className="h-[35vh]" />
-            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-              <Toolbar initialData={document} />
-              <div className="mt-2">
-                <Editor onChange={onChange} initialData={document} />
-              </div>
+      <div
+        className={`fixed top-0 right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+      >
+        <div className="m-10">
+          <div className="h-[35vh]" />
+          <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+            <Toolbar initialData={document} />
+            <div className="mt-2">
+              <Editor onChange={onChange} initialData={document} />
             </div>
-            {/* Main Contenet */}
           </div>
+          {/* Main Content */}
         </div>
       </div>
     </>

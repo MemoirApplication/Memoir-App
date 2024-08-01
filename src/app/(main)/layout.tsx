@@ -4,6 +4,7 @@ import { useConvexAuth } from "convex/react";
 import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
+import { SidebarProvider } from "./contexts/SidebarContext";
 
 const MainLayout = ({
   children,
@@ -30,7 +31,7 @@ const MainLayout = ({
     <div className="flex h-screen">
       <main>
         <SearchCommand />
-        {children}
+        <SidebarProvider>{children}</SidebarProvider>
       </main>
     </div>
   );
