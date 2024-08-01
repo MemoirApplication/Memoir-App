@@ -65,54 +65,38 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
   return (
     <>
-      {/* <div className=" h-screen bg-background text-foreground w-screen">
-        <div className="relative z-50 mb-10">
-          <Sidebar isCollapsed={isCollapsed} />
-        </div>
-        <div
-          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <Navbar isBordered={true} height="h-16">
-            <NavbarContent as="div" justify="start">
-              <Button
-                onClick={toggleSidebar}
-                variant="light"
-                color="secondary"
-                isIconOnly
-                size="sm"
-              >
-                <Menu />
-              </Button>
-              <Title initialData={document} />
-            </NavbarContent>
-            <NavbarContent justify="end">
-              <p>end of nav bar</p>
-            </NavbarContent>
-          </Navbar> */}
-      <div className="h-screen bg-background text-foreground w-screen">
-        <div className="relative z-50 mb-10">
-          <Sidebar />
-        </div>
-        <div
-          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <CNavbar document={document} />
-          {document.isArchived && <Banner documentId={document._id} />}
-        </div>
-      </div>
+      {/* background color */}
+      <div className="bg-background h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div>
 
-      <div
-        className={`fixed top-0 right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-      >
-        <div className="m-10">
-          <div className="h-[35vh]" />
-          <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-            <Toolbar initialData={document} />
-            <div className="mt-2">
-              <Editor onChange={onChange} initialData={document} />
+      <div className="text-foreground w-screen flex-grow flex">
+        {/* <div className="z-50">
+          <Sidebar />
+        </div> */}
+        <div
+          className={`flex-1 transition-all duration-300 ${isCollapsed ? "ml-0" : "ml-[18rem]"}`}
+        >
+          {/* Navbar and banner */}
+          <div
+            className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          >
+            <CNavbar document={document} />
+            {document.isArchived && <Banner documentId={document._id} />}
+          </div>
+        </div>
+
+        {/* Main note body */}
+        <div
+          className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          <div className="">
+            <div className="h-[35vh]" />
+            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+              <Toolbar initialData={document} />
+              <div className="mt-2">
+                <Editor onChange={onChange} initialData={document} />
+              </div>
             </div>
           </div>
-          {/* Main Content */}
         </div>
       </div>
     </>
