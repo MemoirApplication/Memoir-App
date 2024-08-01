@@ -12,6 +12,9 @@ import {
   SearchIcon,
   Settings2Icon,
   Trash2Icon,
+  House,
+  CalendarDays,
+  Settings
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
@@ -50,7 +53,7 @@ export const Sidebar = () => {
             <Card isBlurred shadow="lg" className="mb-4">
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
-                <p className="ml-2 select-none">Workspace</p>
+                <p className="ml-2 select-none font-medium text-base">Workspace</p>
                 <Button
                   isIconOnly
                   size="sm"
@@ -64,7 +67,7 @@ export const Sidebar = () => {
             </Card>
             <div>
               <Card>
-                <CardBody className="flex flex-col space-y-2">
+                <CardBody className="flex flex-col">
                   {/* <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
                     <p className="select-none">Search</p>
@@ -74,16 +77,16 @@ export const Sidebar = () => {
                     variant="light"
                     className="justify-start"
                   >
-                    <HomeIcon size={16} />
-                    <p className="select-none">Home</p>
+                    <HomeIcon size={20} />
+                    <p className="select-none font-medium text-base">Home</p>
                   </Button>
                   <Button variant="light" className="justify-start">
-                    <Calendar size={16} />
-                    <p className="select-none">Calendar</p>
+                    <CalendarDays size={20} />
+                    <p className="select-none font-medium text-base">Calendar</p>
                   </Button>
                   <Button variant="light" className="justify-start">
-                    <Settings2Icon size={16} />
-                    <p className="select-none">Settings</p>
+                    <Settings size={20} />
+                    <p className="select-none font-medium text-base">Settings</p>
                   </Button>
                 </CardBody>
               </Card>
