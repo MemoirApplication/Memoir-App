@@ -31,3 +31,14 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* Base theme */
+.bn-container[data-theming-background][data-color-scheme] {
+  --bn-colors-editor-background: #FFFFFF;
+}
+
+/* Changes for dark mode */
+.bn-container[data-theming-background][data-color-scheme="dark"] {
+  --bn-colors-editor-background: #000000;
+}

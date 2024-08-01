@@ -68,7 +68,7 @@ export const Title = ({ initialData }: TitleProps) => {
           onClick={enabaleInput}
           size="sm"
           variant="light"
-          className="font-medium h-auto p-1 text-base"
+          className="font-medium h-auto p-1 text-base justify-start"
         >
           <span className="truncate">{initialData?.title}</span>
         </Button>
