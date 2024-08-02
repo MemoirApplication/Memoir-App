@@ -4,15 +4,11 @@ import { UserButton } from "@clerk/nextjs";
 import { Button, Card, CardBody, Divider } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import {
-  Calendar,
   ChevronDown,
   HomeIcon,
   PlusCircle,
   Search,
-  SearchIcon,
-  Settings2Icon,
   Trash2Icon,
-  House,
   CalendarDays,
   Settings,
 } from "lucide-react";
@@ -23,9 +19,13 @@ import { useRouter } from "next/navigation";
 import { DocumentList } from "./document-list";
 
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+import { Calendar } from "@nextui-org/react";
+
 import { TrashBox } from "./trash-box";
 import { useSearch } from "@/hooks/search-hook";
 import { useSidebar } from "../contexts/SidebarContext";
+import React from "react";
+import { parseDate } from "@internationalized/date";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar();
@@ -41,6 +41,9 @@ export const Sidebar = () => {
       error: "Failed to create a new note.",
     });
   };
+
+  const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
+  let [value, setValue] = React.useState(parseDate(today));
 
   return (
     <>
@@ -86,12 +89,24 @@ export const Sidebar = () => {
                     <HomeIcon size={20} />
                     <p className="select-none font-medium text-base">Home</p>
                   </Button>
-                  <Button variant="light" className="justify-start">
-                    <CalendarDays size={20} />
-                    <p className="select-none font-medium text-base">
-                      Calendar
-                    </p>
-                  </Button>
+                  <Popover shadow="lg" backdrop="blur" placement="right">
+                    <PopoverTrigger>
+                      <Button variant="light" className="justify-start">
+                        <CalendarDays size={20} />
+                        <p className="select-none font-medium text-base">
+                          Calendar
+                        </p>
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Calendar
+                        color="secondary"
+                        aria-label="Date (Controlled)"
+                        value={value}
+                        onChange={setValue}
+                      />
+                    </PopoverContent>
+                  </Popover>
                   <Button variant="light" className="justify-start">
                     <Settings size={20} />
                     <p className="select-none font-medium text-base">
