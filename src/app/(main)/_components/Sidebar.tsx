@@ -49,12 +49,12 @@ export const Sidebar = () => {
       >
         <Card
           shadow="lg"
-          isHoverable
+          // isHoverable
           radius="none"
-          className="h-full shadow-lg bg-opacity-80 backdrop-blur-lg"
+          className="h-full shadow-lg bg-opacity-20 text-foreground backdrop-blur-lg"
         >
           <div className="p-4 h-full flex flex-col">
-            <Card shadow="lg" className="mb-4 bg-opacity-90 backdrop-blur-lg">
+            <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg">
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
@@ -72,7 +72,7 @@ export const Sidebar = () => {
               </CardBody>
             </Card>
             <div>
-              <Card className="bg-opacity-90 backdrop-blur-lg">
+              <Card className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody className="flex flex-col">
                   {/* <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
@@ -104,7 +104,7 @@ export const Sidebar = () => {
 
             <Divider className="my-4" />
 
-            <Card className="bg-opacity-90 backdrop-blur-lg">
+            <Card className="bg-opacity-20 backdrop-blur-lg">
               <CardBody>
                 {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
@@ -130,7 +130,7 @@ export const Sidebar = () => {
             </Card>
             <div className="absolute inset-x-0 bottom-0 m-4">
               <Divider className="my-4" />
-              <Card shadow="lg" className="bg-opacity-90 backdrop-blur-lg">
+              <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody>
                   <Popover
                     backdrop="blur"
