@@ -30,11 +30,12 @@ import React from "react";
 import { parseDate } from "@internationalized/date";
 
 export const Sidebar = () => {
-  const { isCollapsed } = useSidebar();
+  const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
 
+  // Create a new note
   const handleCreate = () => {
     const promise = create({ title: "Untitled" });
     toast.promise(promise, {
@@ -44,6 +45,8 @@ export const Sidebar = () => {
     });
   };
 
+
+  // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
 
@@ -52,6 +55,7 @@ export const Sidebar = () => {
       <aside
         className={`bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
       >
+        {/* Sidebar background and container */}
         <Card
           shadow="lg"
           // isHoverable
@@ -59,13 +63,15 @@ export const Sidebar = () => {
           className="h-full shadow-lg bg-opacity-20 text-foreground backdrop-blur-lg"
         >
           <div className="p-4 h-full flex flex-col">
+
+            {/* user and workspace card */}
             <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg">
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
                   Workspace
                 </p>
-                <Button
+                <Button // Workspace button
                   isIconOnly
                   size="sm"
                   variant="light"
@@ -76,6 +82,8 @@ export const Sidebar = () => {
                 </Button>
               </CardBody>
             </Card>
+
+            {/* Home, Calendar and Settings card */}
             <div>
               <Card className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody className="flex flex-col">
@@ -83,7 +91,8 @@ export const Sidebar = () => {
                     <SearchIcon size={16} />
                     <p className="select-none">Search</p>
                   </Button> */}
-                  <Button
+
+                  <Button // Home button
                     onClick={() => router.push("/documents")}
                     variant="light"
                     className="justify-start"
@@ -91,9 +100,13 @@ export const Sidebar = () => {
                     <HomeIcon size={20} />
                     <p className="select-none font-medium text-base">Home</p>
                   </Button>
+
+                  {/* Popover to show the calendar */}
                   <Popover shadow="lg" backdrop="blur" placement="right">
                     <PopoverTrigger>
-                      <Button variant="light" className="justify-start">
+                      <Button // Calendar button
+                        variant="light" 
+                        className="justify-start">
                         <CalendarDays size={20} />
                         <p className="select-none font-medium text-base">
                           Calendar
@@ -109,18 +122,23 @@ export const Sidebar = () => {
                       />
                     </PopoverContent>
                   </Popover>
-                  <Button variant="light" className="justify-start">
+
+                  <Button // Settings button
+                    variant="light" 
+                    className="justify-start">
                     <Settings size={20} />
                     <p className="select-none font-medium text-base">
                       Settings
                     </p>
                   </Button>
+
                 </CardBody>
               </Card>
             </div>
 
             <Divider className="my-4" />
 
+            {/* Search and Documents card */}
             <Card className="bg-opacity-20 backdrop-blur-lg">
               <CardBody>
                 {/* <Button onClick={onCreate} variant="flat" color="secondary">
@@ -128,21 +146,26 @@ export const Sidebar = () => {
                   New Note
                 </Button> */}
                 <div className="space-y-1">
-                  <Item
+                  <Item // Search button
                     label="Search"
                     icon={Search}
                     isSearch
-                    onClick={search.onOpen}
+                    onClick={search.onOpen} // Calls search.onOpen when pressed
                   />
-                  <Item
-                    onClick={handleCreate}
+                  <Item // New page button
+                    onClick={handleCreate} // Calls handleCreate when pressed
                     label="New Page"
                     icon={PlusCircle}
                   />
                 </div>
                 <div className="mt-4">
+
+                  {/* Document list component */}
                   <DocumentList />
+
                   <Divider className="mt-1" />
+                  
+                  {/* Favorites section */}
                   <p className="flex ml-2 mt-4 mb-2 font-medium">
                     <Star size={20} className="mr-2" />
                     Favorites
@@ -151,6 +174,8 @@ export const Sidebar = () => {
                 </div>
               </CardBody>
             </Card>
+
+            {/* Trash card */}
             <div className="absolute inset-x-0 bottom-0 m-4">
               <Divider className="my-4" />
               <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg">
@@ -161,7 +186,7 @@ export const Sidebar = () => {
                     className="select-none"
                   >
                     <PopoverTrigger>
-                      <Button
+                      <Button // Trash button
                         variant="shadow"
                         color="secondary"
                         className="justify-start "

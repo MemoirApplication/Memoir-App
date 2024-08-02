@@ -26,6 +26,7 @@ import {
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 
+
 interface ItemProps {
   id?: Id<"documents">;
   documentIcon?: string;
@@ -38,6 +39,8 @@ interface ItemProps {
   onClick?: () => void;
   icon: LucideIcon;
 }
+
+// Item component for displaying a document
 export const Item = ({
   id,
   label,
@@ -55,6 +58,8 @@ export const Item = ({
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
 
+
+  // Move document to trash
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
@@ -65,6 +70,8 @@ export const Item = ({
       error: "Failed moving to trash.",
     });
   };
+
+  //  Handle item expansion
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -72,6 +79,7 @@ export const Item = ({
     onExpand?.();
   };
 
+  // Create a new page
   const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
@@ -90,6 +98,7 @@ export const Item = ({
     });
   };
 
+  // Determine which chevron icon to use based on the expanded state
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
@@ -105,7 +114,7 @@ export const Item = ({
       )}
     >
       {!!id && (
-        <div
+        <div // Expand button
           role="button"
           className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-100 dark:bg-secondary-200"
           onClick={handleExpand}
@@ -132,7 +141,7 @@ export const Item = ({
           K
         </Kbd>
       )}
-      {/* this is for plus icon next to each page button  */}
+      {/* Buttons that are shown next to document item */}
       {!!id && (
         <div className=" ml-auto flex items-center gap-x-2">
           <Dropdown className="select-none">
@@ -167,7 +176,7 @@ export const Item = ({
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <div
+          <div // Create note button
             role="button"
             onClick={onCreate}
             className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-200"
@@ -180,6 +189,7 @@ export const Item = ({
   );
 };
 
+// Item Skeleton component for loading state
 Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
   return (
     <div

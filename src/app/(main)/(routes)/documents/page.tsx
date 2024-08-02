@@ -16,19 +16,15 @@ import { PlusCircle, Menu } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
-import { Sidebar } from "../../_components/Sidebar";
 
 export default function Documents() {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  // Function to create a new note
   const onCreate = () => {
     const promise = create({ title: "Untitled" });
+    // Shows a toast with the status
     toast.promise(promise, {
       loading: "Creating a new note...",
       success: "New note created!",
@@ -38,30 +34,9 @@ export default function Documents() {
 
   return (
     <>
-      {/* Navbar */}
       <div className="relative h-screen bg-background text-foreground ">
-        {/* <div className="z-50">
-          <Sidebar />
-        </div> */}
-        {/* <div
-          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <Navbar isBordered={true} height="h-16">
-            <NavbarContent as="div" justify="start">
-              <Button
-                onClick={toggleSidebar}
-                variant="light"
-                color="secondary"
-                isIconOnly
-                size="sm"
-              >
-                <Menu />
-              </Button>
-            </NavbarContent>
-          </Navbar>
-        </div> */}
 
-        {/* Main content */}
+        {/* Main content area */}
         <div
           className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}
         >
@@ -69,8 +44,8 @@ export default function Documents() {
             <h2 className="select-none">
               Hey {user?.firstName}, Welcome to Memoir
             </h2>
-            <Button
-              onClick={onCreate}
+            <Button // Create note button
+              onClick={onCreate} // Calls the onCreate function when pressed
               variant="light"
               color="secondary"
               className="mt-2"

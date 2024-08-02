@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-background text-foreground min-h-full">
+      <body className="min-h-full">
         <ConvexClientProvider>
           <Providers>
             <Toaster position="bottom-center" />

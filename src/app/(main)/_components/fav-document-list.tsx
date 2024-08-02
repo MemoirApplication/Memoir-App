@@ -14,6 +14,8 @@ interface DocumentListProps {
   level?: number;
   data?: Doc<"documents">[];
 }
+
+// Component for rendering a list of favorite documents
 export const FavDocumentList = ({
   parentDocumentId,
   level = 0,
@@ -22,6 +24,7 @@ export const FavDocumentList = ({
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
+  // Toggle the expanded state of a document
   const onExpand = (documentId: string) => {
     setExpanded((prevExpanded) => ({
       ...prevExpanded,
@@ -29,10 +32,12 @@ export const FavDocumentList = ({
     }));
   };
 
+  // Fetch favorite documents from the API
   const documents = useQuery(api.documents.getFavSidebar, {
     parentDocument: parentDocumentId,
   });
 
+  // Display skeleton loaders while documents are being fetched
   if (documents === undefined) {
     return (
       <>
@@ -49,6 +54,7 @@ export const FavDocumentList = ({
     );
   }
 
+  // Redirect to the document
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
@@ -67,23 +73,25 @@ export const FavDocumentList = ({
       >
         No Pages Inside
       </p>
+      {/* Render each document item */}
       {documents.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
             onClick={() => {
-              onRedirect(document._id);
+              onRedirect(document._id); // Navigate to the document on click
             }}
             label={document.title}
             icon={FileIcon}
             documentIcon={document.icon}
-            active={params.documentId === document._id}
+            active={params.documentId === document._id} // Highlight active document
             level={level}
             onExpand={() => {
-              onExpand(document._id);
+              onExpand(document._id); // Toggle expansion on click
             }}
             expanded={expanded[document._id]}
           />
+          {/* Render child documents if expanded */}
           {expanded[document._id] && (
             <FavDocumentList
               parentDocumentId={document._id}
