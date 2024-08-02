@@ -2,28 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Define default values for light theme */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-color: #11181C;
+  /* Default foreground color (text) */
+  --background-color: #FFFFFF;
+  /* Default background color (light theme) */
 }
 
-@media (prefers-color-scheme: light) {
+/* Dark theme overrides */
+@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-color: #ECEDEE;
+    /* Text color for dark theme */
+    --background-color: #000000;
+    /* --background-color: #18181b; */
+    /* Background color for dark theme */
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground-color);
+  background-color: var(--background-color);
 }
 
 @layer utilities {

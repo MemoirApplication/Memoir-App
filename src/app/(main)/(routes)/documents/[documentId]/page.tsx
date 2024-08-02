@@ -66,9 +66,9 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   return (
     <>
       {/* background color */}
-      <div className="bg-background h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div>
+      {/* <div className="bg-background min-h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div> */}
 
-      <div className="text-foreground w-screen flex-grow flex">
+      <div className="w-screen flex-grow flex">
         {/* <div className="z-50">
           <Sidebar />
         </div> */}
