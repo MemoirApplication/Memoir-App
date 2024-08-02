@@ -22,19 +22,23 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  // Enable editing mode for the document title
   const enableInput = () => {
-    if (preview) return;
+    if (preview) return; // Do not allow editing in preview mode
     setIsEditing(true);
     setTimeout(() => {
-      setValue(initialData.title);
+      setValue(initialData.title); // Set the initial title value
       inputRef.current?.focus();
     }, 0);
   };
 
+  // Disable editing mode
   const disableInput = () => {
     setIsEditing(false);
   };
 
+  // Update the document title
   const onInput = (value: string) => {
     setValue(value);
     update({
@@ -43,6 +47,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     });
   };
 
+  // Handle Enter key press to save and exit editing mode
   const onKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -50,6 +55,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     }
   };
 
+
+  // Update the document icon
   const onIconSelect = (icon: string) => {
     update({
       id: initialData._id,
@@ -57,11 +64,13 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     });
   };
 
+  // Remove the document icon
   const onRemoveIcon = () => {
     removeIcon({ id: initialData._id });
   };
   return (
     <div className=" pl-[54px] group relative">
+      {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
       {!!initialData.icon && !preview && (
         <div className="flex items-center gap-x-2 group/icon pt-6">
           <IconPicer onChange={onIconSelect}>
@@ -80,9 +89,13 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </Button>
         </div>
       )}
+
+      {/* Display icon if set and in preview mode */}
       {!!initialData.icon && preview && (
         <p className="text-6xl pt-6">{initialData.icon}</p>
       )}
+
+      {/* Display icon picker and cover image button if no icon or cover image is set and not in preview mode */}
       <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
         {!initialData.icon && !preview && (
           <IconPicer asChild onChange={onIconSelect}>
@@ -103,6 +116,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </Button>
         )}
       </div>
+
+      {/* Display text area for editing title or static title display */}
       {isEditing && !preview ? (
         <TextareaAutosize
           ref={inputRef}

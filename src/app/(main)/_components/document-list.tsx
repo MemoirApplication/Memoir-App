@@ -20,8 +20,9 @@ export const DocumentList = ({
 }: DocumentListProps) => {
   const params = useParams();
   const router = useRouter();
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({}); // Track the expanded state of each item
 
+  // Toggle the expanded state of the item
   const onExpand = (documentId: string) => {
     setExpanded((prevExpanded) => ({
       ...prevExpanded,
@@ -29,10 +30,12 @@ export const DocumentList = ({
     }));
   };
 
+  // Query to fetch documents based on the parent document ID
   const documents = useQuery(api.documents.getSidebar, {
     parentDocument: parentDocumentId,
   });
 
+  // If documents are undefined, show skeleton loaders
   if (documents === undefined) {
     return (
       <>
@@ -49,12 +52,14 @@ export const DocumentList = ({
     );
   }
 
+  // Redirect to the document
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
 
   return (
     <>
+      {/* Displays a message if there are no pages inside, based on the expanded state */}
       <p
         style={{
           paddingLeft: level ? `${level * 12 + 25}px` : "12px",
@@ -67,12 +72,13 @@ export const DocumentList = ({
       >
         No Pages Inside
       </p>
+      {/* Render each document item */}
       {documents.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
             onClick={() => {
-              onRedirect(document._id);
+              onRedirect(document._id); // Navigate to the document on click
             }}
             label={document.title}
             icon={FileIcon}
@@ -80,10 +86,12 @@ export const DocumentList = ({
             active={params.documentId === document._id}
             level={level}
             onExpand={() => {
-              onExpand(document._id);
+              onExpand(document._id); // Toggle expansion on click
             }}
+            
             expanded={expanded[document._id]}
           />
+          {/* Recursively render nested documents if the item is expanded */}
           {expanded[document._id] && (
             <DocumentList parentDocumentId={document._id} level={level + 1} />
           )}
