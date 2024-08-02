@@ -50,6 +50,7 @@ export const Sidebar = () => {
         <Card
           shadow="lg"
           isHoverable
+          radius="none"
           className="h-full shadow-lg bg-opacity-80 backdrop-blur-lg"
         >
           <div className="p-4 h-full flex flex-col">
