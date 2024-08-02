@@ -22,10 +22,10 @@
   }
 }
 
-body {
+/* body {
   color: var(--foreground-color);
   background-color: var(--background-color);
-}
+} */
 
 @layer utilities {
   .text-balance {
