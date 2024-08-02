@@ -22,6 +22,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Divider,
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 
@@ -113,7 +114,9 @@ export const Item = ({
         </div>
       )}
       {documentIcon ? (
-        <div className="shrink-0 pl-[3px] pr-[3px] mr-2 text-[18px]">{documentIcon}</div>
+        <div className="shrink-0 pl-[3px] pr-[3px] mr-2 text-[18px]">
+          {documentIcon}
+        </div>
       ) : (
         <Icon className="shrink-0 h-[18px] mr-2 text-muted-foreground" />
       )}

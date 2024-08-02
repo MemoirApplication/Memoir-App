@@ -52,7 +52,7 @@ export const Title = ({ initialData }: TitleProps) => {
 
   return (
     <div className="flex items-center gap-x-2">
-      {!!initialData && <p className="text-xl" >{initialData.icon}</p>}
+      {!!initialData && <p className="text-xl">{initialData.icon}</p>}
       {isEditing ? (
         <Input
           ref={inputRef}

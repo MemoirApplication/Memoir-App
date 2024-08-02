@@ -11,12 +11,14 @@ import {
   Trash2Icon,
   CalendarDays,
   Settings,
+  Star,
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
 import { Item } from "./item";
 import { useRouter } from "next/navigation";
 import { DocumentList } from "./document-list";
+import { FavDocumentList } from "./fav-document-list";
 
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Calendar } from "@nextui-org/react";
@@ -140,6 +142,12 @@ export const Sidebar = () => {
                 </div>
                 <div className="mt-4">
                   <DocumentList />
+                  <Divider className="mt-1" />
+                  <p className="flex ml-2 mt-4 mb-2 font-medium">
+                    <Star size={20} className="mr-2" />
+                    Favorites
+                  </p>
+                  <FavDocumentList />
                 </div>
               </CardBody>
             </Card>

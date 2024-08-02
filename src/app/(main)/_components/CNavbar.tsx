@@ -11,15 +11,28 @@ import {
   PanelLeft,
   Sun,
   Moon,
+  StarOff,
 } from "lucide-react";
 import { Title } from "@/app/(main)/_components/title";
 import { useTheme } from "next-themes";
 import { useSidebar } from "../contexts/SidebarContext";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
 export const CNavbar = ({ document }) => {
-  const { isCollapsed, toggleSidebar } = useSidebar(); // Use context here
+  const { isCollapsed, toggleSidebar } = useSidebar();
   const { theme, setTheme } = useTheme();
   const ThemeIcon = theme === "dark" ? Sun : Moon;
+
+  const update = useMutation(api.documents.update);
+
+  const toggleFav = () => {
+    update({
+      id: document._id,
+      isFav: !document.isFav,
+    });
+  };
 
   return (
     // <div className=" h-screen bg-background text-foreground w-screen">
@@ -49,8 +62,16 @@ export const CNavbar = ({ document }) => {
         <Button variant="light" color="default" isIconOnly size="sm">
           <Share size={20} />
         </Button>
-        <Button variant="light" color="default" isIconOnly size="sm">
-          <Star size={20} />
+        <Button
+          variant="light"
+          color="default"
+          isIconOnly
+          size="sm"
+          onClick={() => {
+            toggleFav();
+          }}
+        >
+          {document.isFav ? <Star size={20} /> : <StarOff size={20} />}
         </Button>
         <Button
           variant="light"
