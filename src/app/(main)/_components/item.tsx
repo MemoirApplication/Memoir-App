@@ -113,7 +113,7 @@ export const Item = ({
         </div>
       )}
       {documentIcon ? (
-        <div className="shrink-0 mr-2 text-[18px]">{documentIcon}</div>
+        <div className="shrink-0 pl-[3px] pr-[3px] mr-2 text-[18px]">{documentIcon}</div>
       ) : (
         <Icon className="shrink-0 h-[18px] mr-2 text-muted-foreground" />
       )}
@@ -129,7 +129,7 @@ export const Item = ({
           K
         </Kbd>
       )}
-      {/* this is for plus icon nextto each page button  */}
+      {/* this is for plus icon next to each page button  */}
       {!!id && (
         <div className=" ml-auto flex items-center gap-x-2">
           <Dropdown className="select-none">
@@ -181,7 +181,7 @@ Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
   return (
     <div
       style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
-      className="flex gap-x-2 py[3px]"
+      className="flex gap-x-2 py[3px] p-1"
     >
       <Skeleton className="h-4 w-4 " />
       <Skeleton className="h-4 w-[30%] " />
