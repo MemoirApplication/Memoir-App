@@ -71,7 +71,7 @@ export const CNavbar = ({ document }) => {
             toggleFav();
           }}
         >
-          {document.isFav ? <Star size={20} /> : <StarOff size={20} />}
+          {document.isFav ? <StarOff size={20} /> : <Star size={20} />}
         </Button>
         <Button
           variant="light"
