@@ -1,7 +1,7 @@
 export default {
   providers: [
     {
-      domain: process.env.CONVEX_SITE_URL,
+      domain: "https://pleased-airedale-4.clerk.accounts.dev",
       applicationID: "convex",
     },
   ],

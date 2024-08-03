@@ -20,6 +20,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["./**/*", "../src/auth.ts"],
+  "include": ["./**/*"],
   "exclude": ["./_generated"]
 }
