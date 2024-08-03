@@ -9,6 +9,3 @@ export default clerkMiddleware();
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
-
-// Auth.js middleware
-export { auth as middleware } from "@/auth"
