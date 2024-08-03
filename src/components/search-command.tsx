@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { File, Search } from "lucide-react";
 import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/clerk-react";
 
 import { useSearch } from "@/hooks/search-hook";
 import { api } from "../../convex/_generated/api";
@@ -12,7 +11,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
 import { Input } from "@nextui-org/input";
 
 export const SearchCommand = () => {
-  const { user } = useUser();
   const router = useRouter();
   const documents = useQuery(api.documents.getSearch);
   const [isMounted, setIsMounted] = useState(false);

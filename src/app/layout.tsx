@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Providers } from "./providers";
-import { ConvexClientProvider } from "@/components/convex-provider";
+
 import { Toaster } from "sonner";
+import ConvexClientProvider from "@/components/ConvexProviderWithAuth";
+import { auth, signOut } from "@/auth";
+import { ReactNode } from "react";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -35,12 +38,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-full">
-        <ConvexClientProvider>
-          <Providers>
-            <Toaster position="bottom-center" />
-            {children}
-          </Providers>
-        </ConvexClientProvider>
+        <Providers>
+          <Toaster position="bottom-center" />
+          {children}
+        </Providers>
       </body>
     </html>
   );

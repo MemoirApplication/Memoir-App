@@ -14,7 +14,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as authAdapter from "../authAdapter.js";
 import type * as documents from "../documents.js";
+import type * as http from "../http.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -25,7 +27,9 @@ import type * as documents from "../documents.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  authAdapter: typeof authAdapter;
   documents: typeof documents;
+  http: typeof http;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

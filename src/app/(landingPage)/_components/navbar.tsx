@@ -6,8 +6,8 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle, 
-  NavbarMenu, 
+  NavbarMenuToggle,
+  NavbarMenu,
   NavbarMenuItem,
   Link,
   Button,
@@ -22,22 +22,11 @@ import { Sun, Moon } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
-// Import Clerk
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+
 import { Logo } from "./Logo";
-import { useConvexAuth } from "convex/react";
 
 export const NavigationBar = () => {
-  const { isAuthenticated, isLoading } = useConvexAuth();
-  const { isLoaded } = useSession();
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -109,31 +98,33 @@ export const NavigationBar = () => {
           </Dropdown>
         </NavbarItem>
         <NavbarItem>
-          <SignedOut>
-            <SignInButton>
-              <Button as={Link} color="secondary" radius="md" variant="shadow">
-                Sign in
+          {/* <SignedOut> */}
+          {/* <SignInButton> */}
+          <Button as={Link} color="secondary" radius="md" variant="shadow">
+            Sign in
+          </Button>
+          {/* </SignInButton> */}
+          {/* </SignedOut> */}
+          {/* <SignedIn> */}
+          {/*}
+          {loading && isLoaded ? (
+            <Spinner color="secondary" />
+          ) : (
+            <div className="flex gap-4">
+              <Button
+                as={Link}
+                color="secondary"
+                radius="md"
+                variant="shadow"
+                href="/documents"
+              >
+                Open Memoir
               </Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            {loading && isLoaded ? (
-              <Spinner color="secondary" />
-            ) : (
-              <div className="flex gap-4">
-                <Button
-                  as={Link}
-                  color="secondary"
-                  radius="md"
-                  variant="shadow"
-                  href="/documents"
-                >
-                  Open Memoir
-                </Button>
-                <UserButton />
-              </div>
-            )}
-          </SignedIn>
+              {/* <UserButton /> */}
+          {/* </div>
+          )}  */}
+
+          {/* </SignedIn> */}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
