@@ -33,7 +33,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   );
 
   // Use sidebar context to determine if the sidebar is collapsed
-  const { isCollapsed } = useSidebar(); 
+  const { isCollapsed } = useSidebar();
 
   // Query to fetch the document by its ID
   const document = useQuery(api.documents.getById, {
@@ -71,12 +71,11 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
       {/* <div className="bg-background min-h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div> */}
 
       <div className="w-screen flex-grow flex">
-
         {/* Container for resizing navbar and banner based on sidebar state */}
         <div
           className={`flex-1 transition-all duration-300 ${isCollapsed ? "ml-0" : "ml-[18rem]"}`}
         >
-         {/* Fixed container for Navbar and Banner, adjusting width based on sidebar state */}
+          {/* Fixed container for Navbar and Banner, adjusting width based on sidebar state */}
           <div
             className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
           >

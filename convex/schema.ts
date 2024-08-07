@@ -5,6 +5,7 @@ import { v } from "convex/values";
 
 export default defineSchema({
   // the structure of the "documents" table
+
   documents: defineTable({
     title: v.string(),
     userId: v.string(),
@@ -14,10 +15,20 @@ export default defineSchema({
     // tags: v.optional(v.array(v.id("tags"))),
     parentDocument: v.optional(v.id("documents")),
     content: v.optional(v.string()),
+    // content: v.array(v.object({
+    //   id: v.string(),
+    //   type: v.string(),
+    //   props: v.any(),
+    //   content: v.optional(v.string()),
+    //   children: v.optional(v.array(v.id("documents"))),
+    // })),
+
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.boolean(),
     isFav: v.boolean(),
+
+
   })
     .index("by_user", ["userId"])
     .index("by_user_parent", ["userId", "parentDocument"])
