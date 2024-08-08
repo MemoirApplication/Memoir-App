@@ -14,15 +14,17 @@ interface DocumentListProps {
   level?: number;
   data?: Doc<"documents">[];
 }
-export const DocumentList = ({
+
+// Component for rendering a list of favorite documents
+export const FavDocumentList = ({
   parentDocumentId,
   level = 0,
 }: DocumentListProps) => {
   const params = useParams();
   const router = useRouter();
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({}); // Track the expanded state of each item
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  // Toggle the expanded state of the item
+  // Toggle the expanded state of a document
   const onExpand = (documentId: string) => {
     setExpanded((prevExpanded) => ({
       ...prevExpanded,
@@ -30,23 +32,23 @@ export const DocumentList = ({
     }));
   };
 
-  // Query to fetch documents based on the parent document ID
-  const documents = useQuery(api.documents.getSidebar, {
+  // Fetch favorite documents from the API
+  const documents = useQuery(api.documents.getFavSidebar, {
     parentDocument: parentDocumentId,
   });
 
-  // If documents are undefined, show skeleton loaders
+  // Display skeleton loaders while documents are being fetched
   if (documents === undefined) {
     return (
       <>
-      <div className="p-[6px]">
-        <Item.Skeleton level={level} />
-        {level === 0 && (
-          <>
-            <Item.Skeleton level={level} />
-            <Item.Skeleton level={level} />
-          </>
-        )}
+        <div className="p-[6px]">
+          <Item.Skeleton level={level} />
+          {level === 0 && (
+            <>
+              <Item.Skeleton level={level} />
+              <Item.Skeleton level={level} />
+            </>
+          )}
         </div>
       </>
     );
@@ -59,7 +61,6 @@ export const DocumentList = ({
 
   return (
     <>
-      {/* Displays a message if there are no pages inside, based on the expanded state */}
       <p
         style={{
           paddingLeft: level ? `${level * 12 + 25}px` : "12px",
@@ -83,17 +84,19 @@ export const DocumentList = ({
             label={document.title}
             icon={FileIcon}
             documentIcon={document.icon}
-            active={params.documentId === document._id}
+            active={params.documentId === document._id} // Highlight active document
             level={level}
             onExpand={() => {
               onExpand(document._id); // Toggle expansion on click
             }}
-            
             expanded={expanded[document._id]}
           />
-          {/* Recursively render nested documents if the item is expanded */}
+          {/* Render child documents if expanded */}
           {expanded[document._id] && (
-            <DocumentList parentDocumentId={document._id} level={level + 1} />
+            <FavDocumentList
+              parentDocumentId={document._id}
+              level={level + 1}
+            />
           )}
         </div>
       ))}

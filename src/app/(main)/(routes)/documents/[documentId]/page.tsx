@@ -32,19 +32,18 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     []
   );
 
-  const { isCollapsed } = useSidebar(); // Use the context here
-  // const [isCollapsed, setIsCollapsed] = useState(false);
+  // Use sidebar context to determine if the sidebar is collapsed
+  const { isCollapsed } = useSidebar();
 
-  // const toggleSidebar = () => {
-  //   setIsCollapsed(!isCollapsed);
-  // };
-
+  // Query to fetch the document by its ID
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId as Id<"documents">,
   });
 
+  // Mutation function to update the document
   const update = useMutation(api.documents.update);
 
+  // Handler function for updating the document content
   const onChange = (content: string) => {
     update({
       id: params.documentId,
@@ -52,6 +51,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     });
   };
 
+  // Show a spinner while documents are loading
   if (document === undefined) {
     return (
       <div className="bg-background text-foreground h-screen w-screen flex flex-col items-center justify-center">
@@ -59,60 +59,44 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
       </div>
     );
   }
+
+  // If the document is null, display a "Not Found" message
   if (document === null) {
     return <div> Not Found </div>;
   }
 
   return (
     <>
-      {/* <div className=" h-screen bg-background text-foreground w-screen">
-        <div className="relative z-50 mb-10">
-          <Sidebar isCollapsed={isCollapsed} />
-        </div>
-        <div
-          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <Navbar isBordered={true} height="h-16">
-            <NavbarContent as="div" justify="start">
-              <Button
-                onClick={toggleSidebar}
-                variant="light"
-                color="secondary"
-                isIconOnly
-                size="sm"
-              >
-                <Menu />
-              </Button>
-              <Title initialData={document} />
-            </NavbarContent>
-            <NavbarContent justify="end">
-              <p>end of nav bar</p>
-            </NavbarContent>
-          </Navbar> */}
-      <div className="h-screen bg-background text-foreground w-screen">
-        <div className="relative z-50 mb-10">
-          <Sidebar />
-        </div>
-        <div
-          className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <CNavbar document={document} />
-          {document.isArchived && <Banner documentId={document._id} />}
-        </div>
-      </div>
+      {/* background color */}
+      {/* <div className="bg-background min-h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div> */}
 
-      <div
-        className={`fixed top-0 right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-      >
-        <div className="m-10">
-          <div className="h-[35vh]" />
-          <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-            <Toolbar initialData={document} />
-            <div className="mt-2">
-              <Editor onChange={onChange} initialData={document} />
+      <div className="w-screen flex-grow flex">
+        {/* Container for resizing navbar and banner based on sidebar state */}
+        <div
+          className={`flex-1 transition-all duration-300 ${isCollapsed ? "ml-0" : "ml-[18rem]"}`}
+        >
+          {/* Fixed container for Navbar and Banner, adjusting width based on sidebar state */}
+          <div
+            className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          >
+            <CNavbar document={document} />
+            {document.isArchived && <Banner documentId={document._id} />}
+          </div>
+        </div>
+
+        {/* Main content area that adjusts width based on sidebar state */}
+        <div
+          className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          <div className="">
+            <div className="h-[35vh]" />
+            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+              <Toolbar initialData={document} />
+              <div className="mt-2">
+                <Editor onChange={onChange} initialData={document} />
+              </div>
             </div>
           </div>
-          {/* Main Content */}
         </div>
       </div>
     </>

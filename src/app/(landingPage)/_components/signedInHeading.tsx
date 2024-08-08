@@ -18,6 +18,7 @@ export const SignedInHeading = () => {
         </h1>
         {isAuthenticated && !isLoading && (
           <Button
+            variant="shadow"
             color="secondary"
             className="mt-6 drop-shadow-2xl"
             onClick={() => {

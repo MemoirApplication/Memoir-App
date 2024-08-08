@@ -14,6 +14,7 @@ async function createWindow() {
     height: 600,
     minWidth: 750,
     minHeight: 550,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       enableRemoteModule: true,

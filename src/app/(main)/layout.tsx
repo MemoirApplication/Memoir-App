@@ -5,6 +5,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
 import { SidebarProvider } from "./contexts/SidebarContext";
+import { Sidebar } from "./_components/Sidebar";
 
 const MainLayout = ({
   children,
@@ -15,6 +16,7 @@ const MainLayout = ({
 }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
+  // Shows a spinner if the page is loading
   if (isLoading) {
     return (
       <div className="text-foreground bg-background h-screen flex items-center justify-center">
@@ -23,6 +25,7 @@ const MainLayout = ({
     );
   }
 
+  // Redirects the user to the root page if the user isnt authenticated
   if (!isAuthenticated) {
     return redirect("/");
   }
@@ -31,7 +34,13 @@ const MainLayout = ({
     <div className="flex h-screen">
       <main>
         <SearchCommand />
-        <SidebarProvider>{children}</SidebarProvider>
+        {/* Wraps the page with the sidebar context provider */}
+        <SidebarProvider>
+          <div className="z-50">
+            <Sidebar />
+          </div>
+          {children}
+        </SidebarProvider>
       </main>
     </div>
   );

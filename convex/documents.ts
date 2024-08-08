@@ -67,6 +67,33 @@ export const getSidebar = query({
     return documents;
   },
 });
+
+export const getFavSidebar = query({
+  args: {
+    parentDocument: v.optional(v.id("documents")),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+    const userId = identity.subject;
+
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user_parent", (q) =>
+        q.eq("userId", userId).eq("parentDocument", args.parentDocument),
+      )
+      .filter((q) => q
+        .eq(q.field("isArchived"), false) )
+      .filter((q) => q
+        .eq(q.field("isFav"), true) )
+      .order("desc")
+      .collect();
+
+    return documents;
+  },
+});
 // export const get = query({
 //   handler: async (ctx) => {
 //     const identity = await ctx.auth.getUserIdentity();
@@ -98,6 +125,7 @@ export const create = mutation({
       userId,
       isArchived: false,
       isPublished: false,
+      isFav: false,
     });
     return document;
   },
@@ -253,6 +281,7 @@ export const update = mutation({
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
+    isFav: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

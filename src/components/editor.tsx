@@ -73,6 +73,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   return (
     <div>
       <BlockNoteView
+        data-theming-background
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         onChange={() => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { NavigationBar } from "./_components/navbar";
-const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
+const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <main className=" select-none h-max text-foreground bg-background min-h-full flex flex-col">
@@ -12,4 +12,4 @@ const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default MarketingLayout;
+export default LandingPageLayout;
