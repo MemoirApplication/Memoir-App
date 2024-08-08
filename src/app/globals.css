@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Define default values for light theme */
 :root {
-  --foreground-color: #11181C;
+  --foreground-color: #11181c;
   /* Default foreground color (text) */
-  --background-color: #FFFFFF;
+  --background-color: #ffffff;
   /* Default background color (light theme) */
 }
 
 /* Dark theme overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-color: #ECEDEE;
+    --foreground-color: #ecedee;
     /* Text color for dark theme */
     --background-color: #000000;
     /* --background-color: #18181b; */
@@ -33,17 +32,15 @@
   }
 }
 
-
 /* Base theme */
 .bn-container[data-theming-background][data-color-scheme] {
-  --bn-colors-editor-background: #FFFFFF;
+  --bn-colors-editor-background: #ffffff;
 }
 
 /* Changes for dark mode */
 .bn-container[data-theming-background][data-color-scheme="dark"] {
   --bn-colors-editor-background: #000000;
 }
-
 
 /* Light Theme Colors */
 :root {
@@ -205,10 +202,51 @@
   --ui-neutral-900: #ffffff;
 }
 
-.bg-ui-amber-custom {
+.color-button {
+  border: none;
+  border-radius: 50%;
+  /* Makes the button round */
+  width: 30px;
+  /* Adjust size as needed */
+  height: 30px;
+  /* Adjust size as needed */
+  margin: 4px;
+  /* Spacing between buttons */
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  /* Text color */
+  font-weight: bold;
+}
+
+/* Color button styles for each color */
+.color-button-amber {
   background-color: var(--ui-amber-500);
 }
 
-.my-ui-amber {
-  background-color: hsl(var(--nextui--primary-500));
+.color-button-lime {
+  background-color: var(--ui-lime-500);
+}
+
+.color-button-teal {
+  background-color: var(--ui-teal-500);
+}
+
+.color-button-blue {
+  background-color: var(--ui-blue-500);
+}
+
+.color-button-violet {
+  background-color: var(--ui-violet-500);
+}
+
+.color-button-rose {
+  background-color: var(--ui-rose-500);
+}
+
+.color-button-neutral {
+  background-color: var(--ui-neutral-500);
 }
