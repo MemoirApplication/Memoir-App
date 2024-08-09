@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import {
+  Block,
+  BlockNoteEditor,
+  BlockNoteSchema,
+  defaultBlockSpecs,
+  filterSuggestionItems,
+  insertOrUpdateBlock,
+  PartialBlock,
+} from "@blocknote/core";
 import { BlockNoteView } from "@blocknote/mantine";
 import { useTheme } from "next-themes";
 import { Doc } from "../../convex/_generated/dataModel";
@@ -10,12 +18,50 @@ import "@blocknote/core/fonts/inter.css";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 // import { useCreateBlockNote } from "@blocknote/react";
+import { Alert } from "./CustomBlocks/alert";
+import { RiAlertFill } from "react-icons/ri";
+import {
+  getDefaultReactSlashMenuItems,
+  SuggestionMenuController,
+} from "@blocknote/react";
 
 interface EditorProps {
   onChange: (value: string) => void;
   initialData: Doc<"documents">;
   editable?: boolean;
 }
+
+// new blocknote schema with block specs, which contain the configs and implementations for blocks
+// that we want our editor to use.
+const schema = BlockNoteSchema.create({
+  blockSpecs: {
+    // all default blocks
+    ...defaultBlockSpecs,
+    // the new alert block
+    alert: Alert,
+  },
+});
+
+// the slash menu items
+const insertAlert = (editor: typeof schema.BlockNoteEditor) => ({
+  title: "Alert",
+  onItemClick: () => {
+    insertOrUpdateBlock(editor, {
+      type: "alert",
+    });
+  },
+  aliases: [
+    "alert",
+    "notification",
+    "emphasize",
+    "warning",
+    "error",
+    "info",
+    "success",
+  ],
+  group: "Other",
+  icon: <RiAlertFill />,
+});
 
 const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const { resolvedTheme } = useTheme();
@@ -63,6 +109,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }
     return BlockNoteEditor.create({
       initialContent,
+      schema,
     });
   }, [initialContent]);
 
@@ -79,7 +126,19 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
         onChange={() => {
           saveToStorage(editor.document);
         }}
-      />
+        slashMenu={false}
+      >
+        <SuggestionMenuController
+          triggerCharacter={"/"}
+          getItems={async (query) =>
+            // get all default slash menu items and 'insertAlert' item
+            filterSuggestionItems(
+              [...getDefaultReactSlashMenuItems(editor), insertAlert(editor)],
+              query
+            )
+          }
+        />
+      </BlockNoteView>
     </div>
   );
 };
