@@ -1,9 +1,10 @@
 "use client";
 
-import './globals.css';
+import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ColorProvider } from "./(main)/contexts/ColorContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +15,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         enableSystem
         // disableTransitionOnChange
       >
-        {children}
+        <ColorProvider>{children}</ColorProvider>
       </NextThemesProvider>
     </NextUIProvider>
   );

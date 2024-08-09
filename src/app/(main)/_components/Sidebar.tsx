@@ -1,7 +1,17 @@
 "use client";
 
 import { UserButton } from "@clerk/nextjs";
-import { Button, Card, CardBody, Divider } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Divider,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+} from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import {
   ChevronDown,
@@ -28,6 +38,7 @@ import { useSearch } from "@/hooks/search-hook";
 import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
+import ColorSwitcher from "@/components/ColorSwitcher";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -44,7 +55,6 @@ export const Sidebar = () => {
       error: "Failed to create a new note.",
     });
   };
-
 
   // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
@@ -63,7 +73,6 @@ export const Sidebar = () => {
           className="h-full shadow-lg bg-opacity-20 text-foreground backdrop-blur-lg"
         >
           <div className="p-4 h-full flex flex-col">
-
             {/* user and workspace card */}
             <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg">
               <CardBody className="flex-row items-center justify-center">
@@ -71,15 +80,27 @@ export const Sidebar = () => {
                 <p className="ml-2 select-none font-medium text-base">
                   Workspace
                 </p>
-                <Button // Workspace button
-                  isIconOnly
-                  size="sm"
-                  variant="light"
-                  color="secondary"
-                  className="ml-auto"
-                >
-                  <ChevronDown />
-                </Button>
+                <Popover placement="bottom" showArrow={true}>
+                  <PopoverTrigger>
+                    <Button // Workspace button
+                      isIconOnly
+                      size="sm"
+                      variant="light"
+                      color="secondary"
+                      className="ml-auto"
+                    >
+                      <ChevronDown />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <div className="px-1 py-2">
+                      <div>Theme:</div>
+                      <div>
+                        <ColorSwitcher />
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </CardBody>
             </Card>
 
@@ -105,8 +126,9 @@ export const Sidebar = () => {
                   <Popover shadow="lg" backdrop="blur" placement="right">
                     <PopoverTrigger>
                       <Button // Calendar button
-                        variant="light" 
-                        className="justify-start">
+                        variant="light"
+                        className="justify-start"
+                      >
                         <CalendarDays size={20} />
                         <p className="select-none font-medium text-base">
                           Calendar
@@ -124,14 +146,14 @@ export const Sidebar = () => {
                   </Popover>
 
                   <Button // Settings button
-                    variant="light" 
-                    className="justify-start">
+                    variant="light"
+                    className="justify-start"
+                  >
                     <Settings size={20} />
                     <p className="select-none font-medium text-base">
                       Settings
                     </p>
                   </Button>
-
                 </CardBody>
               </Card>
             </div>
@@ -159,12 +181,11 @@ export const Sidebar = () => {
                   />
                 </div>
                 <div className="mt-4">
-
                   {/* Document list component */}
                   <DocumentList />
 
                   <Divider className="mt-1" />
-                  
+
                   {/* Favorites section */}
                   <p className="flex ml-2 mt-4 mb-2 font-medium">
                     <Star size={20} className="mr-2" />
@@ -187,7 +208,7 @@ export const Sidebar = () => {
                   >
                     <PopoverTrigger>
                       <Button // Trash button
-                        variant="shadow"
+                        variant="solid"
                         color="secondary"
                         className="justify-start "
                       >

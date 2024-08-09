@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import { Sidebar } from "./_components/Sidebar";
+import { useColor } from "@/app/(main)/contexts/ColorContext";
+import { useTheme } from "next-themes";
 
 const MainLayout = ({
   children,
@@ -15,11 +17,14 @@ const MainLayout = ({
   toggleSidebar: () => void;
 }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
+  const { color } = useColor(); // Use color from ColorContext
+  const { theme } = useTheme(); // Use theme from next-themes
+  const themeClass = `${color}-${theme}`;
 
   // Shows a spinner if the page is loading
   if (isLoading) {
     return (
-      <div className="text-foreground bg-background h-screen flex items-center justify-center">
+      <div className="themeClass text-foreground bg-background h-screen flex items-center justify-center">
         <Spinner color="secondary" className="py-4 mt-10" />
       </div>
     );
@@ -32,7 +37,7 @@ const MainLayout = ({
 
   return (
     <div className="flex h-screen">
-      <main>
+      <main className={themeClass}>
         <SearchCommand />
         {/* Wraps the page with the sidebar context provider */}
         <SidebarProvider>
