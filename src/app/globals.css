@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Define default values for light theme */
 :root {
-  --foreground-color: #11181C;
+  --foreground-color: #11181c;
   /* Default foreground color (text) */
-  --background-color: #FFFFFF;
+  --background-color: #ffffff;
   /* Default background color (light theme) */
 }
 
 /* Dark theme overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-color: #ECEDEE;
+    --foreground-color: #ecedee;
     /* Text color for dark theme */
     --background-color: #000000;
     /* --background-color: #18181b; */
@@ -33,13 +32,221 @@
   }
 }
 
-
 /* Base theme */
 .bn-container[data-theming-background][data-color-scheme] {
-  --bn-colors-editor-background: #FFFFFF;
+  --bn-colors-editor-background: #ffffff;
 }
 
 /* Changes for dark mode */
 .bn-container[data-theming-background][data-color-scheme="dark"] {
   --bn-colors-editor-background: #000000;
+}
+
+/* Light Theme Colors */
+:root {
+  --ui-amber-50: #fffbeb;
+  --ui-amber-100: #fef3c7;
+  --ui-amber-200: #fde68a;
+  --ui-amber-300: #fcd34d;
+  --ui-amber-400: #fbbf24;
+  --ui-amber-500: #f59e0b;
+  --ui-amber-600: #d97706;
+  --ui-amber-700: #b45309;
+  --ui-amber-800: #92400e;
+  --ui-amber-900: #78350f;
+
+  --ui-lime-50: #f7fee7;
+  --ui-lime-100: #ecfccb;
+  --ui-lime-200: #d9f99d;
+  --ui-lime-300: #bef264;
+  --ui-lime-400: #a3e635;
+  --ui-lime-500: #84cc16;
+  --ui-lime-600: #65a30d;
+  --ui-lime-700: #4d7c0f;
+  --ui-lime-800: #3f6212;
+  --ui-lime-900: #2e7d32;
+
+  --ui-teal-50: #f0fdfa;
+  --ui-teal-100: #ccfbf1;
+  --ui-teal-200: #99f6e4;
+  --ui-teal-300: #5eead4;
+  --ui-teal-400: #2dd4bf;
+  --ui-teal-500: #14b8a6;
+  --ui-teal-600: #0d9488;
+  --ui-teal-700: #0f766e;
+  --ui-teal-800: #115e59;
+  --ui-teal-900: #134e4a;
+
+  --ui-blue-50: #eff6ff;
+  --ui-blue-100: #dbeafe;
+  --ui-blue-200: #bfdbfe;
+  --ui-blue-300: #93c5fd;
+  --ui-blue-400: #60a5fa;
+  --ui-blue-500: #3b82f6;
+  --ui-blue-600: #2563eb;
+  --ui-blue-700: #1d4ed8;
+  --ui-blue-800: #1e40af;
+  --ui-blue-900: #1e3a8a;
+
+  --ui-violet-50: #f5f3ff;
+  --ui-violet-100: #ede9fe;
+  --ui-violet-200: #ddd6fe;
+  --ui-violet-300: #c4b5fd;
+  --ui-violet-400: #a78bfa;
+  --ui-violet-500: #8b5cf6;
+  --ui-violet-600: #7c3aed;
+  --ui-violet-700: #6d28d9;
+  --ui-violet-800: #5b21b6;
+  --ui-violet-900: #4c1d95;
+
+  --ui-rose-50: #fff1f2;
+  --ui-rose-100: #ffe4e6;
+  --ui-rose-200: #fecdd3;
+  --ui-rose-300: #fda4af;
+  --ui-rose-400: #fb7185;
+  --ui-rose-500: #f43f5e;
+  --ui-rose-600: #e11d48;
+  --ui-rose-700: #be123c;
+  --ui-rose-800: #9f1239;
+  --ui-rose-900: #831843;
+
+  --ui-neutral-50: #f9fafb;
+  --ui-neutral-100: #f3f4f6;
+  --ui-neutral-200: #e5e7eb;
+  --ui-neutral-300: #d1d5db;
+  --ui-neutral-400: #9ca3af;
+  --ui-neutral-500: #6b7280;
+  --ui-neutral-600: #4b5563;
+  --ui-neutral-700: #374151;
+  --ui-neutral-800: #1f2937;
+  --ui-neutral-900: #111827;
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+  --ui-amber-50: #78350f;
+  --ui-amber-100: #92400e;
+  --ui-amber-200: #b45309;
+  --ui-amber-300: #d97706;
+  --ui-amber-400: #f59e0b;
+  --ui-amber-500: #fbbf24;
+  --ui-amber-600: #fde68a;
+  --ui-amber-700: #fef3c7;
+  --ui-amber-800: #fffbeb;
+  --ui-amber-900: #ffffff;
+
+  --ui-lime-50: #2e7d32;
+  --ui-lime-100: #3f6212;
+  --ui-lime-200: #4d7c0f;
+  --ui-lime-300: #65a30d;
+  --ui-lime-400: #84cc16;
+  --ui-lime-500: #a3e635;
+  --ui-lime-600: #bef264;
+  --ui-lime-700: #d9f99d;
+  --ui-lime-800: #ecfccb;
+  --ui-lime-900: #f7fee7;
+
+  --ui-teal-50: #134e4a;
+  --ui-teal-100: #115e59;
+  --ui-teal-200: #0f766e;
+  --ui-teal-300: #0d9488;
+  --ui-teal-400: #14b8a6;
+  --ui-teal-500: #2dd4bf;
+  --ui-teal-600: #5eead4;
+  --ui-teal-700: #99f6e4;
+  --ui-teal-800: #ccfbf1;
+  --ui-teal-900: #f0fdfa;
+
+  --ui-blue-50: #1e3a8a;
+  --ui-blue-100: #1d4ed8;
+  --ui-blue-200: #2563eb;
+  --ui-blue-300: #3b82f6;
+  --ui-blue-400: #60a5fa;
+  --ui-blue-500: #93c5fd;
+  --ui-blue-600: #bfdbfe;
+  --ui-blue-700: #dbeafe;
+  --ui-blue-800: #eff6ff;
+  --ui-blue-900: #ffffff;
+
+  --ui-violet-50: #4c1d95;
+  --ui-violet-100: #5b21b6;
+  --ui-violet-200: #6d28d9;
+  --ui-violet-300: #7c3aed;
+  --ui-violet-400: #8b5cf6;
+  --ui-violet-500: #a78bfa;
+  --ui-violet-600: #c4b5fd;
+  --ui-violet-700: #ddd6fe;
+  --ui-violet-800: #ede9fe;
+  --ui-violet-900: #f5f3ff;
+
+  --ui-rose-50: #831843;
+  --ui-rose-100: #9f1239;
+  --ui-rose-200: #be123c;
+  --ui-rose-300: #e11d48;
+  --ui-rose-400: #f43f5e;
+  --ui-rose-500: #fb7185;
+  --ui-rose-600: #fda4af;
+  --ui-rose-700: #fecdd3;
+  --ui-rose-800: #ffe4e6;
+  --ui-rose-900: #fff1f2;
+
+  --ui-neutral-50: #111827;
+  --ui-neutral-100: #1f2937;
+  --ui-neutral-200: #374151;
+  --ui-neutral-300: #4b5563;
+  --ui-neutral-400: #6b7280;
+  --ui-neutral-500: #9ca3af;
+  --ui-neutral-600: #d1d5db;
+  --ui-neutral-700: #f3f4f6;
+  --ui-neutral-800: #f9fafb;
+  --ui-neutral-900: #ffffff;
+}
+
+.color-button {
+  border: none;
+  border-radius: 50%;
+  /* Makes the button round */
+  width: 30px;
+  /* Adjust size as needed */
+  height: 30px;
+  /* Adjust size as needed */
+  margin: 4px;
+  /* Spacing between buttons */
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  /* Text color */
+  font-weight: bold;
+}
+
+/* Color button styles for each color */
+.color-button-amber {
+  background-color: var(--ui-amber-500);
+}
+
+.color-button-lime {
+  background-color: var(--ui-lime-500);
+}
+
+.color-button-teal {
+  background-color: var(--ui-teal-500);
+}
+
+.color-button-blue {
+  background-color: var(--ui-blue-500);
+}
+
+.color-button-violet {
+  background-color: var(--ui-violet-500);
+}
+
+.color-button-rose {
+  background-color: var(--ui-rose-500);
+}
+
+.color-button-neutral {
+  background-color: var(--ui-neutral-500);
 }
