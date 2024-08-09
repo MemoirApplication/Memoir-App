@@ -26,7 +26,6 @@ import {
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 
-
 interface ItemProps {
   id?: Id<"documents">;
   documentIcon?: string;
@@ -57,7 +56,6 @@ export const Item = ({
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
-
 
   // Move document to trash
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -116,7 +114,7 @@ export const Item = ({
       {!!id && (
         <div // Expand button
           role="button"
-          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-100 dark:bg-secondary-200"
+          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-200 dark:hover:bg-secondary-200"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -148,7 +146,7 @@ export const Item = ({
             <DropdownTrigger>
               <div
                 role="button"
-                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-200"
+                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
               >
                 <MoreHorizontal size={18} />
               </div>
@@ -179,7 +177,7 @@ export const Item = ({
           <div // Create note button
             role="button"
             onClick={onCreate}
-            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-100 dark:bg-secondary-200"
+            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
