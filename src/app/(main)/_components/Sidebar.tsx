@@ -11,6 +11,7 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownItem,
+  ScrollShadow,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import {
@@ -74,7 +75,7 @@ export const Sidebar = () => {
         >
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
-            <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg">
+            <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg h-28">
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
@@ -161,8 +162,9 @@ export const Sidebar = () => {
             <Divider className="my-4" />
 
             {/* Search and Documents card */}
-            <Card className="bg-opacity-20 backdrop-blur-lg">
+            <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
+                <ScrollShadow className="transition-all">
                 {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
@@ -193,11 +195,12 @@ export const Sidebar = () => {
                   </p>
                   <FavDocumentList />
                 </div>
+                </ScrollShadow>
               </CardBody>
             </Card>
 
             {/* Trash card */}
-            <div className="absolute inset-x-0 bottom-0 m-4">
+            <div className="inset-x-0 bottom-0">
               <Divider className="my-4" />
               <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody>
