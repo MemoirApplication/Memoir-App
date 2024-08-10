@@ -107,7 +107,7 @@ export const Item = ({
         paddingLeft: level ? `${level * 12 + 6}px` : "4px",
       }}
       className={cn(
-        "select-none group min-h-[27px]  text-md py-1 pr-3 w-full hove:bg-primary/10 flex items-center text-muted-foreground font-medium",
+        "select-none group min-h-[27px] m-1 text-md py-1 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-md",
         active && "bg-secondary/5 text-secondary rounded-md"
       )}
     >

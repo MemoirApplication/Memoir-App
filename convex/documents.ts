@@ -109,6 +109,7 @@ export const create = mutation({
   args: {
     title: v.string(),
     parentDocument: v.optional(v.id("documents")),
+    blockId: v.optional(v.string()),
   },
 
   handler: async (ctx, args) => {
@@ -122,6 +123,7 @@ export const create = mutation({
     const document = await ctx.db.insert("documents", {
       title: args.title,
       parentDocument: args.parentDocument,
+      blockId: args.blockId,
       userId,
       isArchived: false,
       isPublished: false,
