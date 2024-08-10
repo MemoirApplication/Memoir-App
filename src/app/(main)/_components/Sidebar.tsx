@@ -40,6 +40,8 @@ import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -75,7 +77,10 @@ export const Sidebar = () => {
         >
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
-            <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg h-28">
+            <Card
+              shadow="lg"
+              className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
+            >
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
@@ -164,37 +169,39 @@ export const Sidebar = () => {
             {/* Search and Documents card */}
             <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
-                <ScrollShadow className="transition-all">
-                {/* <Button onClick={onCreate} variant="flat" color="secondary">
+                <ScrollShadow>
+                  <SimpleBar>
+                    {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
                 </Button> */}
-                <div className="space-y-1">
-                  <Item // Search button
-                    label="Search"
-                    icon={Search}
-                    isSearch
-                    onClick={search.onOpen} // Calls search.onOpen when pressed
-                  />
-                  <Item // New page button
-                    onClick={handleCreate} // Calls handleCreate when pressed
-                    label="New Page"
-                    icon={PlusCircle}
-                  />
-                </div>
-                <div className="mt-4">
-                  {/* Document list component */}
-                  <DocumentList />
+                    <div className="space-y-1">
+                      <Item // Search button
+                        label="Search"
+                        icon={Search}
+                        isSearch
+                        onClick={search.onOpen} // Calls search.onOpen when pressed
+                      />
+                      <Item // New page button
+                        onClick={handleCreate} // Calls handleCreate when pressed
+                        label="New Page"
+                        icon={PlusCircle}
+                      />
+                    </div>
+                    <div className="mt-4">
+                      {/* Document list component */}
+                      <DocumentList />
 
-                  <Divider className="mt-1" />
+                      <Divider className="mt-1" />
 
-                  {/* Favorites section */}
-                  <p className="flex ml-2 mt-4 mb-2 font-medium">
-                    <Star size={20} className="mr-2" />
-                    Favorites
-                  </p>
-                  <FavDocumentList />
-                </div>
+                      {/* Favorites section */}
+                      <p className="flex ml-2 mt-4 mb-2 font-medium">
+                        <Star size={20} className="mr-2" />
+                        Favorites
+                      </p>
+                      <FavDocumentList />
+                    </div>
+                  </SimpleBar>
                 </ScrollShadow>
               </CardBody>
             </Card>
