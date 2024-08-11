@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import {
   Button,
   Card,
@@ -63,6 +63,8 @@ export const Sidebar = () => {
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
 
+  const { user } = useUser();
+
   return (
     <>
       <aside
@@ -83,7 +85,7 @@ export const Sidebar = () => {
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
-                  Workspace
+                  {user?.username}'s workspace
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
