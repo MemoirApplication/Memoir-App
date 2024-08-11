@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="md:justify-end items-center gap-x-2 text-muted-foreground items-end">
         <Link color="secondary" href="/about">
           About
-        </Link> 
+        </Link>
       </div>
     </div>
   );
