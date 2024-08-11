@@ -17,6 +17,8 @@
     "@blocknote/mantine": "^0.15.3",
     "@blocknote/react": "^0.15.3",
     "@clerk/nextjs": "^5.2.4",
+    "@edgestore/react": "^0.2.2",
+    "@edgestore/server": "^0.2.2",
     "@nextui-org/button": "^2.0.37",
     "@nextui-org/calendar": "^2.0.11",
     "@nextui-org/card": "^2.0.33",
@@ -42,9 +44,13 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-textarea-autosize": "^8.5.3",
+    "simplebar-react": "^3.2.6",
     "sonner": "^1.5.0",
+    "tailwind-merge": "^2.4.0",
     "usehooks-ts": "^3.1.0",
+    "zod": "^3.23.8",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

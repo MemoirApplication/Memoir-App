@@ -56,10 +56,11 @@ export const Title = ({ initialData }: TitleProps) => {
   const [isEditing, setIsEditing] = useState(false); // State to track editing mode
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex items-center pl-6 gap-x-2">
       {!!initialData && <p className="text-xl">{initialData.icon}</p>}
       {isEditing ? (
         <Input
+          radius="sm"
           ref={inputRef}
           onClick={enabaleInput} // Enable input field on click
           onBlur={disableInput} // Disable input field when focus is lost
@@ -74,6 +75,7 @@ export const Title = ({ initialData }: TitleProps) => {
           size="sm"
           variant="light"
           className="font-medium h-auto p-1 text-base justify-start"
+          radius="sm"
         >
           <span className="truncate">{initialData?.title}</span>
         </Button>

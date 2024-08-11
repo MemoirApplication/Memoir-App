@@ -9,7 +9,7 @@ First things first (for devs), you need to manually install the required package
 ```bash
 git clone https://github.com/MemoirApplication/Memoir-App.git --depth 1
 cd Memoir-App && git pull
-npm install
+yarn install #you can still use npm but yarn is recommended
 ```
 
 Make a `.env.local` file and then update the api keys for Clerk.
