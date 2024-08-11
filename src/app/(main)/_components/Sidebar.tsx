@@ -78,7 +78,6 @@ export const Sidebar = () => {
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
             <Card
-              shadow="lg"
               className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
             >
               <CardBody className="flex-row items-center justify-center">
@@ -100,7 +99,7 @@ export const Sidebar = () => {
                   </PopoverTrigger>
                   <PopoverContent>
                     <div className="px-1 py-2">
-                      <div>Theme:</div>
+                      <div className="font-medium">Theme:</div>
                       <div>
                         <ColorSwitcher />
                       </div>
@@ -169,7 +168,7 @@ export const Sidebar = () => {
             {/* Search and Documents card */}
             <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
-                <ScrollShadow>
+                <ScrollShadow className="h-full">
                   <SimpleBar>
                     {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
