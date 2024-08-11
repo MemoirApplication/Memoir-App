@@ -8,6 +8,7 @@ import { SidebarProvider } from "./contexts/SidebarContext";
 import { Sidebar } from "./_components/Sidebar";
 import { useColor } from "@/app/(main)/contexts/ColorContext";
 import { useTheme } from "next-themes";
+import { CoverImageModal } from "@/components/modals/cover-image-modal";
 
 const MainLayout = ({
   children,
@@ -39,6 +40,7 @@ const MainLayout = ({
     <div className="flex h-screen">
       <main className={themeClass}>
         <SearchCommand />
+        <CoverImageModal />
         {/* Wraps the page with the sidebar context provider */}
         <SidebarProvider>
           <div className="z-50">

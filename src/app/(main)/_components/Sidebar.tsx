@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import {
   Button,
   Card,
@@ -11,6 +11,7 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownItem,
+  ScrollShadow,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import {
@@ -39,6 +40,8 @@ import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -60,6 +63,8 @@ export const Sidebar = () => {
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
 
+  const { user } = useUser();
+
   return (
     <>
       <aside
@@ -74,11 +79,13 @@ export const Sidebar = () => {
         >
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
-            <Card shadow="lg" className="mb-4 bg-opacity-20 backdrop-blur-lg">
+            <Card
+              className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
+            >
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
-                  Workspace
+                  {user?.username}'s workspace
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -94,7 +101,7 @@ export const Sidebar = () => {
                   </PopoverTrigger>
                   <PopoverContent>
                     <div className="px-1 py-2">
-                      <div>Theme:</div>
+                      <div className="font-medium">Theme:</div>
                       <div>
                         <ColorSwitcher />
                       </div>
@@ -161,43 +168,47 @@ export const Sidebar = () => {
             <Divider className="my-4" />
 
             {/* Search and Documents card */}
-            <Card className="bg-opacity-20 backdrop-blur-lg">
+            <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
-                {/* <Button onClick={onCreate} variant="flat" color="secondary">
+                <ScrollShadow className="h-full">
+                  <SimpleBar>
+                    {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
                 </Button> */}
-                <div className="space-y-1">
-                  <Item // Search button
-                    label="Search"
-                    icon={Search}
-                    isSearch
-                    onClick={search.onOpen} // Calls search.onOpen when pressed
-                  />
-                  <Item // New page button
-                    onClick={handleCreate} // Calls handleCreate when pressed
-                    label="New Page"
-                    icon={PlusCircle}
-                  />
-                </div>
-                <div className="mt-4">
-                  {/* Document list component */}
-                  <DocumentList />
+                    <div className="space-y-1">
+                      <Item // Search button
+                        label="Search"
+                        icon={Search}
+                        isSearch
+                        onClick={search.onOpen} // Calls search.onOpen when pressed
+                      />
+                      <Item // New page button
+                        onClick={handleCreate} // Calls handleCreate when pressed
+                        label="New Page"
+                        icon={PlusCircle}
+                      />
+                    </div>
+                    <div className="mt-4">
+                      {/* Document list component */}
+                      <DocumentList />
 
-                  <Divider className="mt-1" />
+                      <Divider className="mt-1" />
 
-                  {/* Favorites section */}
-                  <p className="flex ml-2 mt-4 mb-2 font-medium">
-                    <Star size={20} className="mr-2" />
-                    Favorites
-                  </p>
-                  <FavDocumentList />
-                </div>
+                      {/* Favorites section */}
+                      <p className="flex ml-2 mt-4 mb-2 font-medium">
+                        <Star size={20} className="mr-2" />
+                        Favorites
+                      </p>
+                      <FavDocumentList />
+                    </div>
+                  </SimpleBar>
+                </ScrollShadow>
               </CardBody>
             </Card>
 
             {/* Trash card */}
-            <div className="absolute inset-x-0 bottom-0 m-4">
+            <div className="inset-x-0 bottom-0">
               <Divider className="my-4" />
               <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody>

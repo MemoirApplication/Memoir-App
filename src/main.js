@@ -10,10 +10,10 @@ let mainWindow;
 
 async function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth: 750,
-    minHeight: 550,
+    width: 1200,
+    height: 800,
+    minWidth: 1200,
+    minHeight: 800,
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
