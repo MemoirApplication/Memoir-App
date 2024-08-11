@@ -123,11 +123,25 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }, [document, updateDocument]);
 
     if (isLoading) {
-      return <div>Loading...</div>;
+      return (
+        <div
+          role="button"
+          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex p-3 w-fit font text-medium transition-all text-muted-foreground inline-content"
+        >
+          Loading...
+        </div>
+      );
     }
 
     if (!document) {
-      return <div>Document not found</div>;
+      return (
+        <div
+          role="button"
+          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex p-3 w-fit font text-medium transition-all text-muted-foreground inline-content"
+        >
+          Document not found
+        </div>
+      );
     }
 
     return (
@@ -137,9 +151,11 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
             router.push(`/documents/${document._id}`);
           }} // redirect to the page
           role="button"
-          className="select-none bg-secondary/5 hover:bg-secondary/25 rounded-md flex p-3 w-fit font text-medium transition-all text-muted-foreground inline-content"
+          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex py-3 px-20 w-fit font text-medium transition-all text-muted-foreground inline-content"
         >
-          <span className="text-medium">{document.title}</span>
+          <span className="text-medium">
+            {document.icon} &#8203;{document.title}
+          </span>
         </div>
       </div>
     );
