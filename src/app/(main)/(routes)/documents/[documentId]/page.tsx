@@ -19,6 +19,7 @@ import { Toolbar } from "@/components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import { useSidebar } from "../../../contexts/SidebarContext";
 import dynamic from "next/dynamic";
+import { Cover } from "@/components/cover";
 
 interface DocumentIdPageProps {
   params: {
@@ -54,6 +55,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   // Show a spinner while documents are loading
   if (document === undefined) {
     return (
+      // <Cover.Skeleton />
       <div className="bg-background text-foreground h-screen w-screen flex flex-col items-center justify-center">
         <Spinner color="secondary" className="py-4 mt-10" />
       </div>
@@ -89,7 +91,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
           className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           <div className="">
-            <div className="h-[35vh]" />
+            <Cover url={document.coverImage} />
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
               <Toolbar initialData={document} />
               <div className="mt-2">
