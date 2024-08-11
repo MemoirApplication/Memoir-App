@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 
 import React, { useState } from "react";
 import { Button } from "@nextui-org/button";
@@ -56,6 +57,11 @@ export const CNavbar = ({ document }) => {
 
       {/* items on the right */}
       <div className="flex items-center gap-x-2 pr-2">
+        <Link href="/documents">
+          <Button variant="light" color="secondary">
+            Document Page |
+          </Button>
+        </Link>
         <Button variant="light" color="default" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>

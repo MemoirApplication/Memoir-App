@@ -114,12 +114,12 @@ export const Sidebar = () => {
                   </Button> */}
 
                   <Button // Home button
-                    onClick={() => router.push("/documents")}
+                    onClick={() => router.push("/")}
                     variant="light"
                     className="justify-start"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none font-medium text-base">Home</p>
+                    <p className="select-none font-medium text-base">Home Page</p>
                   </Button>
 
                   {/* Popover to show the calendar */}
