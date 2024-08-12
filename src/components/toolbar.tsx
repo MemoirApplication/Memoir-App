@@ -99,7 +99,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       )}
 
       {/* Display icon picker and cover image button if no icon or cover image is set and not in preview mode */}
-      <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+      <div className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
         {!initialData.icon && !preview && (
           <IconPicer asChild onChange={onIconSelect}>
             <Button variant="ghost" className="text-muted-foreground text-xs">

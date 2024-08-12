@@ -36,12 +36,13 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   return (
     <div
       className={`relative w-full ${!url ? "h-[12vh]" : "h-[35vh]"} group ${url ? "bg-default-50" : ""}`}
-    >
+    > 
+    {/* TODO Check cn */}
       {!!url && (
         <Image src={url} fill alt="Cover Image" className="object-cover" />
       )}
       {url && !preview && (
-        <div className="opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
+        <div className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
           <Button
             onClick={() => coverImage.onReplace(url)}
             className="text-muted-foreground text-xs"
