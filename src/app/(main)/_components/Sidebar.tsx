@@ -40,8 +40,6 @@ import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
-import SimpleBar from "simplebar-react";
-import "simplebar-react/dist/simplebar.min.css";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -101,7 +99,7 @@ export const Sidebar = () => {
                   </PopoverTrigger>
                   <PopoverContent>
                     <div className="px-1 py-2">
-                      <div className="font-medium">Theme:</div>
+                      <div className="font-medium select-none">Theme:</div>
                       <div>
                         <ColorSwitcher />
                       </div>
@@ -171,7 +169,6 @@ export const Sidebar = () => {
             <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
                 <ScrollShadow className="h-full">
-                  <SimpleBar>
                     {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
@@ -196,13 +193,12 @@ export const Sidebar = () => {
                       <Divider className="mt-1" />
 
                       {/* Favorites section */}
-                      <p className="flex ml-2 mt-4 mb-2 font-medium">
+                      <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
                         <Star size={20} className="mr-2" />
                         Favorites
                       </p>
                       <FavDocumentList />
                     </div>
-                  </SimpleBar>
                 </ScrollShadow>
               </CardBody>
             </Card>
