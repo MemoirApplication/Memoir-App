@@ -72,7 +72,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     removeIcon({ id: initialData._id });
   };
   return (
-    <div className=" pl-[54px] group relative">
+    <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
       {!!initialData.icon && !preview && (
         <div className="flex items-center gap-x-2 group/icon pt-6">
@@ -130,7 +130,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           onKeyDown={onKeyDown}
           value={value}
           onChange={(e) => onInput(e.target.value)}
-          className="text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
+          className="w-full text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
         />
       ) : (
         <div

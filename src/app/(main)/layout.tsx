@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useConvexAuth } from "convex/react";
-import { Spinner } from "@nextui-org/spinner";
+import { SidebarProvider } from "./contexts/SidebarContext";
+import { EditorProvider } from "./contexts/EditorContext";
 import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
-import { SidebarProvider } from "./contexts/SidebarContext";
 import { Sidebar } from "./_components/Sidebar";
+import { Spinner } from "@nextui-org/spinner";
 import { useColor } from "@/app/(main)/contexts/ColorContext";
 import { useTheme } from "next-themes";
 import { CoverImageModal } from "@/components/modals/cover-image-modal";
@@ -46,7 +47,9 @@ const MainLayout = ({
           <div className="z-50">
             <Sidebar />
           </div>
+          <EditorProvider>
           {children}
+          </EditorProvider>
         </SidebarProvider>
       </main>
     </div>

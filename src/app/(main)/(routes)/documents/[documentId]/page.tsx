@@ -18,6 +18,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import { useSidebar } from "../../../contexts/SidebarContext";
+import { useEditor } from "../../../contexts/EditorContext";
 import dynamic from "next/dynamic";
 import { Cover } from "@/components/cover";
 
@@ -35,6 +36,9 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
   // Use sidebar context to determine if the sidebar is collapsed
   const { isCollapsed } = useSidebar();
+
+  // Use editor context to determine if the editor is full-width
+  const { isFullWidth } = useEditor();
 
   // Query to fetch the document by its ID
   const document = useQuery(api.documents.getById, {
@@ -87,19 +91,21 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
         </div>
 
         {/* Main content area that adjusts width based on sidebar state */}
-        <div
-          className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
-        >
-          <div className="">
-            <Cover url={document.coverImage} />
-            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
-              <Toolbar initialData={document} />
-              <div className="mt-2">
-                <Editor onChange={onChange} initialData={document} />
-              </div>
-            </div>
-          </div>
-        </div>
+<div
+  className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+>
+  {/* Cover should remain unaffected by isFullWidth */}
+  <Cover url={document.coverImage} />
+
+  <div className="flex justify-center">
+    <div className={`transition-all duration-300 ${isFullWidth ? "max-w-full" : "md:max-w-3xl lg:max-w-4xl"} w-full`}>
+      <div className="mt-2">
+        <Toolbar initialData={document} />
+        <Editor onChange={onChange} initialData={document} />
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </>
   );
