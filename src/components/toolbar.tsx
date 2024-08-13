@@ -72,7 +72,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     removeIcon({ id: initialData._id });
   };
   return (
-    <div className=" pl-[54px] group relative">
+    <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
       {!!initialData.icon && !preview && (
         <div className="flex items-center gap-x-2 group/icon pt-6">
@@ -99,7 +99,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       )}
 
       {/* Display icon picker and cover image button if no icon or cover image is set and not in preview mode */}
-      <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+      <div className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
         {!initialData.icon && !preview && (
           <IconPicer asChild onChange={onIconSelect}>
             <Button variant="ghost" className="text-muted-foreground text-xs">
@@ -130,7 +130,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           onKeyDown={onKeyDown}
           value={value}
           onChange={(e) => onInput(e.target.value)}
-          className="text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
+          className="w-full text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
         />
       ) : (
         <div

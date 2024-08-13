@@ -56,7 +56,7 @@ export const Title = ({ initialData }: TitleProps) => {
   const [isEditing, setIsEditing] = useState(false); // State to track editing mode
 
   return (
-    <div className="flex items-center pl-6 gap-x-2">
+    <div className="flex items-center gap-x-2 select-none">
       {!!initialData && <p className="text-xl">{initialData.icon}</p>}
       {isEditing ? (
         <Input
