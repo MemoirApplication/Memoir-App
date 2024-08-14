@@ -38,6 +38,8 @@ import { cn } from "@nextui-org/theme";
 import { Title } from "@/app/(main)/_components/title";
 import { useRouter } from "next/navigation";
 
+import { useEdgeStore } from "@/lib/edgestore";
+
 interface EditorProps {
   onChange: (value: string) => void;
   initialData: Doc<"documents">;
@@ -225,6 +227,14 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   // Creates a new editor instance.
   // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
   // can delay the creation of the editor until the initial content is loaded.
+  const { edgestore } = useEdgeStore();
+  const handleupload = async (file: File) => {
+    const respond = await edgestore.publicFiles.upload({
+      file,
+    });
+    return respond.url;
+  };
+
   const editor = useMemo(() => {
     if (initialContent === "loading") {
       return undefined;
@@ -232,6 +242,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     return BlockNoteEditor.create({
       initialContent,
       schema,
+      uploadFile: handleupload,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialContent]);

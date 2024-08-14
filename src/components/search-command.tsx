@@ -86,14 +86,14 @@ export const SearchCommand = () => {
                 key={document._id}
                 role="button"
                 onClick={() => onClick(document._id)}
-                className="text-sm rounded-md w-full hover:bg-secondary/5 flex items-start text-secondary "
+                className="text-sm my-1 py-2 rounded-md w-full hover:bg-secondary/15 flex place-items-center text-secondary "
               >
                 {document.icon ? (
-                  <p className="mr-2 text-[18px]">{document.icon}</p>
+                  <p className="mr-2  pl-2 text-[18px]">{document.icon}</p>
                 ) : (
-                  <File className="mr-2 h-4 w-4" />
+                  <File className="mr-2 ml-2 h-4 w-4" />
                 )}
-                <span className="truncate pl-2">{document.title}</span>
+                <span className="truncate ">{document.title}</span>
                 <div className="flex  items-center"></div>
               </div>
             ))}
