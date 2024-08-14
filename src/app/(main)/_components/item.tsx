@@ -107,14 +107,14 @@ export const Item = ({
         paddingLeft: level ? `${level * 12 + 6}px` : "4px",
       }}
       className={cn(
-        "select-none group min-h-[27px] m-1 text-md py-1 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-md",
+        "select-none transition-all duration-300 ease-in-out group min-h-[27px] my-1 text-md py-1 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-md",
         active && "bg-secondary/5 text-secondary rounded-md"
       )}
     >
       {!!id && (
         <div // Expand button
           role="button"
-          className="h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-200 dark:hover:bg-secondary-200"
+          className="transition-all duration-300 ease-in-out h-full p-1 rounded-md opacity-0 group-hover:opacity-90 hover:bg-secondary-200 dark:hover:bg-secondary-200"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
@@ -146,7 +146,7 @@ export const Item = ({
             <DropdownTrigger>
               <div
                 role="button"
-                className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
+                className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
               >
                 <MoreHorizontal size={18} />
               </div>
@@ -177,7 +177,7 @@ export const Item = ({
           <div // Create note button
             role="button"
             onClick={onCreate}
-            className="opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
+            className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
