@@ -2,17 +2,9 @@
 
 import { api } from "../../../../../../convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
-import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 
-import { Navbar, NavbarContent } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Menu } from "lucide-react";
-
-import { Sidebar } from "@/app/(main)/_components/Sidebar";
-import { Title } from "@/app/(main)/_components/title";
-import { Skeleton } from "@nextui-org/skeleton";
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
@@ -91,21 +83,23 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
         </div>
 
         {/* Main content area that adjusts width based on sidebar state */}
-<div
-  className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
->
-  {/* Cover should remain unaffected by isFullWidth */}
-  <Cover url={document.coverImage} />
+        <div
+          className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+        >
+          {/* Cover should remain unaffected by isFullWidth */}
+          <Cover url={document.coverImage} />
 
-  <div className="flex justify-center">
-    <div className={`transition-all duration-300 ${isFullWidth ? "max-w-full" : "md:max-w-3xl lg:max-w-4xl"} w-full`}>
-      <div className="mt-2">
-        <Toolbar initialData={document} />
-        <Editor onChange={onChange} initialData={document} />
-      </div>
-    </div>
-  </div>
-</div>
+          <div className="flex justify-center">
+            <div
+              className={`transition-all duration-300 ${isFullWidth ? "max-w-full" : "md:max-w-3xl lg:max-w-4xl"} w-full`}
+            >
+              <div className="mt-2">
+                <Toolbar initialData={document} />
+                <Editor onChange={onChange} initialData={document} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

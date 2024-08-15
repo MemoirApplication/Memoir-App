@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Dropdown,
@@ -14,7 +14,6 @@ import {
   Ellipsis,
   MessageSquareText,
   Share,
-  PanelLeft,
   Sun,
   Moon,
   StarOff,
@@ -27,9 +26,9 @@ import { useSidebar } from "../contexts/SidebarContext";
 import { useEditor } from "../contexts/EditorContext";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import { Doc, Id } from "../../../../convex/_generated/dataModel";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
-export const CNavbar = ({ document }) => {
+export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { isCollapsed, toggleSidebar } = useSidebar();
   const { isFullWidth, toggleWidth } = useEditor();
   const { theme, setTheme } = useTheme();

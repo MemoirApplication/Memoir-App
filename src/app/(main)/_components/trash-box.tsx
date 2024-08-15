@@ -7,21 +7,10 @@ import { useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
-import {
-  CircleCheckBig,
-  CircleSlash2,
-  Search,
-  Trash,
-  Undo,
-} from "lucide-react";
+import { CircleCheckBig, Search, Trash, Undo } from "lucide-react";
 import { Input } from "@nextui-org/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@nextui-org/dropdown";
+
 import { Button } from "@nextui-org/button";
 
 // Component for displaying and managing trashed documents

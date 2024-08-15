@@ -8,21 +8,6 @@ const Error = () => {
   return (
     <div className="flex items-center justify-center h-full flex-col space-y-4 pt-56">
       <div>
-        {/* <Image
-          src={"/logo-dark.svg"}
-          height={300}
-          width={300}
-          alt="Error"
-          className="dark:hidden"
-        />
-
-        <Image
-          src={"/logo.svg"}
-          height={300}
-          width={300}
-          alt="Error"
-          className="hidden dark:block"
-        /> */}
         <Image
           src={"/default-monochrome.svg"}
           height={800}

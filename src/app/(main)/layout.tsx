@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useConvexAuth } from "convex/react";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import { EditorProvider } from "./contexts/EditorContext";
@@ -47,9 +47,7 @@ const MainLayout = ({
           <div className="z-50">
             <Sidebar />
           </div>
-          <EditorProvider>
-          {children}
-          </EditorProvider>
+          <EditorProvider>{children}</EditorProvider>
         </SidebarProvider>
       </main>
     </div>
