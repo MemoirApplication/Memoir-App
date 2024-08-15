@@ -41,10 +41,3 @@ next-env.d.ts
 .trunk
 
 yarn.lock
-
-# PWA
-public/sw.js
-public/sw.js.*
-public/swe*
-public/workbox-*.js
-public/workbox-*.js.map
