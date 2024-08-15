@@ -22,7 +22,9 @@ export const IconPicer = ({ onChange, children, asChild }: IconPickerProps) => {
 
   return (
     <Popover>
-      <PopoverTrigger asChild={asChild}>{children}</PopoverTrigger>
+      <PopoverTrigger as={asChild ? "button" : undefined}>
+        {children}
+      </PopoverTrigger>
       <PopoverContent className="p-0 w-full border-none shadow-none">
         {" "}
         <EmojiPicker

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 // Define the shape of the context value
 interface EditorContextType {
@@ -10,11 +10,13 @@ interface EditorContextType {
 const EditorContext = createContext<EditorContextType | undefined>(undefined);
 
 // Create a provider component
-export const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const EditorProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [isFullWidth, setIsFullWidth] = useState<boolean>(false);
 
   const toggleWidth = () => {
-    setIsFullWidth(prev => !prev);
+    setIsFullWidth((prev) => !prev);
   };
 
   return (
@@ -28,7 +30,7 @@ export const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 export const useEditor = () => {
   const context = useContext(EditorContext);
   if (context === undefined) {
-    throw new Error('useEditor must be used within an EditorProvider');
+    throw new Error("useEditor must be used within an EditorProvider");
   }
   return context;
 };
