@@ -77,13 +77,11 @@ export const Sidebar = () => {
         >
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
-            <Card
-              className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
-            >
+            <Card className="mb-4 bg-opacity-20 backdrop-blur-lg h-28">
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
-                  {user?.username}'s workspace
+                  {user?.username}&apos;s workspace
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -169,36 +167,36 @@ export const Sidebar = () => {
             <Card className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
                 <ScrollShadow className="h-full">
-                    {/* <Button onClick={onCreate} variant="flat" color="secondary">
+                  {/* <Button onClick={onCreate} variant="flat" color="secondary">
                   <PlusCircle size={18} />
                   New Note
                 </Button> */}
-                    <div className="space-y-1">
-                      <Item // Search button
-                        label="Search"
-                        icon={Search}
-                        isSearch
-                        onClick={search.onOpen} // Calls search.onOpen when pressed
-                      />
-                      <Item // New page button
-                        onClick={handleCreate} // Calls handleCreate when pressed
-                        label="New Page"
-                        icon={PlusCircle}
-                      />
-                    </div>
-                    <div className="mt-4">
-                      {/* Document list component */}
-                      <DocumentList />
+                  <div className="space-y-1">
+                    <Item // Search button
+                      label="Search"
+                      icon={Search}
+                      isSearch
+                      onClick={search.onOpen} // Calls search.onOpen when pressed
+                    />
+                    <Item // New page button
+                      onClick={handleCreate} // Calls handleCreate when pressed
+                      label="New Page"
+                      icon={PlusCircle}
+                    />
+                  </div>
+                  <div className="mt-4">
+                    {/* Document list component */}
+                    <DocumentList />
 
-                      <Divider className="mt-1" />
+                    <Divider className="mt-1" />
 
-                      {/* Favorites section */}
-                      <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
-                        <Star size={20} className="mr-2" />
-                        Favorites
-                      </p>
-                      <FavDocumentList />
-                    </div>
+                    {/* Favorites section */}
+                    <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
+                      <Star size={20} className="mr-2" />
+                      Favorites
+                    </p>
+                    <FavDocumentList />
+                  </div>
                 </ScrollShadow>
               </CardBody>
             </Card>
