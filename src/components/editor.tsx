@@ -7,10 +7,8 @@ import {
   BlockNoteSchema,
   defaultBlockSpecs,
   filterSuggestionItems,
-  InlineContentSchema,
   insertOrUpdateBlock,
   PartialBlock,
-  StyleSchema,
 } from "@blocknote/core";
 import { defaultProps } from "@blocknote/core";
 import "./CustomBlocks/styles.css";
@@ -21,21 +19,16 @@ import "@blocknote/mantine/style.css";
 import "@blocknote/core/fonts/inter.css";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-// import { useCreateBlockNote } from "@blocknote/react";
 import { Alert } from "./CustomBlocks/alert";
-// import { inlinePage } from "./CustomBlocks/inlinePage";
 import { RiAlertFill } from "react-icons/ri";
 import {
   createReactBlockSpec,
   getDefaultReactSlashMenuItems,
-  ReactCustomBlockRenderProps,
   SuggestionMenuController,
 } from "@blocknote/react";
 import { NotepadText } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@nextui-org/button";
-import { cn } from "@nextui-org/theme";
-import { Title } from "@/app/(main)/_components/title";
+
 import { useRouter } from "next/navigation";
 
 import { useEdgeStore } from "@/lib/edgestore";
@@ -52,6 +45,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const update = useMutation(api.documents.update);
   const create = useMutation(api.documents.create);
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
 
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
@@ -149,7 +143,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     return (
       <div>
         <div
-          onClick={(onClick) => {
+          onClick={() => {
             router.push(`/documents/${document._id}`);
           }} // redirect to the page
           role="button"
@@ -227,7 +221,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   // Creates a new editor instance.
   // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
   // can delay the creation of the editor until the initial content is loaded.
-  const { edgestore } = useEdgeStore();
   const handleupload = async (file: File) => {
     const respond = await edgestore.publicFiles.upload({
       file,
@@ -258,7 +251,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         onChange={() => {
-          saveToStorage(editor.document);
+          saveToStorage(editor.document as Block[]);
         }}
         slashMenu={false}
         onSelectionChange={() => {
@@ -268,9 +261,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
           // the selection is empty, store the block containing the text cursor
           // instead.
           if (selection !== undefined) {
-            setBlocks(selection.blocks);
+            setBlocks(selection.blocks as Block[]);
           } else {
-            setBlocks([editor.getTextCursorPosition().block]);
+            setBlocks([editor.getTextCursorPosition().block as Block]);
           }
         }}
       >
