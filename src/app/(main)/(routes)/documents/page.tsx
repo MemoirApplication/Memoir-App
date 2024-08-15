@@ -1,18 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button,
-  Input,
-} from "@nextui-org/react";
-import App from "../../_components/blocksnote";
-import { UserButton, useUser } from "@clerk/nextjs";
-import { PlusCircle, Menu } from "lucide-react";
+import React from "react";
+import { Button } from "@nextui-org/react";
+import { useUser } from "@clerk/nextjs";
+import { PlusCircle } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
@@ -35,7 +26,6 @@ export default function Documents() {
   return (
     <>
       <div className="relative h-screen bg-background text-foreground ">
-
         {/* Main content area */}
         <div
           className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}

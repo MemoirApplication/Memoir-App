@@ -6,9 +6,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle, 
-  NavbarMenu, 
-  NavbarMenuItem,
   Link,
   Button,
 } from "@nextui-org/react";
@@ -25,13 +22,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
 // Import Clerk
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Logo } from "./Logo";
 import { useConvexAuth } from "convex/react";
 

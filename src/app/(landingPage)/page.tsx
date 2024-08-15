@@ -5,7 +5,6 @@ import { SignedInHeading } from "./_components/signedInHeading";
 import { Footer } from "./_components/footer";
 import { Calendar } from "@nextui-org/react";
 import { parseDate } from "@internationalized/date";
-import { Image } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 
 const MarketingPage = () => {

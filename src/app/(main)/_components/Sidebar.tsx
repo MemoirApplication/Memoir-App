@@ -6,11 +6,6 @@ import {
   Card,
   CardBody,
   Divider,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownSection,
-  DropdownItem,
   ScrollShadow,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
