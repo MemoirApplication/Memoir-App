@@ -5,7 +5,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { ConvexClientProvider } from "@/components/convex-provider";
 import { Toaster } from "sonner";
-
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -44,6 +45,8 @@ export default function RootLayout({
           <Providers>
             <Toaster position="bottom-center" />
             {children}
+            <Analytics />
+            <SpeedInsights />
           </Providers>
         </ConvexClientProvider>
       </body>

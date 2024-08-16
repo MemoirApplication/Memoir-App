@@ -33,6 +33,9 @@ import { useRouter } from "next/navigation";
 
 import { useEdgeStore } from "@/lib/edgestore";
 
+import { Wand } from "lucide-react";
+import { useCompletion } from "ai/react";
+
 interface EditorProps {
   onChange: (value: string) => void;
   initialData: Doc<"documents">;
@@ -73,6 +76,57 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
 
   const [blocks, setBlocks] = useState<Block[]>([]);
 
+  const { complete } = useCompletion({
+    api: "/api/generate",
+    onResponse: (response) => {
+      if (response.status === 429) {
+        // throw new Error("API rate limit exceeded  (error code 429)");
+        return;
+      }
+      if (response.body) {
+        const reader = response.body.getReader();
+        let decoder = new TextDecoder();
+        reader.read().then(function processText({ done, value }) {
+          if (done) {
+            return;
+          }
+          let chunk = decoder.decode(value, { stream: true });
+          editor?._tiptapEditor.commands.insertContent(chunk);
+          reader.read().then(processText);
+        });
+      } else {
+        console.error("Response body is null");
+      }
+    },
+    onError: (e) => console.error(e.message),
+  });
+
+  const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
+    // const prevText = editor._tiptapEditor.state.doc.textBetween(
+    //   Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
+    //   editor._tiptapEditor.state.selection.from - 1,
+    //   "\n"
+    // );
+    // complete(prevText);
+    complete("Why is the sky blue?");
+  };
+
+  const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Insert Magic Text",
+    onItemClick: async () => {
+      const prevText = editor._tiptapEditor.state.doc.textBetween(
+        Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
+        editor._tiptapEditor.state.selection.from - 1,
+        "\n"
+      );
+      insertMagicAi(editor);
+    },
+    aliases: ["autocomplete", "ai"],
+    group: "Ai",
+    icon: <Wand size={18} />,
+    subtext: "Continue your note with Ai-Generated text",
+  });
+
   const insertPage = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Inline Page",
     onItemClick: () => {
@@ -93,7 +147,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
 
     aliases: ["page", "newpage", "inlinePage", "inlinepage"],
     group: "Other",
-    icon: <NotepadText />,
+    icon: <NotepadText size={18} />,
   });
 
   const InlinePageContent = ({ blockId }: { blockId: string }) => {
@@ -276,6 +330,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 ...getDefaultReactSlashMenuItems(editor),
                 insertAlert(editor),
                 insertPage(editor),
+                insertMagicItem(editor),
               ],
               query
             )
