@@ -1,9 +1,9 @@
 {
   "theme_color": "#9353d3",
-  "background_color": "#FFFFFF",
+  "background_color": "#000000",
   "display": "standalone",
   "scope": "/documents/",
-  "start_url": "/",
+  "start_url": "/documents/",
   "name": "Memoir App",
   "short_name": "Memoir",
   "description": "Beautiful Note-Taking App with much better UI and Features",
