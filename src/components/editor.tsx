@@ -77,10 +77,10 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const [blocks, setBlocks] = useState<Block[]>([]);
 
   const { complete } = useCompletion({
-    id: "hackathon_started",
     api: "/api/generate",
     onResponse: (response) => {
       if (response.status === 429) {
+        // throw new Error("API rate limit exceeded  (error code 429)");
         return;
       }
       if (response.body) {
@@ -102,12 +102,13 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   });
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
-    const prevText = editor._tiptapEditor.state.doc.textBetween(
-      Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-      editor._tiptapEditor.state.selection.from - 1,
-      "\n"
-    );
-    complete(prevText);
+    // const prevText = editor._tiptapEditor.state.doc.textBetween(
+    //   Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
+    //   editor._tiptapEditor.state.selection.from - 1,
+    //   "\n"
+    // );
+    // complete(prevText);
+    complete("Why is the sky blue?");
   };
 
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({

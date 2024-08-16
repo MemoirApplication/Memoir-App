@@ -13,6 +13,7 @@
     "electron-build": "next build && electron-builder"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.46",
     "@blocknote/core": "^0.15.3",
     "@blocknote/mantine": "^0.15.3",
     "@blocknote/react": "^0.15.3",
@@ -38,6 +39,7 @@
     "@upstash/ratelimit": "^2.0.1",
     "@vercel/analytics": "^1.3.1",
     "@vercel/kv": "^2.0.0",
+    "@vercel/speed-insights": "^1.0.12",
     "ai": "^3.3.7",
     "convex": "^1.14.0",
     "electron-serve": "^2.0.0",
