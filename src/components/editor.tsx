@@ -102,13 +102,13 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   });
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
-    // const prevText = editor._tiptapEditor.state.doc.textBetween(
-    //   Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-    //   editor._tiptapEditor.state.selection.from - 1,
-    //   "\n"
-    // );
-    // complete(prevText);
-    complete("Why is the sky blue?");
+    const prevText = editor._tiptapEditor.state.doc.textBetween(
+      Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
+      editor._tiptapEditor.state.selection.from - 1,
+      "\n"
+    );
+    complete(prevText);
+    // complete("Why is the sky blue?");
   };
 
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
