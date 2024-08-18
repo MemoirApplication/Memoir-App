@@ -7,6 +7,7 @@ const ColorSwitcher: React.FC = () => {
 
   const handleColorChange = (color: string) => {
     setColor(color);
+    localStorage.setItem("selectedColor", color); // Save to local storage
   };
 
   const colorButtons = [
