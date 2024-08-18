@@ -128,6 +128,7 @@ export const create = mutation({
       isArchived: false,
       isPublished: false,
       isFav: false,
+      isFullWidth: false,
     });
     return document;
   },
@@ -302,6 +303,7 @@ export const update = mutation({
     icon: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
     isFav: v.optional(v.boolean()),
+    isFullWidth: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

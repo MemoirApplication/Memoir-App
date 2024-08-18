@@ -20,6 +20,7 @@ export default defineSchema({
     isPublished: v.boolean(),
     isFav: v.boolean(),
     blockId: v.optional(v.string()),
+    isFullWidth: v.boolean(),
   })
     .index("by_user", ["userId"])
     .index("by_user_parent", ["userId", "parentDocument"])

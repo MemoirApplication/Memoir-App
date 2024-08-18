@@ -9,7 +9,6 @@ import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
 import { Toolbar } from "@/components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
-import { useEditor } from "@/app/(main)/contexts/EditorContext";
 import dynamic from "next/dynamic";
 import { Cover } from "@/components/cover";
 
@@ -24,11 +23,6 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     () => dynamic(() => import("@/components/editor"), { ssr: false }),
     []
   );
-
-  // Use sidebar context to determine if the sidebar is collapsed
-
-  // Use editor context to determine if the editor is full-width
-  const { isFullWidth } = useEditor();
 
   // Query to fetch the document by its ID
   const document = useQuery(api.documents.getById, {
@@ -75,7 +69,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
           <div className="flex justify-center">
             <div
-              className={`transition-all duration-300 ${isFullWidth ? "max-w-full" : "md:max-w-3xl lg:max-w-4xl"} w-full`}
+              className={`transition-all duration-300 ${document.isFullWidth ? "max-w-full" : "md:max-w-3xl lg:max-w-4xl"} w-full`}
             >
               <div className="mt-2">
                 <Toolbar preview initialData={document} />

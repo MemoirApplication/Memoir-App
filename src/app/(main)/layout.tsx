@@ -2,7 +2,6 @@
 import React from "react";
 import { useConvexAuth } from "convex/react";
 import { SidebarProvider } from "./contexts/SidebarContext";
-import { EditorProvider } from "./contexts/EditorContext";
 import { redirect } from "next/navigation";
 import { SearchCommand } from "@/components/search-command";
 import { Sidebar } from "./_components/Sidebar";
@@ -47,7 +46,7 @@ const MainLayout = ({
           <div className="z-50">
             <Sidebar />
           </div>
-          <EditorProvider>{children}</EditorProvider>
+          {children}
         </SidebarProvider>
       </main>
     </div>
