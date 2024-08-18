@@ -27,6 +27,7 @@ import { useEditor } from "../contexts/EditorContext";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
+import { Publish } from "./publish";
 
 export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { isCollapsed, toggleSidebar } = useSidebar();
@@ -68,9 +69,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         <Button variant="light" color="default" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>
-        <Button variant="light" color="default" isIconOnly size="sm">
-          <Share size={20} />
-        </Button>
+        <Publish initialData={document} />
         <Button
           variant="light"
           color="default"
@@ -91,7 +90,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         >
           <ThemeIcon size={20} />
         </Button>
-        <Dropdown>
+        <Dropdown offset={12}>
           <DropdownTrigger>
             <Button variant="light" color="default" isIconOnly size="sm">
               <Ellipsis size={20} />
