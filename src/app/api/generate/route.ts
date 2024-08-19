@@ -33,6 +33,7 @@ export async function POST(req: Request) {
       //                     "Limit your response to no more than 200 characters, but make sure to construct complete sentences.",
       prompt: prompt,
     })
+    result.toAIStreamResponse();
     return result.toTextStreamResponse();
   } catch (error: any) {
     if (error.status === 429) {

@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import {
   Block,
   BlockIdentifier,
   BlockNoteEditor,
   BlockNoteSchema,
   BlockSchemaFromSpecs,
+  blocksToMarkdown,
   defaultBlockSpecs,
   filterSuggestionItems,
   insertOrUpdateBlock,
@@ -53,6 +54,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const router = useRouter();
   const { edgestore } = useEdgeStore();
   const [blocks, setBlocks] = useState<Block[]>([]);
+  const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
   // const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
 
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
@@ -88,29 +90,31 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       }
       if (response.body) {
         const reader = response.body.getReader();
-        let decoder = new TextDecoder();
-        let index = 0;
-        let lastInsertedBlockId = blocks[0].id;
+        const decoder = new TextDecoder("utf-8");
+
+        // Whenever the current Markdown content changes, converts it to an array of
+        // Block objects and replaces the editor's content with them.
         reader.read().then(function processText({ done, value }) {
           if (done) {
             return;
           }
           let chunk = decoder.decode(value, { stream: true });
-          let cblock = editor?.tryParseMarkdownToBlocks(chunk) as PartialBlock;
-          if (index === 0) {
-            editor?.updateBlock(lastInsertedBlockId, cblock);
-            index++;
-          } else {
-            editor?.insertBlocks([cblock], blocks[2].id, "after");
-            index++;
-          }
+          editor?._tiptapEditor.commands.insertContent(chunk);
+
           reader.read().then(processText);
         });
+
+        const parsedblocktohtml = editor?.blocksToHTMLLossy(editor.document);
+        // const html2block = editor?.tryParseHTMLToBlocks(html);
+        editor?._tiptapEditor.commands.setContent({
+          type: "html",
+          content: parsedblocktohtml as any,
+        });
+        // editor?.replaceBlocks([blocks[0].id], [html2block] as PartialBlock[]);
         // editor?.insertInlineContent();
-        // editor?._tiptapEditor.commands.insertContent(aiblock);
-        // editor?.replaceBlocks([blocks[0].id], [
-        //   editor.tryParseMarkdownToBlocks(aiblock),
-        // ] as PartialBlock[]);
+
+        // editor?.insertInlineContent([b]);
+        // editor?.removeBlocks([nextBlocks[0].id]);
       } else {
         console.error("Response body is null");
       }
@@ -310,6 +314,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     <div>
       <BlockNoteView
         data-theming-background
+        editable={editable}
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         onChange={() => {
@@ -326,6 +331,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
             setBlocks(selection.blocks as Block[]);
           } else {
             setBlocks([editor.getTextCursorPosition().block as Block]);
+            setNextBlocks([editor.getTextCursorPosition().nextBlock as Block]);
           }
         }}
       >
