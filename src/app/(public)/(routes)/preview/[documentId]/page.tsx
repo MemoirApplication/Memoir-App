@@ -57,7 +57,6 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
   return (
     <>
-
       <div className="w-screen flex-grow flex">
         {/* Container for resizing navbar and banner based on sidebar state */}
         {/* Main content area that adjusts width based on sidebar state */}
@@ -73,7 +72,11 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             >
               <div className="mt-2">
                 <Toolbar preview initialData={document} />
-                <Editor editable={false} onChange={onChange} initialData={document} />
+                <Editor
+                  editable={false}
+                  onChange={onChange}
+                  initialData={document}
+                />
               </div>
             </div>
           </div>

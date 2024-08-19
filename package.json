@@ -13,7 +13,7 @@
     "electron-build": "next build && electron-builder"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.46",
+    "@ai-sdk/google": "^0.0.39",
     "@blocknote/core": "^0.15.3",
     "@blocknote/mantine": "^0.15.3",
     "@blocknote/react": "^0.15.3",
@@ -54,7 +54,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-textarea-autosize": "^8.5.3",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.5",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
     "usehooks-ts": "^3.1.0",
