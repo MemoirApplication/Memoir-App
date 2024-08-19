@@ -57,7 +57,7 @@ export const Item = ({
   const archive = useMutation(api.documents.archive);
 
   // Move document to trash
-  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onArchive = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
     const promise = archive({ id });

@@ -23,14 +23,13 @@ import {
 import { Title } from "@/app/(main)/_components/title";
 import { useTheme } from "next-themes";
 import { useSidebar } from "../contexts/SidebarContext";
-import { useEditor } from "../contexts/EditorContext";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
+import { Publish } from "./publish";
 
 export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { isCollapsed, toggleSidebar } = useSidebar();
-  const { isFullWidth, toggleWidth } = useEditor();
   const { theme, setTheme } = useTheme();
   const ThemeIcon = theme === "dark" ? Sun : Moon;
 
@@ -40,6 +39,13 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
     update({
       id: document._id,
       isFav: !document.isFav,
+    });
+  };
+
+  const toggleEditorWidth = () => {
+    update({
+      id: document._id,
+      isFullWidth: !document.isFullWidth,
     });
   };
 
@@ -68,9 +74,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         <Button variant="light" color="default" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>
-        <Button variant="light" color="default" isIconOnly size="sm">
-          <Share size={20} />
-        </Button>
+        <Publish initialData={document} />
         <Button
           variant="light"
           color="default"
@@ -91,7 +95,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         >
           <ThemeIcon size={20} />
         </Button>
-        <Dropdown>
+        <Dropdown offset={12}>
           <DropdownTrigger>
             <Button variant="light" color="default" isIconOnly size="sm">
               <Ellipsis size={20} />
@@ -99,7 +103,9 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
           </DropdownTrigger>
           <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
             <DropdownItem
-              onClick={toggleWidth}
+              onClick={() => {
+                toggleEditorWidth();
+              }}
               key="width"
               shortcut="⌘⇧I"
               startContent={<Proportions />}

@@ -41,3 +41,8 @@ next-env.d.ts
 .trunk
 
 yarn.lock
+
+public/workbox-*
+public/swe-*
+public/sw.js*
+public/sw.js
