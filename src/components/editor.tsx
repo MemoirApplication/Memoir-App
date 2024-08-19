@@ -3,12 +3,15 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Block,
+  BlockIdentifier,
   BlockNoteEditor,
   BlockNoteSchema,
+  BlockSchemaFromSpecs,
   defaultBlockSpecs,
   filterSuggestionItems,
   insertOrUpdateBlock,
   PartialBlock,
+  PartialInlineContent,
 } from "@blocknote/core";
 import { defaultProps } from "@blocknote/core";
 import "./CustomBlocks/styles.css";
@@ -49,6 +52,8 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const create = useMutation(api.documents.create);
   const router = useRouter();
   const { edgestore } = useEdgeStore();
+  const [blocks, setBlocks] = useState<Block[]>([]);
+  // const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
 
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
@@ -74,8 +79,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     icon: <RiAlertFill />,
   });
 
-  const [blocks, setBlocks] = useState<Block[]>([]);
-
   const { complete } = useCompletion({
     api: "/api/generate",
     onResponse: (response) => {
@@ -86,14 +89,28 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       if (response.body) {
         const reader = response.body.getReader();
         let decoder = new TextDecoder();
+        let index = 0;
+        let lastInsertedBlockId = blocks[0].id;
         reader.read().then(function processText({ done, value }) {
           if (done) {
             return;
           }
           let chunk = decoder.decode(value, { stream: true });
-          editor?._tiptapEditor.commands.insertContent(chunk);
+          let cblock = editor?.tryParseMarkdownToBlocks(chunk) as PartialBlock;
+          if (index === 0) {
+            editor?.updateBlock(lastInsertedBlockId, cblock);
+            index++;
+          } else {
+            editor?.insertBlocks([cblock], blocks[2].id, "after");
+            index++;
+          }
           reader.read().then(processText);
         });
+        // editor?.insertInlineContent();
+        // editor?._tiptapEditor.commands.insertContent(aiblock);
+        // editor?.replaceBlocks([blocks[0].id], [
+        //   editor.tryParseMarkdownToBlocks(aiblock),
+        // ] as PartialBlock[]);
       } else {
         console.error("Response body is null");
       }
@@ -102,11 +119,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   });
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
-    const prevText = editor._tiptapEditor.state.doc.textBetween(
-      Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-      editor._tiptapEditor.state.selection.from - 1,
-      "\n"
-    );
+    const prevText = JSON.stringify(editor.getBlock(blocks[0].id));
     complete(prevText);
     // complete("Why is the sky blue?");
   };
@@ -114,11 +127,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Insert Magic Text",
     onItemClick: async () => {
-      const prevText = editor._tiptapEditor.state.doc.textBetween(
-        Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-        editor._tiptapEditor.state.selection.from - 1,
-        "\n"
-      );
       insertMagicAi(editor);
     },
     aliases: ["autocomplete", "ai"],
