@@ -13,7 +13,7 @@
     "electron-build": "next build && electron-builder"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.46",
+    "@ai-sdk/google": "^0.0.39",
     "@blocknote/core": "^0.15.3",
     "@blocknote/mantine": "^0.15.3",
     "@blocknote/react": "^0.15.3",
