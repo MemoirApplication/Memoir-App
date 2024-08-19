@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { EditorProvider } from "@/app/(main)/contexts/EditorContext";
 import { Spinner } from "@nextui-org/spinner";
 import { useColor } from "@/app/(main)/contexts/ColorContext";
 import { useTheme } from "next-themes";
@@ -27,9 +26,7 @@ const MainLayout = ({
   return (
     <div className="flex h-screen">
       <main className={themeClass}>
-        <EditorProvider>
           {children}
-        </EditorProvider>
       </main>
     </div>
   );
