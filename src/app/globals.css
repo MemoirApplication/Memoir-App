@@ -250,3 +250,75 @@
 .color-button-neutral {
   background-color: var(--ui-neutral-500);
 }
+
+
+
+/* Custom scrollbar */
+/* Ensure that the scrollbar does not take up space */
+body {
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: var(--scrollbar-color) transparent;
+  /* Firefox */
+  /* overflow: overlay; */
+  overflow-x: hidden;
+  /* For WebKit browsers */
+}
+
+/* Webkit browsers (Chrome, Safari, etc.) */
+body::-webkit-scrollbar {
+  width: 8px;
+  /* Width of the scrollbar */
+  /* height: 8px; */
+  /* Height for horizontal scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  /* Thumb color */
+  border-radius: 10px;
+  /* Rounded corners */
+  border: 2px solid transparent;
+  /* Space around the thumb */
+  background-clip: padding-box;
+  /* Thumb background stays inside border */
+}
+
+/* Hide scrollbar when not scrolling */
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide scrollbar when not scrolling */
+body::-webkit-scrollbar-thumb {
+  opacity: 0;
+  /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+/* Show scrollbar when hovering over or scrolling */
+body:hover::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+t
+/* Adjust scrollbar colors for dark and light modes */
+:root {
+  --scrollbar-color: rgba(0, 0, 0, 0.5);
+  /* Default color */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --scrollbar-color: rgba(70, 70, 70, 0.5);
+    /* Light color for dark mode */
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --scrollbar-color: rgba(0, 0, 0, 0.3);
+    /* Dark color for light mode */
+  }
+}
