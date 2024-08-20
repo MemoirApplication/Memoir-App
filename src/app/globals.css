@@ -252,7 +252,6 @@
 }
 
 
-
 /* Custom scrollbar */
 /* Ensure that the scrollbar does not take up space */
 body {
@@ -260,7 +259,7 @@ body {
   /* Firefox */
   scrollbar-color: var(--scrollbar-color) transparent;
   /* Firefox */
-  /* overflow: overlay; */
+  overflow: overlay;
   overflow-x: hidden;
   /* For WebKit browsers */
 }
@@ -269,14 +268,14 @@ body {
 body::-webkit-scrollbar {
   width: 8px;
   /* Width of the scrollbar */
-  /* height: 8px; */
+  height: 8px;
   /* Height for horizontal scrollbar */
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-color);
   /* Thumb color */
-  border-radius: 10px;
+  border-radius: 40px;
   /* Rounded corners */
   border: 2px solid transparent;
   /* Space around the thumb */
@@ -302,7 +301,7 @@ body::-webkit-scrollbar-thumb:active,
 body::-webkit-scrollbar-thumb:hover {
   opacity: 1;
 }
-t
+
 /* Adjust scrollbar colors for dark and light modes */
 :root {
   --scrollbar-color: rgba(0, 0, 0, 0.5);
@@ -311,14 +310,14 @@ t
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --scrollbar-color: rgba(70, 70, 70, 0.5);
+    --scrollbar-color: rgba(71, 71, 71, 0);
     /* Light color for dark mode */
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --scrollbar-color: rgba(0, 0, 0, 0.3);
+    --scrollbar-color: rgba(0, 0, 0, 0);
     /* Dark color for light mode */
   }
 }
