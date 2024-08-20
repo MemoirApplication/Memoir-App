@@ -32,7 +32,6 @@ const MarketingPage = () => {
     <BackgroundGradientAnimation
       key={theme}
       interactive={false}
-      
       gradientBackgroundStart={gradientBackgroundStart}
       gradientBackgroundEnd={gradientBackgroundEnd}
       firstColor={firstColor}
@@ -41,12 +40,12 @@ const MarketingPage = () => {
       fourthColor={fourthColor}
       fifthColor={fifthColor}
     >
-      <div className="absolute inset-0 z-10 items-center justify-center text-foreground h-max w-screen flex flex-col">
+      <div className="absolute inset-0 z-10 items-center justify-center text-foreground h-max min-w-full flex flex-col">
         <div className="flex flex-col items-center justify-center md:justify-start text-center gap-y-8 flex-1 pb-10 px-6">
           <SignedInHeading />
         </div>
 
-        <div className="pt-8 mt-5 flex justify-center justfy-between items-center w-screen drop-shadow-2xl pb-6">
+        <div className="pt-8 mt-5 flex justify-center justfy-between items-center min-w-full drop-shadow-2xl pb-6">
           <Textarea
             isReadOnly
             label="Description"

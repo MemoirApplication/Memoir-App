@@ -12,7 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <NextUIProvider>
       <NextThemesProvider
         attribute="class"
-        defaultTheme="system" //system default theme
+        defaultTheme="dark" //system default theme
         enableSystem
         // disableTransitionOnChange
       >
