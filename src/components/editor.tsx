@@ -1,14 +1,18 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import {
   Block,
+  BlockIdentifier,
   BlockNoteEditor,
   BlockNoteSchema,
+  BlockSchemaFromSpecs,
+  blocksToMarkdown,
   defaultBlockSpecs,
   filterSuggestionItems,
   insertOrUpdateBlock,
   PartialBlock,
+  PartialInlineContent,
 } from "@blocknote/core";
 import { defaultProps } from "@blocknote/core";
 import "./CustomBlocks/styles.css";
@@ -49,6 +53,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const create = useMutation(api.documents.create);
   const router = useRouter();
   const { edgestore } = useEdgeStore();
+  const [blocks, setBlocks] = useState<Block[]>([]);
+  const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
+  // const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
 
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
@@ -74,8 +81,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     icon: <RiAlertFill />,
   });
 
-  const [blocks, setBlocks] = useState<Block[]>([]);
-
   const { complete } = useCompletion({
     api: "/api/generate",
     onResponse: (response) => {
@@ -85,15 +90,31 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       }
       if (response.body) {
         const reader = response.body.getReader();
-        let decoder = new TextDecoder();
+        const decoder = new TextDecoder("utf-8");
+
+        // Whenever the current Markdown content changes, converts it to an array of
+        // Block objects and replaces the editor's content with them.
         reader.read().then(function processText({ done, value }) {
           if (done) {
             return;
           }
           let chunk = decoder.decode(value, { stream: true });
           editor?._tiptapEditor.commands.insertContent(chunk);
+
           reader.read().then(processText);
         });
+
+        const parsedblocktohtml = editor?.blocksToHTMLLossy(editor.document);
+        // const html2block = editor?.tryParseHTMLToBlocks(html);
+        editor?._tiptapEditor.commands.setContent({
+          type: "html",
+          content: parsedblocktohtml as any,
+        });
+        // editor?.replaceBlocks([blocks[0].id], [html2block] as PartialBlock[]);
+        // editor?.insertInlineContent();
+
+        // editor?.insertInlineContent([b]);
+        // editor?.removeBlocks([nextBlocks[0].id]);
       } else {
         console.error("Response body is null");
       }
@@ -102,23 +123,14 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   });
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
-    // const prevText = editor._tiptapEditor.state.doc.textBetween(
-    //   Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-    //   editor._tiptapEditor.state.selection.from - 1,
-    //   "\n"
-    // );
-    // complete(prevText);
-    complete("Why is the sky blue?");
+    const prevText = JSON.stringify(editor.getBlock(blocks[0].id));
+    complete(prevText);
+    // complete("Why is the sky blue?");
   };
 
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Insert Magic Text",
     onItemClick: async () => {
-      const prevText = editor._tiptapEditor.state.doc.textBetween(
-        Math.max(0, editor._tiptapEditor.state.selection.from - 5000),
-        editor._tiptapEditor.state.selection.from - 1,
-        "\n"
-      );
       insertMagicAi(editor);
     },
     aliases: ["autocomplete", "ai"],
@@ -302,6 +314,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     <div>
       <BlockNoteView
         data-theming-background
+        editable={editable}
         editor={editor}
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         onChange={() => {
@@ -318,6 +331,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
             setBlocks(selection.blocks as Block[]);
           } else {
             setBlocks([editor.getTextCursorPosition().block as Block]);
+            setNextBlocks([editor.getTextCursorPosition().nextBlock as Block]);
           }
         }}
       >
