@@ -11,7 +11,7 @@ import { Toolbar } from "@/app/(main)/_components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import { useSidebar } from "../../../contexts/SidebarContext";
 import dynamic from "next/dynamic";
-import { Cover } from "@/components/cover";
+import { Cover } from "@/app/(main)/_components/cover";
 
 interface DocumentIdPageProps {
   params: {
