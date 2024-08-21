@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.39",
-    "@blocknote/core": "^0.15.3",
-    "@blocknote/mantine": "^0.15.3",
-    "@blocknote/react": "^0.15.3",
+    "@blocknote/core": "^0.15.5",
+    "@blocknote/mantine": "^0.15.5",
+    "@blocknote/react": "^0.15.5",
     "@clerk/nextjs": "^5.3.0",
     "@clerk/themes": "^2.1.19",
     "@ducanh2912/next-pwa": "^10.2.8",

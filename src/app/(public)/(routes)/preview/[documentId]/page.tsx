@@ -5,12 +5,10 @@ import { useMutation, useQuery } from "convex/react";
 import { useMemo } from "react";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 
-import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
-import { Toolbar } from "@/components/toolbar";
-import { CNavbar } from "@/app/(main)/_components/CNavbar";
+import { Toolbar } from "@/app/(main)/_components/toolbar";
 import dynamic from "next/dynamic";
-import { Cover } from "@/components/cover";
+import { Cover } from "@/app/(main)/_components/cover";
 
 interface DocumentIdPageProps {
   params: {

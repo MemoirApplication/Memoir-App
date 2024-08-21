@@ -30,7 +30,7 @@ import {
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
 } from "@blocknote/react";
-import { NotepadText } from "lucide-react";
+import { NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
@@ -39,6 +39,8 @@ import { useEdgeStore } from "@/lib/edgestore";
 
 import { Wand } from "lucide-react";
 import { useCompletion } from "ai/react";
+import { getAnswer } from "./getAnswer";
+import { getAiCompletion } from "./getAiCompletion";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -81,51 +83,25 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     icon: <RiAlertFill />,
   });
 
-  const { complete } = useCompletion({
-    api: "/api/generate",
-    onResponse: (response) => {
-      if (response.status === 429) {
-        // throw new Error("API rate limit exceeded  (error code 429)");
-        return;
-      }
-      if (response.body) {
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder("utf-8");
+  const complete = async (prevText: string) => {
+    const { text } = await getAiCompletion(prevText);
+    const bblocks = await editor?.tryParseMarkdownToBlocks(text as string);
+    editor?.insertBlocks(bblocks as PartialBlock[], blocks[0].id, "after");
+  };
+  const summarize = async (prevText: string) => {
+    const { text } = await getAnswer(prevText);
+    const bblocks = await editor?.tryParseMarkdownToBlocks(text as string);
+    editor?.insertBlocks(bblocks as PartialBlock[], blocks[0].id, "after");
+  };
 
-        // Whenever the current Markdown content changes, converts it to an array of
-        // Block objects and replaces the editor's content with them.
-        reader.read().then(function processText({ done, value }) {
-          if (done) {
-            return;
-          }
-          let chunk = decoder.decode(value, { stream: true });
-          editor?._tiptapEditor.commands.insertContent(chunk);
-
-          reader.read().then(processText);
-        });
-
-        const parsedblocktohtml = editor?.blocksToHTMLLossy(editor.document);
-        // const html2block = editor?.tryParseHTMLToBlocks(html);
-        editor?._tiptapEditor.commands.setContent({
-          type: "html",
-          content: parsedblocktohtml as any,
-        });
-        // editor?.replaceBlocks([blocks[0].id], [html2block] as PartialBlock[]);
-        // editor?.insertInlineContent();
-
-        // editor?.insertInlineContent([b]);
-        // editor?.removeBlocks([nextBlocks[0].id]);
-      } else {
-        console.error("Response body is null");
-      }
-    },
-    onError: (e) => console.error(e.message),
-  });
+  const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
+    const prevText = JSON.stringify(editor.document);
+    summarize(prevText);
+  };
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
     const prevText = JSON.stringify(editor.getBlock(blocks[0].id));
     complete(prevText);
-    // complete("Why is the sky blue?");
   };
 
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
@@ -139,6 +115,16 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     subtext: "Continue your note with Ai-Generated text",
   });
 
+  const aiSummarization = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Summarize page",
+    onItemClick: async () => {
+      aiSummarize(editor);
+    },
+    aliases: ["summarize", "ai"],
+    group: "Ai",
+    icon: <TextSelect size={18} />,
+    subtext: "Write a Summarization of the Page with Ai",
+  });
   const insertPage = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Inline Page",
     onItemClick: () => {
@@ -345,6 +331,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 insertAlert(editor),
                 insertPage(editor),
                 insertMagicItem(editor),
+                aiSummarization(editor),
               ],
               query
             )
