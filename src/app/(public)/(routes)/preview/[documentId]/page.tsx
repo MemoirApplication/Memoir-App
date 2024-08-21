@@ -7,7 +7,7 @@ import { Id } from "../../../../../../convex/_generated/dataModel";
 
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
-import { Toolbar } from "@/components/toolbar";
+import { Toolbar } from "@/app/(main)/_components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import dynamic from "next/dynamic";
 import { Cover } from "@/components/cover";

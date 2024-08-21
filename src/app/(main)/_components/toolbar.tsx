@@ -1,13 +1,12 @@
 "use client";
 
-import { init } from "next/dist/compiled/webpack/webpack";
-import { IconPicer } from "./icon-picker";
+import { IconPicer } from "../../../components/icon-picker";
 import { Button } from "@nextui-org/button";
 import { ImageIcon, Smile, X } from "lucide-react";
 import { ElementRef, useRef, useState } from "react";
 import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { Doc } from "../../convex/_generated/dataModel";
+import { api } from "../../../../convex/_generated/api";
+import { Doc } from "../../../../convex/_generated/dataModel";
 import TextareaAutosize from "react-textarea-autosize";
 import { useCoverImage } from "@/hooks/use-cover-image";
 
@@ -58,7 +57,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     }
   };
 
-
   // Update the document icon
   const onIconSelect = (icon: string) => {
     update({
@@ -75,7 +73,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
       {!!initialData.icon && !preview && (
-        <div className="flex items-center gap-x-2 group/icon pt-6">
+        <div className="select-none flex items-center gap-x-2 group/icon pt-6">
           <IconPicer onChange={onIconSelect}>
             <p className="text-6xl hover:opacity-75 transition">
               {initialData.icon}
@@ -109,7 +107,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </IconPicer>
         )}
 
-        
         {!initialData.coverImage && !preview && (
           <Button
             onClick={coverImage.onOpen}
