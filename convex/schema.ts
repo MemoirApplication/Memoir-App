@@ -1,7 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 
 import { v } from "convex/values";
-// import { title } from "process";
 
 export default defineSchema({
   // the structure of the "documents" table
@@ -11,8 +10,9 @@ export default defineSchema({
     userId: v.string(),
     isArchived: v.boolean(),
     workspaceId: v.optional(v.id("workspaces")),
-    comments: v.optional(v.array(v.id("comments"))),
-    tags: v.optional(v.array(v.id("tags"))),
+    comment: v.optional(v.string()),
+    tags: v.optional(v.string()),
+
     parentDocument: v.optional(v.id("documents")),
     content: v.optional(v.string()),
     coverImage: v.optional(v.string()),
