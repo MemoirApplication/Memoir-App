@@ -77,11 +77,14 @@ export const getDocuments = query({
     const userId = identity.subject;
     const documents = await ctx.db
       .query("documents")
-      .withIndex("by_user_parent", (q) => q.eq("userId", userId),)
+      .withIndex("by_user_parent", (q) => q.eq("userId", userId))
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
-    return documents;
+    return documents.map((doc): Doc<"documents"> & { _id: Id<"documents"> } => ({
+      ...doc,
+      _id: doc._id
+    }));
   }
 });
 

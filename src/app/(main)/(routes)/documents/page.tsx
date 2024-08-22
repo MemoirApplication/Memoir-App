@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { Button, Card } from "@nextui-org/react";
 import { useUser } from "@clerk/nextjs";
 import { PlusCircle } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
+import DocumentGraph from "@/components/documentGraph";
 
 export default function Documents() {
   const { user } = useUser();
@@ -45,6 +46,11 @@ export default function Documents() {
               Create Note
             </Button>
           </div>
+          <Card isFooterBlurred radius="lg" className="border-none">
+            <div className="object-cover">
+              <DocumentGraph />
+            </div>
+          </Card>
         </div>
       </div>
     </>
