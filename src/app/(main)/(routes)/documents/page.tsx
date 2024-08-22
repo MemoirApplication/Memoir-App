@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { Button } from "@nextui-org/react";
+import { Button, Card } from "@nextui-org/react";
 import { useUser } from "@clerk/nextjs";
 import { PlusCircle } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
+import DocumentGraph from "@/components/documentGraph";
 
 export default function Documents() {
   const { user } = useUser();
@@ -31,9 +32,10 @@ export default function Documents() {
           className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}
         >
           <div className="flex flex-col items-center justify-center mt-72">
-            <h2 className="select-none">
-              Hey {user?.firstName}, Welcome to Memoir
-            </h2>
+            <h1 className="select-none ">
+              Hey {user?.username}, Welcome to Memoir
+            </h1>
+            {/* <h2 className="select-none mt-2 ">start by creating a new note</h2> */}
             <Button // Create note button
               onClick={onCreate} // Calls the onCreate function when pressed
               variant="light"
@@ -44,6 +46,11 @@ export default function Documents() {
               Create Note
             </Button>
           </div>
+          <Card isFooterBlurred radius="lg" className="border-none">
+            <div className="object-cover">
+              <DocumentGraph />
+            </div>
+          </Card>
         </div>
       </div>
     </>
