@@ -114,16 +114,7 @@ export const getFavSidebar = query({
     return documents;
   },
 });
-// export const get = query({
-//   handler: async (ctx) => {
-//     const identity = await ctx.auth.getUserIdentity();
-//     if (!identity) {
-//       throw new Error("Not authenticated");
-//     }
-//     const documents = await ctx.db.query("documents").collect();
-//     return documents;
-//   }
-// })
+
 
 export const create = mutation({
   args: {
@@ -324,6 +315,9 @@ export const update = mutation({
     isPublished: v.optional(v.boolean()),
     isFav: v.optional(v.boolean()),
     isFullWidth: v.optional(v.boolean()),
+    lastEditedTime: v.optional(v.string()),
+    comments: v.optional(v.string()),
+    tags: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

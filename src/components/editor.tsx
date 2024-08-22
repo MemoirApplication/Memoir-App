@@ -57,6 +57,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const { edgestore } = useEdgeStore();
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
+
+  const [currentTime, setCurrentTime] = useState(Date.now());
+
   // const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
 
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
@@ -94,11 +97,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     editor?.insertBlocks(bblocks as PartialBlock[], blocks[0].id, "after");
   };
 
-  const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
-    const prevText = JSON.stringify(editor.document);
-    summarize(prevText);
-  };
-
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
     const prevText = JSON.stringify(editor.getBlock(blocks[0].id));
     complete(prevText);
@@ -114,6 +112,11 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     icon: <Wand size={18} />,
     subtext: "Continue your note with Ai-Generated text",
   });
+
+  const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
+    const prevText = JSON.stringify(editor.document);
+    summarize(prevText);
+  };
 
   const aiSummarization = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Summarize page",
@@ -244,6 +247,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     update({
       id: initialData._id,
       content: JSON.stringify(jsonBlocks),
+      lastEditedTime: currentTime.toString(),
     });
   }
 
