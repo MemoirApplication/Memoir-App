@@ -1,51 +1,44 @@
-import React, { useRef, useCallback } from 'react';
-import ForceGraph3D, { ForceGraphMethods } from 'react-force-graph-3d';
-import { useQuery } from '../../convex/_generated/react';
-import { getDocuments } from '../../convex/documents';
+import React, { useEffect, useState } from "react";
+import ForceGraph3D from "react-force-graph-3d";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
-interface NodeObject {
-  id: string;
-  title?: string;
-}
+const DocumentGraph = () => {
+  const documents = useQuery(api.documents.getDocuments);
+  const [graphData, setGraphData] = useState({ nodes: [], links: [] });
 
-interface LinkObject {
-  source: string;
-  target: string;
-}
+  useEffect(() => {
+    if (documents) {
+      const nodes = documents.map((doc) => ({
+        id: doc._id,
+        name: doc.title,
+        val: 1,
+      }));
 
-const ForceGraph: React.FC = () => {
-  const fgRef = useRef<ForceGraphMethods>();
-  const documents = useQuery(getDocuments) || [];
+      const links = documents.reduce((acc, doc) => {
+        if (doc.parentDocument) {
+          acc.push({
+            source: doc.parentDocument,
+            target: doc._id,
+          });
+        }
+        return acc;
+      }, []);
 
-  const graphData = {
-    nodes: documents.map((doc:any) => ({id:doc._id, title:doc.title})),
-    links: documents.flatmap((doc:any) => (doc.links || []).map((linkId: string)=> ({source: doc._id, target: linkId})))
-  };
+      setGraphData({ nodes, links });
+    }
+  }, [documents]);
 
-  const handleNodeClick = useCallback((node: NodeObject) => {
-    console.log('Clicked node:', node);
-    const distance = 40;
-    const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-    fgRef.current?.cameraPosition(
-      { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
-      node as any,
-      3000
-    );
-  } [fgRef]);
-
-  return(
-    <ForceGraph3D
-      ref={fgRef}
-      graphData={graphData}
-      nodeLabel={(node: NodeObject) => node.title || node.id}
-      nodeColor={()=>'#00ffff'}
-      linkColor={()=>'#ffffff'}
-      backgroundColor="#000011"
-      onNodeClick={handleNodeClick}
-      width={800}
-      height={600}
-    />
+  return (
+    <div style={{ width: "100%", height: "600px" }}>
+      <ForceGraph3D
+        graphData={graphData}
+        nodeLabel="name"
+        nodeAutoColorBy="group"
+        linkDirectionalParticles={2}
+      />
+    </div>
   );
 };
 
-export default ForceGraph;
+export default DocumentGraph;

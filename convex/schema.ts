@@ -10,9 +10,8 @@ export default defineSchema({
     userId: v.string(),
     isArchived: v.boolean(),
     workspaceId: v.optional(v.id("workspaces")),
-    comment: v.optional(v.string()),
+    comments: v.optional(v.string()),
     tags: v.optional(v.string()),
-
     parentDocument: v.optional(v.id("documents")),
     content: v.optional(v.string()),
     coverImage: v.optional(v.string()),
