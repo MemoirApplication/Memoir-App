@@ -32,8 +32,9 @@ export default function Documents() {
         >
           <div className="flex flex-col items-center justify-center mt-72">
             <h2 className="select-none">
-              Hey {user?.firstName}, Welcome to Memoir
+              Hey {user?.username}, Welcome to Memoir
             </h2>
+            <h2 className="select-none">start by creating a new note</h2>
             <Button // Create note button
               onClick={onCreate} // Calls the onCreate function when pressed
               variant="light"
