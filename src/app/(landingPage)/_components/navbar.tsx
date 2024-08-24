@@ -6,9 +6,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle, 
-  NavbarMenu, 
-  NavbarMenuItem,
   Link,
   Button,
 } from "@nextui-org/react";
@@ -25,13 +22,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
 // Import Clerk
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Logo } from "./Logo";
 import { useConvexAuth } from "convex/react";
 
@@ -79,6 +70,33 @@ export const NavigationBar = () => {
 
       <NavbarContent justify="end">
         <NavbarItem>
+          <SignedOut>
+            <SignInButton>
+              <Button as={Link} color="secondary" radius="md" variant="shadow">
+                Sign in
+              </Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            {loading && isLoaded ? (
+              <Spinner color="secondary" />
+            ) : (
+              <div className="flex gap-4">
+                <Button
+                  as={Link}
+                  color="secondary"
+                  radius="md"
+                  variant="shadow"
+                  href="/documents"
+                >
+                  Open Memoir
+                </Button>
+                <UserButton />
+              </div>
+            )}
+          </SignedIn>
+        </NavbarItem>
+        <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
               <Button isIconOnly variant="bordered" color="default">
@@ -107,33 +125,6 @@ export const NavigationBar = () => {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-        </NavbarItem>
-        <NavbarItem>
-          <SignedOut>
-            <SignInButton>
-              <Button as={Link} color="secondary" radius="md" variant="shadow">
-                Sign in
-              </Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            {loading && isLoaded ? (
-              <Spinner color="secondary" />
-            ) : (
-              <div className="flex gap-4">
-                <Button
-                  as={Link}
-                  color="secondary"
-                  radius="md"
-                  variant="shadow"
-                  href="/documents"
-                >
-                  Open Memoir
-                </Button>
-                <UserButton />
-              </div>
-            )}
-          </SignedIn>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

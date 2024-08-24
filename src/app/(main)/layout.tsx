@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useConvexAuth } from "convex/react";
 import { SidebarProvider } from "./contexts/SidebarContext";
-import { EditorProvider } from "./contexts/EditorContext";
 import { redirect } from "next/navigation";
-import { SearchCommand } from "@/components/search-command";
+import { SearchCommand } from "@/app/(main)/_components/search-command";
 import { Sidebar } from "./_components/Sidebar";
 import { Spinner } from "@nextui-org/spinner";
 import { useColor } from "@/app/(main)/contexts/ColorContext";
@@ -47,9 +46,7 @@ const MainLayout = ({
           <div className="z-50">
             <Sidebar />
           </div>
-          <EditorProvider>
           {children}
-          </EditorProvider>
         </SidebarProvider>
       </main>
     </div>

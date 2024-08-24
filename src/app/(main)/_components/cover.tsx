@@ -5,9 +5,9 @@ import { Button } from "@nextui-org/button";
 import { ImageIcon, X } from "lucide-react";
 import { useCoverImage } from "@/hooks/use-cover-image";
 import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../../convex/_generated/api";
 import { useParams } from "next/navigation";
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Skeleton } from "@nextui-org/skeleton";
 
@@ -36,8 +36,8 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   return (
     <div
       className={`relative w-full ${!url ? "h-[12vh]" : "h-[35vh]"} group ${url ? "bg-default-50" : ""}`}
-    > 
-    {/* TODO Check cn */}
+    >
+      {/* TODO Check cn */}
       {!!url && (
         <Image src={url} fill alt="Cover Image" className="object-cover" />
       )}
@@ -66,7 +66,5 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
 };
 
 Cover.Skeleton = function CoverSkeleton() {
-    return(
-        <Skeleton className="w-full h-[12vh]" />
-    )
-}
+  return <Skeleton className="w-full h-[12vh]" />;
+};

@@ -7,52 +7,62 @@ const ColorSwitcher: React.FC = () => {
 
   const handleColorChange = (color: string) => {
     setColor(color);
+    localStorage.setItem("selectedColor", color); // Save to local storage
   };
+
+  const colorButtons = [
+    {
+      title: "Rose",
+      value: "rose",
+      className: "color-button-rose",
+    },
+    {
+      title: "Amber",
+      value: "amber",
+      className: "color-button-amber",
+    },
+    {
+      title: "Lime",
+      value: "lime",
+      className: "color-button-lime",
+    },
+    {
+      title: "Teal",
+      value: "teal",
+      className: "color-button-teal",
+    },
+    {
+      title: "Blue",
+      value: "blue",
+      className: "color-button-blue",
+    },
+    {
+      title: "Violet",
+      value: "violet",
+      className: "color-button-violet",
+    },
+    {
+      title: "Neutral",
+      value: "neutral",
+      className: "color-button-neutral",
+    },
+  ];
 
   return (
     <div>
-      <Tooltip placement="bottom" showArrow={true} content="Rose">
-        <button
-          className="color-button color-button-rose"
-          onClick={() => handleColorChange("rose")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Amber">
-        <button
-          className="color-button color-button-amber"
-          onClick={() => handleColorChange("amber")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Lime">
-        <button
-          className="color-button color-button-lime"
-          onClick={() => handleColorChange("lime")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Teal">
-        <button
-          className="color-button color-button-teal"
-          onClick={() => handleColorChange("teal")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Blue">
-        <button
-          className="color-button color-button-blue"
-          onClick={() => handleColorChange("blue")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Violet">
-        <button
-          className="color-button color-button-violet"
-          onClick={() => handleColorChange("violet")}
-        />
-      </Tooltip>
-      <Tooltip placement="bottom" showArrow={true} content="Neutral">
-        <button
-          className="color-button color-button-neutral"
-          onClick={() => handleColorChange("neutral")}
-        />
-      </Tooltip>
+      {colorButtons.map((colorButton) => (
+        <Tooltip
+          key={colorButton.value}
+          placement="bottom"
+          showArrow={true}
+          content={colorButton.title}
+        >
+          <button
+            className={`color-button ${colorButton.className}`}
+            onClick={() => handleColorChange(colorButton.value)}
+          />
+        </Tooltip>
+      ))}
     </div>
   );
 };

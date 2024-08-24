@@ -12,10 +12,10 @@ export const SignedInHeading = () => {
       <div className="drop-shadow-2xl  flex justify-center">
         <Image src={headingImage} alt="Logo" width={200} height={200} />
       </div>
-      <div className="drop-shadow-2xl">
-        <h1 className="drop-shadow-2xl text-5xl font-bold">
-          Welcome to <span className="underline">Memoir</span>
-        </h1>
+      <div className="drop-shadow-2xl space-y-4 items-center justify-center">
+        <p className="drop-shadow-2xl mb-4 text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/60 dark:from-white/90 dark:to-white/60">
+          Welcome to Memoir
+        </p>
         {isAuthenticated && !isLoading && (
           <Button
             variant="shadow"
@@ -30,7 +30,12 @@ export const SignedInHeading = () => {
         )}
       </div>
       <br></br>
-      <Card shadow="lg" isHoverable isFooterBlurred>
+      <Card
+        shadow="lg"
+        isHoverable
+        isFooterBlurred
+        className="bg-opacity-60 backdrop-blur-lg"
+      >
         <CardBody>
           <p>Your Ideas, Documents and Plans all together in one place.</p>
         </CardBody>

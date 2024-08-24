@@ -25,15 +25,18 @@ async function createWindow() {
 
   if (isDev) {
     // In development, we'll use the Next.js dev server
-    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.loadURL("https://open-memoir.vercel.app/documents/");
     mainWindow.webContents.openDevTools(); // this will open browser dev tools
   } else {
     // In production, we'll load the built app
-    const startUrl = url.format({
-      pathname: path.join(__dirname, "./out/index.html"),
-      protocol: "file:",
-      slashes: true,
-    });
+    // const startUrl = url.format({
+    //   pathname: path.join(
+    //     "memoir-990afngcz-memoirs-projects.vercel.app/documents/"
+    //   ),
+    //   protocol: "https://",
+    //   slashes: true,
+    // });
+    const startUrl = "https://open-memoir.vercel.app/documents/";
     mainWindow.loadURL(startUrl);
   }
 

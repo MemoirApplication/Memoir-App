@@ -22,7 +22,6 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Divider,
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 
@@ -58,7 +57,7 @@ export const Item = ({
   const archive = useMutation(api.documents.archive);
 
   // Move document to trash
-  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onArchive = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
     const promise = archive({ id });
@@ -163,7 +162,7 @@ export const Item = ({
                 Copy link
               </DropdownItem>
               <DropdownItem
-                onClick={onArchive}
+                onClick={onArchive as React.MouseEventHandler<HTMLElement>}
                 key="delete"
                 className="text-danger"
                 color="danger"

@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 // Define the shape of the context data
 type ColorContextType = {
@@ -27,7 +33,31 @@ type ColorProviderProps = {
 // ColorProvider component to provide color context to its children
 export const ColorProvider: React.FC<ColorProviderProps> = ({ children }) => {
   // State to hold the current color, initialized to 'violet'
-  const [color, setColor] = useState<string>("violet");
+  const [color, setColor] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Load color from local storage
+    if (typeof window !== "undefined") {
+      const storedColor = localStorage.getItem("selectedColor");
+      if (storedColor) {
+        setColor(storedColor);
+      } else {
+        setColor("violet");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save color to local storage whenever it changes
+    if (typeof window !== "undefined" && color !== null) {
+      localStorage.setItem("selectedColor", color);
+    }
+  }, [color]);
+
+  // Show nothing or a loading spinner while the color is being initialized
+  if (color === null) {
+    return null;
+  }
 
   return (
     <ColorContext.Provider value={{ color, setColor }}>

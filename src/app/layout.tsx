@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 // import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "./providers";
 import { ConvexClientProvider } from "@/components/convex-provider";
 import { Toaster } from "sonner";
-
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "Memoir App",
-  description: "Memoir app description",
+  description: "Beautiful Note-Taking App with much better UI and Features",
   icons: {
     icon: [
       {
@@ -27,12 +29,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body className="min-h-full">
@@ -40,6 +45,8 @@ export default function RootLayout({
           <Providers>
             <Toaster position="bottom-center" />
             {children}
+            <Analytics />
+            <SpeedInsights />
           </Providers>
         </ConvexClientProvider>
       </body>
