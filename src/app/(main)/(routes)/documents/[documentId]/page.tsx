@@ -21,7 +21,8 @@ interface DocumentIdPageProps {
 
 export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   const Editor = useMemo(
-    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    () =>
+      dynamic(() => import("../../../../../components/editor"), { ssr: false }),
     []
   );
 

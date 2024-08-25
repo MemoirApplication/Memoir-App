@@ -140,6 +140,7 @@ export const create = mutation({
       isPublished: false,
       isFav: false,
       isFullWidth: false,
+      lastEditedTime: Date.now().toString(),
     });
     return document;
   },

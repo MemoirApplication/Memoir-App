@@ -11,7 +11,7 @@ export default defineSchema({
     isArchived: v.boolean(),
     workspaceId: v.optional(v.id("workspaces")),
     comments: v.optional(v.string()),
-    tags: v.optional(v.string()),
+    tags: v.optional(v.string()), // This will be a JSON string
     parentDocument: v.optional(v.id("documents")),
     content: v.optional(v.string()),
     coverImage: v.optional(v.string()),

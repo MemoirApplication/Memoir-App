@@ -106,8 +106,8 @@ export const Item = ({
         paddingLeft: level ? `${level * 12 + 6}px` : "4px",
       }}
       className={cn(
-        "select-none transition-all duration-300 ease-in-out group min-h-[27px] my-1 text-md py-1 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-md",
-        active && "bg-secondary/5 text-secondary rounded-md"
+        "select-none transition-all duration-300 ease-in-out group min-h-[27px] my-1 text-md py-1.5 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-xl",
+        active && "bg-secondary/5 text-secondary"
       )}
     >
       {!!id && (

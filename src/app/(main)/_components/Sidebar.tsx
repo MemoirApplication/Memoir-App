@@ -72,7 +72,10 @@ export const Sidebar = () => {
         >
           <div className="p-4 h-full flex flex-col">
             {/* user and workspace card */}
-            <Card className="mb-4 bg-opacity-20 backdrop-blur-lg h-28">
+            <Card
+              shadow="lg"
+              className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
+            >
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
@@ -83,7 +86,7 @@ export const Sidebar = () => {
                     <Button // Workspace button
                       isIconOnly
                       size="sm"
-                      variant="light"
+                      variant="flat"
                       color="secondary"
                       className="ml-auto"
                     >
@@ -92,7 +95,9 @@ export const Sidebar = () => {
                   </PopoverTrigger>
                   <PopoverContent>
                     <div className="px-1 py-2">
-                      <div className="font-medium select-none">Theme:</div>
+                      <div className="font-medium select-none py-1">
+                        Color Accent:{" "}
+                      </div>
                       <div>
                         <ColorSwitcher />
                       </div>
@@ -104,7 +109,7 @@ export const Sidebar = () => {
 
             {/* Home, Calendar and Settings card */}
             <div>
-              <Card className="bg-opacity-20 backdrop-blur-lg">
+              <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg">
                 <CardBody className="flex flex-col">
                   {/* <Button variant="light" className="justify-start">
                     <SearchIcon size={16} />
@@ -113,24 +118,24 @@ export const Sidebar = () => {
 
                   <Button // Home button
                     onClick={() => router.push("/documents")}
-                    variant="light"
-                    className="justify-start"
+                    variant="shadow"
+                    color="secondary"
+                    className="justify-start my-1"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none font-medium text-base">Home</p>
+                    <p className="select-none  font-medium ">Home</p>
                   </Button>
 
                   {/* Popover to show the calendar */}
                   <Popover shadow="lg" backdrop="blur" placement="right">
                     <PopoverTrigger>
                       <Button // Calendar button
-                        variant="light"
-                        className="justify-start"
+                        variant="shadow"
+                        color="secondary"
+                        className="justify-start my-1"
                       >
                         <CalendarDays size={20} />
-                        <p className="select-none font-medium text-base">
-                          Calendar
-                        </p>
+                        <p className="select-none font-medium ">Calendar</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -144,13 +149,12 @@ export const Sidebar = () => {
                   </Popover>
 
                   <Button // Settings button
-                    variant="light"
-                    className="justify-start"
+                    color="secondary"
+                    variant="shadow"
+                    className="justify-start my-1"
                   >
                     <Settings size={20} />
-                    <p className="select-none font-medium text-base">
-                      Settings
-                    </p>
+                    <p className="select-none font-medium ">Settings</p>
                   </Button>
                 </CardBody>
               </Card>
@@ -159,7 +163,7 @@ export const Sidebar = () => {
             <Divider className="my-4" />
 
             {/* Search and Documents card */}
-            <Card className="bg-opacity-20 backdrop-blur-lg h-full">
+            <Card shadow="lg" className="bg-opacity-20 backdrop-blur-lg h-full">
               <CardBody>
                 <ScrollShadow className="h-full">
                   {/* <Button onClick={onCreate} variant="flat" color="secondary">
@@ -208,12 +212,12 @@ export const Sidebar = () => {
                   >
                     <PopoverTrigger>
                       <Button // Trash button
-                        variant="solid"
+                        variant="shadow"
                         color="secondary"
                         className="justify-start "
                       >
-                        <Trash2Icon size={16} />
-                        Trash
+                        <Trash2Icon size={20} />
+                        <p className="select-none  font-medium ">Trash</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>

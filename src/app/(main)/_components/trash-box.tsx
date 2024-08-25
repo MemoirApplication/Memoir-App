@@ -143,6 +143,7 @@ export const TrashBox = () => {
           </div>
         ))}
       </div>
+      {/* To-do : Empty Trash Button  */}
     </div>
   );
 };
