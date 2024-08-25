@@ -2,16 +2,16 @@
 
 import { api } from "../../../../../../convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Id } from "../../../../../../convex/_generated/dataModel";
 
 import { Banner } from "@/app/(main)/_components/banner";
 import { Spinner } from "@nextui-org/spinner";
-import { Toolbar } from "@/components/toolbar";
+import { Toolbar } from "@/app/(main)/_components/toolbar";
 import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import { useSidebar } from "../../../contexts/SidebarContext";
 import dynamic from "next/dynamic";
-import { Cover } from "@/components/cover";
+import { Cover } from "@/app/(main)/_components/cover";
 
 interface DocumentIdPageProps {
   params: {
@@ -21,7 +21,8 @@ interface DocumentIdPageProps {
 
 export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   const Editor = useMemo(
-    () => dynamic(() => import("@/components/editor"), { ssr: false }),
+    () =>
+      dynamic(() => import("../../../../../components/editor"), { ssr: false }),
     []
   );
 

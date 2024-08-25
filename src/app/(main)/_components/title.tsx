@@ -15,6 +15,11 @@ interface TitleProps {
 }
 
 export const Title = ({ initialData }: TitleProps) => {
+  // API mutation to update document title
+  const update = useMutation(api.documents.update);
+
+  const [isEditing, setIsEditing] = useState(false); // State to track editing mode
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState(initialData.title || "Untitled"); // State to manage the title text
@@ -49,11 +54,6 @@ export const Title = ({ initialData }: TitleProps) => {
       disableInput();
     }
   };
-
-  // API mutation to update document title
-  const update = useMutation(api.documents.update);
-
-  const [isEditing, setIsEditing] = useState(false); // State to track editing mode
 
   return (
     <div className="flex items-center gap-x-2 select-none">

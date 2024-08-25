@@ -68,6 +68,26 @@ export const getSidebar = query({
   },
 });
 
+export const getDocuments = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+    const userId = identity.subject;
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user_parent", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("isArchived"), false))
+      .order("desc")
+      .collect();
+    return documents.map((doc): Doc<"documents"> & { _id: Id<"documents"> } => ({
+      ...doc,
+      _id: doc._id
+    }));
+  }
+});
+
 export const getFavSidebar = query({
   args: {
     parentDocument: v.optional(v.id("documents")),
@@ -94,16 +114,7 @@ export const getFavSidebar = query({
     return documents;
   },
 });
-// export const get = query({
-//   handler: async (ctx) => {
-//     const identity = await ctx.auth.getUserIdentity();
-//     if (!identity) {
-//       throw new Error("Not authenticated");
-//     }
-//     const documents = await ctx.db.query("documents").collect();
-//     return documents;
-//   }
-// })
+
 
 export const create = mutation({
   args: {
@@ -129,6 +140,7 @@ export const create = mutation({
       isPublished: false,
       isFav: false,
       isFullWidth: false,
+      lastEditedTime: Date.now().toString(),
     });
     return document;
   },
@@ -304,6 +316,9 @@ export const update = mutation({
     isPublished: v.optional(v.boolean()),
     isFav: v.optional(v.boolean()),
     isFullWidth: v.optional(v.boolean()),
+    lastEditedTime: v.optional(v.string()),
+    comments: v.optional(v.string()),
+    tags: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

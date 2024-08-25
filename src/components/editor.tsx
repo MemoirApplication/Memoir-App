@@ -1,18 +1,14 @@
 "use client";
 
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Block,
-  BlockIdentifier,
   BlockNoteEditor,
   BlockNoteSchema,
-  BlockSchemaFromSpecs,
-  blocksToMarkdown,
   defaultBlockSpecs,
   filterSuggestionItems,
   insertOrUpdateBlock,
   PartialBlock,
-  PartialInlineContent,
 } from "@blocknote/core";
 import { defaultProps } from "@blocknote/core";
 import "./CustomBlocks/styles.css";
@@ -30,7 +26,7 @@ import {
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
 } from "@blocknote/react";
-import { NotepadText } from "lucide-react";
+import { NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
@@ -38,7 +34,9 @@ import { useRouter } from "next/navigation";
 import { useEdgeStore } from "@/lib/edgestore";
 
 import { Wand } from "lucide-react";
-import { useCompletion } from "ai/react";
+import { getAnswer } from "./getAnswer";
+import { getAiCompletion } from "./getAiCompletion";
+import { Button } from "@nextui-org/button";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -55,12 +53,10 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const { edgestore } = useEdgeStore();
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
+
+  const [currentTime, setCurrentTime] = useState(Date.now());
   // const [nextBlocks, setNextBlocks] = useState<Block[]>([]);
 
-  // new blocknote schema with block specs, which contain the configs and implementations for blocks
-  // that we want our editor to use.
-
-  // the slash menu items
   const insertAlert = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Alert",
     onItemClick: () => {
@@ -77,55 +73,24 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       "info",
       "success",
     ],
-    group: "Other",
-    icon: <RiAlertFill />,
+    group: "Others",
+    icon: <RiAlertFill size={18} />,
   });
 
-  const { complete } = useCompletion({
-    api: "/api/generate",
-    onResponse: (response) => {
-      if (response.status === 429) {
-        // throw new Error("API rate limit exceeded  (error code 429)");
-        return;
-      }
-      if (response.body) {
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder("utf-8");
-
-        // Whenever the current Markdown content changes, converts it to an array of
-        // Block objects and replaces the editor's content with them.
-        reader.read().then(function processText({ done, value }) {
-          if (done) {
-            return;
-          }
-          let chunk = decoder.decode(value, { stream: true });
-          editor?._tiptapEditor.commands.insertContent(chunk);
-
-          reader.read().then(processText);
-        });
-
-        const parsedblocktohtml = editor?.blocksToHTMLLossy(editor.document);
-        // const html2block = editor?.tryParseHTMLToBlocks(html);
-        editor?._tiptapEditor.commands.setContent({
-          type: "html",
-          content: parsedblocktohtml as any,
-        });
-        // editor?.replaceBlocks([blocks[0].id], [html2block] as PartialBlock[]);
-        // editor?.insertInlineContent();
-
-        // editor?.insertInlineContent([b]);
-        // editor?.removeBlocks([nextBlocks[0].id]);
-      } else {
-        console.error("Response body is null");
-      }
-    },
-    onError: (e) => console.error(e.message),
-  });
+  const complete = async (prevText: string) => {
+    const { text } = await getAiCompletion(prevText);
+    const bblocks = await editor?.tryParseMarkdownToBlocks(text as string);
+    editor?.insertBlocks(bblocks as PartialBlock[], blocks[0].id, "after");
+  };
+  const summarize = async (prevText: string) => {
+    const { text } = await getAnswer(prevText);
+    const bblocks = await editor?.tryParseMarkdownToBlocks(text as string);
+    editor?.insertBlocks(bblocks as PartialBlock[], blocks[0].id, "after");
+  };
 
   const insertMagicAi = (editor: typeof schema.BlockNoteEditor) => {
     const prevText = JSON.stringify(editor.getBlock(blocks[0].id));
     complete(prevText);
-    // complete("Why is the sky blue?");
   };
 
   const insertMagicItem = (editor: typeof schema.BlockNoteEditor) => ({
@@ -139,6 +104,21 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     subtext: "Continue your note with Ai-Generated text",
   });
 
+  const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
+    const prevText = JSON.stringify(editor.document);
+    summarize(prevText);
+  };
+
+  const aiSummarization = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Summarize page",
+    onItemClick: async () => {
+      aiSummarize(editor);
+    },
+    aliases: ["summarize", "ai"],
+    group: "Ai",
+    icon: <TextSelect size={18} />,
+    subtext: "Write a Summarization of the Page with Ai",
+  });
   const insertPage = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Inline Page",
     onItemClick: () => {
@@ -158,7 +138,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     },
 
     aliases: ["page", "newpage", "inlinePage", "inlinepage"],
-    group: "Other",
+    group: "Others",
     icon: <NotepadText size={18} />,
   });
 
@@ -186,22 +166,20 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
 
     if (isLoading) {
       return (
-        <div
-          role="button"
-          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex p-3 w-fit font text-medium transition-all text-muted-foreground inline-content"
-        >
-          Loading...
+        <div>
+          <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex  py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
+            Loading...
+          </div>
         </div>
       );
     }
 
     if (!document) {
       return (
-        <div
-          role="button"
-          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex p-3 w-fit font text-medium transition-all text-muted-foreground inline-content"
-        >
-          Document not found
+        <div>
+          <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
+            Document not found
+          </div>
         </div>
       );
     }
@@ -213,7 +191,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
             router.push(`/documents/${document._id}`);
           }} // redirect to the page
           role="button"
-          className="select-none bg-secondary/10 hover:bg-secondary/25 rounded-md flex py-3 px-20 w-fit font text-medium transition-all text-muted-foreground inline-content"
+          className="select-none bg-default/40 hover:bg-default/65 rounded-md flex py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content"
         >
           <span className="text-medium">
             {document.icon} &#8203;{document.title}
@@ -241,6 +219,8 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }
   );
 
+  // new blocknote schema with block specs, which contain the configs and implementations for blocks
+  // that we want our editor to use.
   const schema = BlockNoteSchema.create({
     blockSpecs: {
       // all default blocks
@@ -258,6 +238,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     update({
       id: initialData._id,
       content: JSON.stringify(jsonBlocks),
+      lastEditedTime: currentTime.toString(),
     });
   }
 
@@ -284,9 +265,6 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Creates a new editor instance.
-  // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
-  // can delay the creation of the editor until the initial content is loaded.
   const handleupload = async (file: File) => {
     const respond = await edgestore.publicFiles.upload({
       file,
@@ -294,6 +272,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     return respond.url;
   };
 
+  // Creates a new editor instance.
+  // We use useMemo + createBlockNoteEditor instead of useCreateBlockNote so we
+  // can delay the creation of the editor until the initial content is loaded.
   const editor = useMemo(() => {
     if (initialContent === "loading") {
       return undefined;
@@ -345,6 +326,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 insertAlert(editor),
                 insertPage(editor),
                 insertMagicItem(editor),
+                aiSummarization(editor),
               ],
               query
             )

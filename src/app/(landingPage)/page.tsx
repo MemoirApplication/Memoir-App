@@ -44,7 +44,7 @@ const MarketingPage = () => {
         <div className="flex flex-col items-center justify-center md:justify-start text-center gap-y-8 flex-1 pb-10 px-6">
           <SignedInHeading />
         </div>
-
+        {/*
         <div className="pt-8 mt-5 flex justify-center justfy-between items-center min-w-full drop-shadow-2xl pb-6">
           <Textarea
             isReadOnly
@@ -63,6 +63,7 @@ const MarketingPage = () => {
             onChange={setValue}
           />
         </div>
+        */}
 
         {/* <div className="  object-fill h-48 w-96 pt-8 mt-4  justify-center items-center px-8 mx-6 drop-shadow-2xl">
         <BlockNoteView editor={editor} />
