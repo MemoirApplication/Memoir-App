@@ -25,8 +25,9 @@ import {
   createReactBlockSpec,
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
+  TextAlignButton,
 } from "@blocknote/react";
-import { NotepadText, TextSelect } from "lucide-react";
+import { Minus, NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
@@ -37,6 +38,7 @@ import { Wand } from "lucide-react";
 import { getAnswer } from "./getAnswer";
 import { getAiCompletion } from "./getAiCompletion";
 import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -219,6 +221,34 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }
   );
 
+  const insertDivider = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Divider",
+    onItemClick: () => {
+      insertOrUpdateBlock(editor, {
+        type: "inlineDivider",
+      });
+    },
+    aliases: ["Div", "Divider", "divi", "d"],
+    group: "Others",
+    icon: <Minus size={18} />,
+  });
+
+  const inlineDivider = createReactBlockSpec(
+    {
+      type: "inlineDivider",
+      propSchema: {
+        text: { default: "", hidden: true, readOnly: true },
+        type: { default: "Divider" },
+      },
+      content: "none",
+    },
+    {
+      render: (props) => {
+        return <Divider className="my-2" />;
+      },
+    }
+  );
+
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
   const schema = BlockNoteSchema.create({
@@ -228,6 +258,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       // the new alert block
       alert: Alert,
       inlinePage: inlinePage,
+      inlineDivider: inlineDivider,
     },
   });
 
@@ -327,6 +358,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 insertPage(editor),
                 insertMagicItem(editor),
                 aiSummarization(editor),
+                insertDivider(editor),
               ],
               query
             )

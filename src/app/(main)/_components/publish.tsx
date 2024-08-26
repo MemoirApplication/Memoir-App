@@ -69,7 +69,7 @@ export const Publish = ({ initialData }: PublishProps) => {
   return (
     <Popover placement="bottom" offset={12} className="w-72">
       <PopoverTrigger>
-        <Button variant="light" color="secondary" isIconOnly size="sm">
+        <Button variant="light" isIconOnly size="sm">
           <Share size={20} />
         </Button>
       </PopoverTrigger>
@@ -102,7 +102,6 @@ export const Publish = ({ initialData }: PublishProps) => {
               </Button>
             </div>
             <Button
-              color="secondary"
               size="sm"
               className="w-full text-xs"
               disabled={isSubmitting}
@@ -123,7 +122,6 @@ export const Publish = ({ initialData }: PublishProps) => {
               Share your work with others.
             </span>
             <Button
-              color="secondary"
               disabled={isSubmitting}
               onClick={onPublish}
               size="sm"

@@ -126,6 +126,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       tags: tagsJson,
     });
   };
+  // Saving
+  // saveTags(tags);
 
   // When retrieving tags from the database
   const getTags = (tagsJson: string | undefined): Tag[] => {
@@ -142,9 +144,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     { type: "priority", content: "High" },
   ];
 
-  // Saving
-  saveTags(tags);
-
   // Retrieving
   const retrievedTags = getTags(initialData.tags);
 
@@ -152,21 +151,23 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     switch (tag.type) {
       case "date":
         return (
-          <span>{new Date(tag.content as string).toLocaleDateString()}</span>
+          <pre>
+            Pick a Date {new Date(tag.content as string).toLocaleDateString()}
+          </pre>
         );
       case "text":
-        return <span>{tag.content as string}</span>;
+        return <pre>{tag.content as string}</pre>;
       case "checkbox":
         return (
           <input type="checkbox" checked={tag.content as boolean} readOnly />
         );
       case "number":
-        return <span>{tag.content as number}</span>;
+        return <pre>{tag.content as number}</pre>;
       case "priority":
         return (
-          <span className={`priority-${tag.content}`}>
+          <pre className={`priority-${tag.content}`}>
             {tag.content as string}
-          </span>
+          </pre>
         );
       default:
         return null;
@@ -286,9 +287,12 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           <DropdownSection></DropdownSection>
         </DropdownMenu>
       </Dropdown> */}
-      <Divider className="my-2" />
+      {retrievedTags.map((tag) => (
+        <TagComponent key={tag.type} tag={tag} />
+      ))}
       <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
         Last edited time: {formattedDate}, {timeAgo}
+        <Divider className="my-2" />
       </pre>
     </div>
   );

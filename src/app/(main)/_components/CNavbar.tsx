@@ -56,13 +56,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
     >
       {/* items on the left */}
       <div className="flex items-center gap-x-2 pl-2">
-        <Button
-          onClick={toggleSidebar}
-          variant="light"
-          color="secondary"
-          isIconOnly
-          size="sm"
-        >
+        <Button onClick={toggleSidebar} variant="light" isIconOnly size="sm">
           <Menu size={20} />
           {/* <PanelLeft size={20} /> */}
         </Button>
@@ -71,13 +65,12 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
 
       {/* items on the right */}
       <div className="flex items-center gap-x-2 pr-2">
-        <Button variant="light" color="secondary" isIconOnly size="sm">
+        <Button variant="light" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>
         <Publish initialData={document} />
         <Button
           variant="light"
-          color="secondary"
           isIconOnly
           size="sm"
           onClick={() => {
@@ -88,7 +81,6 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         </Button>
         <Button
           variant="light"
-          color="secondary"
           isIconOnly
           size="sm"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -97,7 +89,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         </Button>
         <Dropdown offset={12}>
           <DropdownTrigger>
-            <Button variant="light" color="secondary" isIconOnly size="sm">
+            <Button variant="light" isIconOnly size="sm">
               <Ellipsis size={20} />
             </Button>
           </DropdownTrigger>

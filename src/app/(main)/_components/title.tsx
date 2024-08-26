@@ -74,10 +74,10 @@ export const Title = ({ initialData }: TitleProps) => {
           onClick={enabaleInput} // Enable input field on button click
           size="sm"
           variant="light"
-          className="font-medium h-auto p-1 text-base justify-start"
+          className="font-medium p-1 text-base"
           radius="sm"
         >
-          <span className="truncate">{initialData?.title}</span>
+          <pre className="truncate">{initialData?.title}</pre>
         </Button>
       )}
     </div>
