@@ -9,11 +9,19 @@ import {
 import type { Selection } from "@nextui-org/react";
 import { useLanguage } from "@/app/(main)/contexts/LanguageContext"; // Import the language context
 
+type LanguageType = "en" | "ar"; // Define the supported languages
+
 export default function LanguageDropdown() {
   const { language, setLanguage } = useLanguage(); // Use the language context to get/set language
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([language])
   ); // Initialize with current language
+
+  // Mapping language to direction (ltr/rtl)
+  const languageDirectionMap: Record<LanguageType, string> = {
+    en: "ltr",
+    ar: "rtl",
+  };
 
   // Define a mapping from language codes to names
   const languageOptions = [
@@ -21,13 +29,19 @@ export default function LanguageDropdown() {
     { key: "ar", name: "Arabic" },
     // Add more languages as needed
   ];
+
   // Get the name of the currently selected language
   const selectedLanguageName =
     languageOptions.find((option) => option.key === language)?.name ||
     "Select Language";
   // Update selectedKeys when the language changes
+
   useEffect(() => {
     setSelectedKeys(new Set([language]));
+
+    // Set the 'dir' attribute based on the selected language
+    const dir = languageDirectionMap[language as LanguageType] || "ltr"; // Default to 'ltr' if language is not mapped
+    document.documentElement.setAttribute("dir", dir);
   }, [language]);
 
   // Handle selection change and update the language
