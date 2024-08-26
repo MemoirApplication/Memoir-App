@@ -39,6 +39,7 @@ import { getAnswer } from "./getAnswer";
 import { getAiCompletion } from "./getAiCompletion";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -48,6 +49,7 @@ interface EditorProps {
 
 const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const { resolvedTheme } = useTheme();
+  const { dict } = useLocalization();
 
   const update = useMutation(api.documents.update);
   const create = useMutation(api.documents.create);
@@ -134,9 +136,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
         blockId: blocks[0].id,
       });
       toast.promise(promise, {
-        loading: "Creating a new note...",
-        success: "New note created!",
-        error: "Failed to create a new note.",
+        loading: dict.components.editor.toastCreateLoading,
+        success: dict.components.editor.toastCreateSuccess,
+        error: dict.components.editor.toastCreateError,
       });
     },
 
@@ -172,7 +174,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       return (
         <div>
           <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex  py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            Loading...
+            {dict.components.editor.isLoading}
           </div>
         </div>
       );
@@ -182,7 +184,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       return (
         <div>
           <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            Document not found
+            {dict.components.editor.notFound}
           </div>
         </div>
       );
@@ -321,7 +323,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   }, [initialContent]);
 
   if (editor === undefined) {
-    return "Loading content...";
+    return dict.components.editor.loadingContent;
   }
 
   return (

@@ -18,6 +18,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Divider } from "@nextui-org/divider";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -30,6 +31,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const [isCommentEditing, setCommentIsEditing] = useState(false);
   const [value, setValue] = useState(initialData.title);
   const [comment, setComment] = useState(initialData.comments);
+  const { dict } = useLocalization();
 
   const [currentTime, setCurrentTime] = useState(Date.now());
 
@@ -207,7 +209,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           <IconPicer asChild onChange={onIconSelect}>
             <Button variant="ghost" className="text-muted-foreground text-xs">
               <Smile className="h-4 w-4 mr-2" />
-              Add icon
+              {dict.components.toolbar.addIcon}
             </Button>
           </IconPicer>
         )}
@@ -219,7 +221,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             className="text-muted-foreground text-xs"
           >
             <ImageIcon className="h-4 w-4 mr-2" />
-            Add Cover
+            {dict.components.toolbar.addCover}
           </Button>
         )}
       </div>
@@ -268,8 +270,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         >
           <pre>
             {initialData.comments
-              ? "Comment: " + initialData.comments
-              : "Add a comment"}
+              ? dict.components.toolbar.comment + initialData.comments
+              : dict.components.toolbar.addComment}
           </pre>
         </div>
       )}
