@@ -8,6 +8,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Spinner } from "@nextui-org/react";
 import Image from "next/image";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 const variants = {
   base: "relative rounded-md flex justify-center items-center flex-col cursor-pointer min-h-[150px] min-w-[200px] border border-dashed border-gray-400 dark:border-gray-300 transition-colors duration-200 ease-in-out",
@@ -50,6 +51,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
     { dropzoneOptions, width, height, value, className, disabled, onChange },
     ref
   ) => {
+    const { dict } = useLocalization();
     const imageUrl = React.useMemo(() => {
       if (typeof value === "string") {
         // in case an url is passed in, use it to display the image
@@ -154,7 +156,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
             <div className="flex flex-col items-center justify-center text-xs text-gray-400">
               <UploadCloudIcon className="mb-2 h-7 w-7" />
               <div className="text-gray-400">
-                Click or drag & drop to upload
+                {dict.components.imageDropzone.uploadMessage}
               </div>
             </div>
           )}

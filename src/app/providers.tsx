@@ -6,6 +6,8 @@ import React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ColorProvider } from "./(main)/contexts/ColorContext";
 import { EdgeStoreProvider } from "../lib/edgestore";
+import { LocalizationProvider } from "./(main)/contexts/LocalizationContext";
+import { LanguageProvider } from "./(main)/contexts/LanguageContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -16,9 +18,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
         enableSystem
         // disableTransitionOnChange
       >
-        <EdgeStoreProvider>
-          <ColorProvider>{children}</ColorProvider>
-        </EdgeStoreProvider>
+        <LanguageProvider>
+          <LocalizationProvider>
+            <EdgeStoreProvider>
+              <ColorProvider>
+                {children}
+              </ColorProvider>
+            </EdgeStoreProvider>
+          </LocalizationProvider>
+        </LanguageProvider>
       </NextThemesProvider>
     </NextUIProvider>
   );

@@ -24,6 +24,7 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -55,6 +56,7 @@ export const Item = ({
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
+  const { dict } = useLocalization();
 
   // Move document to trash
   const onArchive = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
@@ -62,9 +64,9 @@ export const Item = ({
     if (!id) return;
     const promise = archive({ id });
     toast.promise(promise, {
-      loading: "Moving to trash...",
-      success: "Note moved to trash!",
-      error: "Failed moving to trash.",
+      loading: dict.main.components.item.toastArchiveLoading,
+      success: dict.main.components.item.toastArchiveSuccess,
+      error: dict.main.components.item.toastArchiveError,
     });
   };
 
@@ -89,9 +91,9 @@ export const Item = ({
       }
     );
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Failed to create a new note.",
+      loading: dict.main.components.item.toastCreateLoading,
+      success: dict.main.components.item.toastCreateSuccess,
+      error: dict.main.components.item.toastCreateError,
     });
   };
 
@@ -152,14 +154,14 @@ export const Item = ({
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
-                Last Edited By: {user?.username}
+                {dict.main.components.item.lastEdited}{user?.username}
               </DropdownItem>
               <DropdownItem
                 key="copy"
                 shortcut="⌘C"
                 startContent={<CopyIcon />}
               >
-                Copy link
+                {dict.main.components.item.copyLink}
               </DropdownItem>
               <DropdownItem
                 onClick={onArchive as React.MouseEventHandler<HTMLElement>}
@@ -169,7 +171,7 @@ export const Item = ({
                 shortcut="⌘⇧D"
                 startContent={<Trash2Icon />}
               >
-                Delete file
+                {dict.main.components.item.archive}
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>

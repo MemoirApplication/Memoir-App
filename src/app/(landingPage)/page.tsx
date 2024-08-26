@@ -9,10 +9,11 @@ import { Textarea } from "@nextui-org/react";
 import { BackgroundGradientAnimation } from "@/components/background-gradient-animation";
 import { useTheme } from "next-themes";
 
+
 const MarketingPage = () => {
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
-  const { theme } = useTheme();
+  const { theme } = useTheme() || "dark";
 
   const isDarkMode = theme === "dark";
 

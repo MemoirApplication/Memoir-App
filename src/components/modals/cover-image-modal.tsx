@@ -18,12 +18,14 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "../../../convex/_generated/dataModel";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 export const CoverImageModal = () => {
   const params = useParams();
   const update = useMutation(api.documents.update);
   const { edgestore } = useEdgeStore();
   const coverImage = useCoverImage();
+  const { dict } = useLocalization();
 
   const [file, setFile] = useState<File>();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,7 +70,7 @@ export const CoverImageModal = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-center">
-                Upload Cover Image
+              {dict.components.modals.coverImage.uploadImage}
               </ModalHeader>
               <ModalBody className="mb-4">
                 <SingleImageDropzone

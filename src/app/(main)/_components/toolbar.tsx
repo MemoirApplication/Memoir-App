@@ -3,7 +3,7 @@
 import { IconPicer } from "../../../components/icon-picker";
 import { Button } from "@nextui-org/button";
 import { ImageIcon, Smile, X } from "lucide-react";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, ReactNode, useRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
@@ -18,6 +18,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Divider } from "@nextui-org/divider";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -30,6 +31,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const [isCommentEditing, setCommentIsEditing] = useState(false);
   const [value, setValue] = useState(initialData.title);
   const [comment, setComment] = useState(initialData.comments);
+  const { dict } = useLocalization();
 
   const [currentTime, setCurrentTime] = useState(Date.now());
 
@@ -110,6 +112,70 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const onRemoveIcon = () => {
     removeIcon({ id: initialData._id });
   };
+
+  // TypeScript type for a tag
+  type Tag = {
+    type: "date" | "text" | "checkbox" | "number" | "priority";
+    content: string | number | boolean | Date;
+  };
+
+  // When saving tags to the database
+  const saveTags = (tags: Tag[]) => {
+    const tagsJson = JSON.stringify(tags);
+    // Now save tagsJson to the database
+    update({
+      id: initialData._id,
+      tags: tagsJson,
+    });
+  };
+  // Saving
+  // saveTags(tags);
+
+  // When retrieving tags from the database
+  const getTags = (tagsJson: string | undefined): Tag[] => {
+    if (!tagsJson) return [];
+    return JSON.parse(tagsJson) as Tag[];
+  };
+
+  // Example usage
+  const tags: Tag[] = [
+    { type: "date", content: new Date() },
+    { type: "text", content: "Important" },
+    { type: "checkbox", content: true },
+    { type: "number", content: 5 },
+    { type: "priority", content: "High" },
+  ];
+
+  // Retrieving
+  const retrievedTags = getTags(initialData.tags);
+
+  const TagComponent: React.FC<{ tag: Tag }> = ({ tag }) => {
+    switch (tag.type) {
+      case "date":
+        return (
+          <pre>
+            Pick a Date {new Date(tag.content as string).toLocaleDateString()}
+          </pre>
+        );
+      case "text":
+        return <pre>{tag.content as string}</pre>;
+      case "checkbox":
+        return (
+          <input type="checkbox" checked={tag.content as boolean} readOnly />
+        );
+      case "number":
+        return <pre>{tag.content as number}</pre>;
+      case "priority":
+        return (
+          <pre className={`priority-${tag.content}`}>
+            {tag.content as string}
+          </pre>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
@@ -143,7 +209,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           <IconPicer asChild onChange={onIconSelect}>
             <Button variant="ghost" className="text-muted-foreground text-xs">
               <Smile className="h-4 w-4 mr-2" />
-              Add icon
+              {dict.components.toolbar.addIcon}
             </Button>
           </IconPicer>
         )}
@@ -155,7 +221,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             className="text-muted-foreground text-xs"
           >
             <ImageIcon className="h-4 w-4 mr-2" />
-            Add Cover
+            {dict.components.toolbar.addCover}
           </Button>
         )}
       </div>
@@ -204,17 +270,14 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         >
           <pre>
             {initialData.comments
-              ? "Comment: " + initialData.comments
-              : "Add a comment"}
+              ? dict.components.toolbar.comment + initialData.comments
+              : dict.components.toolbar.addComment}
           </pre>
         </div>
       )}
 
       {/* To-Do Display document tags */}
 
-      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-        Last edited time: {formattedDate}, {timeAgo}
-      </pre>
       {/* <Dropdown>
         <DropdownTrigger>
           <Button size="sm" radius="sm" variant="light" color="secondary">
@@ -226,7 +289,13 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           <DropdownSection></DropdownSection>
         </DropdownMenu>
       </Dropdown> */}
-      <Divider className="my-2" />
+      {retrievedTags.map((tag) => (
+        <TagComponent key={tag.type} tag={tag} />
+      ))}
+      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+        Last edited time: {formattedDate}, {timeAgo}
+        <Divider className="my-2" />
+      </pre>
     </div>
   );
 };

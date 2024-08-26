@@ -8,10 +8,14 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { toast } from "sonner";
 import DocumentGraph from "@/components/documentGraph";
+import { useLocalization } from "../../contexts/LocalizationContext";
 
 export default function Documents() {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
+  const { dict } = useLocalization();
+  const welcomeMessage = dict.main.documents.welcome.replace("{firstName}", user?.firstName || "User");
+  
 
   // Function to create a new note
   const onCreate = () => {
@@ -33,7 +37,7 @@ export default function Documents() {
         >
           <div className="flex flex-col items-center justify-center mt-72">
             <h1 className="select-none ">
-              Hey {user?.username}, Welcome to Memoir
+            {welcomeMessage}
             </h1>
             {/* <h2 className="select-none mt-2 ">start by creating a new note</h2> */}
             <Button // Create note button
@@ -43,7 +47,7 @@ export default function Documents() {
               className="mt-2"
             >
               <PlusCircle />
-              Create Note
+              {dict.main.documents.welcome.create}
             </Button>
           </div>
           <Card isFooterBlurred radius="lg" className="border-none">

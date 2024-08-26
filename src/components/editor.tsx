@@ -25,8 +25,9 @@ import {
   createReactBlockSpec,
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
+  TextAlignButton,
 } from "@blocknote/react";
-import { NotepadText, TextSelect } from "lucide-react";
+import { Minus, NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
@@ -37,6 +38,8 @@ import { Wand } from "lucide-react";
 import { getAnswer } from "./getAnswer";
 import { getAiCompletion } from "./getAiCompletion";
 import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -46,6 +49,7 @@ interface EditorProps {
 
 const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   const { resolvedTheme } = useTheme();
+  const { dict } = useLocalization();
 
   const update = useMutation(api.documents.update);
   const create = useMutation(api.documents.create);
@@ -74,6 +78,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       "success",
     ],
     group: "Others",
+    subtext: "Add an alert to your note",
     icon: <RiAlertFill size={18} />,
   });
 
@@ -131,14 +136,15 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
         blockId: blocks[0].id,
       });
       toast.promise(promise, {
-        loading: "Creating a new note...",
-        success: "New note created!",
-        error: "Failed to create a new note.",
+        loading: dict.components.editor.toastCreateLoading,
+        success: dict.components.editor.toastCreateSuccess,
+        error: dict.components.editor.toastCreateError,
       });
     },
 
     aliases: ["page", "newpage", "inlinePage", "inlinepage"],
     group: "Others",
+    subtext: "Add a new page inside this page",
     icon: <NotepadText size={18} />,
   });
 
@@ -168,7 +174,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       return (
         <div>
           <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex  py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            Loading...
+            {dict.components.editor.isLoading}
           </div>
         </div>
       );
@@ -178,7 +184,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       return (
         <div>
           <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            Document not found
+            {dict.components.editor.notFound}
           </div>
         </div>
       );
@@ -219,15 +225,44 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }
   );
 
+  const insertDivider = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Divider",
+    onItemClick: () => {
+      insertOrUpdateBlock(editor, {
+        type: "inlineDivider",
+      });
+    },
+    aliases: ["Div", "Divider", "divi", "d"],
+    group: "Others",
+    subtext: "Add a divider to your note",
+    icon: <Minus size={18} />,
+  });
+
+  const inlineDivider = createReactBlockSpec(
+    {
+      type: "inlineDivider",
+      propSchema: {
+        type: { default: "Divider" },
+      },
+      content: "none",
+    },
+    {
+      render: () => {
+        return <Divider className="my-3" />;
+      },
+    }
+  );
+
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
   const schema = BlockNoteSchema.create({
     blockSpecs: {
       // all default blocks
       ...defaultBlockSpecs,
-      // the new alert block
+      // new blocks added :
       alert: Alert,
       inlinePage: inlinePage,
+      inlineDivider: inlineDivider,
     },
   });
 
@@ -288,7 +323,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
   }, [initialContent]);
 
   if (editor === undefined) {
-    return "Loading content...";
+    return dict.components.editor.loadingContent;
   }
 
   return (
@@ -325,6 +360,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 ...getDefaultReactSlashMenuItems(editor),
                 insertAlert(editor),
                 insertPage(editor),
+                insertDivider(editor),
                 insertMagicItem(editor),
                 aiSummarization(editor),
               ],

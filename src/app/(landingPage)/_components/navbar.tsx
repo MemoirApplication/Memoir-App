@@ -25,12 +25,15 @@ import { Spinner } from "@nextui-org/spinner";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Logo } from "./Logo";
 import { useConvexAuth } from "convex/react";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 export const NavigationBar = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { isLoaded } = useSession();
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { dict } = useLocalization();
+
 
   useEffect(() => {
     setMounted(true);
@@ -53,17 +56,17 @@ export const NavigationBar = () => {
       <NavbarContent className="hidden sm:flex gap-4 " justify="center">
         <NavbarItem>
           <Link color="foreground" href="/documents">
-            Docs
+            {dict.landingPage.components.navbar.docs}
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="#" aria-current="page" color="secondary">
-            Features
+          {dict.landingPage.components.navbar.features}
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+          {dict.landingPage.components.navbar.integrations}
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -73,7 +76,7 @@ export const NavigationBar = () => {
           <SignedOut>
             <SignInButton>
               <Button as={Link} color="secondary" radius="md" variant="shadow">
-                Sign in
+              {dict.landingPage.components.navbar.signin}
               </Button>
             </SignInButton>
           </SignedOut>
@@ -89,7 +92,7 @@ export const NavigationBar = () => {
                   variant="shadow"
                   href="/documents"
                 >
-                  Open Memoir
+                  {dict.landingPage.components.navbar.open}
                 </Button>
                 <UserButton />
               </div>
@@ -112,7 +115,7 @@ export const NavigationBar = () => {
                 startContent={<Moon />}
                 onClick={() => setTheme("dark")}
               >
-                Dark
+                {dict.landingPage.components.navbar.dark}
               </DropdownItem>
               <DropdownItem
                 className="text-foreground "
@@ -121,7 +124,7 @@ export const NavigationBar = () => {
                 startContent={<Sun />}
                 onClick={() => setTheme("light")}
               >
-                Light
+                {dict.landingPage.components.navbar.light}
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>

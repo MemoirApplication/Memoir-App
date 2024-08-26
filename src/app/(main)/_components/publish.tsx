@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { Check, Copy, Globe, Share } from "lucide-react";
 import { toast } from "sonner";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface PublishProps {
   initialData: Doc<"documents">;
@@ -21,6 +22,7 @@ interface PublishProps {
 export const Publish = ({ initialData }: PublishProps) => {
   const origin = useOrigin();
   const update = useMutation(api.documents.update);
+  const { dict } = useLocalization();
 
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,9 +38,9 @@ export const Publish = ({ initialData }: PublishProps) => {
     }).finally(() => setIsSubmitting(false));
 
     toast.promise(promise, {
-      loading: "Publishing...",
-      success: "Note published",
-      error: "Failed to publish note.",
+      loading: dict.main.components.Publish.toastPublishLoading,
+      success: dict.main.components.Publish.toastPublishSuccess,
+      error: dict.main.components.Publish.toastPublishError,
     });
   };
 
@@ -51,9 +53,9 @@ export const Publish = ({ initialData }: PublishProps) => {
     }).finally(() => setIsSubmitting(false));
 
     toast.promise(promise, {
-      loading: "Unpublishing...",
-      success: "Note unpublished",
-      error: "Failed to unpublish note.",
+      loading:dict.main.components.Publish.toastUnpublishLoading,
+      success: dict.main.components.Publish.toastUnpublishSuccess,
+      error: dict.main.components.Publish.toastUnpublishError,
     });
   };
 
@@ -69,7 +71,7 @@ export const Publish = ({ initialData }: PublishProps) => {
   return (
     <Popover placement="bottom" offset={12} className="w-72">
       <PopoverTrigger>
-        <Button variant="light" color="secondary" isIconOnly size="sm">
+        <Button variant="light" isIconOnly size="sm">
           <Share size={20} />
         </Button>
       </PopoverTrigger>
@@ -79,7 +81,7 @@ export const Publish = ({ initialData }: PublishProps) => {
             <div className="flex items-center gap-x-2">
               <Globe className="text-success-500 animate-pulse h-4 w-4" />
               <p className="text-xs font-medium text-success-500 select-none">
-                This note is published on the web
+                {dict.main.components.Publish.pageIsPublished}
               </p>
             </div>
             <div className="flex items-center">
@@ -102,7 +104,6 @@ export const Publish = ({ initialData }: PublishProps) => {
               </Button>
             </div>
             <Button
-              color="secondary"
               size="sm"
               className="w-full text-xs"
               disabled={isSubmitting}
@@ -110,27 +111,26 @@ export const Publish = ({ initialData }: PublishProps) => {
               radius="sm"
               fullWidth={true}
             >
-              Unpublish
+              {dict.main.components.Publish.unpublish}
             </Button>
           </div>
         ) : (
           <div className="w-full flex flex-col items-center justify-center p-3">
             <Globe className="h-8 w-8 text-muted-foreground mb-2" />
             <p className="text-sm font-medium mb-2 select-none">
-              Publish this note
+              {dict.main.components.Publish.publishPopover}
             </p>
             <span className="text-xs text-muted-foreground mb-4 select-none">
-              Share your work with others.
+              {dict.main.components.Publish.shareWork}
             </span>
             <Button
-              color="secondary"
               disabled={isSubmitting}
               onClick={onPublish}
               size="sm"
               radius="sm"
               fullWidth={true}
             >
-              Publish
+              {dict.main.components.Publish.publish}
             </Button>
           </div>
         )}

@@ -35,33 +35,38 @@ import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLocalization } from "../contexts/LocalizationContext";
+
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
+  const { dict } = useLocalization();
 
   // Create a new note
   const handleCreate = () => {
     const promise = create({ title: "Untitled" });
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Failed to create a new note.",
+      loading: dict.main.components.Sidebar.toastCreateLoading,
+      success: dict.main.components.Sidebar.toastCreateSuccess,
+      error: dict.main.components.Sidebar.toastCreateError,
     });
   };
 
   // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
+  const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
   const { user } = useUser();
 
   return (
     <>
       <aside
-        className={`bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
+        className={`bg-background text-foreground fixed top-0 inset-start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
       >
         {/* Sidebar background and container */}
         <Card
@@ -78,8 +83,8 @@ export const Sidebar = () => {
             >
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
-                <p className="ml-2 select-none font-medium text-base">
-                  {user?.username}&apos;s workspace
+                <p className="ms-2 select-none font-medium text-base">
+                  {user?.username}{dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -88,7 +93,7 @@ export const Sidebar = () => {
                       size="sm"
                       variant="flat"
                       color="secondary"
-                      className="ml-auto"
+                      className="ms-auto"
                     >
                       <ChevronDown />
                     </Button>
@@ -96,10 +101,16 @@ export const Sidebar = () => {
                   <PopoverContent>
                     <div className="px-1 py-2">
                       <div className="font-medium select-none py-1">
-                        Color Accent:{" "}
+                        {dict.main.components.Sidebar.theme}{" "}
                       </div>
                       <div>
                         <ColorSwitcher />
+                      </div>
+                      <div className="font-medium select-none py-1">
+                        {dict.main.components.Sidebar.language}{" "}
+                      </div>
+                      <div>
+                        <LanguageSwitcher />
                       </div>
                     </div>
                   </PopoverContent>
@@ -123,7 +134,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none  font-medium ">Home</p>
+                    <p className="select-none  font-medium ">{dict.main.components.Sidebar.home}</p>
                   </Button>
 
                   {/* Popover to show the calendar */}
@@ -135,7 +146,7 @@ export const Sidebar = () => {
                         className="justify-start my-1"
                       >
                         <CalendarDays size={20} />
-                        <p className="select-none font-medium ">Calendar</p>
+                        <p className="select-none font-medium ">{dict.main.components.Sidebar.calendar}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -154,7 +165,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <Settings size={20} />
-                    <p className="select-none font-medium ">Settings</p>
+                    <p className="select-none font-medium ">{dict.main.components.Sidebar.settings}</p>
                   </Button>
                 </CardBody>
               </Card>
@@ -172,14 +183,14 @@ export const Sidebar = () => {
                 </Button> */}
                   <div className="space-y-1">
                     <Item // Search button
-                      label="Search"
+                      label={dict.main.components.Sidebar.search}
                       icon={Search}
                       isSearch
                       onClick={search.onOpen} // Calls search.onOpen when pressed
                     />
                     <Item // New page button
                       onClick={handleCreate} // Calls handleCreate when pressed
-                      label="New Page"
+                      label={dict.main.components.Sidebar.newpage}
                       icon={PlusCircle}
                     />
                   </div>
@@ -190,9 +201,9 @@ export const Sidebar = () => {
                     <Divider className="mt-1" />
 
                     {/* Favorites section */}
-                    <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
-                      <Star size={20} className="mr-2" />
-                      Favorites
+                    <p className="flex ms-2 mt-4 mb-2 font-medium select-none">
+                      <Star size={20} className="me-2" />
+                      {dict.main.components.Sidebar.favorites}
                     </p>
                     <FavDocumentList />
                   </div>
@@ -217,7 +228,7 @@ export const Sidebar = () => {
                         className="justify-start "
                       >
                         <Trash2Icon size={20} />
-                        <p className="select-none  font-medium ">Trash</p>
+                        <p className="select-none  font-medium ">{dict.main.components.Sidebar.trash}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
