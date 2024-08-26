@@ -57,14 +57,8 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
       className={`flex items-center h-11 top-0 inset-end-0 bg-opacity-50 backdrop-blur-lg drop-shadow-md bg-background text-default-foreground border-b border-default-200 justify-between`}
     >
       {/* items on the left */}
-      <div className="flex items-center gap-x-2 ps-2">
-        <Button
-          onClick={toggleSidebar}
-          variant="light"
-          color="secondary"
-          isIconOnly
-          size="sm"
-        >
+      <div className="flex items-center gap-x-2 pl-2">
+        <Button onClick={toggleSidebar} variant="light" isIconOnly size="sm">
           <Menu size={20} />
           {/* <PanelLeft size={20} /> */}
         </Button>
@@ -72,14 +66,13 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
       </div>
 
       {/* items on the right */}
-      <div className="flex items-center gap-x-2 pe-2">
-        <Button variant="light" color="secondary" isIconOnly size="sm">
+      <div className="flex items-center gap-x-2 pr-2">
+        <Button variant="light" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>
         <Publish initialData={document} />
         <Button
           variant="light"
-          color="secondary"
           isIconOnly
           size="sm"
           onClick={() => {
@@ -90,7 +83,6 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         </Button>
         <Button
           variant="light"
-          color="secondary"
           isIconOnly
           size="sm"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -99,7 +91,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
         </Button>
         <Dropdown offset={12}>
           <DropdownTrigger>
-            <Button variant="light" color="secondary" isIconOnly size="sm">
+            <Button variant="light" isIconOnly size="sm">
               <Ellipsis size={20} />
             </Button>
           </DropdownTrigger>

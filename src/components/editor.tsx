@@ -25,8 +25,9 @@ import {
   createReactBlockSpec,
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
+  TextAlignButton,
 } from "@blocknote/react";
-import { NotepadText, TextSelect } from "lucide-react";
+import { Minus, NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
@@ -37,6 +38,7 @@ import { Wand } from "lucide-react";
 import { getAnswer } from "./getAnswer";
 import { getAiCompletion } from "./getAiCompletion";
 import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
 import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 interface EditorProps {
@@ -76,6 +78,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       "success",
     ],
     group: "Others",
+    subtext: "Add an alert to your note",
     icon: <RiAlertFill size={18} />,
   });
 
@@ -141,6 +144,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
 
     aliases: ["page", "newpage", "inlinePage", "inlinepage"],
     group: "Others",
+    subtext: "Add a new page inside this page",
     icon: <NotepadText size={18} />,
   });
 
@@ -221,15 +225,44 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }
   );
 
+  const insertDivider = (editor: typeof schema.BlockNoteEditor) => ({
+    title: "Divider",
+    onItemClick: () => {
+      insertOrUpdateBlock(editor, {
+        type: "inlineDivider",
+      });
+    },
+    aliases: ["Div", "Divider", "divi", "d"],
+    group: "Others",
+    subtext: "Add a divider to your note",
+    icon: <Minus size={18} />,
+  });
+
+  const inlineDivider = createReactBlockSpec(
+    {
+      type: "inlineDivider",
+      propSchema: {
+        type: { default: "Divider" },
+      },
+      content: "none",
+    },
+    {
+      render: () => {
+        return <Divider className="my-3" />;
+      },
+    }
+  );
+
   // new blocknote schema with block specs, which contain the configs and implementations for blocks
   // that we want our editor to use.
   const schema = BlockNoteSchema.create({
     blockSpecs: {
       // all default blocks
       ...defaultBlockSpecs,
-      // the new alert block
+      // new blocks added :
       alert: Alert,
       inlinePage: inlinePage,
+      inlineDivider: inlineDivider,
     },
   });
 
@@ -327,6 +360,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 ...getDefaultReactSlashMenuItems(editor),
                 insertAlert(editor),
                 insertPage(editor),
+                insertDivider(editor),
                 insertMagicItem(editor),
                 aiSummarization(editor),
               ],
