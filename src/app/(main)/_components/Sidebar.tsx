@@ -59,13 +59,14 @@ export const Sidebar = () => {
   // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
+  const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
   const { user } = useUser();
 
   return (
     <>
       <aside
-        className={`bg-background text-foreground fixed top-0 left-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? "-translate-x-full" : "translate-x-0"} w-72`}
+        className={`bg-background text-foreground fixed top-0 inset-start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
       >
         {/* Sidebar background and container */}
         <Card
@@ -82,7 +83,7 @@ export const Sidebar = () => {
             >
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
-                <p className="ml-2 select-none font-medium text-base">
+                <p className="ms-2 select-none font-medium text-base">
                   {user?.username}{dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
@@ -92,7 +93,7 @@ export const Sidebar = () => {
                       size="sm"
                       variant="flat"
                       color="secondary"
-                      className="ml-auto"
+                      className="ms-auto"
                     >
                       <ChevronDown />
                     </Button>
@@ -200,8 +201,8 @@ export const Sidebar = () => {
                     <Divider className="mt-1" />
 
                     {/* Favorites section */}
-                    <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
-                      <Star size={20} className="mr-2" />
+                    <p className="flex ms-2 mt-4 mb-2 font-medium select-none">
+                      <Star size={20} className="me-2" />
                       {dict.main.components.Sidebar.favorites}
                     </p>
                     <FavDocumentList />

@@ -66,16 +66,16 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
   return (
     <>
       {/* background color */}
-      {/* <div className="bg-background min-h-screen w-screen top-0 left-0 right-0 z-0 absolute"></div> */}
+      {/* <div className="bg-background min-h-screen w-screen top-0 left-0 inset-end-0 z-0 absolute"></div> */}
 
       <div className="w-screen flex-grow flex">
         {/* Container for resizing navbar and banner based on sidebar state */}
         <div
-          className={`flex-1 transition-all duration-300 ${isCollapsed ? "ml-0" : "ml-[18rem]"}`}
+          className={`flex-1 transition-all duration-300 ${isCollapsed ? "ms-0" : "ms-[18rem]"}`}
         >
           {/* Fixed container for Navbar and Banner, adjusting width based on sidebar state */}
           <div
-            className={`fixed top-0 right-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+            className={`fixed top-0 inset-end-0 z-40 transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
           >
             <CNavbar document={document} />
             {document.isArchived && <Banner documentId={document._id} />}
@@ -84,7 +84,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
         {/* Main content area that adjusts width based on sidebar state */}
         <div
-          className={`top-0 right-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
+          className={`top-0 inset-end-0 h-screen transition-all duration-300 ${isCollapsed ? "w-full" : "w-[calc(100%-18rem)]"}`}
         >
           {/* Cover should remain unaffected by isFullWidth */}
           <Cover url={document.coverImage} />

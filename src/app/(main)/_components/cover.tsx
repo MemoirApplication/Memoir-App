@@ -58,7 +58,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             className="text-muted-foreground text-xs"
             variant="solid"
           >
-            <X className="h-4 w-4 mr-2" />
+            <X className="h-4 w-4 me-2" />
             {dict.components.cover.remove}
           </Button>
         </div>

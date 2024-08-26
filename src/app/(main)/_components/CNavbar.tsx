@@ -54,10 +54,10 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   return (
     // <div className=" h-screen bg-background text-foreground w-screen">
     <div
-      className={`flex items-center h-11 top-0 right-0 bg-opacity-50 backdrop-blur-lg drop-shadow-md bg-background text-default-foreground border-b border-default-200 justify-between`}
+      className={`flex items-center h-11 top-0 inset-end-0 bg-opacity-50 backdrop-blur-lg drop-shadow-md bg-background text-default-foreground border-b border-default-200 justify-between`}
     >
       {/* items on the left */}
-      <div className="flex items-center gap-x-2 pl-2">
+      <div className="flex items-center gap-x-2 ps-2">
         <Button
           onClick={toggleSidebar}
           variant="light"
@@ -72,7 +72,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
       </div>
 
       {/* items on the right */}
-      <div className="flex items-center gap-x-2 pr-2">
+      <div className="flex items-center gap-x-2 pe-2">
         <Button variant="light" color="secondary" isIconOnly size="sm">
           <MessageSquareText size={20} />
         </Button>
