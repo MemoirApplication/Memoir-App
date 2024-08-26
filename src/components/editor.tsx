@@ -76,6 +76,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       "success",
     ],
     group: "Others",
+    subtext: "Add an alert to your note",
     icon: <RiAlertFill size={18} />,
   });
 
@@ -141,6 +142,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
 
     aliases: ["page", "newpage", "inlinePage", "inlinepage"],
     group: "Others",
+    subtext: "Add a new page inside this page",
     icon: <NotepadText size={18} />,
   });
 
@@ -230,6 +232,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     },
     aliases: ["Div", "Divider", "divi", "d"],
     group: "Others",
+    subtext: "Add a divider to your note",
     icon: <Minus size={18} />,
   });
 
@@ -237,14 +240,13 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     {
       type: "inlineDivider",
       propSchema: {
-        text: { default: "", hidden: true, readOnly: true },
         type: { default: "Divider" },
       },
       content: "none",
     },
     {
-      render: (props) => {
-        return <Divider className="my-2" />;
+      render: () => {
+        return <Divider className="my-3" />;
       },
     }
   );
@@ -255,7 +257,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     blockSpecs: {
       // all default blocks
       ...defaultBlockSpecs,
-      // the new alert block
+      // new blocks added :
       alert: Alert,
       inlinePage: inlinePage,
       inlineDivider: inlineDivider,
@@ -356,9 +358,9 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
                 ...getDefaultReactSlashMenuItems(editor),
                 insertAlert(editor),
                 insertPage(editor),
+                insertDivider(editor),
                 insertMagicItem(editor),
                 aiSummarization(editor),
-                insertDivider(editor),
               ],
               query
             )
