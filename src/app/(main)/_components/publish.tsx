@@ -19,59 +19,57 @@ interface PublishProps {
 }
 
 export const Publish = ({ initialData }: PublishProps) => {
-    const origin = useOrigin();
-    const update = useMutation(api.documents.update);
+  const origin = useOrigin();
+  const update = useMutation(api.documents.update);
 
-    const [copied, setCopied] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const url = `${origin}/preview/${initialData._id}`;
+  const url = `${origin}/preview/${initialData._id}`;
 
-    const onPublish = () => {
-        setIsSubmitting (true);
+  const onPublish = () => {
+    setIsSubmitting(true);
 
-        const promise = update({
-            id: initialData._id,
-            isPublished: true,
-        })
-        .finally(() => setIsSubmitting(false));
+    const promise = update({
+      id: initialData._id,
+      isPublished: true,
+    }).finally(() => setIsSubmitting(false));
 
-        toast.promise(promise, {
-            loading: "Publishing...", 
-            success: "Note published", 
-            error: "Failed to publish note."
-        });
-    };
+    toast.promise(promise, {
+      loading: "Publishing...",
+      success: "Note published",
+      error: "Failed to publish note.",
+    });
+  };
 
-    const onUnpublish = () => {
-      setIsSubmitting(true);
+  const onUnpublish = () => {
+    setIsSubmitting(true);
 
-      const promise = update({
-        id: initialData._id,
-        isPublished: false,
-      }).finally(() => setIsSubmitting(false));
+    const promise = update({
+      id: initialData._id,
+      isPublished: false,
+    }).finally(() => setIsSubmitting(false));
 
-      toast.promise(promise, {
-        loading: "Unpublishing...",
-        success: "Note unpublished",
-        error: "Failed to unpublish note.",
-      });
-    };
+    toast.promise(promise, {
+      loading: "Unpublishing...",
+      success: "Note unpublished",
+      error: "Failed to unpublish note.",
+    });
+  };
 
-    const onCopy = () => {
-        navigator.clipboard.writeText(url);
-        setCopied(true);
+  const onCopy = () => {
+    navigator.clipboard.writeText(url);
+    setCopied(true);
 
-        setTimeout(() => {
-            setCopied(false);
-        }, 1000);
-    }
-
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
 
   return (
     <Popover placement="bottom" offset={12} className="w-72">
       <PopoverTrigger>
-        <Button variant="light" color="default" isIconOnly size="sm">
+        <Button variant="light" color="secondary" isIconOnly size="sm">
           <Share size={20} />
         </Button>
       </PopoverTrigger>
@@ -119,7 +117,7 @@ export const Publish = ({ initialData }: PublishProps) => {
           <div className="w-full flex flex-col items-center justify-center p-3">
             <Globe className="h-8 w-8 text-muted-foreground mb-2" />
             <p className="text-sm font-medium mb-2 select-none">
-                Publish this note
+              Publish this note
             </p>
             <span className="text-xs text-muted-foreground mb-4 select-none">
               Share your work with others.

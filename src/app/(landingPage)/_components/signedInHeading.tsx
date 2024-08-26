@@ -13,7 +13,7 @@ export const SignedInHeading = () => {
         <Image src={headingImage} alt="Logo" width={200} height={200} />
       </div>
       <div className="drop-shadow-2xl space-y-4 items-center justify-center">
-        <p className="drop-shadow-2xl mb-4 text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/60 dark:from-white/90 dark:to-white/60">
+        <p className="drop-shadow-2xl mb-4 text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/60 dark:from-white/90 dark:to-white/60">
           Welcome to Memoir
         </p>
         {isAuthenticated && !isLoading && (
