@@ -7,10 +7,10 @@
       "navbar": {
         "docs": "Docs",
         "features": "Features",
-        "integrations": "integrations",
+        "integrations": "Integrations",
         "dark": "Dark",
         "light": "Light",
-        "sign in": "Sign in",
+        "signin": "Sign in",
         "open": "Open Memoir"
       },
       "signedInHeading": {
@@ -73,8 +73,9 @@
         "toastCreateLoading": "Creating page...",
         "toastCreateSuccess": "Page created!",
         "toastCreateError": "Failed to create page",
-        "workspace": "&apos;s workspace",
+        "workspace": "'s workspace",
         "theme": "Accent color:",
+        "language": "Accent color:",
         "home": "Home",
         "calendar": "Calendar",
         "settings": "Settings",
@@ -94,12 +95,13 @@
         "toastRestoreSuccess": "Page restored!",
         "toastRestoreError": "Failed to restore page.",
         "filterPlaceholder": "Filter by page title...",
+        "noPages": "No pages in trash",
         "confirmDeletion": "Are you sure?"
       }
     },
     "documents": {
       "documentId": {
-        "notFound": "Not Found"
+        "notFound": " Not Found "
       },
       "welcome": "Hey {firstName}, Welcome to Memoir",
       "create": "Create page"
@@ -125,17 +127,21 @@
       "toastCreateSuccess": "Page created!",
       "toastCreateError": "Failed to create page",
       "isLoading": "Loading...",
-      "notFound": "Document not found",
+      "notFound": "page not found",
       "loading": "loading",
       "loadingContent": "Loading content..."
     },
-    "seachCommand": {
-      "notFound": "No documents found."
+    "searchCommand": {
+      "notFound": "No page found.",
+      "placeholder": "Search {fullName}'s workspace..."
     },
     "imageDropzone": {
       "uploadMessage": "Click or drag & drop to upload"
     },
     "toolbar": {
+      "comment": "Comment: ",
+      "addComment": "Add a comment",
+      "lastEdit": "Last edited:",
       "addIcon": "Add icon",
       "addCover": "Add cover"
     }

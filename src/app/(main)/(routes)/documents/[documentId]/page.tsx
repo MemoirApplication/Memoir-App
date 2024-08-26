@@ -12,6 +12,7 @@ import { CNavbar } from "@/app/(main)/_components/CNavbar";
 import { useSidebar } from "../../../contexts/SidebarContext";
 import dynamic from "next/dynamic";
 import { Cover } from "@/app/(main)/_components/cover";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 interface DocumentIdPageProps {
   params: {
@@ -20,6 +21,8 @@ interface DocumentIdPageProps {
 }
 
 export default function DocumentIdPage({ params }: DocumentIdPageProps) {
+  const { dict } = useLocalization();
+
   const Editor = useMemo(
     () =>
       dynamic(() => import("../../../../../components/editor"), { ssr: false }),
@@ -57,7 +60,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
 
   // If the document is null, display a "Not Found" message
   if (document === null) {
-    return <div> Not Found </div>;
+    return <div>{dict.main.documents.documentId.notFound}</div>;
   }
 
   return (

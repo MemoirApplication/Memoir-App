@@ -27,11 +27,13 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { Publish } from "./publish";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { isCollapsed, toggleSidebar } = useSidebar();
   const { theme, setTheme } = useTheme();
   const ThemeIcon = theme === "dark" ? Sun : Moon;
+  const { dict } = useLocalization();
 
   const update = useMutation(api.documents.update);
 
@@ -110,7 +112,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
               shortcut="⌘⇧I"
               startContent={<Proportions />}
             >
-              Toggle page width
+              {dict.main.components.cnavbar.toggleWidth}
             </DropdownItem>
             <DropdownItem
               // onClick={onArchive}
@@ -120,7 +122,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
               shortcut="⌘⇧D"
               startContent={<Trash2Icon />}
             >
-              Delete file
+              {dict.main.components.cnavbar.archive}
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

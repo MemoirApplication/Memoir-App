@@ -36,6 +36,7 @@ import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 
 export const Sidebar = () => {
@@ -43,14 +44,15 @@ export const Sidebar = () => {
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
+  const { dict } = useLocalization();
 
   // Create a new note
   const handleCreate = () => {
     const promise = create({ title: "Untitled" });
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Failed to create a new note.",
+      loading: dict.main.components.Sidebar.toastCreateLoading,
+      success: dict.main.components.Sidebar.toastCreateSuccess,
+      error: dict.main.components.Sidebar.toastCreateError,
     });
   };
 
@@ -81,7 +83,7 @@ export const Sidebar = () => {
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ml-2 select-none font-medium text-base">
-                  {user?.username}&apos;s workspace
+                  {user?.username}{dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -98,13 +100,13 @@ export const Sidebar = () => {
                   <PopoverContent>
                     <div className="px-1 py-2">
                       <div className="font-medium select-none py-1">
-                        Accent Color:{" "}
+                        {dict.main.components.Sidebar.theme}{" "}
                       </div>
                       <div>
                         <ColorSwitcher />
                       </div>
                       <div className="font-medium select-none py-1">
-                        Language:{" "}
+                        {dict.main.components.Sidebar.language}{" "}
                       </div>
                       <div>
                         <LanguageSwitcher />
@@ -131,7 +133,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none  font-medium ">Home</p>
+                    <p className="select-none  font-medium ">{dict.main.components.Sidebar.home}</p>
                   </Button>
 
                   {/* Popover to show the calendar */}
@@ -143,7 +145,7 @@ export const Sidebar = () => {
                         className="justify-start my-1"
                       >
                         <CalendarDays size={20} />
-                        <p className="select-none font-medium ">Calendar</p>
+                        <p className="select-none font-medium ">{dict.main.components.Sidebar.calendar}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -162,7 +164,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <Settings size={20} />
-                    <p className="select-none font-medium ">Settings</p>
+                    <p className="select-none font-medium ">{dict.main.components.Sidebar.settings}</p>
                   </Button>
                 </CardBody>
               </Card>
@@ -180,14 +182,14 @@ export const Sidebar = () => {
                 </Button> */}
                   <div className="space-y-1">
                     <Item // Search button
-                      label="Search"
+                      label={dict.main.components.Sidebar.search}
                       icon={Search}
                       isSearch
                       onClick={search.onOpen} // Calls search.onOpen when pressed
                     />
                     <Item // New page button
                       onClick={handleCreate} // Calls handleCreate when pressed
-                      label="New Page"
+                      label={dict.main.components.Sidebar.newpage}
                       icon={PlusCircle}
                     />
                   </div>
@@ -200,7 +202,7 @@ export const Sidebar = () => {
                     {/* Favorites section */}
                     <p className="flex ml-2 mt-4 mb-2 font-medium select-none">
                       <Star size={20} className="mr-2" />
-                      Favorites
+                      {dict.main.components.Sidebar.favorites}
                     </p>
                     <FavDocumentList />
                   </div>
@@ -225,7 +227,7 @@ export const Sidebar = () => {
                         className="justify-start "
                       >
                         <Trash2Icon size={20} />
-                        <p className="select-none  font-medium ">Trash</p>
+                        <p className="select-none  font-medium ">{dict.main.components.Sidebar.trash}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>

@@ -10,12 +10,15 @@ import { useSearch } from "@/hooks/search-hook";
 import { api } from "../../../../convex/_generated/api";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
 import { Input } from "@nextui-org/input";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 export const SearchCommand = () => {
   const { user } = useUser();
   const router = useRouter();
   const documents = useQuery(api.documents.getSearch);
   const [isMounted, setIsMounted] = useState(false);
+  const { dict } = useLocalization();
+  const placeholderMessage = dict.components.searchCommand.placeholder.replace("{fullName}", user?.fullName || "User");
 
   const toggle = useSearch((store) => store.toggle);
   const isOpen = useSearch((store) => store.isOpen);
@@ -74,12 +77,12 @@ export const SearchCommand = () => {
               variant="faded"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={`Search ${user?.fullName}'s workspace...`}
+              placeholder={placeholderMessage}
             />
           </div>
           <div className="mt-2 px-1 pb-1">
             <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
-              No documents found.
+              {dict.components.searchCommand.notFound}
             </p>
             {filterDocuments?.map((document) => (
               <div

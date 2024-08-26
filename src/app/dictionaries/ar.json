@@ -10,7 +10,7 @@
         "integrations": "تكاملات",
         "dark": "داكن",
         "light": "فاتح",
-        "sign in": "تسجيل الدخول",
+        "signin": "تسجيل الدخول",
         "open": "افتح Memoir"
       },
       "signedInHeading": {
@@ -75,6 +75,7 @@
         "toastCreateError": "فشل إنشاء الصفحة",
         "workspace": "مساحة العمل الخاصة بـ",
         "theme": "لون التمييز:",
+        "language": "اللغة:",
         "home": "الرئيسية",
         "calendar": "التقويم",
         "settings": "الإعدادات",
@@ -94,6 +95,7 @@
         "toastRestoreSuccess": "تم استعادة الصفحة!",
         "toastRestoreError": "فشل استعادة الصفحة.",
         "filterPlaceholder": "تصفية حسب عنوان الصفحة...",
+        "noPages": "لا توجد صفحات في سلة المهملات",
         "confirmDeletion": "هل أنت متأكد؟"
       }
     },
@@ -101,7 +103,7 @@
       "documentId": {
         "notFound": "لم يتم العثور عليه"
       },
-      "welcome": "مرحبا {firstName}, مرحبا بك في Memoir",
+      "welcome": "اهلا {firstName}, مرحبا بك في Memoir",
       "create": "إنشاء صفحة"
     }
   },
@@ -125,17 +127,21 @@
       "toastCreateSuccess": "تم إنشاء الصفحة!",
       "toastCreateError": "فشل إنشاء الصفحة",
       "isLoading": "جارِ التحميل...",
-      "notFound": "لم يتم العثور على المستند",
+      "notFound": "لم يتم العثور على الصفحة",
       "loading": "جارِ التحميل",
       "loadingContent": "جارِ تحميل المحتوى..."
     },
     "searchCommand": {
-      "notFound": "لم يتم العثور على مستندات."
+      "notFound": "لم يتم العثور على صفحات.",
+      "placeholder": "ابحث في مساحة العمل الخاصة بـ{fullName}"
     },
     "imageDropzone": {
       "uploadMessage": "انقر أو اسحب وأفلت للتحميل"
     },
     "toolbar": {
+      "comment": "تعليق:  ",
+      "addComment": "اضف تعليق",
+      "lastEdit": "آخر تعديل:",
       "addIcon": "إضافة أيقونة",
       "addCover": "إضافة غلاف"
     }

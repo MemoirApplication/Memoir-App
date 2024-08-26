@@ -16,7 +16,7 @@ export default function LanguageDropdown() {
   const handleSelectionChange = (keys: Selection) => {
     const selectedLanguage = Array.from(keys).join("") || "en";  // Failsafe to 'en' if no valid key is selected
     setLanguage(selectedLanguage);  // Update the language in the context
-    console.log("set the language to", selectedLanguage)
+    localStorage.setItem("selectedLanguage", selectedLanguage); // Save to local storage
   };
 
   return (

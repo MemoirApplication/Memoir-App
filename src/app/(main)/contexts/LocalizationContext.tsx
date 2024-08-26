@@ -33,7 +33,6 @@ export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({ chil
     // Fetch the dictionary whenever the language changes
     const loadDictionary = async () => {
       const dictionary = await getDictionary(language);
-      console.log("Loaded dictionary:", dictionary); // Add this
       setDict(dictionary);
     };
     loadDictionary();

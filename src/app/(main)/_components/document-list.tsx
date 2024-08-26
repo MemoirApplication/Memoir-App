@@ -8,6 +8,7 @@ import { api } from "../../../../convex/_generated/api";
 import { Item } from "./item";
 import { cn } from "@nextui-org/theme";
 import { FileIcon } from "lucide-react";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
@@ -21,6 +22,8 @@ export const DocumentList = ({
   const params = useParams();
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({}); // Track the expanded state of each item
+  const { dict } = useLocalization();
+
 
   // Toggle the expanded state of the item
   const onExpand = (documentId: string) => {
@@ -70,7 +73,7 @@ export const DocumentList = ({
           level === 0 && "hidden"
         )}
       >
-        No Pages Inside
+        {dict.main.components.documentList.noPage}
       </p>
       {/* Render each document item */}
       {documents.map((document) => (
