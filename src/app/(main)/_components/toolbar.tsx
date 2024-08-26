@@ -3,7 +3,7 @@
 import { IconPicer } from "../../../components/icon-picker";
 import { Button } from "@nextui-org/button";
 import { ImageIcon, Smile, X } from "lucide-react";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, ReactNode, useRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
@@ -110,6 +110,69 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const onRemoveIcon = () => {
     removeIcon({ id: initialData._id });
   };
+
+  // TypeScript type for a tag
+  type Tag = {
+    type: "date" | "text" | "checkbox" | "number" | "priority";
+    content: string | number | boolean | Date;
+  };
+
+  // When saving tags to the database
+  const saveTags = (tags: Tag[]) => {
+    const tagsJson = JSON.stringify(tags);
+    // Now save tagsJson to the database
+    update({
+      id: initialData._id,
+      tags: tagsJson,
+    });
+  };
+
+  // When retrieving tags from the database
+  const getTags = (tagsJson: string | undefined): Tag[] => {
+    if (!tagsJson) return [];
+    return JSON.parse(tagsJson) as Tag[];
+  };
+
+  // Example usage
+  const tags: Tag[] = [
+    { type: "date", content: new Date() },
+    { type: "text", content: "Important" },
+    { type: "checkbox", content: true },
+    { type: "number", content: 5 },
+    { type: "priority", content: "High" },
+  ];
+
+  // Saving
+  saveTags(tags);
+
+  // Retrieving
+  const retrievedTags = getTags(initialData.tags);
+
+  const TagComponent: React.FC<{ tag: Tag }> = ({ tag }) => {
+    switch (tag.type) {
+      case "date":
+        return (
+          <span>{new Date(tag.content as string).toLocaleDateString()}</span>
+        );
+      case "text":
+        return <span>{tag.content as string}</span>;
+      case "checkbox":
+        return (
+          <input type="checkbox" checked={tag.content as boolean} readOnly />
+        );
+      case "number":
+        return <span>{tag.content as number}</span>;
+      case "priority":
+        return (
+          <span className={`priority-${tag.content}`}>
+            {tag.content as string}
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
@@ -212,9 +275,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
       {/* To-Do Display document tags */}
 
-      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-        Last edited time: {formattedDate}, {timeAgo}
-      </pre>
       {/* <Dropdown>
         <DropdownTrigger>
           <Button size="sm" radius="sm" variant="light" color="secondary">
@@ -227,6 +287,9 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         </DropdownMenu>
       </Dropdown> */}
       <Divider className="my-2" />
+      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+        Last edited time: {formattedDate}, {timeAgo}
+      </pre>
     </div>
   );
 };
