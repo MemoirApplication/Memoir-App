@@ -3,7 +3,8 @@
 <!-- ![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image") -->
 
 
-![alt text](https://github.com/MemoirApplication/Memoir-App/blob/main/public/default-monochrome.svg)
+![alt text](/public/default-monochrome.svg)
+
 # Getting Started
 
 First things first (for devs), you need to manually install the required packages after cloning the repository:
