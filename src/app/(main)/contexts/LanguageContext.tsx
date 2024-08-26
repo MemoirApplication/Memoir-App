@@ -37,7 +37,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
   // State to hold the current language
-  const [language, setLanguage] = useState<string>("en"); // Default to English
+  const [language, setLanguage] = useState<string | null>(null); // Default to English
 
   useEffect(() => {
     // Load language preference from local storage
