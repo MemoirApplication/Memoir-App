@@ -74,7 +74,7 @@
         "toastCreateSuccess": "Page created!",
         "toastCreateError": "Failed to create page",
         "workspace": "&apos;s workspace",
-        "theme": "Theme",
+        "theme": "Accent color:",
         "home": "Home",
         "calendar": "Calendar",
         "settings": "Settings",

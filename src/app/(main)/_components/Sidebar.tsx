@@ -35,6 +35,8 @@ import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -96,10 +98,16 @@ export const Sidebar = () => {
                   <PopoverContent>
                     <div className="px-1 py-2">
                       <div className="font-medium select-none py-1">
-                        Color Accent:{" "}
+                        Accent Color:{" "}
                       </div>
                       <div>
                         <ColorSwitcher />
+                      </div>
+                      <div className="font-medium select-none py-1">
+                        Language:{" "}
+                      </div>
+                      <div>
+                        <LanguageSwitcher />
                       </div>
                     </div>
                   </PopoverContent>
