@@ -5,6 +5,8 @@
 
 ![alt text](/public/default-monochrome.svg)
 
+<br><br/>
+
 # Getting Started
 
 First things first (for devs), you need to manually install the required packages after cloning the repository:
