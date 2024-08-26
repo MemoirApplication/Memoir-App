@@ -9,6 +9,7 @@ import { Spinner } from "@nextui-org/spinner";
 import { useColor } from "@/app/(main)/contexts/ColorContext";
 import { useTheme } from "next-themes";
 import { CoverImageModal } from "@/components/modals/cover-image-modal";
+import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 const MainLayout = ({
   children,
@@ -20,10 +21,11 @@ const MainLayout = ({
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { color } = useColor(); // Use color from ColorContext
   const { theme } = useTheme(); // Use theme from next-themes
+  const { dict } = useLocalization();
   const themeClass = `${color}-${theme}`;
 
   // Shows a spinner if the page is loading
-  if (isLoading) {
+  if (isLoading || !dict) {
     return (
       <div className="themeClass text-foreground bg-background h-screen flex items-center justify-center">
         <Spinner color="secondary" className="py-4 mt-10" />

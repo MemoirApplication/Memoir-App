@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Skeleton } from "@nextui-org/skeleton";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 interface CoverImageProps {
   url?: string;
@@ -21,6 +22,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   const params = useParams();
   const coverImage = useCoverImage();
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
+  const { dict } = useLocalization();
 
   const onRemove = async () => {
     if (url) {
@@ -49,15 +51,15 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             variant="solid"
           >
             <ImageIcon className="h-4 w-4 mr-2" />
-            Change cover
+            {dict.components.cover.change}
           </Button>
           <Button
             onClick={onRemove}
             className="text-muted-foreground text-xs"
             variant="solid"
           >
-            <X className="h-4 w-4 mr-2" />
-            Remove
+            <X className="h-4 w-4 me-2" />
+            {dict.components.cover.remove}
           </Button>
         </div>
       )}

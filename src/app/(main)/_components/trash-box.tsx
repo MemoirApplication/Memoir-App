@@ -12,6 +12,7 @@ import { Input } from "@nextui-org/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
 
 import { Button } from "@nextui-org/button";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 // Component for displaying and managing trashed documents
 export const TrashBox = () => {
@@ -20,6 +21,7 @@ export const TrashBox = () => {
   const documents = useQuery(api.documents.getTrash); // Fetch trashed documents
   const restore = useMutation(api.documents.restore); // Mutation to restore a document
   const remove = useMutation(api.documents.remove); // Mutation to permanently remove a document
+  const { dict } = useLocalization();
 
   const [search, setSearch] = useState(""); // State for search input
 
@@ -41,9 +43,9 @@ export const TrashBox = () => {
     event.stopPropagation();
     const promise = restore({ id: documentId });
     toast.promise(promise, {
-      loading: "Restoring...",
-      success: "Note restored!",
-      error: "Failed restoring.",
+      loading: dict.main.components.trashBox.toastRestoreLoading,
+      success: dict.main.components.trashBox.toastRestoreSuccess,
+      error: dict.main.components.trashBox.toastRestoreError,
     });
   };
 
@@ -54,9 +56,9 @@ export const TrashBox = () => {
   ) => {
     const promise = remove({ id: documentId });
     toast.promise(promise, {
-      loading: "Removing...",
-      success: "Note removed!",
-      error: "Failed removing.",
+      loading: dict.main.components.trashBox.toastRemoveLoading,
+      success: dict.main.components.trashBox.toastRemoveSuccess,
+      error: dict.main.components.trashBox.toastRemoveError,
     });
 
     // Redirect if the removed document is currently open
@@ -83,12 +85,12 @@ export const TrashBox = () => {
           variant="faded"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Filter by page title..."
+          placeholder={dict.main.components.trashBox.filterPlaceholder}
         />
       </div>
       <div className="mt-2 px-1 pb-1">
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
-          No documents in Trash.
+          {dict.main.components.trashBox.noPages}
         </p>
         {/* Render filtered documents */}
         {filterDocuments?.map((document) => (
@@ -117,7 +119,7 @@ export const TrashBox = () => {
                 </PopoverTrigger>
                 <PopoverContent>
                   <div className="flex  justify-center items-center">
-                    <h2 className="text-lg mr-4 ml-2">Are you sure ?</h2>
+                    <h2 className="text-lg mr-4 ml-2">{dict.main.components.trashBox.confirmDeletion}</h2>
                     {/* Button to Confirm removal */}
                     <Button
                       onClick={() => onRemove(document._id)}
