@@ -1,6 +1,11 @@
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
 
-![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image")
+<!-- ![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image") -->
+
+
+![alt text](/public/default-monochrome.svg)
+
+<br><br/>
 
 # Getting Started
 
