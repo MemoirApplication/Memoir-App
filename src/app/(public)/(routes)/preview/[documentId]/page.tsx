@@ -59,7 +59,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
         {/* Container for resizing navbar and banner based on sidebar state */}
         {/* Main content area that adjusts width based on sidebar state */}
         <div
-          className={`top-0 right-0 h-screen transition-all duration-300 w-full`}
+          className={`top-0 end-0 h-screen transition-all duration-300 w-full`}
         >
           {/* Cover should remain unaffected by isFullWidth */}
           <Cover preview url={document.coverImage} />

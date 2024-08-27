@@ -14,7 +14,7 @@ export default function Documents() {
   const { user } = useUser();
   const create = useMutation(api.documents.create);
   const { dict } = useLocalization();
-  const welcomeMessage = dict.main.documents.welcome.replace("{firstName}", user?.firstName || "User");
+  const welcomeMessage = dict.main.documents.welcome.replace("{firstName}", user?.username || "User");
   
 
   // Function to create a new note
@@ -22,9 +22,9 @@ export default function Documents() {
     const promise = create({ title: "Untitled" });
     // Shows a toast with the status
     toast.promise(promise, {
-      loading: "Creating a new note...",
-      success: "New note created!",
-      error: "Failed to create a new note.",
+      loading: dict.main.components.item.toastCreateLoading,
+      success: dict.main.components.item.toastCreateSuccess,
+      error: dict.main.components.item.toastCreateError,
     });
   };
 
@@ -33,7 +33,7 @@ export default function Documents() {
       <div className="relative h-screen bg-background text-foreground ">
         {/* Main content area */}
         <div
-          className={`fixed right-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}
+          className={`fixed end-0 h-screen flex-grow bg-background text-foreground transition-all duration-300 w-[calc(100%-18rem)]`}
         >
           <div className="flex flex-col items-center justify-center mt-72">
             <h1 className="select-none ">
@@ -47,7 +47,7 @@ export default function Documents() {
               className="mt-2"
             >
               <PlusCircle />
-              {dict.main.documents.welcome.create}
+              {dict.main.documents.create}
             </Button>
           </div>
           <Card isFooterBlurred radius="lg" className="border-none">

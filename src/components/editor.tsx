@@ -106,7 +106,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     aliases: ["autocomplete", "ai"],
     group: "Ai",
     icon: <Wand size={18} />,
-    subtext: "Continue your note with Ai-Generated text",
+    subtext: "Continue your note with AI-Generated text",
   });
 
   const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
@@ -122,7 +122,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     aliases: ["summarize", "ai"],
     group: "Ai",
     icon: <TextSelect size={18} />,
-    subtext: "Write a Summarization of the Page with Ai",
+    subtext: "Write a Summarization of the Page with AI",
   });
   const insertPage = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Inline Page",

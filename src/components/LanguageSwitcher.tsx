@@ -26,7 +26,7 @@ export default function LanguageDropdown() {
   // Define a mapping from language codes to names
   const languageOptions = [
     { key: "en", name: "English" },
-    { key: "ar", name: "Arabic" },
+    { key: "ar", name: "العربية" },
     // Add more languages as needed
   ];
 
@@ -67,7 +67,7 @@ export default function LanguageDropdown() {
         onSelectionChange={handleSelectionChange} // Trigger language change
       >
         <DropdownItem key="en">English</DropdownItem>
-        <DropdownItem key="ar">Arabic</DropdownItem>
+        <DropdownItem key="ar">العربية</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

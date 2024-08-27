@@ -59,6 +59,7 @@ export const Sidebar = () => {
   // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
+
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
   const { user } = useUser();
@@ -66,7 +67,7 @@ export const Sidebar = () => {
   return (
     <>
       <aside
-        className={`bg-background text-foreground fixed top-0 inset-start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
+        className={`bg-background text-foreground fixed top-0 start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
       >
         {/* Sidebar background and container */}
         <Card
@@ -81,10 +82,10 @@ export const Sidebar = () => {
               shadow="lg"
               className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
             >
-              <CardBody className="flex-row items-center justify-center">
+              <CardBody className="flex-row items-center justify-center overflow-hidden">
                 <UserButton />
                 <p className="ms-2 select-none font-medium text-base">
-                  {user?.username}{dict.main.components.Sidebar.workspace}
+                {(user?.username || "User") + dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -129,7 +130,7 @@ export const Sidebar = () => {
 
                   <Button // Home button
                     onClick={() => router.push("/documents")}
-                    variant="shadow"
+                    variant="flat"
                     color="secondary"
                     className="justify-start my-1"
                   >
@@ -141,7 +142,7 @@ export const Sidebar = () => {
                   <Popover shadow="lg" backdrop="blur" placement="right">
                     <PopoverTrigger>
                       <Button // Calendar button
-                        variant="shadow"
+                        variant="flat"
                         color="secondary"
                         className="justify-start my-1"
                       >
@@ -161,7 +162,7 @@ export const Sidebar = () => {
 
                   <Button // Settings button
                     color="secondary"
-                    variant="shadow"
+                    variant="flat"
                     className="justify-start my-1"
                   >
                     <Settings size={20} />
