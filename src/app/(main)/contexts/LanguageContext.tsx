@@ -12,6 +12,8 @@ type LanguageContextType = {
   setLanguage: (language: string) => void; // Function to update the language
 };
 
+type LanguageType = "en" | "ar"; // Define the supported languages
+
 // Create a context with an undefined default value
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
@@ -45,6 +47,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
       const storedLanguage = localStorage.getItem("selectedLanguage");
       if (storedLanguage) {
         setLanguage(storedLanguage);
+        const languageDirectionMap: Record<LanguageType, string> = {
+          en: "ltr",
+          ar: "rtl",
+        };
+      
+        const dir = languageDirectionMap[storedLanguage as LanguageType] || "ltr";
+        document.documentElement.setAttribute("dir", dir);
       } else {
         setLanguage("en");
       }
@@ -69,3 +78,4 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     </LanguageContext.Provider>
   );
 };
+
