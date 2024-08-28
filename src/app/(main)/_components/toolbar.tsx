@@ -222,10 +222,12 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       )}
 
       {/* To-Do Display document tags */}
-      <TagManager
-        documentId={initialData._id}
-        existingTags={initialData.tags}
-      />
+      {!preview && (
+        <TagManager
+          documentId={initialData._id}
+          existingTags={initialData.tags}
+        />
+      )}
 
       {/* Display last edited time and by user if in preview mode */}
       {!preview ? (
@@ -234,7 +236,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         </pre>
       ) : (
         <pre className="break-words text-wrap select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-          {dict.components.toolbar.lastEdit} {formattedDate}, {timeAgo} by {user?.username}
+          {dict.components.toolbar.lastEdit} {formattedDate}, {timeAgo} by{" "}
+          {user?.username}
         </pre>
       )}
       <Divider className="my-2" />
