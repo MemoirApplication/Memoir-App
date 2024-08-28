@@ -53,7 +53,7 @@ export const Publish = ({ initialData }: PublishProps) => {
     }).finally(() => setIsSubmitting(false));
 
     toast.promise(promise, {
-      loading:dict.main.components.Publish.toastUnpublishLoading,
+      loading: dict.main.components.Publish.toastUnpublishLoading,
       success: dict.main.components.Publish.toastUnpublishSuccess,
       error: dict.main.components.Publish.toastUnpublishError,
     });
