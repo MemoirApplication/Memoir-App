@@ -9,7 +9,7 @@ import {
 import type { Selection } from "@nextui-org/react";
 import { useLanguage } from "@/app/(main)/contexts/LanguageContext"; // Import the language context
 
-type LanguageType = "en" | "ar"; // Define the supported languages
+type LanguageType = "en" | "ar" | "jp"; // Define the supported languages
 
 export default function LanguageDropdown() {
   const { language, setLanguage } = useLanguage(); // Use the language context to get/set language
@@ -21,12 +21,14 @@ export default function LanguageDropdown() {
   const languageDirectionMap: Record<LanguageType, string> = {
     en: "ltr",
     ar: "rtl",
+    jp: "ltr",
   };
 
   // Define a mapping from language codes to names
   const languageOptions = [
     { key: "en", name: "English" },
-    { key: "ar", name: "Arabic" },
+    { key: "ar", name: "العربية" },
+    { key: "jp", name: "日本語" },
     // Add more languages as needed
   ];
 
@@ -67,7 +69,8 @@ export default function LanguageDropdown() {
         onSelectionChange={handleSelectionChange} // Trigger language change
       >
         <DropdownItem key="en">English</DropdownItem>
-        <DropdownItem key="ar">Arabic</DropdownItem>
+        <DropdownItem key="ar">العربية</DropdownItem>
+        <DropdownItem key="jp">日本語</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

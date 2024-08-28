@@ -105,7 +105,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     aliases: ["autocomplete", "ai"],
     group: "Ai",
     icon: <Wand size={18} />,
-    subtext: "Continue your note with Ai-Generated text",
+    subtext: "Continue your note with AI-Generated text",
   });
 
   const aiSummarize = (editor: typeof schema.BlockNoteEditor) => {
@@ -121,7 +121,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     aliases: ["summarize", "ai"],
     group: "Ai",
     icon: <TextSelect size={18} />,
-    subtext: "Write a Summarization of the Page with Ai",
+    subtext: "Write a Summarization of the Page with AI",
   });
   const insertPage = (editor: typeof schema.BlockNoteEditor) => ({
     title: "Inline Page",
@@ -170,13 +170,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }, [document, updateDocument]);
 
     if (isLoading) {
-      return (
-        <div>
-          <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex  py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            {dict.components.editor.isLoading}
-          </div>
-        </div>
-      );
+      return null;
     }
 
     if (!document) {

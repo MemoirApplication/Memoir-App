@@ -3,6 +3,7 @@
 import {
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   CopyIcon,
   LucideIcon,
   MoreHorizontal,
@@ -25,7 +26,6 @@ import {
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 import { useLocalization } from "../contexts/LocalizationContext";
-import { format } from "date-fns";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -38,7 +38,6 @@ interface ItemProps {
   label: string;
   onClick?: () => void;
   icon: LucideIcon;
-  lastEditedTime?: string | undefined;
 }
 
 // Item component for displaying a document
@@ -53,7 +52,6 @@ export const Item = ({
   level = 0,
   onExpand,
   expanded,
-  lastEditedTime,
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
@@ -100,18 +98,24 @@ export const Item = ({
     });
   };
 
+  const isRTL = document.documentElement.getAttribute("dir") === "rtl";
+
   // Determine which chevron icon to use based on the expanded state
-  const ChevronIcon = expanded ? ChevronDown : ChevronRight;
+  const ChevronIcon = expanded
+    ? ChevronDown // If expanded, show down chevron
+    : isRTL
+      ? ChevronLeft // Use left chevron in RTL mode
+      : ChevronRight; // Use right chevron in LTR mode
 
   return (
     <div
       onClick={onClick}
       role="button"
       style={{
-        paddingLeft: level ? `${level * 12 + 6}px` : "4px",
+        paddingInlineStart: level ? `${level * 12 + 6}px` : "8px",
       }}
       className={cn(
-        "select-none transition-all duration-300 ease-in-out group min-h-[27px] my-1 text-md py-1.5 pr-3 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-xl",
+        "select-none transition-all duration-300 ease-in-out group min-h-[27px] my-1 text-md py-1.5 pe-2 w-full hover:bg-secondary/10 flex items-center text-muted-foreground font-medium rounded-xl",
         active && "bg-secondary/5 text-secondary"
       )}
     >
@@ -125,19 +129,19 @@ export const Item = ({
         </div>
       )}
       {documentIcon ? (
-        <div className="shrink-0 pl-[3px] pr-[3px] mr-2 text-[18px]">
+        <div className="shrink-0 ps-[3px] pe-[3px] me-2 text-[18px]">
           {documentIcon}
         </div>
       ) : (
-        <Icon className="shrink-0 h-[18px] mr-2 text-muted-foreground" />
+        <Icon className="shrink-0 h-[18px] me-2 text-muted-foreground" />
       )}
       <span className="truncate">{label}</span>
       {isSearch && (
-        // <kbd className="ml-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-        //   <span className="text-xs pr-1">⌘ K</span>
+        // <kbd className="ms-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+        //   <span className="text-xs pe-1">⌘ K</span>
         // </kbd>
         <Kbd
-          className="ml-auto pointer-events-none inline-flex select-none"
+          className="ms-auto pointer-events-none inline-flex select-none"
           keys={["command"]}
         >
           K
@@ -145,12 +149,12 @@ export const Item = ({
       )}
       {/* Buttons that are shown next to document item */}
       {!!id && (
-        <div className=" ml-auto flex items-center gap-x-2">
+        <div className=" ms-auto flex items-center gap-x-2">
           <Dropdown className="select-none">
             <DropdownTrigger>
               <div
                 role="button"
-                className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
+                className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ms-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
               >
                 <MoreHorizontal size={18} />
               </div>
@@ -158,11 +162,7 @@ export const Item = ({
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
                 {dict.main.components.item.lastEdited}
-                {user?.username}-{" "}
-                {format(
-                  parseInt(lastEditedTime as string),
-                  "MMM dd, yyyy HH:mm"
-                )}
+                {user?.username}
               </DropdownItem>
               <DropdownItem
                 key="copy"
@@ -186,7 +186,7 @@ export const Item = ({
           <div // Create note button
             role="button"
             onClick={onCreate}
-            className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ml-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
+            className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-90 h-full ms-auto rounded-md p-1 hover:bg-secondary-200 dark:hover:bg-secondary-200"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />
           </div>
@@ -200,11 +200,13 @@ export const Item = ({
 Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
   return (
     <div
-      style={{ paddingLeft: level ? `${level * 12 + 25}px` : "12px" }}
-      className="flex gap-x-2 py[3px] p-1"
+      style={{
+        paddingInlineStart: level ? `${level * 12 + 25}px` : "12px",
+      }}
+      className="flex gap-x-2 py-[3px] p-1"
     >
-      <Skeleton className="h-4 w-4 " />
-      <Skeleton className="h-4 w-[30%] " />
+      <Skeleton className="h-4 w-4" />
+      <Skeleton className="h-4 w-[30%]" />
     </div>
   );
 };

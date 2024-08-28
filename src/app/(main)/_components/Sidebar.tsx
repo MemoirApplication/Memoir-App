@@ -6,6 +6,10 @@ import {
   Card,
   CardBody,
   Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   ScrollShadow,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
@@ -18,6 +22,8 @@ import {
   CalendarDays,
   Settings,
   Star,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
@@ -37,6 +43,7 @@ import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocalization } from "../contexts/LocalizationContext";
+import { useTheme } from "next-themes";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -44,6 +51,11 @@ export const Sidebar = () => {
   const create = useMutation(api.documents.create);
   const search = useSearch();
   const { dict } = useLocalization();
+  const { theme, setTheme } = useTheme();
+  const isDarkMode = theme === "dark";
+  const themeButtonText = isDarkMode
+    ? dict.landingPage.components.navbar.dark
+    : dict.landingPage.components.navbar.light;
 
   // Create a new note
   const handleCreate = () => {
@@ -58,6 +70,7 @@ export const Sidebar = () => {
   // Create a state variable with today's date
   const today = new Date().toISOString().split("T")[0]; // Gets today's date in "YYYY-MM-DD" format
   let [value, setValue] = React.useState(parseDate(today));
+
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
   const { user } = useUser();
@@ -65,7 +78,7 @@ export const Sidebar = () => {
   return (
     <>
       <aside
-        className={`bg-background text-foreground fixed top-0 inset-start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
+        className={`bg-background text-foreground fixed top-0 start-0 h-full z-50 transition-transform duration-300 transform ${isCollapsed ? (isRTL ? "translate-x-full" : "-translate-x-full") : "translate-x-0"} w-72`}
       >
         {/* Sidebar background and container */}
         <Card
@@ -80,11 +93,11 @@ export const Sidebar = () => {
               shadow="lg"
               className="mb-4 bg-opacity-20 backdrop-blur-lg h-28"
             >
-              <CardBody className="flex-row items-center justify-center">
+              <CardBody className="flex-row items-center justify-center overflow-hidden">
                 <UserButton />
                 <p className="ms-2 select-none font-medium text-base">
-                  {user?.username}
-                  {dict.main.components.Sidebar.workspace}
+                  {(user?.username || "User") +
+                    dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -101,13 +114,46 @@ export const Sidebar = () => {
                   <PopoverContent>
                     <div className="px-1 py-2">
                       <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.theme}{" "}
+                        {dict.main.components.Sidebar.theme}
+                      </div>
+                      <Dropdown className="justify-start items-start">
+                        <DropdownTrigger>
+                          <Button variant="bordered" color="default">
+                            {themeButtonText}
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                          variant="faded"
+                          aria-label="Dropdown Menu with icons"
+                        >
+                          <DropdownItem
+                            className="text-foreground "
+                            variant="faded"
+                            key="dark"
+                            startContent={<Moon />}
+                            onClick={() => setTheme("dark")}
+                          >
+                            {dict.landingPage.components.navbar.dark}
+                          </DropdownItem>
+                          <DropdownItem
+                            className="text-foreground "
+                            variant="faded"
+                            key="light"
+                            startContent={<Sun />}
+                            onClick={() => setTheme("light")}
+                          >
+                            {dict.landingPage.components.navbar.light}
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                      <div className="font-medium select-none py-1">
+                        {dict.main.components.Sidebar.color}
                       </div>
                       <div>
                         <ColorSwitcher />
                       </div>
                       <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.language}{" "}
+                        {dict.main.components.Sidebar.language}
                       </div>
                       <div>
                         <LanguageSwitcher />

@@ -3,6 +3,7 @@
 const dictionaries = {
   en: () => import('@/app/dictionaries/en.json').then((module) => module.default),
   ar: () => import('@/app/dictionaries/ar.json').then((module) => module.default),
+  jp: () => import('@/app/dictionaries/jp.json').then((module) => module.default),
 };
 
 // Updated function to ensure the fallback works as expected

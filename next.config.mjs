@@ -15,7 +15,13 @@ const withPWA = withPWAInit({
 });
 export default withPWA({
   images: {
-    domains: ["files.edgestore.dev"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'files.edgestore.dev',
+        port: '',
+      },
+    ],
   },
   reactStrictMode: true,
 });
