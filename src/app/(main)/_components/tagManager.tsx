@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -90,9 +90,9 @@ const TagManager: React.FC<TagManagerProps> = ({
     if (editingTag) {
       saveEditedTag();
     }
-  }, [editContent]);
+  }, [editingTag, saveEditedTag, editContent]);
 
-  const saveEditedTag = () => {
+  const saveEditedTag = useCallback(() => {
     if (!editingTag) return;
 
     const currentTags = parseTags(existingTags);
@@ -120,7 +120,7 @@ const TagManager: React.FC<TagManagerProps> = ({
       id: documentId,
       tags: JSON.stringify(updatedTags),
     });
-  };
+  }, [editingTag, editContent, existingTags, documentId, updateDocument]);
 
   const renderTag = (tag: Tag, index: number) => {
     let content: string;
