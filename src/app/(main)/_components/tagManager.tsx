@@ -199,7 +199,7 @@ const TagManager: React.FC<TagManagerProps> = ({
           //   onChange={(e) => setEditContent(e.target.value)}
           // />
           <DatePicker
-            variant="underlined"
+            variant="faded"
             label="Pick a Date"
             className="max-w-[484px]"
             onChange={(e) => setEditContent(e.toString())}
