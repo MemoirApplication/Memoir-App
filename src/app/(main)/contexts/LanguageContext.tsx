@@ -12,7 +12,7 @@ type LanguageContextType = {
   setLanguage: (language: string) => void; // Function to update the language
 };
 
-type LanguageType = "en" | "ar"; // Define the supported languages
+type LanguageType = "en" | "ar" | "jp"; // Define the supported languages
 
 // Create a context with an undefined default value
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -50,6 +50,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
         const languageDirectionMap: Record<LanguageType, string> = {
           en: "ltr",
           ar: "rtl",
+          jp: "ltr",
         };
       
         const dir = languageDirectionMap[storedLanguage as LanguageType] || "ltr";
