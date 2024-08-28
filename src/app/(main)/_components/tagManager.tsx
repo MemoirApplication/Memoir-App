@@ -6,16 +6,10 @@ import {
   DropdownItem,
   Button,
   Input,
-  Badge,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  cn,
   Popover,
   PopoverTrigger,
   PopoverContent,
+  cn,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -37,16 +31,12 @@ const TagManager: React.FC<TagManagerProps> = ({
   documentId,
   existingTags,
 }) => {
-  const [selectedType, setSelectedType] = useState<TagType | null>(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingTag, setEditingTag] = useState<{
     tag: Tag;
     index: number;
   } | null>(null);
   const [editContent, setEditContent] = useState<string>("");
   const updateDocument = useMutation(api.documents.update);
-
-  // For check boxes
 
   const parseTags = (tagsJson: string | undefined): Tag[] => {
     if (!tagsJson) return [];
@@ -84,18 +74,14 @@ const TagManager: React.FC<TagManagerProps> = ({
       id: documentId,
       tags: JSON.stringify(updatedTags),
     });
-
-    setSelectedType(null);
   };
 
-  const openEditModal = (tag: Tag, index: number) => {
+  const openEditPopover = (tag: Tag, index: number) => {
     setEditingTag({ tag, index });
     setEditContent(String(tag.content));
-    setIsEditModalOpen(true);
   };
 
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
+  const closeEditPopover = () => {
     setEditingTag(null);
     setEditContent("");
   };
@@ -129,7 +115,7 @@ const TagManager: React.FC<TagManagerProps> = ({
       tags: JSON.stringify(updatedTags),
     });
 
-    closeEditModal();
+    closeEditPopover();
   };
 
   const renderTag = (tag: Tag, index: number) => {
@@ -147,44 +133,57 @@ const TagManager: React.FC<TagManagerProps> = ({
     }
 
     return (
-      <div className="flex">
-        <div className="py-1">{tag.type}:</div>
-        <div
-          key={index}
-          role="button"
-          className={cn(
-            "ml-2",
-            "hover:bg-secondary/25",
-            "transition-all",
-            "ease-in-out",
-            "duration-300",
-            "rounded-md",
-            "py-1",
-            "px-2",
-            "flex"
-          )}
-          onClick={() => openEditModal(tag, index)}
-        >
-          {tag.type === "priority" && (
+      <Popover
+        key={index}
+        onOpenChange={(isOpen) => !isOpen && closeEditPopover()}
+      >
+        <PopoverTrigger>
+          <div className="flex">
+            <div className="py-1">{tag.type}:</div>
             <div
               className={cn(
-                "rounded-lg",
-                "p-1",
-                tag.type === "priority" && tag.content === "High"
-                  ? "bg-rose-500"
-                  : "",
-                tag.type === "priority" && tag.content === "Medium"
-                  ? "bg-amber-500"
-                  : "",
-                tag.type === "priority" && tag.content === "Low"
-                  ? "bg-sky-500"
-                  : ""
+                "ml-2",
+                "hover:bg-secondary/25",
+                "transition-all",
+                "ease-in-out",
+                "duration-300",
+                "rounded-md",
+                "py-1",
+                "px-2",
+                "flex"
               )}
-            />
-          )}
-          {content}
-        </div>
-      </div>
+              onClick={() => openEditPopover(tag, index)}
+            >
+              {tag.type === "priority" && (
+                <div
+                  className={cn(
+                    "rounded-lg",
+                    "p-1",
+                    tag.type === "priority" && tag.content === "High"
+                      ? "bg-rose-500"
+                      : "",
+                    tag.type === "priority" && tag.content === "Medium"
+                      ? "bg-amber-500"
+                      : "",
+                    tag.type === "priority" && tag.content === "Low"
+                      ? "bg-sky-500"
+                      : ""
+                  )}
+                />
+              )}
+              {content}
+            </div>
+          </div>
+        </PopoverTrigger>
+        <PopoverContent>
+          {renderEditInput()}
+          <div className="flex justify-end mt-2">
+            <Button color="primary" size="sm" onPress={saveEditedTag}>
+              Save
+            </Button>
+          </div>
+        </PopoverContent>
+      </Popover>
     );
   };
 
@@ -246,25 +245,10 @@ const TagManager: React.FC<TagManagerProps> = ({
   return (
     <div>
       <div className="">
-        {/* <h3>Current Tags:</h3> */}
         <pre className="w-fit select-none outline-none transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md py-1 px-2">
           {parseTags(existingTags).map((tag, index) => renderTag(tag, index))}
         </pre>
       </div>
-      <Modal isOpen={isEditModalOpen} onClose={closeEditModal}>
-        <ModalContent>
-          <ModalHeader>Edit Tag</ModalHeader>
-          <ModalBody>{renderEditInput()}</ModalBody>
-          <ModalFooter>
-            <Button color="danger" variant="light" onPress={closeEditModal}>
-              Cancel
-            </Button>
-            <Button color="primary" onPress={saveEditedTag}>
-              Save
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
 
       <div className="flex gap-2">
         <Dropdown>
