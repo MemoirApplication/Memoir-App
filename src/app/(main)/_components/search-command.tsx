@@ -18,7 +18,10 @@ export const SearchCommand = () => {
   const documents = useQuery(api.documents.getSearch);
   const [isMounted, setIsMounted] = useState(false);
   const { dict } = useLocalization();
-  const placeholderMessage = dict.components.searchCommand.placeholder.replace("{fullName}", user?.fullName || "User");
+  const placeholderMessage = dict.components.searchCommand.placeholder.replace(
+    "{fullName}",
+    user?.username || "User"
+  );
 
   const toggle = useSearch((store) => store.toggle);
   const isOpen = useSearch((store) => store.isOpen);
@@ -55,16 +58,23 @@ export const SearchCommand = () => {
   }
 
   return (
+    // <div className="flex flex-col w-full justify-center items-center">
     <Popover
+      // className="justify-center items-center"
       isOpen={isOpen}
       onOpenChange={onClose}
-      onClose={onClose}
+      // onClose={onClose}
       backdrop="blur"
+      // side={(e) => {
+      //   // Return true if onClose should be called
+      //   return true;
+      // }}
       shouldCloseOnBlur={true}
       shouldCloseOnInteractOutside={(e) => {
         // Return true if onClose should be called
         return true;
       }}
+      placement="top"
     >
       <PopoverTrigger>
         <div></div>
@@ -104,5 +114,6 @@ export const SearchCommand = () => {
         </div>
       </PopoverContent>
     </Popover>
+    // </div>
   );
 };
