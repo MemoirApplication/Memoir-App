@@ -86,12 +86,6 @@ const TagManager: React.FC<TagManagerProps> = ({
     setEditContent("");
   };
 
-  useEffect(() => {
-    if (editingTag) {
-      saveEditedTag();
-    }
-  }, [editingTag, saveEditedTag, editContent]);
-
   const saveEditedTag = useCallback(() => {
     if (!editingTag) return;
 
@@ -121,6 +115,12 @@ const TagManager: React.FC<TagManagerProps> = ({
       tags: JSON.stringify(updatedTags),
     });
   }, [editingTag, editContent, existingTags, documentId, updateDocument]);
+
+  useEffect(() => {
+    if (editingTag) {
+      saveEditedTag();
+    }
+  }, [editingTag, saveEditedTag, editContent]);
 
   const renderTag = (tag: Tag, index: number) => {
     let content: string;
