@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, SetStateAction } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -10,6 +10,8 @@ import {
   PopoverTrigger,
   PopoverContent,
   cn,
+  DatePicker,
+  CalendarDate,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -190,10 +192,16 @@ const TagManager: React.FC<TagManagerProps> = ({
     switch (editingTag.tag.type) {
       case "date":
         return (
-          <Input
-            type="date"
-            value={editContent}
-            onChange={(e) => setEditContent(e.target.value)}
+          // <Input
+          //   type="date"
+          //   value={editContent}
+          //   onChange={(e) => setEditContent(e.target.value)}
+          // />
+          <DatePicker
+            variant="underlined"
+            label="Pick a Date"
+            className="max-w-[484px]"
+            onChange={(e) => setEditContent(e)}
           />
         );
       case "checkbox":
