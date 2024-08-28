@@ -158,11 +158,9 @@ export const Item = ({
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
                 {dict.main.components.item.lastEdited}
-                {user?.username}-{" "}
-                {format(
-                  parseInt(lastEditedTime as string),
-                  "MMM dd, yyyy HH:mm"
-                )}
+                {user?.username}
+                {" - "}
+                {format(parseInt(lastEditedTime as string), "MMM dd, yyyy")}
               </DropdownItem>
               <DropdownItem
                 key="copy"
