@@ -154,7 +154,8 @@ export const Item = ({
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
-                {dict.main.components.item.lastEdited}{user?.username}
+                {dict.main.components.item.lastEdited}
+                {user?.username}
               </DropdownItem>
               <DropdownItem
                 key="copy"
