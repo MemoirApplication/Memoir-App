@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -86,6 +86,12 @@ const TagManager: React.FC<TagManagerProps> = ({
     setEditContent("");
   };
 
+  useEffect(() => {
+    if (editingTag) {
+      saveEditedTag();
+    }
+  }, [editContent]);
+
   const saveEditedTag = () => {
     if (!editingTag) return;
 
@@ -114,8 +120,6 @@ const TagManager: React.FC<TagManagerProps> = ({
       id: documentId,
       tags: JSON.stringify(updatedTags),
     });
-
-    closeEditPopover();
   };
 
   const renderTag = (tag: Tag, index: number) => {
@@ -175,14 +179,7 @@ const TagManager: React.FC<TagManagerProps> = ({
             </div>
           </div>
         </PopoverTrigger>
-        <PopoverContent>
-          {renderEditInput()}
-          <div className="flex justify-end mt-2">
-            <Button color="primary" size="sm" onPress={saveEditedTag}>
-              Save
-            </Button>
-          </div>
-        </PopoverContent>
+        <PopoverContent>{renderEditInput()}</PopoverContent>
       </Popover>
     );
   };
