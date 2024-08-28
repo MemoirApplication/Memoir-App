@@ -38,6 +38,7 @@ import ColorSwitcher from "@/components/ColorSwitcher";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocalization } from "../contexts/LocalizationContext";
 
+
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
   const router = useRouter();
@@ -83,8 +84,7 @@ export const Sidebar = () => {
               <CardBody className="flex-row items-center justify-center">
                 <UserButton />
                 <p className="ms-2 select-none font-medium text-base">
-                  {user?.username}
-                  {dict.main.components.Sidebar.workspace}
+                  {user?.username}{dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -134,9 +134,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none  font-medium ">
-                      {dict.main.components.Sidebar.home}
-                    </p>
+                    <p className="select-none  font-medium ">{dict.main.components.Sidebar.home}</p>
                   </Button>
 
                   {/* Popover to show the calendar */}
@@ -148,9 +146,7 @@ export const Sidebar = () => {
                         className="justify-start my-1"
                       >
                         <CalendarDays size={20} />
-                        <p className="select-none font-medium ">
-                          {dict.main.components.Sidebar.calendar}
-                        </p>
+                        <p className="select-none font-medium ">{dict.main.components.Sidebar.calendar}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -169,9 +165,7 @@ export const Sidebar = () => {
                     className="justify-start my-1"
                   >
                     <Settings size={20} />
-                    <p className="select-none font-medium ">
-                      {dict.main.components.Sidebar.settings}
-                    </p>
+                    <p className="select-none font-medium ">{dict.main.components.Sidebar.settings}</p>
                   </Button>
                 </CardBody>
               </Card>
@@ -234,9 +228,7 @@ export const Sidebar = () => {
                         className="justify-start "
                       >
                         <Trash2Icon size={20} />
-                        <p className="select-none  font-medium ">
-                          {dict.main.components.Sidebar.trash}
-                        </p>
+                        <p className="select-none  font-medium ">{dict.main.components.Sidebar.trash}</p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>

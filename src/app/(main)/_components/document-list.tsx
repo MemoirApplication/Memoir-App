@@ -24,6 +24,7 @@ export const DocumentList = ({
   const [expanded, setExpanded] = useState<Record<string, boolean>>({}); // Track the expanded state of each item
   const { dict } = useLocalization();
 
+
   // Toggle the expanded state of the item
   const onExpand = (documentId: string) => {
     setExpanded((prevExpanded) => ({
@@ -41,14 +42,14 @@ export const DocumentList = ({
   if (documents === undefined) {
     return (
       <>
-        <div className="p-[6px]">
-          <Item.Skeleton level={level} />
-          {level === 0 && (
-            <>
-              <Item.Skeleton level={level} />
-              <Item.Skeleton level={level} />
-            </>
-          )}
+      <div className="p-[6px]">
+        <Item.Skeleton level={level} />
+        {level === 0 && (
+          <>
+            <Item.Skeleton level={level} />
+            <Item.Skeleton level={level} />
+          </>
+        )}
         </div>
       </>
     );
@@ -90,8 +91,8 @@ export const DocumentList = ({
             onExpand={() => {
               onExpand(document._id); // Toggle expansion on click
             }}
+            
             expanded={expanded[document._id]}
-            lastEditedTime={document.lastEditedTime}
           />
           {/* Recursively render nested documents if the item is expanded */}
           {expanded[document._id] && (

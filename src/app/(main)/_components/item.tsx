@@ -37,7 +37,6 @@ interface ItemProps {
   label: string;
   onClick?: () => void;
   icon: LucideIcon;
-  lastEditedTime?: string | undefined;
 }
 
 // Item component for displaying a document
@@ -52,7 +51,6 @@ export const Item = ({
   level = 0,
   onExpand,
   expanded,
-  lastEditedTime,
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
@@ -156,8 +154,7 @@ export const Item = ({
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
-                {dict.main.components.item.lastEdited}
-                {user?.username} - {lastEditedTime}
+                {dict.main.components.item.lastEdited}{user?.username}
               </DropdownItem>
               <DropdownItem
                 key="copy"
