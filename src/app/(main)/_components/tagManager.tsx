@@ -16,6 +16,7 @@ import {
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { format } from "date-fns";
 
 type TagType = "date" | "text" | "checkbox" | "number" | "priority";
 
@@ -201,7 +202,7 @@ const TagManager: React.FC<TagManagerProps> = ({
             variant="underlined"
             label="Pick a Date"
             className="max-w-[484px]"
-            onChange={(e) => setEditContent(e)}
+            onChange={(e) => setEditContent(e.toString())}
           />
         );
       case "checkbox":
