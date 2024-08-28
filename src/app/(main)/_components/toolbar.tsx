@@ -17,8 +17,10 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
+import TagManager from "./tagManager";
 import { Divider } from "@nextui-org/divider";
 import { useLocalization } from "../contexts/LocalizationContext";
+import { useUser } from "@clerk/nextjs";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -26,6 +28,7 @@ interface ToolbarProps {
 }
 
 export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
+  const { user } = useUser();
   const inputRef = useRef<ElementRef<"textarea">>(null);
   const [isTitleEditing, setTitleIsEditing] = useState(false);
   const [isCommentEditing, setCommentIsEditing] = useState(false);
@@ -113,69 +116,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
     removeIcon({ id: initialData._id });
   };
 
-  // TypeScript type for a tag
-  type Tag = {
-    type: "date" | "text" | "checkbox" | "number" | "priority";
-    content: string | number | boolean | Date;
-  };
-
-  // When saving tags to the database
-  const saveTags = (tags: Tag[]) => {
-    const tagsJson = JSON.stringify(tags);
-    // Now save tagsJson to the database
-    update({
-      id: initialData._id,
-      tags: tagsJson,
-    });
-  };
-  // Saving
-  // saveTags(tags);
-
-  // When retrieving tags from the database
-  const getTags = (tagsJson: string | undefined): Tag[] => {
-    if (!tagsJson) return [];
-    return JSON.parse(tagsJson) as Tag[];
-  };
-
-  // Example usage
-  const tags: Tag[] = [
-    { type: "date", content: new Date() },
-    { type: "text", content: "Important" },
-    { type: "checkbox", content: true },
-    { type: "number", content: 5 },
-    { type: "priority", content: "High" },
-  ];
-
-  // Retrieving
-  const retrievedTags = getTags(initialData.tags);
-
-  const TagComponent: React.FC<{ tag: Tag }> = ({ tag }) => {
-    switch (tag.type) {
-      case "date":
-        return (
-          <pre>
-            Pick a Date {new Date(tag.content as string).toLocaleDateString()}
-          </pre>
-        );
-      case "text":
-        return <pre>{tag.content as string}</pre>;
-      case "checkbox":
-        return (
-          <input type="checkbox" checked={tag.content as boolean} readOnly />
-        );
-      case "number":
-        return <pre>{tag.content as number}</pre>;
-      case "priority":
-        return (
-          <pre className={`priority-${tag.content}`}>
-            {tag.content as string}
-          </pre>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className=" px-[54px] group relative">
       {/* Display icon picker and remove icon button if an icon is set and not in preview mode */}
@@ -250,52 +190,54 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       )}
 
       {/* Display text area for editing comment or static comment display */}
-      {isCommentEditing && !preview ? (
+      {!preview && (
         <div>
-          <pre>
-            <TextareaAutosize
-              ref={inputRef}
-              onBlur={disableCommentInput}
-              onKeyDown={onKeyDown}
-              value={comment}
-              onChange={(e) => onInputComment(e.target.value)}
-              className="py-[11.5px] w-full bg-transparent break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
-            />
-          </pre>
-        </div>
-      ) : (
-        <div
-          onClick={enableInputComment}
-          className="break-words flex w-fit select-none outline-none hover:bg-secondary/20 transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md p-2"
-        >
-          <pre>
-            {initialData.comments
-              ? dict.components.toolbar.comment + initialData.comments
-              : dict.components.toolbar.addComment}
-          </pre>
+          {isCommentEditing ? (
+            <div>
+              <pre>
+                <TextareaAutosize
+                  ref={inputRef}
+                  onBlur={disableCommentInput}
+                  onKeyDown={onKeyDown}
+                  value={comment}
+                  onChange={(e) => onInputComment(e.target.value)}
+                  className="py-[11.5px] w-full bg-transparent break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] resize-none "
+                />
+              </pre>
+            </div>
+          ) : (
+            <div
+              role="button"
+              onClick={enableInputComment}
+              className="break-words flex w-fit select-none outline-none hover:bg-secondary/20 transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md p-2"
+            >
+              <pre>
+                {initialData.comments
+                  ? dict.components.toolbar.comment + initialData.comments
+                  : dict.components.toolbar.addComment}
+              </pre>
+            </div>
+          )}
         </div>
       )}
 
       {/* To-Do Display document tags */}
+      <TagManager
+        documentId={initialData._id}
+        existingTags={initialData.tags}
+      />
 
-      {/* <Dropdown>
-        <DropdownTrigger>
-          <Button size="sm" radius="sm" variant="light" color="secondary">
-            Add a tag
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu>
-          <DropdownItem></DropdownItem>
-          <DropdownSection></DropdownSection>
-        </DropdownMenu>
-      </Dropdown> */}
-      {retrievedTags.map((tag) => (
-        <TagComponent key={tag.type} tag={tag} />
-      ))}
-      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-        Last edited time: {formattedDate}, {timeAgo}
-        <Divider className="my-2" />
-      </pre>
+      {/* Display last edited time and by user if in preview mode */}
+      {!preview ? (
+        <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+          Last edited time: {formattedDate}, {timeAgo}
+        </pre>
+      ) : (
+        <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+          Last edited time: {formattedDate}, {timeAgo} by {user?.username}
+        </pre>
+      )}
+      <Divider className="my-2" />
     </div>
   );
 };
