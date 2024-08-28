@@ -25,7 +25,6 @@ import {
   createReactBlockSpec,
   getDefaultReactSlashMenuItems,
   SuggestionMenuController,
-  TextAlignButton,
 } from "@blocknote/react";
 import { Minus, NotepadText, TextSelect } from "lucide-react";
 import { toast } from "sonner";

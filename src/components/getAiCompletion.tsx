@@ -1,6 +1,6 @@
 "use server";
 
-import { generateText, streamText } from "ai";
+import { generateText } from "ai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
 export async function getAiCompletion(question: string) {
@@ -10,7 +10,7 @@ export async function getAiCompletion(question: string) {
   });
 
   const systemInstruction: string =
-    "You are an AI writing assistant that continues existing text based on context from prior text.\nGive more weight/priority to the later characters than the beginning ones.\nLimit your response to no more than 200 characters, but make sure to construct complete sentences.\nIf you get any context, request or question which you think its forbidden or its out of study & note taking context you have the rights to refuse replying for that and tell the reason you did not reply.";
+    "You are an AI writing assistant that continues existing text based on context from prior text.\nGive more weight/priority to the later characters than the beginning ones, but make sure to construct complete sentences.\nIf you get any context, request or question which you think its forbidden or its out of study & note taking context you have the rights to refuse replying for that and tell the reason you did not reply.";
 
   try {
     const { text, finishReason, usage } = await generateText({
