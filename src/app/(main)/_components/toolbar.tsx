@@ -292,7 +292,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       {retrievedTags.map((tag) => (
         <TagComponent key={tag.type} tag={tag} />
       ))}
-      <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+      <pre className="break-words text-wrap select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
         {dict.components.toolbar.lastEdit} {formattedDate}, {timeAgo}
         <Divider className="my-2" />
       </pre>

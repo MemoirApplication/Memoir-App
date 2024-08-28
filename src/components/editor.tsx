@@ -171,13 +171,7 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
     }, [document, updateDocument]);
 
     if (isLoading) {
-      return (
-        <div>
-          <div className="select-none bg-default/40 hover:bg-default/65 rounded-md flex  py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content">
-            {dict.components.editor.isLoading}
-          </div>
-        </div>
-      );
+      return null;
     }
 
     if (!document) {

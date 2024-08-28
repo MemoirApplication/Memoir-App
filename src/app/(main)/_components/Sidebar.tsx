@@ -6,6 +6,10 @@ import {
   Card,
   CardBody,
   Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   ScrollShadow,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
@@ -18,6 +22,8 @@ import {
   CalendarDays,
   Settings,
   Star,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
@@ -37,7 +43,7 @@ import { parseDate } from "@internationalized/date";
 import ColorSwitcher from "@/components/ColorSwitcher";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocalization } from "../contexts/LocalizationContext";
-
+import { useTheme } from "next-themes";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -45,6 +51,11 @@ export const Sidebar = () => {
   const create = useMutation(api.documents.create);
   const search = useSearch();
   const { dict } = useLocalization();
+  const { theme, setTheme } = useTheme();
+  const isDarkMode = theme === "dark";
+  const themeButtonText = isDarkMode
+    ? dict.landingPage.components.navbar.dark
+    : dict.landingPage.components.navbar.light;
 
   // Create a new note
   const handleCreate = () => {
@@ -85,7 +96,8 @@ export const Sidebar = () => {
               <CardBody className="flex-row items-center justify-center overflow-hidden">
                 <UserButton />
                 <p className="ms-2 select-none font-medium text-base">
-                {(user?.username || "User") + dict.main.components.Sidebar.workspace}
+                  {(user?.username || "User") +
+                    dict.main.components.Sidebar.workspace}
                 </p>
                 <Popover placement="bottom" showArrow={true}>
                   <PopoverTrigger>
@@ -102,13 +114,46 @@ export const Sidebar = () => {
                   <PopoverContent>
                     <div className="px-1 py-2">
                       <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.theme}{" "}
+                        {dict.main.components.Sidebar.theme}
+                      </div>
+                      <Dropdown className="justify-start items-start">
+                        <DropdownTrigger>
+                          <Button variant="bordered" color="default">
+                            {themeButtonText}
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                          variant="faded"
+                          aria-label="Dropdown Menu with icons"
+                        >
+                          <DropdownItem
+                            className="text-foreground "
+                            variant="faded"
+                            key="dark"
+                            startContent={<Moon />}
+                            onClick={() => setTheme("dark")}
+                          >
+                            {dict.landingPage.components.navbar.dark}
+                          </DropdownItem>
+                          <DropdownItem
+                            className="text-foreground "
+                            variant="faded"
+                            key="light"
+                            startContent={<Sun />}
+                            onClick={() => setTheme("light")}
+                          >
+                            {dict.landingPage.components.navbar.light}
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                      <div className="font-medium select-none py-1">
+                        {dict.main.components.Sidebar.color}
                       </div>
                       <div>
                         <ColorSwitcher />
                       </div>
                       <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.language}{" "}
+                        {dict.main.components.Sidebar.language}
                       </div>
                       <div>
                         <LanguageSwitcher />
@@ -130,24 +175,28 @@ export const Sidebar = () => {
 
                   <Button // Home button
                     onClick={() => router.push("/documents")}
-                    variant="flat"
+                    variant="shadow"
                     color="secondary"
                     className="justify-start my-1"
                   >
                     <HomeIcon size={20} />
-                    <p className="select-none  font-medium ">{dict.main.components.Sidebar.home}</p>
+                    <p className="select-none  font-medium ">
+                      {dict.main.components.Sidebar.home}
+                    </p>
                   </Button>
 
                   {/* Popover to show the calendar */}
                   <Popover shadow="lg" backdrop="blur" placement="right">
                     <PopoverTrigger>
                       <Button // Calendar button
-                        variant="flat"
+                        variant="shadow"
                         color="secondary"
                         className="justify-start my-1"
                       >
                         <CalendarDays size={20} />
-                        <p className="select-none font-medium ">{dict.main.components.Sidebar.calendar}</p>
+                        <p className="select-none font-medium ">
+                          {dict.main.components.Sidebar.calendar}
+                        </p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -162,11 +211,13 @@ export const Sidebar = () => {
 
                   <Button // Settings button
                     color="secondary"
-                    variant="flat"
+                    variant="shadow"
                     className="justify-start my-1"
                   >
                     <Settings size={20} />
-                    <p className="select-none font-medium ">{dict.main.components.Sidebar.settings}</p>
+                    <p className="select-none font-medium ">
+                      {dict.main.components.Sidebar.settings}
+                    </p>
                   </Button>
                 </CardBody>
               </Card>
@@ -229,7 +280,9 @@ export const Sidebar = () => {
                         className="justify-start "
                       >
                         <Trash2Icon size={20} />
-                        <p className="select-none  font-medium ">{dict.main.components.Sidebar.trash}</p>
+                        <p className="select-none  font-medium ">
+                          {dict.main.components.Sidebar.trash}
+                        </p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
