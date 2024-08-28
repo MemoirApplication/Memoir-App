@@ -7,6 +7,12 @@ import {
   Button,
   Input,
   Badge,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  cn,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -29,6 +35,12 @@ const TagManager: React.FC<TagManagerProps> = ({
   existingTags,
 }) => {
   const [selectedType, setSelectedType] = useState<TagType | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingTag, setEditingTag] = useState<{
+    tag: Tag;
+    index: number;
+  } | null>(null);
+  const [editContent, setEditContent] = useState<string>("");
   const updateDocument = useMutation(api.documents.update);
 
   // For check boxes
@@ -74,10 +86,48 @@ const TagManager: React.FC<TagManagerProps> = ({
   };
 
   const openEditModal = (tag: Tag, index: number) => {
-    // Implement logic to open an edit modal or inline edit field
+    setEditingTag({ tag, index });
+    setEditContent(String(tag.content));
+    setIsEditModalOpen(true);
   };
 
-  const [isSelected, setIsSelected] = useState(false);
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setEditingTag(null);
+    setEditContent("");
+  };
+
+  const saveEditedTag = () => {
+    if (!editingTag) return;
+
+    const currentTags = parseTags(existingTags);
+    const updatedTags = [...currentTags];
+
+    let newContent: string | number | boolean | Date = editContent;
+    switch (editingTag.tag.type) {
+      case "date":
+        newContent = new Date(editContent).toISOString();
+        break;
+      case "checkbox":
+        newContent = editContent.toLowerCase() === "true";
+        break;
+      case "number":
+        newContent = Number(editContent);
+        break;
+    }
+
+    updatedTags[editingTag.index] = {
+      ...editingTag.tag,
+      content: newContent,
+    };
+
+    updateDocument({
+      id: documentId,
+      tags: JSON.stringify(updatedTags),
+    });
+
+    closeEditModal();
+  };
 
   const renderTag = (tag: Tag, index: number) => {
     let content: string;
@@ -94,17 +144,100 @@ const TagManager: React.FC<TagManagerProps> = ({
     }
 
     return (
-      <div>
-        <Badge
+      <div className="flex">
+        <div className="py-1">{tag.type}:</div>
+        <div
           key={index}
-          color={tag.type === "priority" ? "danger" : "primary"}
-          // onClick={() => openEditModal(tag, index)}
+          role="button"
+          className={cn(
+            "ml-2",
+            "hover:bg-secondary/25",
+            "transition-all",
+            "ease-in-out",
+            "duration-300",
+            "rounded-md",
+            "py-1",
+            "px-2",
+            "flex"
+          )}
+          onClick={() => openEditModal(tag, index)}
         >
-          {tag.type}: {content}
-        </Badge>
-        <br />
+          {tag.type === "priority" && (
+            <div
+              className={cn(
+                "rounded-lg",
+                "p-1",
+                tag.type === "priority" && tag.content === "High"
+                  ? "bg-rose-500"
+                  : "",
+                tag.type === "priority" && tag.content === "Medium"
+                  ? "bg-amber-500"
+                  : "",
+                tag.type === "priority" && tag.content === "Low"
+                  ? "bg-sky-500"
+                  : ""
+              )}
+            />
+          )}
+          {content}
+        </div>
       </div>
     );
+  };
+
+  const renderEditInput = () => {
+    if (!editingTag) return null;
+
+    switch (editingTag.tag.type) {
+      case "date":
+        return (
+          <Input
+            type="date"
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+          />
+        );
+      case "checkbox":
+        return (
+          <Dropdown>
+            <DropdownTrigger>
+              <Button>{editContent}</Button>
+            </DropdownTrigger>
+            <DropdownMenu onAction={(key) => setEditContent(key as string)}>
+              <DropdownItem key="true">True</DropdownItem>
+              <DropdownItem key="false">False</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        );
+      case "number":
+        return (
+          <Input
+            type="number"
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+          />
+        );
+      case "priority":
+        return (
+          <Dropdown>
+            <DropdownTrigger>
+              <Button>{editContent}</Button>
+            </DropdownTrigger>
+            <DropdownMenu onAction={(key) => setEditContent(key as string)}>
+              <DropdownItem key="Low">Low</DropdownItem>
+              <DropdownItem key="Medium">Medium</DropdownItem>
+              <DropdownItem key="High">High</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        );
+      default:
+        return (
+          <Input
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+          />
+        );
+    }
   };
 
   return (
@@ -115,6 +248,21 @@ const TagManager: React.FC<TagManagerProps> = ({
           {parseTags(existingTags).map((tag, index) => renderTag(tag, index))}
         </pre>
       </div>
+      <Modal isOpen={isEditModalOpen} onClose={closeEditModal}>
+        <ModalContent>
+          <ModalHeader>Edit Tag</ModalHeader>
+          <ModalBody>{renderEditInput()}</ModalBody>
+          <ModalFooter>
+            <Button color="danger" variant="light" onPress={closeEditModal}>
+              Cancel
+            </Button>
+            <Button color="primary" onPress={saveEditedTag}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <div className="flex gap-2">
         <Dropdown>
           <DropdownTrigger>
