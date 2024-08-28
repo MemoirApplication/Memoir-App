@@ -25,7 +25,6 @@ import {
 } from "@nextui-org/react";
 import { useUser } from "@clerk/clerk-react";
 import { useLocalization } from "../contexts/LocalizationContext";
-import { format } from "date-fns";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -158,11 +157,7 @@ export const Item = ({
             <DropdownMenu variant="faded" aria-label="Dropdown menu with icons">
               <DropdownItem showDivider isDisabled>
                 {dict.main.components.item.lastEdited}
-                {user?.username}-{" "}
-                {format(
-                  parseInt(lastEditedTime as string),
-                  "MMM dd, yyyy HH:mm"
-                )}
+                {user?.username} - {lastEditedTime}
               </DropdownItem>
               <DropdownItem
                 key="copy"
