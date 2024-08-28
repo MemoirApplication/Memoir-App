@@ -13,6 +13,9 @@ import {
   ModalBody,
   ModalFooter,
   cn,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
@@ -269,9 +272,6 @@ const TagManager: React.FC<TagManagerProps> = ({
             <div className="break-words flex w-fit select-none outline-none hover:bg-secondary/20 transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md py-1 px-2">
               <pre>Add a tag</pre>
             </div>
-            {/* <Button variant="light" color="secondary" radius="sm">
-            Add a Tag
-          </Button> */}
           </DropdownTrigger>
           <DropdownMenu onAction={(key) => addTag(key as TagType)}>
             <DropdownItem key="date">Date</DropdownItem>
