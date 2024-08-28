@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ForceGraph3D from "react-force-graph-3d";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { useTheme } from "next-themes";
 
 // Define types for our graph data
 type GraphNode = {
@@ -23,6 +24,10 @@ type GraphData = {
 };
 
 const DocumentGraphClient = () => {
+  const { theme } = useTheme() || "dark";
+  const isDarkMode = theme === "dark";
+  const graphBackgroundColor = isDarkMode ? "rgb(0, 0, 0, 0)" : "rgb(255, 255, 255, 0)";
+
   const documents = useQuery(api.documents.getDocuments);
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
@@ -57,6 +62,7 @@ const DocumentGraphClient = () => {
       nodeLabel="name"
       nodeAutoColorBy="group"
       linkDirectionalParticles={2}
+      backgroundColor={graphBackgroundColor}
     />
   );
 };

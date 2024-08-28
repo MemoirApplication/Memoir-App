@@ -65,12 +65,13 @@ export const FavDocumentList = ({
     <>
       <p
         style={{
-          paddingLeft: level ? `${level * 12 + 25}px` : "12px",
+          paddingInlineStart: level ? `${level * 12 + 25}px` : "12px",
         }}
         className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80 p-2 select-none",
+          "hidden text-sm font-medium text-muted-foreground/80 p-2 justify-start select-none",
           expanded && "last:block",
-          level === 0 && "hidden"
+          level === 0 && "hidden",
+          "text-start" // Ensure text aligns with the flow (left in LTR, right in RTL)
         )}
       >
         {dict.main.components.documentList.noPage}

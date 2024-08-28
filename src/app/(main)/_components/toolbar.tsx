@@ -148,7 +148,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         {!initialData.icon && !preview && (
           <IconPicer asChild onChange={onIconSelect}>
             <Button variant="ghost" className="text-muted-foreground text-xs">
-              <Smile className="h-4 w-4 mr-2" />
+              <Smile className="h-4 w-4 me-2" />
               {dict.components.toolbar.addIcon}
             </Button>
           </IconPicer>
@@ -160,7 +160,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             variant="ghost"
             className="text-muted-foreground text-xs"
           >
-            <ImageIcon className="h-4 w-4 mr-2" />
+            <ImageIcon className="h-4 w-4 me-2" />
             {dict.components.toolbar.addCover}
           </Button>
         )}
@@ -229,12 +229,12 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
       {/* Display last edited time and by user if in preview mode */}
       {!preview ? (
-        <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-          Last edited time: {formattedDate}, {timeAgo}
+        <pre className="break-words text-wrap select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+          {dict.components.toolbar.lastEdit} {formattedDate}, {timeAgo}
         </pre>
       ) : (
-        <pre className="break-words select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
-          Last edited time: {formattedDate}, {timeAgo} by {user?.username}
+        <pre className="break-words text-wrap select-none outline-none text-[#707070] dark:text-[#b6b6b6] p-2">
+          {dict.components.toolbar.lastEdit} {formattedDate}, {timeAgo} by {user?.username}
         </pre>
       )}
       <Divider className="my-2" />

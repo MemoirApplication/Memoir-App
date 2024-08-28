@@ -64,12 +64,13 @@ export const DocumentList = ({
       {/* Displays a message if there are no pages inside, based on the expanded state */}
       <p
         style={{
-          paddingLeft: level ? `${level * 12 + 25}px` : "12px",
+          paddingInlineStart: level ? `${level * 12 + 25}px` : "12px",
         }}
         className={cn(
           "hidden text-sm font-medium text-muted-foreground/80 p-2 select-none",
           expanded && "last:block",
-          level === 0 && "hidden"
+          level === 0 && "hidden",
+          "text-start"
         )}
       >
         {dict.main.components.documentList.noPage}

@@ -80,7 +80,7 @@ export const TrashBox = () => {
     <div className="text-sm">
       {/* Search input for filtering documents */}
       <div className="flex items-center gap-x-1 p-2">
-        <Search className="mr-3" />
+        <Search className="me-3" />
         <Input
           variant="faded"
           value={search}
@@ -100,7 +100,7 @@ export const TrashBox = () => {
             onClick={() => onClick(document._id)}
             className="text-sm rounded-md w-full hover:bg-secondary/5 flex items-center text-secondary justify-between"
           >
-            <span className="truncate pl-2">{document.title}</span>
+            <span className="truncate ps-2">{document.title}</span>
             <div className="flex  items-center">
               {/* Restore button */}
               <div
@@ -119,7 +119,7 @@ export const TrashBox = () => {
                 </PopoverTrigger>
                 <PopoverContent>
                   <div className="flex  justify-center items-center">
-                    <h2 className="text-lg mr-4 ml-2">{dict.main.components.trashBox.confirmDeletion}</h2>
+                    <h2 className="text-lg me-4 ms-2">{dict.main.components.trashBox.confirmDeletion}</h2>
                     {/* Button to Confirm removal */}
                     <Button
                       onClick={() => onRemove(document._id)}

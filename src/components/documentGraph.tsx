@@ -3,7 +3,7 @@ import React from "react";
 
 const DocumentGraphClient = dynamic(() => import("./documentGraphClient"), {
   ssr: false,
-  loading: () => <p>Loading graph...</p>,
+  loading: () => null,
 });
 
 const DocumentGraph = () => {

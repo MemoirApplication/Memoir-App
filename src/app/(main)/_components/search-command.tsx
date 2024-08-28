@@ -18,10 +18,7 @@ export const SearchCommand = () => {
   const documents = useQuery(api.documents.getSearch);
   const [isMounted, setIsMounted] = useState(false);
   const { dict } = useLocalization();
-  const placeholderMessage = dict.components.searchCommand.placeholder.replace(
-    "{fullName}",
-    user?.username || "User"
-  );
+  const placeholderMessage = dict.components.searchCommand.placeholder.replace("{fullName}", user?.username || "User");
 
   const toggle = useSearch((store) => store.toggle);
   const isOpen = useSearch((store) => store.isOpen);
