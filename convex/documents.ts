@@ -115,6 +115,42 @@ export const getFavSidebar = query({
   },
 });
 
+export const getRecentDocuments = query({
+  args: {
+    limit: v.optional(v.number()), // To limit the number of recent documents
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+    const userId = identity.subject;
+
+    // Fetch documents for the user
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("isArchived"), false))
+      .collect();
+
+    // Sort documents by lastEditedTime in descending order
+    const sortedDocuments = documents
+      .filter(doc => doc.lastEditedTime) // Ensure lastEditedTime is defined
+      .sort((a, b) => {
+        // Convert lastEditedTime to number for accurate sorting
+        const timeA = Number(a.lastEditedTime);
+        const timeB = Number(b.lastEditedTime);
+        return timeB - timeA; // Descending order
+      });
+
+    // Limit the number of results if a limit is specified
+    const limitedDocuments = args.limit ? sortedDocuments.slice(0, args.limit) : sortedDocuments;
+
+    return limitedDocuments;
+  },
+});
+
+
 
 export const create = mutation({
   args: {
