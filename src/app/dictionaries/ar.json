@@ -79,6 +79,7 @@
         "language": "اللغة:",
         "home": "الرئيسية",
         "calendar": "التقويم",
+        "graph": "رسم بياني 3D",
         "settings": "الإعدادات",
         "search": "بحث",
         "newpage": "صفحة جديدة",
@@ -149,6 +150,18 @@
       "lastEdit": "آخر تعديل:",
       "addIcon": "إضافة أيقونة",
       "addCover": "إضافة غلاف"
+    },
+    "tagManager": {
+      "low": "قليل",
+      "medium": "متوسط",
+      "high": "مرتفع",
+      "addTag": "أضف علامة",
+      "date": "تاريخ",
+      "text": "نص",
+      "checkbox": "مربع الاختيار",
+      "number": "رقم",
+      "priority": "أولوية",
+      "cleartags": "مسح العلامات"
     }
   }
 }

@@ -79,6 +79,7 @@
         "language": "Language:",
         "home": "Home",
         "calendar": "Calendar",
+        "graph": "Graph",
         "settings": "Settings",
         "search": "Search",
         "newpage": "New page",
@@ -149,6 +150,18 @@
       "lastEdit": "Last edited:",
       "addIcon": "Add icon",
       "addCover": "Add cover"
+    },
+    "tagManager": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "addTag": "Add a tag",
+      "date": "Date",
+      "text": "Text",
+      "checkbox": "Checkbox",
+      "number": "Number",
+      "priority": "Priority",
+      "cleartags": "Clear Tags"
     }
   }
 }
