@@ -105,7 +105,11 @@
         "notFound": " Not Found "
       },
       "welcome": "Hey {firstName}, Welcome to Memoir",
-      "create": "Create page"
+      "create": "Create page",
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "recentPages": "Recent pages:"
     }
   },
   "error": {

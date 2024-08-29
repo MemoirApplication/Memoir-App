@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocalization } from "./(main)/contexts/LocalizationContext";
 
 const Error = () => {
+  const router = useRouter();
   const { dict } = useLocalization();
 
   return (
@@ -23,8 +25,14 @@ const Error = () => {
         <h2 className="text-2xl font-medium">{dict.error.errorMessage}</h2>
       </div>
       <div className="pt-6">
-        <Button color="secondary" size="lg">
-          <Link href={"/documents"}>{dict.error.goBack}</Link>
+        <Button
+          color="secondary"
+          size="lg"
+          onClick={() => {
+            router.push("/documents");
+          }}
+        >
+          {dict.error.goBack}
         </Button>
       </div>
     </div>

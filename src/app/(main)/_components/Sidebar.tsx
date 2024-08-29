@@ -24,6 +24,7 @@ import {
   Star,
   Sun,
   Moon,
+  ScatterChart,
 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { toast } from "sonner";
@@ -44,6 +45,7 @@ import ColorSwitcher from "@/components/ColorSwitcher";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocalization } from "../contexts/LocalizationContext";
 import { useTheme } from "next-themes";
+import DocumentGraph from "@/components/documentGraph";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
@@ -206,6 +208,30 @@ export const Sidebar = () => {
                         value={value}
                         onChange={setValue}
                       />
+                    </PopoverContent>
+                  </Popover>
+
+                  <Popover shadow="lg" backdrop="blur" placement="right">
+                    <PopoverTrigger>
+                      <Button
+                        variant="shadow"
+                        color="secondary"
+                        className="justify-start my-1"
+                      >
+                        <ScatterChart size={20} />
+                        <p className="select-none font-medium">Graph</p>
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Card
+                        isFooterBlurred
+                        radius="lg"
+                        className="border-none bg-background w-[700px] h-[700px]"
+                      >
+                        <div className="object-cover">
+                          <DocumentGraph />
+                        </div>
+                      </Card>
                     </PopoverContent>
                   </Popover>
 
