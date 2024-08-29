@@ -87,13 +87,13 @@ export const Publish = ({ initialData }: PublishProps) => {
             <div className="flex items-center">
               <input
                 value={url}
-                className="flex-1 px-2 text-xs border rounded-l-md h-8"
+                className="flex-1 px-2 text-xs border rounded-s-md h-8"
                 disabled
               />
               <Button
                 onClick={onCopy}
                 disabled={copied}
-                className="h-8 rounded-l-none"
+                className="h-8 rounded-s-none"
                 isIconOnly={true}
               >
                 {copied ? (

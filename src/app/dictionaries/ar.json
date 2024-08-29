@@ -105,7 +105,11 @@
         "notFound": "لم يتم العثور عليه"
       },
       "welcome": "اهلا {firstName}, مرحبا بك في Memoir",
-      "create": "إنشاء صفحة"
+      "create": "إنشاء صفحة",
+      "morning": "صباح الخير",
+      "afternoon": "مساء الخير",
+      "evening": "مساء الخير",
+      "recentPages": "الصفحات الأخيرة:"
     }
   },
   "error": {
