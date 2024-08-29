@@ -21,7 +21,8 @@ interface PublishProps {
 
 export const Publish = ({ initialData }: PublishProps) => {
   const origin = useOrigin();
-  const update = useMutation(api.documents.update);
+  const publish = useMutation(api.documents.publish);
+  const unPublish = useMutation(api.documents.unPublish);
   const { dict } = useLocalization();
 
   const [copied, setCopied] = useState(false);
@@ -32,31 +33,15 @@ export const Publish = ({ initialData }: PublishProps) => {
   const onPublish = () => {
     setIsSubmitting(true);
 
-    const promise = update({
-      id: initialData._id,
-      isPublished: true,
-    }).finally(() => setIsSubmitting(false));
-
-    toast.promise(promise, {
-      loading: dict.main.components.Publish.toastPublishLoading,
-      success: dict.main.components.Publish.toastPublishSuccess,
-      error: dict.main.components.Publish.toastPublishError,
-    });
+    publish({ id: initialData._id }).finally(() => setIsSubmitting(false));
   };
 
   const onUnpublish = () => {
     setIsSubmitting(true);
 
-    const promise = update({
+    unPublish({
       id: initialData._id,
-      isPublished: false,
     }).finally(() => setIsSubmitting(false));
-
-    toast.promise(promise, {
-      loading: dict.main.components.Publish.toastUnpublishLoading,
-      success: dict.main.components.Publish.toastUnpublishSuccess,
-      error: dict.main.components.Publish.toastUnpublishError,
-    });
   };
 
   const onCopy = () => {
