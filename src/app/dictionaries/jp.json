@@ -1,155 +1,168 @@
 {
-    "landingPage": {
-        "components": {
-            "footer": {
-                "about": "概要"
-            },
-            "navbar": {
-                "docs": "ドキュメント",
-                "features": "機能",
-                "integrations": "統合",
-                "dark": "ダーク",
-                "light": "ライト",
-                "signin": "サインイン",
-                "signup": "サインアップ",
-                "open": "Memoirを開く"
-            },
-            "signedInHeading": {
-                "welcome": "Memoirへようこそ",
-                "open": "Memoirを開く",
-                "card": "アイデア、ドキュメント、計画を一つにまとめて管理します。"
-            }
-        },
-        "Page": ""
-    },
-    "main": {
-        "components": {
-            "banner": {
-                "toastRemoveLoading": "ページを削除中...",
-                "toastRemoveSuccess": "ページが削除されました！",
-                "toastRemoveError": "ページの削除に失敗しました。",
-                "toastRestoreLoading": "ページを復元中...",
-                "toastRestoreSuccess": "ページが復元されました！",
-                "toastRestoreError": "ページの復元に失敗しました。",
-                "pageInTrash": "このページはゴミ箱にあります",
-                "trashRestore": "復元",
-                "trashDelete": "削除"
-            },
-            "cnavbar": {
-                "toggleWidth": "ページ幅を切り替える",
-                "archive": "ゴミ箱に移動"
-            },
-            "documentList": {
-                "noPage": "ページがありません"
-            },
-            "favList": {
-                "noPage": "ページがありません"
-            },
-            "item": {
-                "toastArchiveLoading": "ゴミ箱に移動中...",
-                "toastArchiveSuccess": "ページがゴミ箱に移動されました！",
-                "toastArchiveError": "ゴミ箱への移動に失敗しました",
-                "toastCreateLoading": "ページを作成中...",
-                "toastCreateSuccess": "ページが作成されました！",
-                "toastCreateError": "ページの作成に失敗しました",
-                "lastEdited": "最終編集者: ",
-                "copyLink": "リンクをコピー",
-                "archive": "ゴミ箱に移動"
-            },
-            "Publish": {
-                "toastPublishLoading": "ページを公開中...",
-                "toastPublishSuccess": "ページが公開されました！",
-                "toastPublishError": "ページの公開に失敗しました",
-                "toastUnpublishLoading": "ページを非公開にしています...",
-                "toastUnpublishSuccess": "ページが非公開になりました！",
-                "toastUnpublishError": "ページの非公開に失敗しました",
-                "pageIsPublished": "このページはウェブ上で公開されています",
-                "unpublish": "非公開にする",
-                "publishPopover": "このページを公開",
-                "shareWork": "あなたの作業を他の人と共有しましょう。",
-                "publish": "公開する"
-            },
-            "Sidebar": {
-                "untitled": "無題",
-                "toastCreateLoading": "ページを作成中...",
-                "toastCreateSuccess": "ページが作成されました！",
-                "toastCreateError": "ページの作成に失敗しました",
-                "workspace": "のワークスペース",
-                "theme": "テーマ：",
-                "color": "アクセントカラー：",
-                "language": "言語：",
-                "home": "ホーム",
-                "calendar": "カレンダー",
-                "settings": "設定",
-                "search": "検索",
-                "newpage": "新しいページ",
-                "favorites": "お気に入り",
-                "trash": "ゴミ箱"
-            },
-            "title": {
-                "untitled": "無題"
-            },
-            "trashBox": {
-                "toastRemoveLoading": "ページを削除中...",
-                "toastRemoveSuccess": "ページが削除されました！",
-                "toastRemoveError": "ページの削除に失敗しました。",
-                "toastRestoreLoading": "ページを復元中...",
-                "toastRestoreSuccess": "ページが復元されました！",
-                "toastRestoreError": "ページの復元に失敗しました。",
-                "filterPlaceholder": "ページタイトルでフィルター...",
-                "noPages": "ゴミ箱にページがありません",
-                "confirmDeletion": "本当に削除しますか？"
-            }
-        },
-        "documents": {
-            "documentId": {
-                "notFound": " 見つかりません "
-            },
-            "welcome": "{firstName}さん、Memoirへようこそ",
-            "create": "ページを作成",
-            "morning": "おはようございます",
-            "afternoon": "こんにちは",
-            "evening": "こんばんは",
-            "recentPages": "最近のページ:"
-        }
-    },
-    "error": {
-        "errorMessage": "何かがうまくいきませんでした！",
-        "goBack": "戻る"
-    },
+  "landingPage": {
     "components": {
-        "modals": {
-            "coverImage": {
-                "uploadImage": "カバー画像をアップロード"
-            }
-        },
-        "cover": {
-            "change": "カバーを変更",
-            "remove": "カバーを削除"
-        },
-        "editor": {
-            "untitled": "無題",
-            "toastCreateLoading": "ページを作成中...",
-            "toastCreateSuccess": "ページが作成されました！",
-            "toastCreateError": "ページの作成に失敗しました",
-            "isLoading": "読み込み中...",
-            "notFound": "ページが見つかりません",
-            "loading": "読み込み中",
-            "loadingContent": "コンテンツを読み込んでいます..."
-        },
-        "searchCommand": {
-            "notFound": "ページが見つかりませんでした。",
-            "placeholder": "{fullName}のワークスペースを検索..."
-        },
-        "imageDropzone": {
-            "uploadMessage": "クリックまたはドラッグ＆ドロップでアップロード"
-        },
-        "toolbar": {
-            "comment": "コメント：",
-            "addComment": "コメントを追加",
-            "lastEdit": "最終編集：",
-            "addIcon": "アイコンを追加",
-            "addCover": "カバーを追加"
-        }
+      "footer": {
+        "about": "概要"
+      },
+      "navbar": {
+        "docs": "ドキュメント",
+        "features": "機能",
+        "integrations": "統合",
+        "dark": "ダーク",
+        "light": "ライト",
+        "signin": "サインイン",
+        "signup": "サインアップ",
+        "open": "Memoirを開く"
+      },
+      "signedInHeading": {
+        "welcome": "Memoirへようこそ",
+        "open": "Memoirを開く",
+        "card": "アイデア、ドキュメント、計画を一つにまとめて管理します。"
+      }
+    },
+    "Page": ""
+  },
+  "main": {
+    "components": {
+      "banner": {
+        "toastRemoveLoading": "ページを削除中...",
+        "toastRemoveSuccess": "ページが削除されました！",
+        "toastRemoveError": "ページの削除に失敗しました。",
+        "toastRestoreLoading": "ページを復元中...",
+        "toastRestoreSuccess": "ページが復元されました！",
+        "toastRestoreError": "ページの復元に失敗しました。",
+        "pageInTrash": "このページはゴミ箱にあります",
+        "trashRestore": "復元",
+        "trashDelete": "削除"
+      },
+      "cnavbar": {
+        "toggleWidth": "ページ幅を切り替える",
+        "archive": "ゴミ箱に移動"
+      },
+      "documentList": {
+        "noPage": "ページがありません"
+      },
+      "favList": {
+        "noPage": "ページがありません"
+      },
+      "item": {
+        "toastArchiveLoading": "ゴミ箱に移動中...",
+        "toastArchiveSuccess": "ページがゴミ箱に移動されました！",
+        "toastArchiveError": "ゴミ箱への移動に失敗しました",
+        "toastCreateLoading": "ページを作成中...",
+        "toastCreateSuccess": "ページが作成されました！",
+        "toastCreateError": "ページの作成に失敗しました",
+        "lastEdited": "最終編集者: ",
+        "copyLink": "リンクをコピー",
+        "archive": "ゴミ箱に移動"
+      },
+      "Publish": {
+        "toastPublishLoading": "ページを公開中...",
+        "toastPublishSuccess": "ページが公開されました！",
+        "toastPublishError": "ページの公開に失敗しました",
+        "toastUnpublishLoading": "ページを非公開にしています...",
+        "toastUnpublishSuccess": "ページが非公開になりました！",
+        "toastUnpublishError": "ページの非公開に失敗しました",
+        "pageIsPublished": "このページはウェブ上で公開されています",
+        "unpublish": "非公開にする",
+        "publishPopover": "このページを公開",
+        "shareWork": "あなたの作業を他の人と共有しましょう。",
+        "publish": "公開する"
+      },
+      "Sidebar": {
+        "untitled": "無題",
+        "toastCreateLoading": "ページを作成中...",
+        "toastCreateSuccess": "ページが作成されました！",
+        "toastCreateError": "ページの作成に失敗しました",
+        "workspace": "のワークスペース",
+        "theme": "テーマ：",
+        "color": "アクセントカラー：",
+        "language": "言語：",
+        "home": "ホーム",
+        "calendar": "カレンダー",
+        "graph": "グラフ",
+        "settings": "設定",
+        "search": "検索",
+        "newpage": "新しいページ",
+        "favorites": "お気に入り",
+        "trash": "ゴミ箱"
+      },
+      "title": {
+        "untitled": "無題"
+      },
+      "trashBox": {
+        "toastRemoveLoading": "ページを削除中...",
+        "toastRemoveSuccess": "ページが削除されました！",
+        "toastRemoveError": "ページの削除に失敗しました。",
+        "toastRestoreLoading": "ページを復元中...",
+        "toastRestoreSuccess": "ページが復元されました！",
+        "toastRestoreError": "ページの復元に失敗しました。",
+        "filterPlaceholder": "ページタイトルでフィルター...",
+        "noPages": "ゴミ箱にページがありません",
+        "confirmDeletion": "本当に削除しますか？"
+      }
+    },
+    "documents": {
+      "documentId": {
+        "notFound": " 見つかりません "
+      },
+      "welcome": "{firstName}さん、Memoirへようこそ",
+      "create": "ページを作成",
+      "morning": "おはようございます",
+      "afternoon": "こんにちは",
+      "evening": "こんばんは",
+      "recentPages": "最近のページ:"
     }
+  },
+  "error": {
+    "errorMessage": "何かがうまくいきませんでした！",
+    "goBack": "戻る"
+  },
+  "components": {
+    "modals": {
+      "coverImage": {
+        "uploadImage": "カバー画像をアップロード"
+      }
+    },
+    "cover": {
+      "change": "カバーを変更",
+      "remove": "カバーを削除"
+    },
+    "editor": {
+      "untitled": "無題",
+      "toastCreateLoading": "ページを作成中...",
+      "toastCreateSuccess": "ページが作成されました！",
+      "toastCreateError": "ページの作成に失敗しました",
+      "isLoading": "読み込み中...",
+      "notFound": "ページが見つかりません",
+      "loading": "読み込み中",
+      "loadingContent": "コンテンツを読み込んでいます..."
+    },
+    "searchCommand": {
+      "notFound": "ページが見つかりませんでした。",
+      "placeholder": "{fullName}のワークスペースを検索..."
+    },
+    "imageDropzone": {
+      "uploadMessage": "クリックまたはドラッグ＆ドロップでアップロード"
+    },
+    "toolbar": {
+      "comment": "コメント：",
+      "addComment": "コメントを追加",
+      "lastEdit": "最終編集：",
+      "addIcon": "アイコンを追加",
+      "addCover": "カバーを追加"
+    },
+    "tagManager": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "addTag": "Add a tag",
+      "date": "Date",
+      "text": "Text",
+      "checkbox": "Checkbox",
+      "number": "Number",
+      "priority": "Priority",
+      "cleartags": "Clear Tags"
+    }
+  }
 }
