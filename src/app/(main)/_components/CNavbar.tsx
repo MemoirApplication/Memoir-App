@@ -28,6 +28,7 @@ import { api } from "../../../../convex/_generated/api";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { Publish } from "./publish";
 import { useLocalization } from "../contexts/LocalizationContext";
+import { toast } from "sonner";
 
 export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { isCollapsed, toggleSidebar } = useSidebar();
@@ -36,6 +37,19 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
   const { dict } = useLocalization();
 
   const update = useMutation(api.documents.update);
+  const archive = useMutation(api.documents.archive);
+
+  const id = document._id
+  const onArchive = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    event.stopPropagation();
+    if (!id) return;
+    const promise = archive({ id });
+    toast.promise(promise, {
+      loading: dict.main.components.item.toastArchiveLoading,
+      success: dict.main.components.item.toastArchiveSuccess,
+      error: dict.main.components.item.toastArchiveError,
+    });
+  };
 
   const toggleFav = () => {
     update({
@@ -107,7 +121,7 @@ export const CNavbar = ({ document }: { document: Doc<"documents"> }) => {
               {dict.main.components.cnavbar.toggleWidth}
             </DropdownItem>
             <DropdownItem
-              // onClick={onArchive}
+              onClick={onArchive as React.MouseEventHandler<HTMLElement>}
               key="delete"
               className="text-danger"
               color="danger"
