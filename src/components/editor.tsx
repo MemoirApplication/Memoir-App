@@ -41,7 +41,7 @@ import { Divider } from "@nextui-org/divider";
 import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
 
 interface EditorProps {
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   initialData: Doc<"documents">;
   editable?: boolean;
 }
@@ -187,7 +187,11 @@ const Editor = ({ onChange, initialData, editable }: EditorProps) => {
       <div>
         <div
           onClick={() => {
-            router.push(`/documents/${document._id}`);
+            if (editable) {
+              router.push(`/documents/${document._id}`);
+            } else {
+              router.push(`/preview/${document._id}`);
+            }
           }} // redirect to the page
           role="button"
           className="select-none bg-default/40 hover:bg-default/65 rounded-md flex py-1.5 break-words px-20 w-fit font text-medium transition-all text-muted-foreground inline-content"

@@ -30,17 +30,6 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
     documentId: params.documentId as Id<"documents">,
   });
 
-  // Mutation function to update the document
-  const update = useMutation(api.documents.update);
-
-  // Handler function for updating the document content
-  const onChange = (content: string) => {
-    update({
-      id: params.documentId,
-      content,
-    });
-  };
-
   // Show a spinner while documents are loading
   if (document === undefined) {
     return (
@@ -73,11 +62,7 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             >
               <div className="mt-2">
                 <Toolbar preview initialData={document} />
-                <Editor
-                  editable={false}
-                  onChange={() => {}}
-                  initialData={document}
-                />
+                <Editor editable={false} initialData={document} />
               </div>
             </div>
           </div>
