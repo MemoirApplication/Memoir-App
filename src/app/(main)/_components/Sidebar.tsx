@@ -41,23 +41,17 @@ import { useSearch } from "@/hooks/search-hook";
 import { useSidebar } from "../contexts/SidebarContext";
 import React from "react";
 import { parseDate } from "@internationalized/date";
-import ColorSwitcher from "@/components/ColorSwitcher";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocalization } from "../contexts/LocalizationContext";
-import { useTheme } from "next-themes";
 import DocumentGraph from "@/components/documentGraph";
+import { useSettings } from "@/hooks/use-settings";
 
 export const Sidebar = () => {
   const { isCollapsed } = useSidebar(); // Use sidebar context to determine if sidebar is collapsed
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const search = useSearch();
+  const settings = useSettings();
   const { dict } = useLocalization();
-  const { theme, setTheme } = useTheme();
-  const isDarkMode = theme === "dark";
-  const themeButtonText = isDarkMode
-    ? dict.landingPage.components.navbar.dark
-    : dict.landingPage.components.navbar.light;
 
   // Create a new note
   const handleCreate = () => {
@@ -101,8 +95,6 @@ export const Sidebar = () => {
                   {(user?.username || "User") +
                     dict.main.components.Sidebar.workspace}
                 </p>
-                <Popover placement="bottom" showArrow={true}>
-                  <PopoverTrigger>
                     <Button // Workspace button
                       isIconOnly
                       size="sm"
@@ -112,57 +104,6 @@ export const Sidebar = () => {
                     >
                       <ChevronDown />
                     </Button>
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <div className="px-1 py-2">
-                      <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.theme}
-                      </div>
-                      <Dropdown className="justify-start items-start">
-                        <DropdownTrigger>
-                          <Button variant="bordered" color="default">
-                            {themeButtonText}
-                          </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu
-                          variant="faded"
-                          aria-label="Dropdown Menu with icons"
-                        >
-                          <DropdownItem
-                            className="text-foreground "
-                            variant="faded"
-                            key="dark"
-                            startContent={<Moon />}
-                            onClick={() => setTheme("dark")}
-                          >
-                            {dict.landingPage.components.navbar.dark}
-                          </DropdownItem>
-                          <DropdownItem
-                            className="text-foreground "
-                            variant="faded"
-                            key="light"
-                            startContent={<Sun />}
-                            onClick={() => setTheme("light")}
-                          >
-                            {dict.landingPage.components.navbar.light}
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                      <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.color}
-                      </div>
-                      <div>
-                        <ColorSwitcher />
-                      </div>
-                      <div className="font-medium select-none py-1">
-                        {dict.main.components.Sidebar.language}
-                      </div>
-                      <div>
-                        <LanguageSwitcher />
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
               </CardBody>
             </Card>
 
@@ -219,7 +160,9 @@ export const Sidebar = () => {
                         className="justify-start my-1"
                       >
                         <ScatterChart size={20} />
-                        <p className="select-none font-medium">Graph</p>
+                        <p className="select-none font-medium">
+                        {dict.main.components.Sidebar.graph}
+                        </p>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -239,6 +182,7 @@ export const Sidebar = () => {
                     color="secondary"
                     variant="shadow"
                     className="justify-start my-1"
+                    onClick={settings.onOpen} // Calls settings.onOpen when pressed
                   >
                     <Settings size={20} />
                     <p className="select-none font-medium ">
