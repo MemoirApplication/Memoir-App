@@ -1,154 +1,155 @@
 {
-  "landingPage": {
+    "landingPage": {
+        "components": {
+            "footer": {
+                "about": "حول"
+            },
+            "navbar": {
+                "docs": "مستندات",
+                "features": "ميزات",
+                "integrations": "تكاملات",
+                "dark": "داكن",
+                "light": "فاتح",
+                "signin": "تسجيل الدخول",
+                "signup": "إنشاء حساب",
+                "open": "افتح Memoir"
+            },
+            "signedInHeading": {
+                "welcome": "مرحباً بك في Memoir",
+                "open": "افتح Memoir",
+                "card": "أفكارك ومستنداتك وخططك كلها في مكان واحد."
+            }
+        },
+        "Page": ""
+    },
+    "main": {
+        "components": {
+            "banner": {
+                "toastRemoveLoading": "جارِ حذف الصفحة...",
+                "toastRemoveSuccess": "تم حذف الصفحة!",
+                "toastRemoveError": "فشل حذف الصفحة.",
+                "toastRestoreLoading": "جارِ استعادة الصفحة...",
+                "toastRestoreSuccess": "تم استعادة الصفحة!",
+                "toastRestoreError": "فشل استعادة الصفحة.",
+                "pageInTrash": "هذه الصفحة في سلة المهملات",
+                "trashRestore": "استعادة",
+                "trashDelete": "حذف"
+            },
+            "cnavbar": {
+                "toggleWidth": "تبديل عرض الصفحة",
+                "archive": "نقل إلى سلة المهملات"
+            },
+            "documentList": {
+                "noPage": "لا توجد صفحات في الداخل"
+            },
+            "favList": {
+                "noPage": "لا توجد صفحات في الداخل"
+            },
+            "item": {
+                "toastArchiveLoading": "جارِ نقل إلى سلة المهملات...",
+                "toastArchiveSuccess": "تم نقل الصفحة إلى سلة المهملات!",
+                "toastArchiveError": "فشل نقل الصفحة إلى سلة المهملات",
+                "toastCreateLoading": "جارِ إنشاء الصفحة...",
+                "toastCreateSuccess": "تم إنشاء الصفحة!",
+                "toastCreateError": "فشل إنشاء الصفحة",
+                "lastEdited": "آخر تعديل بواسطة: ",
+                "copyLink": "نسخ الرابط",
+                "archive": "نقل إلى سلة المهملات"
+            },
+            "Publish": {
+                "toastPublishLoading": "جارِ نشر الصفحة...",
+                "toastPublishSuccess": "تم نشر الصفحة!",
+                "toastPublishError": "فشل نشر الصفحة",
+                "toastUnpublishLoading": "جارِ إلغاء نشر الصفحة...",
+                "toastUnpublishSuccess": "تم إلغاء نشر الصفحة!",
+                "toastUnpublishError": "فشل إلغاء نشر الصفحة",
+                "pageIsPublished": "هذه الصفحة منشورة على الويب",
+                "unpublish": "إلغاء النشر",
+                "publishPopover": "نشر هذه الصفحة",
+                "shareWork": "شارك عملك مع الآخرين.",
+                "publish": "نشر"
+            },
+            "Sidebar": {
+                "untitled": "بلا عنوان",
+                "toastCreateLoading": "جارِ إنشاء الصفحة...",
+                "toastCreateSuccess": "تم إنشاء الصفحة!",
+                "toastCreateError": "فشل إنشاء الصفحة",
+                "workspace": "مساحة العمل الخاصة بـ",
+                "theme": "السمة:",
+                "color": "لون التمييز:",
+                "language": "اللغة:",
+                "home": "الرئيسية",
+                "calendar": "التقويم",
+                "settings": "الإعدادات",
+                "search": "بحث",
+                "newpage": "صفحة جديدة",
+                "favorites": "المفضلة",
+                "trash": "سلة المهملات"
+            },
+            "title": {
+                "untitled": "بلا عنوان"
+            },
+            "trashBox": {
+                "toastRemoveLoading": "جارِ حذف الصفحة...",
+                "toastRemoveSuccess": "تم حذف الصفحة!",
+                "toastRemoveError": "فشل حذف الصفحة.",
+                "toastRestoreLoading": "جارِ استعادة الصفحة...",
+                "toastRestoreSuccess": "تم استعادة الصفحة!",
+                "toastRestoreError": "فشل استعادة الصفحة.",
+                "filterPlaceholder": "تصفية حسب عنوان الصفحة...",
+                "noPages": "لا توجد صفحات في سلة المهملات",
+                "confirmDeletion": "هل أنت متأكد؟"
+            }
+        },
+        "documents": {
+            "documentId": {
+                "notFound": "لم يتم العثور عليه"
+            },
+            "welcome": "اهلا {firstName}, مرحبا بك في Memoir",
+            "create": "إنشاء صفحة",
+            "morning": "صباح الخير",
+            "afternoon": "مساء الخير",
+            "evening": "مساء الخير",
+            "recentPages": "الصفحات الأخيرة:"
+        }
+    },
+    "error": {
+        "errorMessage": "حدث خطأ ما!",
+        "goBack": "العودة"
+    },
     "components": {
-      "footer": {
-        "about": "حول"
-      },
-      "navbar": {
-        "docs": "مستندات",
-        "features": "ميزات",
-        "integrations": "تكاملات",
-        "dark": "داكن",
-        "light": "فاتح",
-        "signin": "تسجيل الدخول",
-        "open": "افتح Memoir"
-      },
-      "signedInHeading": {
-        "welcome": "مرحباً بك في Memoir",
-        "open": "افتح Memoir",
-        "card": "أفكارك ومستنداتك وخططك كلها في مكان واحد."
-      }
-    },
-    "Page": ""
-  },
-  "main": {
-    "components": {
-      "banner": {
-        "toastRemoveLoading": "جارِ حذف الصفحة...",
-        "toastRemoveSuccess": "تم حذف الصفحة!",
-        "toastRemoveError": "فشل حذف الصفحة.",
-        "toastRestoreLoading": "جارِ استعادة الصفحة...",
-        "toastRestoreSuccess": "تم استعادة الصفحة!",
-        "toastRestoreError": "فشل استعادة الصفحة.",
-        "pageInTrash": "هذه الصفحة في سلة المهملات",
-        "trashRestore": "استعادة",
-        "trashDelete": "حذف"
-      },
-      "cnavbar": {
-        "toggleWidth": "تبديل عرض الصفحة",
-        "archive": "نقل إلى سلة المهملات"
-      },
-      "documentList": {
-        "noPage": "لا توجد صفحات في الداخل"
-      },
-      "favList": {
-        "noPage": "لا توجد صفحات في الداخل"
-      },
-      "item": {
-        "toastArchiveLoading": "جارِ نقل إلى سلة المهملات...",
-        "toastArchiveSuccess": "تم نقل الصفحة إلى سلة المهملات!",
-        "toastArchiveError": "فشل نقل الصفحة إلى سلة المهملات",
-        "toastCreateLoading": "جارِ إنشاء الصفحة...",
-        "toastCreateSuccess": "تم إنشاء الصفحة!",
-        "toastCreateError": "فشل إنشاء الصفحة",
-        "lastEdited": "آخر تعديل بواسطة: ",
-        "copyLink": "نسخ الرابط",
-        "archive": "نقل إلى سلة المهملات"
-      },
-      "Publish": {
-        "toastPublishLoading": "جارِ نشر الصفحة...",
-        "toastPublishSuccess": "تم نشر الصفحة!",
-        "toastPublishError": "فشل نشر الصفحة",
-        "toastUnpublishLoading": "جارِ إلغاء نشر الصفحة...",
-        "toastUnpublishSuccess": "تم إلغاء نشر الصفحة!",
-        "toastUnpublishError": "فشل إلغاء نشر الصفحة",
-        "pageIsPublished": "هذه الصفحة منشورة على الويب",
-        "unpublish": "إلغاء النشر",
-        "publishPopover": "نشر هذه الصفحة",
-        "shareWork": "شارك عملك مع الآخرين.",
-        "publish": "نشر"
-      },
-      "Sidebar": {
-        "untitled": "بلا عنوان",
-        "toastCreateLoading": "جارِ إنشاء الصفحة...",
-        "toastCreateSuccess": "تم إنشاء الصفحة!",
-        "toastCreateError": "فشل إنشاء الصفحة",
-        "workspace": "مساحة العمل الخاصة بـ",
-        "theme": "السمة:",
-        "color": "لون التمييز:",
-        "language": "اللغة:",
-        "home": "الرئيسية",
-        "calendar": "التقويم",
-        "settings": "الإعدادات",
-        "search": "بحث",
-        "newpage": "صفحة جديدة",
-        "favorites": "المفضلة",
-        "trash": "سلة المهملات"
-      },
-      "title": {
-        "untitled": "بلا عنوان"
-      },
-      "trashBox": {
-        "toastRemoveLoading": "جارِ حذف الصفحة...",
-        "toastRemoveSuccess": "تم حذف الصفحة!",
-        "toastRemoveError": "فشل حذف الصفحة.",
-        "toastRestoreLoading": "جارِ استعادة الصفحة...",
-        "toastRestoreSuccess": "تم استعادة الصفحة!",
-        "toastRestoreError": "فشل استعادة الصفحة.",
-        "filterPlaceholder": "تصفية حسب عنوان الصفحة...",
-        "noPages": "لا توجد صفحات في سلة المهملات",
-        "confirmDeletion": "هل أنت متأكد؟"
-      }
-    },
-    "documents": {
-      "documentId": {
-        "notFound": "لم يتم العثور عليه"
-      },
-      "welcome": "اهلا {firstName}, مرحبا بك في Memoir",
-      "create": "إنشاء صفحة",
-      "morning": "صباح الخير",
-      "afternoon": "مساء الخير",
-      "evening": "مساء الخير",
-      "recentPages": "الصفحات الأخيرة:"
+        "modals": {
+            "coverImage": {
+                "uploadImage": "تحميل صورة الغلاف"
+            }
+        },
+        "cover": {
+            "change": "تغيير الغلاف",
+            "remove": "إزالة الغلاف"
+        },
+        "editor": {
+            "untitled": "بلا عنوان",
+            "toastCreateLoading": "جارِ إنشاء الصفحة...",
+            "toastCreateSuccess": "تم إنشاء الصفحة!",
+            "toastCreateError": "فشل إنشاء الصفحة",
+            "isLoading": "جارِ التحميل...",
+            "notFound": "لم يتم العثور على الصفحة",
+            "loading": "جارِ التحميل",
+            "loadingContent": "جارِ تحميل المحتوى..."
+        },
+        "searchCommand": {
+            "notFound": "لم يتم العثور على صفحات.",
+            "placeholder": "ابحث في مساحة العمل الخاصة بـ{fullName}"
+        },
+        "imageDropzone": {
+            "uploadMessage": "انقر أو اسحب وأفلت للتحميل"
+        },
+        "toolbar": {
+            "comment": "تعليق:  ",
+            "addComment": "اضف تعليق",
+            "lastEdit": "آخر تعديل:",
+            "addIcon": "إضافة أيقونة",
+            "addCover": "إضافة غلاف"
+        }
     }
-  },
-  "error": {
-    "errorMessage": "حدث خطأ ما!",
-    "goBack": "العودة"
-  },
-  "components": {
-    "modals": {
-      "coverImage": {
-        "uploadImage": "تحميل صورة الغلاف"
-      }
-    },
-    "cover": {
-      "change": "تغيير الغلاف",
-      "remove": "إزالة الغلاف"
-    },
-    "editor": {
-      "untitled": "بلا عنوان",
-      "toastCreateLoading": "جارِ إنشاء الصفحة...",
-      "toastCreateSuccess": "تم إنشاء الصفحة!",
-      "toastCreateError": "فشل إنشاء الصفحة",
-      "isLoading": "جارِ التحميل...",
-      "notFound": "لم يتم العثور على الصفحة",
-      "loading": "جارِ التحميل",
-      "loadingContent": "جارِ تحميل المحتوى..."
-    },
-    "searchCommand": {
-      "notFound": "لم يتم العثور على صفحات.",
-      "placeholder": "ابحث في مساحة العمل الخاصة بـ{fullName}"
-    },
-    "imageDropzone": {
-      "uploadMessage": "انقر أو اسحب وأفلت للتحميل"
-    },
-    "toolbar": {
-      "comment": "تعليق:  ",
-      "addComment": "اضف تعليق",
-      "lastEdit": "آخر تعديل:",
-      "addIcon": "إضافة أيقونة",
-      "addCover": "إضافة غلاف"
-    }
-  }
 }

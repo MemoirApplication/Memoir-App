@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
 // Import Clerk
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton,SignUpButton } from "@clerk/nextjs";
 import { Logo } from "./Logo";
 import { useConvexAuth } from "convex/react";
 import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
@@ -73,12 +73,18 @@ export const NavigationBar = () => {
 
       <NavbarContent justify="end">
         <NavbarItem>
+          <div className="flex gap-x-2 justify-center">
           <SignedOut>
             <SignInButton>
-              <Button as={Link} color="secondary" radius="md" variant="shadow">
-              {dict.landingPage.components.navbar.signin}
+              <Button as={Link} color="secondary" radius="md" variant="light" className="font-bold text-secondary-600">
+              <div>{dict.landingPage.components.navbar.signin}</div>
               </Button>
             </SignInButton>
+            <SignUpButton>
+            <Button  as={Link} color="secondary" radius="md" variant="shadow">
+              {dict.landingPage.components.navbar.signup}
+              </Button>
+            </SignUpButton>
           </SignedOut>
           <SignedIn>
             {loading && isLoaded ? (
@@ -98,6 +104,7 @@ export const NavigationBar = () => {
               </div>
             )}
           </SignedIn>
+          </div>
         </NavbarItem>
         <NavbarItem>
           <Dropdown>
