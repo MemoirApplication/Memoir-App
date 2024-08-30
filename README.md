@@ -1,6 +1,5 @@
 <!-- This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). -->
 
-<!-- ![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image") -->
 
 
 ![alt text](/public/default-monochrome.svg)
@@ -37,6 +36,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Contributing
 To contribute to the project see [CONTRIBUTING.md](https://github.com/MemoirApplication/Memoir-App/blob/main/CONTRIBUTING.md)
+![Alt](https://repobeats.axiom.co/api/embed/666050adf3141b96af9b7d198422970553da7ba0.svg "Repobeats analytics image") 
+
 ## Star History
 
 <a href="https://star-history.com/#MemoirApplication/Memoir-App&Date">
