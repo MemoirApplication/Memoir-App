@@ -35,6 +35,8 @@ npm run electron
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 
+## Contributing
+To contribute to the project see [CONTRIBUTING.md](https://github.com/MemoirApplication/Memoir-App/blob/main/CONTRIBUTING.md)
 ## Star History
 
 <a href="https://star-history.com/#MemoirApplication/Memoir-App&Date">
@@ -44,6 +46,3 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=MemoirApplication/Memoir-App&type=Date" />
  </picture>
 </a>
- 
-
-  <!-- /when i write npx convex dev/ there is an error that i don't have access to the project with deployment dutiful-pika-147, as configured in CONVEX_DEPLOYMENT -->
