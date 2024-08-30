@@ -1,155 +1,168 @@
 {
-    "landingPage": {
-        "components": {
-            "footer": {
-                "about": "About"
-            },
-            "navbar": {
-                "docs": "Docs",
-                "features": "Features",
-                "integrations": "Integrations",
-                "dark": "Dark",
-                "light": "Light",
-                "signin": "Sign in",
-                "signup": "Sign up",
-                "open": "Open Memoir"
-            },
-            "signedInHeading": {
-                "welcome": "Welcome to Memoir",
-                "open": "Open Memoir",
-                "card": "Your Ideas, Documents and Plans all together in one place."
-            }
-        },
-        "Page": ""
-    },
-    "main": {
-        "components": {
-            "banner": {
-                "toastRemoveLoading": "Deleting page...",
-                "toastRemoveSuccess": "Page deleted!",
-                "toastRemoveError": "Failed to delete page.",
-                "toastRestoreLoading": "Restoring page...",
-                "toastRestoreSuccess": "Page restored!",
-                "toastRestoreError": "Failed to restore page.",
-                "pageInTrash": "This page is in the Trash",
-                "trashRestore": "Restore",
-                "trashDelete": "Delete"
-            },
-            "cnavbar": {
-                "toggleWidth": "Toggle page width",
-                "archive": "Move to trash"
-            },
-            "documentList": {
-                "noPage": "No pages inside"
-            },
-            "favList": {
-                "noPage": "No pages inside"
-            },
-            "item": {
-                "toastArchiveLoading": "Moving to trash...",
-                "toastArchiveSuccess": "Page moved to trash!",
-                "toastArchiveError": "Failed to move to trash",
-                "toastCreateLoading": "Creating page...",
-                "toastCreateSuccess": "Page created!",
-                "toastCreateError": "Failed to create page",
-                "lastEdited": "Last edited by: ",
-                "copyLink": "Copy link",
-                "archive": "Move to trash"
-            },
-            "Publish": {
-                "toastPublishLoading": "Publishing page...",
-                "toastPublishSuccess": "Page published!",
-                "toastPublishError": "Failed to publish page",
-                "toastUnpublishLoading": "Unpublishing page...",
-                "toastUnpublishSuccess": "Page Unpublished!",
-                "toastUnpublishError": "Failed to unpublish page",
-                "pageIsPublished": "This page is published on the web",
-                "unpublish": "Unpublish",
-                "publishPopover": "Publish this page",
-                "shareWork": "Share your work with others.",
-                "publish": "Publish"
-            },
-            "Sidebar": {
-                "untitled": "Untitled",
-                "toastCreateLoading": "Creating page...",
-                "toastCreateSuccess": "Page created!",
-                "toastCreateError": "Failed to create page",
-                "workspace": "'s workspace",
-                "theme": "Theme:",
-                "color": "Accent color:",
-                "language": "Language:",
-                "home": "Home",
-                "calendar": "Calendar",
-                "settings": "Settings",
-                "search": "Search",
-                "newpage": "New page",
-                "favorites": "Favorites",
-                "trash": "Trash"
-            },
-            "title": {
-                "untitled": "Untitled"
-            },
-            "trashBox": {
-                "toastRemoveLoading": "Deleting page...",
-                "toastRemoveSuccess": "Page deleted!",
-                "toastRemoveError": "Failed to delete page.",
-                "toastRestoreLoading": "Restoring page...",
-                "toastRestoreSuccess": "Page restored!",
-                "toastRestoreError": "Failed to restore page.",
-                "filterPlaceholder": "Filter by page title...",
-                "noPages": "No pages in trash",
-                "confirmDeletion": "Are you sure?"
-            }
-        },
-        "documents": {
-            "documentId": {
-                "notFound": " Not Found "
-            },
-            "welcome": "Hey {firstName}, Welcome to Memoir",
-            "create": "Create page",
-            "morning": "Good morning",
-            "afternoon": "Good afternoon",
-            "evening": "Good evening",
-            "recentPages": "Recent pages:"
-        }
-    },
-    "error": {
-        "errorMessage": "Something went wrong!",
-        "goBack": "Go back"
-    },
+  "landingPage": {
     "components": {
-        "modals": {
-            "coverImage": {
-                "uploadImage": "Upload cover image"
-            }
-        },
-        "cover": {
-            "change": "Change cover",
-            "remove": "Remove cover"
-        },
-        "editor": {
-            "untitled": "Untitled",
-            "toastCreateLoading": "Creating page...",
-            "toastCreateSuccess": "Page created!",
-            "toastCreateError": "Failed to create page",
-            "isLoading": "Loading...",
-            "notFound": "page not found",
-            "loading": "loading",
-            "loadingContent": "Loading content..."
-        },
-        "searchCommand": {
-            "notFound": "No page found.",
-            "placeholder": "Search {fullName}'s workspace..."
-        },
-        "imageDropzone": {
-            "uploadMessage": "Click or drag & drop to upload"
-        },
-        "toolbar": {
-            "comment": "Comment: ",
-            "addComment": "Add a comment",
-            "lastEdit": "Last edited:",
-            "addIcon": "Add icon",
-            "addCover": "Add cover"
-        }
+      "footer": {
+        "about": "About"
+      },
+      "navbar": {
+        "docs": "Docs",
+        "features": "Features",
+        "integrations": "Integrations",
+        "dark": "Dark",
+        "light": "Light",
+        "signin": "Sign in",
+        "signup": "Sign up",
+        "open": "Open Memoir"
+      },
+      "signedInHeading": {
+        "welcome": "Welcome to Memoir",
+        "open": "Open Memoir",
+        "card": "Your Ideas, Documents and Plans all together in one place."
+      }
+    },
+    "Page": ""
+  },
+  "main": {
+    "components": {
+      "banner": {
+        "toastRemoveLoading": "Deleting page...",
+        "toastRemoveSuccess": "Page deleted!",
+        "toastRemoveError": "Failed to delete page.",
+        "toastRestoreLoading": "Restoring page...",
+        "toastRestoreSuccess": "Page restored!",
+        "toastRestoreError": "Failed to restore page.",
+        "pageInTrash": "This page is in the Trash",
+        "trashRestore": "Restore",
+        "trashDelete": "Delete"
+      },
+      "cnavbar": {
+        "toggleWidth": "Toggle page width",
+        "archive": "Move to trash"
+      },
+      "documentList": {
+        "noPage": "No pages inside"
+      },
+      "favList": {
+        "noPage": "No pages inside"
+      },
+      "item": {
+        "toastArchiveLoading": "Moving to trash...",
+        "toastArchiveSuccess": "Page moved to trash!",
+        "toastArchiveError": "Failed to move to trash",
+        "toastCreateLoading": "Creating page...",
+        "toastCreateSuccess": "Page created!",
+        "toastCreateError": "Failed to create page",
+        "lastEdited": "Last edited by: ",
+        "copyLink": "Copy link",
+        "archive": "Move to trash"
+      },
+      "Publish": {
+        "toastPublishLoading": "Publishing page...",
+        "toastPublishSuccess": "Page published!",
+        "toastPublishError": "Failed to publish page",
+        "toastUnpublishLoading": "Unpublishing page...",
+        "toastUnpublishSuccess": "Page Unpublished!",
+        "toastUnpublishError": "Failed to unpublish page",
+        "pageIsPublished": "This page is published on the web",
+        "unpublish": "Unpublish",
+        "publishPopover": "Publish this page",
+        "shareWork": "Share your work with others.",
+        "publish": "Publish"
+      },
+      "Sidebar": {
+        "untitled": "Untitled",
+        "toastCreateLoading": "Creating page...",
+        "toastCreateSuccess": "Page created!",
+        "toastCreateError": "Failed to create page",
+        "workspace": "'s workspace",
+        "theme": "Theme:",
+        "color": "Accent color:",
+        "language": "Language:",
+        "home": "Home",
+        "calendar": "Calendar",
+        "graph": "Graph",
+        "settings": "Settings",
+        "search": "Search",
+        "newpage": "New page",
+        "favorites": "Favorites",
+        "trash": "Trash"
+      },
+      "title": {
+        "untitled": "Untitled"
+      },
+      "trashBox": {
+        "toastRemoveLoading": "Deleting page...",
+        "toastRemoveSuccess": "Page deleted!",
+        "toastRemoveError": "Failed to delete page.",
+        "toastRestoreLoading": "Restoring page...",
+        "toastRestoreSuccess": "Page restored!",
+        "toastRestoreError": "Failed to restore page.",
+        "filterPlaceholder": "Filter by page title...",
+        "noPages": "No pages in trash",
+        "confirmDeletion": "Are you sure?"
+      }
+    },
+    "documents": {
+      "documentId": {
+        "notFound": " Not Found "
+      },
+      "welcome": "Hey {firstName}, Welcome to Memoir",
+      "create": "Create page",
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "recentPages": "Recent pages:"
     }
+  },
+  "error": {
+    "errorMessage": "Something went wrong!",
+    "goBack": "Go back"
+  },
+  "components": {
+    "modals": {
+      "coverImage": {
+        "uploadImage": "Upload cover image"
+      }
+    },
+    "cover": {
+      "change": "Change cover",
+      "remove": "Remove cover"
+    },
+    "editor": {
+      "untitled": "Untitled",
+      "toastCreateLoading": "Creating page...",
+      "toastCreateSuccess": "Page created!",
+      "toastCreateError": "Failed to create page",
+      "isLoading": "Loading...",
+      "notFound": "page not found",
+      "loading": "loading",
+      "loadingContent": "Loading content..."
+    },
+    "searchCommand": {
+      "notFound": "No page found.",
+      "placeholder": "Search {fullName}'s workspace..."
+    },
+    "imageDropzone": {
+      "uploadMessage": "Click or drag & drop to upload"
+    },
+    "toolbar": {
+      "comment": "Comment: ",
+      "addComment": "Add a comment",
+      "lastEdit": "Last edited:",
+      "addIcon": "Add icon",
+      "addCover": "Add cover"
+    },
+    "tagManager": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "addTag": "Add a tag",
+      "date": "Date",
+      "text": "Text",
+      "checkbox": "Checkbox",
+      "number": "Number",
+      "priority": "Priority",
+      "cleartags": "Clear Tags"
+    }
+  }
 }
