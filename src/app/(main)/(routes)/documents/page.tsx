@@ -75,7 +75,7 @@ export default function Documents() {
               <div className="flex overflow-x-auto overflow-visible">
                 <ScrollShadow
                   orientation="horizontal"
-                  className="flex overflow-x-auto space-x-4"
+                  className="flex overflow-x-auto gap-x-4"
                 >
                   <RecentDocumentList />
                 </ScrollShadow>
