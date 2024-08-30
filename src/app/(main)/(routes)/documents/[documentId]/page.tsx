@@ -95,7 +95,11 @@ export default function DocumentIdPage({ params }: DocumentIdPageProps) {
             >
               <div className="mt-2">
                 <Toolbar initialData={document} />
-                <Editor onChange={onChange} initialData={document} />
+                <Editor
+                  editable={true}
+                  onChange={onChange}
+                  initialData={document}
+                />
               </div>
             </div>
           </div>
