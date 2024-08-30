@@ -86,7 +86,7 @@ export const RecentCard = ({
         onPress={onClick}
         className="p-4 w-60 min-w-60 shrink-0 h-96 bg-opacity-80 backdrop-blur-lg text-start"
       >
-        <div className="flex items-center justify-between pb-1">
+        <div className="flex items-center justify-between pb-1 overflow-hidden w-52">
           {documentIcon ? (
             <div className="shrink-0 h-[18px] me-1 text-foreground-700">
               {documentIcon}
@@ -94,7 +94,7 @@ export const RecentCard = ({
           ) : (
             <Icon className="shrink-0 h-[18px] me-1 text-foreground-700" />
           )}
-          <p className="text-xl font-semibold select-none text-foreground-700 whitespace-nowrap truncate">
+          <p className="text-xl font-semibold select-none text-foreground-700 w-full truncate">
             {title}
           </p>
         </div>

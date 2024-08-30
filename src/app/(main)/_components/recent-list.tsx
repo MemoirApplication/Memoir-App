@@ -26,7 +26,7 @@ export const RecentDocumentList = ({}: DocumentListProps) => {
   // If documents are undefined, show skeleton loaders
   if (documents === undefined) {
     return (
-      <div className="flex overflow-x-auto space-x-4">
+      <div className="flex overflow-x-auto gap-x-4">
         <RecentCard.Skeleton />
         <RecentCard.Skeleton />
         <RecentCard.Skeleton />
