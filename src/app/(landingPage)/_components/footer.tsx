@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <div className="mb-0 items-end p-6 z-50">
       <div className="md:justify-end items-center gap-x-2 text-muted-foreground ">
-        <Link color="secondary" href="#">
+        <Link color="secondary" href="/about">
         {dict.landingPage.components.footer.about}
         </Link>
       </div>

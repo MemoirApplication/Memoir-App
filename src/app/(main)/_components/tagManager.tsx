@@ -17,6 +17,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { format } from "date-fns";
+import { useLocalization } from "../contexts/LocalizationContext";
 
 type TagType = "date" | "text" | "checkbox" | "number" | "priority";
 
@@ -40,6 +41,7 @@ const TagManager: React.FC<TagManagerProps> = ({
   } | null>(null);
   const [editContent, setEditContent] = useState<string>("");
   const updateDocument = useMutation(api.documents.update);
+  const { dict } = useLocalization();
 
   const parseTags = (tagsJson: string | undefined): Tag[] => {
     if (!tagsJson) return [];
@@ -232,9 +234,15 @@ const TagManager: React.FC<TagManagerProps> = ({
               <Button>{editContent}</Button>
             </DropdownTrigger>
             <DropdownMenu onAction={(key) => setEditContent(key as string)}>
-              <DropdownItem key="Low">Low</DropdownItem>
-              <DropdownItem key="Medium">Medium</DropdownItem>
-              <DropdownItem key="High">High</DropdownItem>
+              <DropdownItem key="Low">
+              {dict.components.tagManager.low}
+              </DropdownItem>
+              <DropdownItem key="Medium">
+              {dict.components.tagManager.medium}
+              </DropdownItem>
+              <DropdownItem key="High">
+              {dict.components.tagManager.high}
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         );
@@ -260,15 +268,27 @@ const TagManager: React.FC<TagManagerProps> = ({
         <Dropdown>
           <DropdownTrigger>
             <div className="break-words flex w-fit select-none outline-none hover:bg-secondary/20 transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md py-1 px-2">
-              <pre>Add a tag</pre>
+              <pre>
+              {dict.components.tagManager.addTag}
+              </pre>
             </div>
           </DropdownTrigger>
           <DropdownMenu onAction={(key) => addTag(key as TagType)}>
-            <DropdownItem key="date">Date</DropdownItem>
-            <DropdownItem key="text">Text</DropdownItem>
-            <DropdownItem key="checkbox">Checkbox</DropdownItem>
-            <DropdownItem key="number">Number</DropdownItem>
-            <DropdownItem key="priority">Priority</DropdownItem>
+            <DropdownItem key="date">
+            {dict.components.tagManager.date}
+            </DropdownItem>
+            <DropdownItem key="text">
+            {dict.components.tagManager.text}
+            </DropdownItem>
+            <DropdownItem key="checkbox">
+            {dict.components.tagManager.checkbox}
+            </DropdownItem>
+            <DropdownItem key="number">
+            {dict.components.tagManager.number}
+            </DropdownItem>
+            <DropdownItem key="priority">
+            {dict.components.tagManager.priority}
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <div
@@ -278,7 +298,9 @@ const TagManager: React.FC<TagManagerProps> = ({
           }}
           className="break-words flex w-fit select-none outline-none hover:bg-secondary/20 transition-all duration-300 ease-in-out  text-[#707070] dark:text-[#b6b6b6] rounded-md py-1 px-2"
         >
-          <pre>Clear Tags</pre>
+          <pre>
+          {dict.components.tagManager.cleartags}
+          </pre>
         </div>
       </div>
     </div>
