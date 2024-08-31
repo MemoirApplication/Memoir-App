@@ -31,7 +31,7 @@
         "toastRestoreLoading": "Restoring page...",
         "toastRestoreSuccess": "Page restored!",
         "toastRestoreError": "Failed to restore page.",
-        "pageInTrash": "This page is in the Trash",
+        "pageInTrash": "This page is in the trash",
         "trashRestore": "Restore",
         "trashDelete": "Delete"
       },

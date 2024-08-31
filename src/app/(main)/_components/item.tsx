@@ -135,7 +135,7 @@ export const Item = ({
       ) : (
         <Icon className="shrink-0 h-[18px] me-2 text-muted-foreground" />
       )}
-      <span className="truncate">{label}</span>
+      <span dir="auto" className="truncate">{label}</span>
       {isSearch && (
         // <kbd className="ms-auto pointer-events-none inline-flex select-none h-5 items-center rounded border  bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
         //   <span className="text-xs pe-1">⌘ K</span>

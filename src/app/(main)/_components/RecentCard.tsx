@@ -86,9 +86,9 @@ export const RecentCard = ({
         onPress={onClick}
         className="p-4 w-60 min-w-60 shrink-0 h-96 bg-opacity-80 backdrop-blur-lg text-start"
       >
-        <div className="flex items-center justify-between pb-1 overflow-hidden w-52">
+        <div dir="auto" className="flex flex-row items-center justify-between pb-1 overflow-hidden w-52">
           {documentIcon ? (
-            <div className="shrink-0 h-[18px] me-1 text-foreground-700">
+            <div className="shrink-0 h-[18px] me-2 text-foreground-700">
               {documentIcon}
             </div>
           ) : (
@@ -103,6 +103,7 @@ export const RecentCard = ({
         </p>
         <Divider />
         <p
+          dir="auto"
           className="text-m font-normal select-none text-foreground-600 py-2 overflow-wrap break-words"
           style={{
             wordBreak: "break-word",
