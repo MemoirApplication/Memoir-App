@@ -60,6 +60,7 @@ export const Title = ({ initialData }: TitleProps) => {
       {!!initialData && <p className="text-xl">{initialData.icon}</p>}
       {isEditing ? (
         <Input
+          dir="auto"
           radius="sm"
           ref={inputRef}
           onClick={enabaleInput} // Enable input field on click
@@ -71,6 +72,7 @@ export const Title = ({ initialData }: TitleProps) => {
         />
       ) : (
         <Button
+          dir="auto"
           onClick={enabaleInput} // Enable input field on button click
           size="sm"
           variant="light"

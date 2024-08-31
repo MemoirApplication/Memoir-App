@@ -170,6 +170,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       {isTitleEditing && !preview ? (
         <div>
           <TextareaAutosize
+            dir="auto"
             ref={inputRef}
             onBlur={disableTitleInput}
             onKeyDown={onKeyDown}
@@ -181,6 +182,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         </div>
       ) : (
         <div
+          dir="auto"
           onClick={enableTitleInput}
           className="pb-[11.5px] mb-2 text-6xl font-bold break-words outline-none text-[#3f3f3f] dark:text-[#CFCFCF] "
         >

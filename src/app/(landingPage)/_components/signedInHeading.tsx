@@ -19,7 +19,7 @@ export const SignedInHeading = () => {
         <Image src={headingImage} alt="Logo" width={200} height={200} />
       </div>
       <div className="drop-shadow-2xl space-y-4 items-center justify-center">
-        <p className="drop-shadow-2xl mb-4 text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/60 dark:from-white/90 dark:to-white/60">
+        <p className="drop-shadow-2xl leading-normal mb-4 text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/60 dark:from-white/90 dark:to-white/60">
           {dict.landingPage.components.signedInHeading.welcome}
         </p>
         {isAuthenticated && !isLoading && (
@@ -43,7 +43,7 @@ export const SignedInHeading = () => {
         className="bg-opacity-60 backdrop-blur-lg"
       >
         <CardBody>
-          <p>{dict.landingPage.components.signedInHeading.card}</p>
+          <p dir="auto">{dict.landingPage.components.signedInHeading.card}</p>
         </CardBody>
       </Card>
     </div>
