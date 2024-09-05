@@ -15,31 +15,37 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/dropdown";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Github } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useSession } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/spinner";
 // Import Clerk
-import { SignInButton, SignedIn, SignedOut, UserButton,SignUpButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignUpButton,
+} from "@clerk/nextjs";
 import { Logo } from "./Logo";
 import { useConvexAuth } from "convex/react";
 import { useLocalization } from "@/app/(main)/contexts/LocalizationContext";
+import Image from "next/image";
 
 export const NavigationBar = () => {
-  const { isAuthenticated, isLoading } = useConvexAuth();
+  // const { isAuthenticated, isLoading } = useConvexAuth();
   const { isLoaded } = useSession();
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const { dict } = useLocalization();
-
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  //Timeout for Spinner
   const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+  //Timeout for Spinner
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -50,9 +56,18 @@ export const NavigationBar = () => {
     <Navbar isBordered>
       <NavbarBrand>
         <Logo />
-        <p>Memoir</p>
+        <h1 className="font-bold font-sans">Memoir</h1>
+        <Button
+          isIconOnly
+          variant="light"
+          as={Link}
+          href="https://github.com/MemoirApplication/Memoir-App"
+          className="ml-4"
+        >
+          <Github />
+          {/* <Image src={"./github.svg"} alt="github" width={24} height={24} /> */}
+        </Button>
       </NavbarBrand>
-
       <NavbarContent className="hidden sm:flex gap-4 " justify="center">
         <NavbarItem>
           <Link color="foreground" href="/documents">
@@ -61,12 +76,12 @@ export const NavigationBar = () => {
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="#" aria-current="page" color="secondary">
-          {dict.landingPage.components.navbar.features}
+            {dict.landingPage.components.navbar.features}
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-          {dict.landingPage.components.navbar.integrations}
+            {dict.landingPage.components.navbar.integrations}
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -74,36 +89,47 @@ export const NavigationBar = () => {
       <NavbarContent justify="end">
         <NavbarItem>
           <div className="flex gap-x-2 justify-center">
-          <SignedOut>
-            <SignInButton>
-              <Button as={Link} color="secondary" radius="md" variant="light" className="font-bold text-secondary-600">
-              <div>{dict.landingPage.components.navbar.signin}</div>
-              </Button>
-            </SignInButton>
-            <SignUpButton>
-            <Button  as={Link} color="secondary" radius="md" variant="shadow">
-              {dict.landingPage.components.navbar.signup}
-              </Button>
-            </SignUpButton>
-          </SignedOut>
-          <SignedIn>
-            {loading && isLoaded ? (
-              <Spinner color="secondary" />
-            ) : (
-              <div className="flex gap-4">
+            <SignedOut>
+              <SignInButton>
+                <Button
+                  as={Link}
+                  color="secondary"
+                  radius="md"
+                  variant="light"
+                  className="font-bold text-secondary-600"
+                >
+                  <div>{dict.landingPage.components.navbar.signin}</div>
+                </Button>
+              </SignInButton>
+              <SignUpButton>
                 <Button
                   as={Link}
                   color="secondary"
                   radius="md"
                   variant="shadow"
-                  href="/documents"
                 >
-                  {dict.landingPage.components.navbar.open}
+                  {dict.landingPage.components.navbar.signup}
                 </Button>
-                <UserButton />
-              </div>
-            )}
-          </SignedIn>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              {loading && isLoaded ? (
+                <Spinner color="secondary" />
+              ) : (
+                <div className="flex gap-4">
+                  <Button
+                    as={Link}
+                    color="secondary"
+                    radius="md"
+                    variant="shadow"
+                    href="/documents"
+                  >
+                    {dict.landingPage.components.navbar.open}
+                  </Button>
+                  <UserButton />
+                </div>
+              )}
+            </SignedIn>
           </div>
         </NavbarItem>
         <NavbarItem>
