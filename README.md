@@ -2,9 +2,33 @@
 
 
 
-![alt text](/public/default-monochrome.svg)
+![logo](/public/default-monochrome.svg)
 
 <br><br/>
+
+
+# Screenshots
+
+### Light Mode — Default Note View
+
+
+<div align="center">
+  <img src="./screenshots/Lightmode.png" alt="Light Mode" style="width:70%;"/>
+</div>
+
+
+### Arabic UI — RTL Support
+<div align="center">
+  <img src="./screenshots/Arabic.png" alt="Arabic" style="width:70%;"/>
+</div>
+
+
+### Full Width View
+<div align="center">
+  <img src="./screenshots/Fullwidth.png" alt="Full width" style="width:70%;"/>
+</div>
+
+
 
 # Getting Started
 
